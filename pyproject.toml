@@ -82,9 +82,9 @@ format = { chain = [
 
 "check:importable" = "python -c 'import browserbase'"
 
-"example" = "python -c 'import sys; from pathlib import Path; example = Path(\"examples\") / sys.argv[1]; exec(open(example).read())'"
+"example" = "python -c 'import sys; from pathlib import Path; example = Path(\"examples\") / (sys.argv[1] + \".py\"); exec(open(example).read())'"
 
-"test:e2e" = "python -m pytest e2e"
+"test:e2e" = "python -m pytest examples/e2e"
 
 typecheck = { chain = [
   "typecheck:pyright",
