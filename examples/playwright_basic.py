@@ -1,12 +1,18 @@
 from playwright.sync_api import Playwright, sync_playwright
 
-from examples import (BROWSERBASE_API_KEY, BROWSERBASE_CONNECT_URL,
-                      BROWSERBASE_PROJECT_ID, bb)
+from examples import (
+    BROWSERBASE_API_KEY,
+    BROWSERBASE_CONNECT_URL,
+    BROWSERBASE_PROJECT_ID,
+    bb,
+)
 
 
 def run(playwright: Playwright):
     # Create a session on Browserbase
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+    assert session.id is not None
+    assert session.status == "RUNNING", f"Session status is {session.status}"
 
     # Connect to the remote session
     connect_url = (
@@ -19,14 +25,18 @@ def run(playwright: Playwright):
 
     # Execute Playwright actions on the remote browser tab
     page.goto("https://news.ycombinator.com/")
-    assert page.title == "Hacker News"
+    page_title = page.title()
+    assert (
+        page_title == "Hacker News"
+    ), f"Page title is not 'Hacker News', it is '{page_title}'"
     page.screenshot(path="screenshot.png")
 
     updated_session = bb.sessions.retrieve(session.id)
-    print(updated_session.)
+    print(updated_session.status)
 
     page.close()
     browser.close()
+    return session.id
 
 
 if __name__ == "__main__":

@@ -17,6 +17,5 @@ def playwright():
         yield p
 
 
-def test_create_session(playwright: Playwright):
-    page = playwright_basic.run(playwright)
-    assert page["title"] == "Hacker News"
+def test_playwright_basic(playwright: Playwright):
+    playwright_basic.run(playwright)
