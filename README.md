@@ -57,7 +57,7 @@ To run the examples, clone this repository and run the following commands from t
 
 ```bash
 rye sync
-rye run run-example 02_create_session.py # replace with the example you want to run
+rye run example playwright_basic # replace with the example you want to run
 ```
 
 > [!NOTE]
