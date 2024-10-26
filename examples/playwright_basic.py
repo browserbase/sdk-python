@@ -31,12 +31,9 @@ def run(playwright: Playwright):
     ), f"Page title is not 'Hacker News', it is '{page_title}'"
     page.screenshot(path="screenshot.png")
 
-    updated_session = bb.sessions.retrieve(session.id)
-    print(updated_session.status)
-
     page.close()
     browser.close()
-    return session.id
+    print("Done!")
 
 
 if __name__ == "__main__":
