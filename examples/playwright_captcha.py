@@ -31,7 +31,7 @@ def run(playwright: Playwright) -> None:
 
     # Browserbase logs messages to the console to indicate when captcha solving has started and finished
     # We can track these messages to know when the captcha solving has started and finished
-    def handle_console(msg: ConsoleMessage):
+    def handle_console(msg: ConsoleMessage) -> None:
         nonlocal captcha_solving_started, captcha_solving_finished
         if msg.text == "browserbase-solving-started":
             captcha_solving_started = True

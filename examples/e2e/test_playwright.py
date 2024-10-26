@@ -1,4 +1,5 @@
 import os
+from typing import Generator
 
 import pytest
 from dotenv import load_dotenv
@@ -21,7 +22,7 @@ SKIP_CAPTCHA_SOLVING = os.getenv("SKIP_CAPTCHA_SOLVING", "true").lower() == "tru
 
 
 @pytest.fixture(scope="session")
-def playwright():
+def playwright() -> Generator[Playwright, None, None]:
     with sync_playwright() as p:
         yield p
 
