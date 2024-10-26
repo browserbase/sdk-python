@@ -50,17 +50,18 @@ so that your API Key is not stored in source control.
 
 See the [examples](examples) directory for more usage examples.
 
+> [!NOTE]
+> Running the examples requires [Rye](https://rye.astral.sh/) to be installed.
+
 To run the examples, clone this repository and run the following commands from the project root (this directory):
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install .
-python3 -m examples/02_create_session.py # replace with the example you want to run
+rye sync
+rye run example playwright_basic # replace with the example you want to run
 ```
 
-!!! note
-    Make sure you have a `.env` file that matches the [.env.example](.env.example) file in the root of this repository.
+> [!NOTE]
+> Make sure you have a `.env` file that matches the [.env.example](.env.example) file in the root of this repository.
 
 ## Async usage
 
