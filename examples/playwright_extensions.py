@@ -4,7 +4,7 @@ import zipfile
 from io import BytesIO
 from pathlib import Path
 
-from playwright.sync_api import Playwright, sync_playwright
+from playwright.sync_api import Page, Playwright, sync_playwright
 
 from examples import (
     BROWSERBASE_API_KEY,
@@ -52,7 +52,7 @@ def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> B
     return memory_zip
 
 
-def create_extension():
+def create_extension() -> str:
     zip_data = zip_extension(save_local=True)
     extension: Extension = bb.extensions.create(
         file=("extension.zip", zip_data.getvalue())
@@ -64,11 +64,27 @@ def get_extension(id: str) -> Extension:
     return bb.extensions.retrieve(id)
 
 
-def delete_extension(id: str):
+def delete_extension(id: str) -> None:
     bb.extensions.delete(id)
 
 
-def run(playwright: Playwright):
+def check_for_message(page: Page, message: str) -> None:
+    # Wait for the extension to load and log a message
+    console_messages: list[str] = []
+    page.on("console", lambda msg: console_messages.append(msg.text))
+    page.goto("https://www.browserbase.com/")
+
+    start = time.time()
+    while time.time() - start < 10:
+        if message in console_messages:
+            break
+    assert (
+        message in console_messages
+    ), f"Expected message not found in console logs. Messages: {console_messages}"
+
+
+def run(playwright: Playwright) -> None:
+    expected_message = "browserbase test extension image loaded"
     extension_id = None
 
     # Create extension
@@ -90,21 +106,7 @@ def run(playwright: Playwright):
     )
     context = browser.contexts[0]
     page = context.pages[0]
-
-    console_messages: list[str] = []
-    page.on("console", lambda msg: console_messages.append(msg.text))
-
-    page.goto("https://www.browserbase.com/")
-
-    # Wait for the extension to load and log a message
-    start = time.time()
-    while time.time() - start < 10:
-        if "browserbase test extension image loaded" in console_messages:
-            break
-    assert (
-        "browserbase test extension image loaded" in console_messages
-    ), f"Expected message not found in console logs. Messages: {console_messages}"
-
+    check_for_message(page, expected_message)
     page.close()
     browser.close()
 
@@ -126,15 +128,7 @@ def run(playwright: Playwright):
 
     page.goto("https://www.browserbase.com/")
 
-    # Wait for the extension to load and log a message (longer timeout for proxies)
-    start = time.time()
-    while time.time() - start < 10:
-        if "browserbase test extension image loaded" in console_messages:
-            break
-    assert (
-        "browserbase test extension image loaded" in console_messages
-    ), f"Expected message not found in console logs. Messages: {console_messages}"
-
+    check_for_message(page, expected_message)
     page.close()
     browser.close()
 

@@ -8,7 +8,7 @@ from examples import (
 )
 
 
-def run(playwright: Playwright):
+def run(playwright: Playwright) -> None:
     # Create a session on Browserbase
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
     assert session.id is not None

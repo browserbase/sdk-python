@@ -26,19 +26,19 @@ def playwright():
         yield p
 
 
-def test_playwright_basic(playwright: Playwright):
+def test_playwright_basic(playwright: Playwright) -> None:
     playwright_basic.run(playwright)
 
 
-def test_playwright_captcha(playwright: Playwright):
+def test_playwright_captcha(playwright: Playwright) -> None:
     if SKIP_CAPTCHA_SOLVING:
         pytest.skip("Skipping captcha solving")
     playwright_captcha.run(playwright)
 
 
-def test_playwright_contexts(playwright: Playwright):
+def test_playwright_contexts(playwright: Playwright) -> None:
     playwright_contexts.run(playwright)
 
 
-def test_playwright_downloads(playwright: Playwright):
+def test_playwright_downloads(playwright: Playwright) -> None:
     playwright_downloads.run(playwright)

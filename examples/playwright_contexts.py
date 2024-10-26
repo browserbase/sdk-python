@@ -28,7 +28,7 @@ def find_cookie(browser: Browser, name: str) -> Optional[Cookie]:
     return next((cookie for cookie in cookies if cookie.get("name") == name), None)
 
 
-def run(playwright: Playwright):
+def run(playwright: Playwright) -> None:
     context_id = None
     session_id = None
     test_cookie_name = None
