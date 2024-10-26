@@ -1,5 +1,4 @@
-from playwright.sync_api import Playwright, sync_playwright, ConsoleMessage
-
+from playwright.sync_api import Playwright, ConsoleMessage, sync_playwright
 
 from examples import (
     BROWSERBASE_API_KEY,

@@ -1,17 +1,19 @@
 import os
-import zipfile
 import time
+import zipfile
+from io import BytesIO
 from pathlib import Path
-from playwright.sync_api import sync_playwright, Playwright
-from browserbase.types.extension import Extension
-from browserbase.types.session import Session
+
+from playwright.sync_api import Playwright, sync_playwright
+
 from examples import (
     BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
     BROWSERBASE_CONNECT_URL,
     bb,
 )
-from io import BytesIO
+from browserbase.types.session import Session
+from browserbase.types.extension import Extension
 
 PATH_TO_EXTENSION = (
     Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"

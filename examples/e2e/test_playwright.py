@@ -1,7 +1,9 @@
-import pytest
-from playwright.sync_api import Playwright, sync_playwright
-from dotenv import load_dotenv
 import os
+
+import pytest
+from dotenv import load_dotenv
+from playwright.sync_api import Playwright, sync_playwright
+
 from browserbase import Browserbase
 
 from .. import (

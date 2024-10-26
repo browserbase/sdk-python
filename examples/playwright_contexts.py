@@ -1,16 +1,17 @@
-from playwright.sync_api import Playwright, sync_playwright, Browser, Cookie
-from browserbase.types.session_create_params import (
-    BrowserSettings,
-    BrowserSettingsContext,
-)
 import time
 from typing import Optional
+
+from playwright.sync_api import Cookie, Browser, Playwright, sync_playwright
 
 from examples import (
     BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
     BROWSERBASE_CONNECT_URL,
     bb,
+)
+from browserbase.types.session_create_params import (
+    BrowserSettings,
+    BrowserSettingsContext,
 )
 
 CONTEXT_TEST_URL = "https://www.browserbase.com"

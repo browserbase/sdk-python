@@ -1,7 +1,9 @@
+import io
 import re
 import zipfile
-import io
+
 from playwright.sync_api import Playwright, sync_playwright
+
 from examples import (
     BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
