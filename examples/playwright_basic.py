@@ -2,8 +2,8 @@ from playwright.sync_api import Playwright, sync_playwright
 
 from examples import (
     BROWSERBASE_API_KEY,
-    BROWSERBASE_CONNECT_URL,
     BROWSERBASE_PROJECT_ID,
+    BROWSERBASE_CONNECT_URL,
     bb,
 )
 
