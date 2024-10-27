@@ -9,12 +9,13 @@ from .. import (
     playwright_basic,
     playwright_captcha,
     playwright_contexts,
+    playwright_downloads,
 )
 
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
 load_dotenv()
 
-SKIP_CAPTCHA_SOLVING = os.getenv("SKIP_CAPTCHA_SOLVING", "false").lower() == "true"
+SKIP_CAPTCHA_SOLVING = os.getenv("SKIP_CAPTCHA_SOLVING", "true").lower() == "true"
 
 
 @pytest.fixture(scope="session")
@@ -35,3 +36,7 @@ def test_playwright_captcha(playwright: Playwright):
 
 def test_playwright_contexts(playwright: Playwright):
     playwright_contexts.run(playwright)
+
+
+def test_playwright_downloads(playwright: Playwright):
+    playwright_downloads.run(playwright)
