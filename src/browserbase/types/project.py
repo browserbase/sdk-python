@@ -14,4 +14,10 @@ class Project(BaseModel):
 
     created_at: datetime = FieldInfo(alias="createdAt")
 
+    default_timeout: int = FieldInfo(alias="defaultTimeout")
+
+    name: str
+
+    owner_id: str = FieldInfo(alias="ownerId")
+
     updated_at: datetime = FieldInfo(alias="updatedAt")
