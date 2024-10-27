@@ -11,10 +11,10 @@ from .. import (
     BROWSERBASE_API_KEY,
     playwright_basic,
     playwright_proxy,
+    playwright_upload,
     playwright_captcha,
     playwright_contexts,
     playwright_downloads,
-    playwright_upload,
 )
 
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
