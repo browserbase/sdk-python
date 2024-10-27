@@ -105,10 +105,7 @@ class SessionsResource(SyncAPIResource):
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
         proxies: object | NotGiven = NOT_GIVEN,
-        region: (
-            Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
-            | NotGiven
-        ) = NOT_GIVEN,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,10 +159,7 @@ class SessionsResource(SyncAPIResource):
                 session_create_params.SessionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionCreateResponse,
         )
@@ -198,10 +192,7 @@ class SessionsResource(SyncAPIResource):
         return self._get(
             f"/v1/sessions/{id}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Session,
         )
@@ -250,10 +241,7 @@ class SessionsResource(SyncAPIResource):
                 session_update_params.SessionUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Session,
         )
@@ -261,9 +249,7 @@ class SessionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        status: (
-            Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven
-        ) = NOT_GIVEN,
+        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,9 +276,7 @@ class SessionsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"status": status}, session_list_params.SessionListParams
-                ),
+                query=maybe_transform({"status": status}, session_list_params.SessionListParams),
             ),
             cast_to=SessionListResponse,
         )
@@ -325,10 +309,7 @@ class SessionsResource(SyncAPIResource):
         return self._get(
             f"/v1/sessions/{id}/debug",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionLiveURLs,
         )
@@ -378,10 +359,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
         proxies: object | NotGiven = NOT_GIVEN,
-        region: (
-            Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
-            | NotGiven
-        ) = NOT_GIVEN,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -435,10 +413,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                 session_create_params.SessionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionCreateResponse,
         )
@@ -471,10 +446,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         return await self._get(
             f"/v1/sessions/{id}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Session,
         )
@@ -523,10 +495,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                 session_update_params.SessionUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Session,
         )
@@ -534,9 +503,7 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        status: (
-            Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven
-        ) = NOT_GIVEN,
+        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -563,9 +530,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"status": status}, session_list_params.SessionListParams
-                ),
+                query=await async_maybe_transform({"status": status}, session_list_params.SessionListParams),
             ),
             cast_to=SessionListResponse,
         )
@@ -598,10 +563,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         return await self._get(
             f"/v1/sessions/{id}/debug",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionLiveURLs,
         )
