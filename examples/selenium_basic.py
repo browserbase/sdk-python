@@ -11,17 +11,18 @@ class BrowserbaseConnection(RemoteConnection):
     """
 
     browserbase_session: SessionCreateResponse
+    session_id: str
 
-    def __init__(self, *args, **kwargs):
-        self.browserbase_session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+    def __init__(self, session_id: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.session_id = session_id
 
     def get_remote_connection_headers(self, parsed_url, keep_alive=False):
         headers = super().get_remote_connection_headers(parsed_url, keep_alive)
 
         # Update headers to include the Browserbase required information
         headers["x-bb-api-key"] = BROWSERBASE_API_KEY
-        headers["session-id"] = self.browserbase_session.id
+        headers["session-id"] = self.session_id
 
         return headers
 
@@ -37,7 +38,8 @@ def run(driver: WebDriver):
 
 
 # Use the custom class to create and connect to a new browser session
-connection = BrowserbaseConnection("http://connect.browserbase.com/webdriver")
+session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+connection = BrowserbaseConnection(session.id, session.selenium_remote_url)
 driver = webdriver.Remote(connection, options=webdriver.ChromeOptions())
 
 # Print a bit of info about the browser we've connected to
