@@ -1,16 +1,25 @@
+import os
+
 from playwright.sync_api import Playwright, sync_playwright
 
-from examples import (
-    BROWSERBASE_PROJECT_ID,
-    bb,
+from browserbase import Browserbase
+
+BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY", "")
+if not BROWSERBASE_API_KEY:
+    raise ValueError("BROWSERBASE_API_KEY is not set")
+BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID", "")
+if not BROWSERBASE_PROJECT_ID:
+    raise ValueError("BROWSERBASE_PROJECT_ID is not set")
+
+bb = Browserbase(
+    # This is the default and can be omitted
+    api_key=BROWSERBASE_API_KEY,
 )
 
 
 def run(playwright: Playwright) -> None:
     # Create a session on Browserbase
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
-    assert session.id is not None
-    assert session.status == "RUNNING", f"Session status is {session.status}"
 
     # Connect to the remote session
     chromium = playwright.chromium

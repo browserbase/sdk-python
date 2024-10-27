@@ -28,23 +28,45 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
+from playwright.sync_api import Playwright, sync_playwright
 from browserbase import Browserbase
 
-client = Browserbase(
+BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY")
+BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID")
+
+bb = Browserbase(
     # This is the default and can be omitted
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),
+    api_key=BROWSERBASE_API_KEY,
 )
 
-context = client.contexts.create(
-    project_id="projectId",
-)
-print(context.id)
+def run(playwright: Playwright) -> None:
+    # Create a session on Browserbase
+    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+
+    # Connect to the remote session
+    chromium = playwright.chromium
+    browser = chromium.connect_over_cdp(session.connect_url)
+    context = browser.contexts[0]
+    page = context.pages[0]
+
+    # Execute Playwright actions on the remote browser tab
+    page.goto("https://news.ycombinator.com/")
+    page_title = page.title()
+    assert (
+        page_title == "Hacker News"
+    ), f"Page title is not 'Hacker News', it is '{page_title}'"
+    page.screenshot(path="screenshot.png")
+
+    page.close()
+    browser.close()
+    print("Done!")
+
+
+if __name__ == "__main__":
+    with sync_playwright() as playwright:
+        run(playwright)
+
 ```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BROWSERBASE_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
 ## Examples
 
@@ -62,33 +84,6 @@ rye run example playwright_basic # replace with the example you want to run
 
 > [!NOTE]
 > Make sure you have a `.env` file that matches the [.env.example](.env.example) file in the root of this repository.
-
-## Async usage
-
-Simply import `AsyncBrowserbase` instead of `Browserbase` and use `await` with each API call:
-
-```python
-import os
-import asyncio
-from browserbase import AsyncBrowserbase
-
-client = AsyncBrowserbase(
-    # This is the default and can be omitted
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),
-)
-
-
-async def main() -> None:
-    context = await client.contexts.create(
-        project_id="projectId",
-    )
-    print(context.id)
-
-
-asyncio.run(main())
-```
-
-Functionality between the synchronous and asynchronous clients is otherwise identical.
 
 ## Using types
 
