@@ -14,6 +14,7 @@ from .. import (
     playwright_captcha,
     playwright_contexts,
     playwright_downloads,
+    playwright_upload,
 )
 
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
@@ -23,7 +24,6 @@ CI = os.getenv("CI", "false").lower() == "true"
 
 
 @pytest.fixture(scope="session")
-@pytest.mark.skipif(True, reason="Flaky and fails on CI")
 def playwright() -> Generator[Playwright, None, None]:
     with sync_playwright() as p:
         yield p
@@ -33,17 +33,15 @@ def test_playwright_basic(playwright: Playwright) -> None:
     playwright_basic.run(playwright)
 
 
-@pytest.mark.skipif(True, reason="Flaky and fails on CI")
+@pytest.mark.skipif(True, reason="Flaky and fails often")
 def test_playwright_captcha(playwright: Playwright) -> None:
     playwright_captcha.run(playwright)
 
 
-@pytest.mark.skipif(True, reason="Flaky and fails on CI")
 def test_playwright_contexts(playwright: Playwright) -> None:
     playwright_contexts.run(playwright)
 
 
-@pytest.mark.skipif(True, reason="Flaky and fails on CI")
 def test_playwright_downloads(playwright: Playwright) -> None:
     playwright_downloads.run(playwright)
 
@@ -74,3 +72,7 @@ def test_playwright_proxy_geolocation_american_city(playwright: Playwright) -> N
 @pytest.mark.skipif(CI, reason="Flaky and fails on CI")
 def test_playwright_proxy_geolocation_non_american_city(playwright: Playwright) -> None:
     playwright_proxy.run_geolocation_non_american_city(playwright)
+
+
+def test_playwright_upload(playwright: Playwright) -> None:
+    playwright_upload.run(playwright)
