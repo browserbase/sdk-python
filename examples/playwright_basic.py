@@ -1,25 +1,20 @@
 from playwright.sync_api import Playwright, sync_playwright
 
 from examples import (
-    BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
-    BROWSERBASE_CONNECT_URL,
     bb,
 )
 
 
-def run(playwright: Playwright):
+def run(playwright: Playwright) -> None:
     # Create a session on Browserbase
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
     assert session.id is not None
     assert session.status == "RUNNING", f"Session status is {session.status}"
 
     # Connect to the remote session
-    connect_url = (
-        f"{BROWSERBASE_CONNECT_URL}?sessionId={session.id}&apiKey={BROWSERBASE_API_KEY}"
-    )
     chromium = playwright.chromium
-    browser = chromium.connect_over_cdp(connect_url)
+    browser = chromium.connect_over_cdp(session.connect_url)
     context = browser.contexts[0]
     page = context.pages[0]
 
