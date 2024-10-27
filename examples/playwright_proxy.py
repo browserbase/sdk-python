@@ -1,20 +1,12 @@
 import time
-from typing import Any, Dict
 
 from playwright.sync_api import Page, Playwright, sync_playwright
-from pydantic import TypeAdapter
 
 from examples import (
     BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
     BROWSERBASE_CONNECT_URL,
     bb,
-)
-from browserbase.types.session_create_params import (
-    ProxiesUnionMember1,
-    ProxiesUnionMember1ExternalProxyConfig,
-    ProxiesUnionMember1BrowserbaseProxyConfig,
-    ProxiesUnionMember1BrowserbaseProxyConfigGeolocation,
 )
 
 GRACEFUL_SHUTDOWN_TIMEOUT = 30000  # Assuming 30 seconds, adjust as needed
@@ -26,50 +18,9 @@ def check_proxy_bytes(session_id: str) -> None:
     )
     time.sleep(GRACEFUL_SHUTDOWN_TIMEOUT / 1000)
     updated_session = bb.sessions.retrieve(id=session_id)
-    print("UPDATED SESSION", updated_session)
     assert (
         updated_session.proxy_bytes is not None and updated_session.proxy_bytes > 0
     ), f"Proxy bytes: {updated_session.proxy_bytes}"
-
-
-def generate_proxy_config(proxy_data: Dict[str, Any]) -> ProxiesUnionMember1:
-    """
-    Generate the appropriate ProxiesUnionMember1 type given a deeply nested JSON.
-
-    :param proxy_data: A dictionary containing proxy configuration data
-    :return: An instance of ProxiesUnionMember1
-    """
-    if proxy_data.get("type") == "browserbase":
-        for key in ["geolocation"]:
-            if proxy_data.get(key) is None:
-                raise ValueError(f"Missing required key in proxy config: {key}")
-
-        geolocation = proxy_data["geolocation"]
-        for key in ["country", "city", "state"]:
-            if geolocation.get(key) is None:
-                raise ValueError(f"Missing required key in geolocation: {key}")
-        return ProxiesUnionMember1BrowserbaseProxyConfig(
-            type="browserbase",
-            domain_pattern=proxy_data.get("domainPattern", ""),
-            geolocation=ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(
-                country=geolocation.get("country", ""),
-                city=geolocation.get("city", ""),
-                state=geolocation.get("state", ""),
-            ),
-        )
-    elif proxy_data.get("type") == "external":
-        for key in ["server", "username", "password"]:
-            if proxy_data.get(key) is None:
-                raise ValueError(f"Missing required key in proxy config: {key}")
-        return ProxiesUnionMember1ExternalProxyConfig(
-            type="external",
-            server=proxy_data["server"],
-            domain_pattern=proxy_data["domainPattern"],
-            username=proxy_data["username"],
-            password=proxy_data["password"],
-        )
-    else:
-        raise ValueError(f"Invalid proxy type: {proxy_data.get('type')}")
 
 
 def run_enable_via_create_session(playwright: Playwright) -> None:
@@ -126,13 +77,10 @@ def run_geolocation_country(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
-            TypeAdapter(ProxiesUnionMember1).validate_python(
-                {
-                    "geolocation": {"country": "CA"},
-                    "type": "browserbase",
-                    "test": "swag",
-                }
-            )
+            {
+                "geolocation": {"country": "CA"},
+                "type": "browserbase",
+            }
         ],
     )
 
@@ -155,15 +103,13 @@ def run_geolocation_state(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
-            generate_proxy_config(
-                {
-                    "geolocation": {
-                        "country": "US",
-                        "state": "NY",
-                    },
-                    "type": "browserbase",
-                }
-            )
+            {
+                "geolocation": {
+                    "country": "US",
+                    "state": "NY",
+                },
+                "type": "browserbase",
+            }
         ],
     )
 
@@ -186,16 +132,14 @@ def run_geolocation_american_city(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
-            generate_proxy_config(
-                {
-                    "geolocation": {
-                        "city": "Los Angeles",
-                        "country": "US",
-                        "state": "CA",
-                    },
-                    "type": "browserbase",
-                }
-            )
+            {
+                "geolocation": {
+                    "city": "Los Angeles",
+                    "country": "US",
+                    "state": "CA",
+                },
+                "type": "browserbase",
+            }
         ],
     )
 
@@ -218,15 +162,13 @@ def run_geolocation_non_american_city(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
-            generate_proxy_config(
-                {
-                    "geolocation": {
-                        "city": "London",
-                        "country": "GB",
-                    },
-                    "type": "browserbase",
-                }
-            )
+            {
+                "geolocation": {
+                    "city": "London",
+                    "country": "GB",
+                },
+                "type": "browserbase",
+            }
         ],
     )
 
@@ -247,6 +189,7 @@ def run_geolocation_non_american_city(playwright: Playwright) -> None:
 
 if __name__ == "__main__":
     with sync_playwright() as playwright:
+        # You can run any of these tests by uncommenting them
         run_enable_via_create_session(playwright)
         # run_enable_via_querystring_with_created_session(playwright)
         # run_geolocation_country(playwright)

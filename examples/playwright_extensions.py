@@ -12,8 +12,7 @@ from examples import (
     BROWSERBASE_CONNECT_URL,
     bb,
 )
-from browserbase.types.session import Session
-from browserbase.types.extension import Extension
+from browserbase.types import Extension, SessionCreateResponse
 
 PATH_TO_EXTENSION = (
     Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
@@ -96,7 +95,7 @@ def run(playwright: Playwright) -> None:
     print(f"Retrieved extension: {extension}")
 
     # Use extension
-    session: Session = bb.sessions.create(
+    session: SessionCreateResponse = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         extension_id=extension.id,
     )
@@ -111,7 +110,7 @@ def run(playwright: Playwright) -> None:
     browser.close()
 
     # Use extension with proxies
-    session_with_proxy: Session = bb.sessions.create(
+    session_with_proxy: SessionCreateResponse = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         extension_id=extension_id,
         proxies=True,

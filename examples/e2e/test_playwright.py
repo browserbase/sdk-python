@@ -19,7 +19,7 @@ from .. import (
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
 load_dotenv()
 
-CI = os.getenv("CI", "true").lower() == "true"
+CI = os.getenv("CI", "false").lower() == "true"
 
 
 @pytest.fixture(scope="session")
