@@ -2,6 +2,7 @@ import time
 from typing import Any, Dict
 
 from playwright.sync_api import Page, Playwright, sync_playwright
+from pydantic import TypeAdapter
 
 from examples import (
     BROWSERBASE_API_KEY,
@@ -20,8 +21,12 @@ GRACEFUL_SHUTDOWN_TIMEOUT = 30000  # Assuming 30 seconds, adjust as needed
 
 
 def check_proxy_bytes(session_id: str) -> None:
+    bb.sessions.update(
+        id=session_id, project_id=BROWSERBASE_PROJECT_ID, status="REQUEST_RELEASE"
+    )
     time.sleep(GRACEFUL_SHUTDOWN_TIMEOUT / 1000)
     updated_session = bb.sessions.retrieve(id=session_id)
+    print("UPDATED SESSION", updated_session)
     assert (
         updated_session.proxy_bytes is not None and updated_session.proxy_bytes > 0
     ), f"Proxy bytes: {updated_session.proxy_bytes}"
@@ -35,7 +40,7 @@ def generate_proxy_config(proxy_data: Dict[str, Any]) -> ProxiesUnionMember1:
     :return: An instance of ProxiesUnionMember1
     """
     if proxy_data.get("type") == "browserbase":
-        for key in ["geolocation", "domainPattern"]:
+        for key in ["geolocation"]:
             if proxy_data.get(key) is None:
                 raise ValueError(f"Missing required key in proxy config: {key}")
 
@@ -53,7 +58,7 @@ def generate_proxy_config(proxy_data: Dict[str, Any]) -> ProxiesUnionMember1:
             ),
         )
     elif proxy_data.get("type") == "external":
-        for key in ["server", "domainPattern", "username", "password"]:
+        for key in ["server", "username", "password"]:
             if proxy_data.get(key) is None:
                 raise ValueError(f"Missing required key in proxy config: {key}")
         return ProxiesUnionMember1ExternalProxyConfig(
@@ -121,12 +126,11 @@ def run_geolocation_country(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
-            generate_proxy_config(
+            TypeAdapter(ProxiesUnionMember1).validate_python(
                 {
-                    "geolocation": {
-                        "country": "CA",
-                    },
+                    "geolocation": {"country": "CA"},
                     "type": "browserbase",
+                    "test": "swag",
                 }
             )
         ],
@@ -244,8 +248,8 @@ def run_geolocation_non_american_city(playwright: Playwright) -> None:
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run_enable_via_create_session(playwright)
-        run_enable_via_querystring_with_created_session(playwright)
-        run_geolocation_country(playwright)
-        run_geolocation_state(playwright)
-        run_geolocation_american_city(playwright)
-        run_geolocation_non_american_city(playwright)
+        # run_enable_via_querystring_with_created_session(playwright)
+        # run_geolocation_country(playwright)
+        # run_geolocation_state(playwright)
+        # run_geolocation_american_city(playwright)
+        # run_geolocation_non_american_city(playwright)

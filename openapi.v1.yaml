@@ -17,12 +17,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateContextResponse"
-        "500":
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
       requestBody:
         required: true
         content:
@@ -62,18 +56,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateContextResponse"
-        "404":
-          description: The server cannot find the requested resource.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /v1/extensions:
     post:
       operationId: Extensions_upload
@@ -211,13 +193,76 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Session"
-        "500":
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                type: object
+                properties:
+                  projectId:
+                    allOf:
+                      - $ref: "#/components/schemas/uuid"
+                    description: The Project ID linked to the Session.
+                  startedAt:
+                    type: string
+                    format: date-time
+                  endedAt:
+                    type: string
+                    format: date-time
+                  expiresAt:
+                    type: string
+                    format: date-time
+                  status:
+                    $ref: "#/components/schemas/SessionStatus"
+                  proxyBytes:
+                    type: integer
+                    description: Bytes used via the [Proxy](/features/stealth-mode#proxies-and-residential-ips)
+                  avgCpuUsage:
+                    type: integer
+                    description: CPU used by the Session
+                  memoryUsage:
+                    type: integer
+                    description: Memory used by the Session
+                  keepAlive:
+                    type: boolean
+                    description: Indicates if the Session was created to be kept alive upon disconnections
+                  contextId:
+                    allOf:
+                      - $ref: "#/components/schemas/uuid"
+                    description: Optional. The Context linked to the Session.
+                  region:
+                    allOf:
+                      - $ref: "#/components/schemas/Region"
+                    description: The region where the Session is running.
+                  id:
+                    $ref: "#/components/schemas/uuid"
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  connectUrl:
+                    type: string
+                    format: uri
+                    description: WebSocket URL to connect to the Session.
+                  seleniumRemoteUrl:
+                    type: string
+                    format: uri
+                    description: HTTP URL to connect to the Session.
+                  signingKey:
+                    type: string
+                    description: Signing key to use when connecting to the Session via HTTP.
+                required:
+                  - projectId
+                  - startedAt
+                  - expiresAt
+                  - status
+                  - proxyBytes
+                  - keepAlive
+                  - region
+                  - id
+                  - createdAt
+                  - updatedAt
+                  - connectUrl
+                  - seleniumRemoteUrl
+                  - signingKey
       requestBody:
         required: true
         content:
@@ -400,22 +445,10 @@ paths:
         "200":
           description: The request has succeeded.
           content:
-            application/octet-stream:
+            application/zip:
               schema:
                 type: string
                 format: binary
-        "404":
-          description: The server cannot find the requested resource.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /v1/sessions/{id}/logs:
     get:
       operationId: Sessions_getLogs
@@ -488,14 +521,8 @@ paths:
                     type: string
                 required:
                   - message
-        "400":
-          description: The server could not understand the request due to invalid syntax.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Server error
+        "415":
+          description: Client error
           content:
             application/json:
               schema:
@@ -559,19 +586,27 @@ components:
     Context:
       type: object
       required:
+        - id
+        - createdAt
+        - updatedAt
         - projectId
       properties:
+        id:
+          $ref: "#/components/schemas/uuid"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         projectId:
           allOf:
             - $ref: "#/components/schemas/uuid"
           description: The Project ID linked to the uploaded Context.
-      allOf:
-        - $ref: "#/components/schemas/Entity"
     ContextSetting:
       type: object
       required:
         - id
-        - persist
       properties:
         id:
           allOf:
@@ -638,14 +673,29 @@ components:
           type: boolean
           description: Set to true to keep the session alive even after disconnections. This is available on the Startup plan only.
         proxies:
-          anyOf:
-            - type: boolean
-            - type: array
-              items:
-                anyOf:
-                  - $ref: "#/components/schemas/BrowserbaseProxyConfig"
-                  - $ref: "#/components/schemas/ExternalProxyConfig"
           description: Proxy configuration. Can be true for default proxy, or an array of proxy configurations.
+        region:
+          allOf:
+            - $ref: "#/components/schemas/Region"
+          description: The region where the Session should run.
+    CreateSessionConnectDetails:
+      type: object
+      required:
+        - connectUrl
+        - seleniumRemoteUrl
+        - signingKey
+      properties:
+        connectUrl:
+          type: string
+          format: uri
+          description: WebSocket URL to connect to the Session.
+        seleniumRemoteUrl:
+          type: string
+          format: uri
+          description: HTTP URL to connect to the Session.
+        signingKey:
+          type: string
+          description: Signing key to use when connecting to the Session via HTTP.
     Entity:
       type: object
       required:
@@ -674,9 +724,20 @@ components:
     Extension:
       type: object
       required:
+        - id
+        - createdAt
+        - updatedAt
         - fileName
         - projectId
       properties:
+        id:
+          $ref: "#/components/schemas/uuid"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         fileName:
           type: string
           minLength: 1
@@ -684,8 +745,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/uuid"
           description: The Project ID linked to the uploaded Extension.
-      allOf:
-        - $ref: "#/components/schemas/Entity"
     ExternalProxyConfig:
       type: object
       required:
@@ -784,10 +843,21 @@ components:
     Project:
       type: object
       required:
+        - id
+        - createdAt
+        - updatedAt
         - name
         - ownerId
         - defaultTimeout
       properties:
+        id:
+          $ref: "#/components/schemas/uuid"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         name:
           type: string
           minLength: 1
@@ -797,8 +867,6 @@ components:
           type: integer
           minimum: 60
           maximum: 21600
-      allOf:
-        - $ref: "#/components/schemas/Entity"
     ProjectUsage:
       type: object
       required:
@@ -811,18 +879,35 @@ components:
         proxyBytes:
           type: integer
           minimum: 0
+    Region:
+      type: string
+      enum:
+        - us-west-2
+        - us-east-1
+        - eu-central-1
+        - ap-southeast-1
     Session:
-      allOf:
-        - $ref: "#/components/schemas/Entity"
       type: object
       required:
+        - id
+        - createdAt
+        - updatedAt
         - projectId
         - startedAt
         - expiresAt
         - status
         - proxyBytes
         - keepAlive
+        - region
       properties:
+        id:
+          $ref: "#/components/schemas/uuid"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         projectId:
           allOf:
             - $ref: "#/components/schemas/uuid"
@@ -853,7 +938,11 @@ components:
         contextId:
           allOf:
             - $ref: "#/components/schemas/uuid"
-          description: Optional. The Context linked to the Session. 
+          description: Optional. The Context linked to the Session.
+        region:
+          allOf:
+            - $ref: "#/components/schemas/Region"
+          description: The region where the Session is running.
     SessionBrowserSettings:
       type: object
       properties:

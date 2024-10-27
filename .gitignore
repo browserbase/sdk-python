@@ -15,5 +15,4 @@ dist
 codegen.log
 Brewfile.lock.json
 screenshot.png
-openapi.v1.yaml
 **/.DS_Store
