@@ -1,14 +1,7 @@
-from typing import Dict, Any
-import os
-import pytest
-from playwright.sync_api import Page, Playwright, sync_playwright
-from browserbase.types.session_create_params import (
-    ProxiesUnionMember1,
-    ProxiesUnionMember1BrowserbaseProxyConfig,
-    ProxiesUnionMember1BrowserbaseProxyConfigGeolocation,
-    ProxiesUnionMember1ExternalProxyConfig,
-)
 import time
+from typing import Any, Dict
+
+from playwright.sync_api import Page, Playwright, sync_playwright
 
 from examples import (
     BROWSERBASE_API_KEY,
@@ -16,9 +9,14 @@ from examples import (
     BROWSERBASE_CONNECT_URL,
     bb,
 )
+from browserbase.types.session_create_params import (
+    ProxiesUnionMember1,
+    ProxiesUnionMember1ExternalProxyConfig,
+    ProxiesUnionMember1BrowserbaseProxyConfig,
+    ProxiesUnionMember1BrowserbaseProxyConfigGeolocation,
+)
 
 GRACEFUL_SHUTDOWN_TIMEOUT = 30000  # Assuming 30 seconds, adjust as needed
-CI = os.environ.get("CI", "false").lower() == "true"
 
 
 def check_proxy_bytes(session_id: str) -> None:
@@ -69,187 +67,185 @@ def generate_proxy_config(proxy_data: Dict[str, Any]) -> ProxiesUnionMember1:
         raise ValueError(f"Invalid proxy type: {proxy_data.get('type')}")
 
 
-def run(playwright: Playwright):
-    def test_enable_via_create_session():
-        session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
+def run_enable_via_create_session(playwright: Playwright):
+    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-        )
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
+    )
 
-        context = browser.contexts[0]
-        page = context.pages[0]
-        page.goto("https://www.google.com")
-        page_title = page.title()
+    context = browser.contexts[0]
+    page = context.pages[0]
+    page.goto("https://www.google.com")
+    page_title = page.title()
 
-        page.close()
-        browser.close()
+    page.close()
+    browser.close()
 
-        assert page_title == "Google"
-        check_proxy_bytes(session.id)
+    assert page_title == "Google"
+    check_proxy_bytes(session.id)
 
-    def test_enable_via_querystring_with_created_session():
-        session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}&enableProxy=true"
-        )
+def run_enable_via_querystring_with_created_session(playwright: Playwright):
+    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-        context = browser.contexts[0]
-        page = context.pages[0]
-        page.goto("https://www.google.com/")
-        page_title = page.title()
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}&enableProxy=true"
+    )
 
-        page.close()
-        browser.close()
+    context = browser.contexts[0]
+    page = context.pages[0]
+    page.goto("https://www.google.com/")
+    page_title = page.title()
 
-        assert page_title == "Google"
-        check_proxy_bytes(session.id)
+    page.close()
+    browser.close()
 
-    def extract_from_table(page: Page, cell: str) -> str:
-        page.goto("https://www.showmyip.com/")
-        page.wait_for_selector("table.iptab")
+    assert page_title == "Google"
+    check_proxy_bytes(session.id)
 
-        td = page.locator(f"table.iptab tr:has-text('{cell}') td:last-child")
 
-        text = td.text_content()
-        if not text:
-            raise Exception(f"Failed to extract {cell}")
-        return text.strip()
+def extract_from_table(page: Page, cell: str) -> str:
+    page.goto("https://www.showmyip.com/")
+    page.wait_for_selector("table.iptab")
 
-    @pytest.mark.skipif(CI, reason="Flaky and fails on CI")
-    def test_geolocation_country():
-        session = bb.sessions.create(
-            project_id=BROWSERBASE_PROJECT_ID,
-            proxies=[
-                generate_proxy_config(
-                    {
-                        "geolocation": {
-                            "country": "CA",
-                        },
-                        "type": "browserbase",
-                    }
-                )
-            ],
-        )
+    td = page.locator(f"table.iptab tr:has-text('{cell}') td:last-child")
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-        )
+    text = td.text_content()
+    if not text:
+        raise Exception(f"Failed to extract {cell}")
+    return text.strip()
 
-        context = browser.contexts[0]
-        page = context.pages[0]
 
-        country = extract_from_table(page, "Country")
+def run_geolocation_country(playwright: Playwright):
+    session = bb.sessions.create(
+        project_id=BROWSERBASE_PROJECT_ID,
+        proxies=[
+            generate_proxy_config(
+                {
+                    "geolocation": {
+                        "country": "CA",
+                    },
+                    "type": "browserbase",
+                }
+            )
+        ],
+    )
 
-        page.close()
-        browser.close()
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
+    )
 
-        assert country == "Canada"
+    context = browser.contexts[0]
+    page = context.pages[0]
 
-    @pytest.mark.skipif(CI, reason="Flaky and fails on CI")
-    def test_geolocation_state():
-        session = bb.sessions.create(
-            project_id=BROWSERBASE_PROJECT_ID,
-            proxies=[
-                generate_proxy_config(
-                    {
-                        "geolocation": {
-                            "country": "US",
-                            "state": "NY",
-                        },
-                        "type": "browserbase",
-                    }
-                )
-            ],
-        )
+    country = extract_from_table(page, "Country")
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-        )
+    page.close()
+    browser.close()
 
-        context = browser.contexts[0]
-        page = context.pages[0]
+    assert country == "Canada"
 
-        state = extract_from_table(page, "Region")
 
-        page.close()
-        browser.close()
+def run_geolocation_state(playwright: Playwright):
+    session = bb.sessions.create(
+        project_id=BROWSERBASE_PROJECT_ID,
+        proxies=[
+            generate_proxy_config(
+                {
+                    "geolocation": {
+                        "country": "US",
+                        "state": "NY",
+                    },
+                    "type": "browserbase",
+                }
+            )
+        ],
+    )
 
-        assert state == "New York"
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
+    )
 
-    @pytest.mark.skipif(CI, reason="Flaky and fails on CI")
-    def test_geolocation_american_city():
-        session = bb.sessions.create(
-            project_id=BROWSERBASE_PROJECT_ID,
-            proxies=[
-                generate_proxy_config(
-                    {
-                        "geolocation": {
-                            "city": "Los Angeles",
-                            "country": "US",
-                            "state": "CA",
-                        },
-                        "type": "browserbase",
-                    }
-                )
-            ],
-        )
+    context = browser.contexts[0]
+    page = context.pages[0]
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-        )
+    state = extract_from_table(page, "Region")
 
-        context = browser.contexts[0]
-        page = context.pages[0]
+    page.close()
+    browser.close()
 
-        city = extract_from_table(page, "City")
+    assert state == "New York"
 
-        page.close()
-        browser.close()
 
-        assert city == "Los Angeles"
+def run_geolocation_american_city(playwright: Playwright):
+    session = bb.sessions.create(
+        project_id=BROWSERBASE_PROJECT_ID,
+        proxies=[
+            generate_proxy_config(
+                {
+                    "geolocation": {
+                        "city": "Los Angeles",
+                        "country": "US",
+                        "state": "CA",
+                    },
+                    "type": "browserbase",
+                }
+            )
+        ],
+    )
 
-    @pytest.mark.skipif(CI, reason="Flaky and fails on CI")
-    def test_geolocation_non_american_city():
-        session = bb.sessions.create(
-            project_id=BROWSERBASE_PROJECT_ID,
-            proxies=[
-                generate_proxy_config(
-                    {
-                        "geolocation": {
-                            "city": "London",
-                            "country": "GB",
-                        },
-                        "type": "browserbase",
-                    }
-                )
-            ],
-        )
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
+    )
 
-        browser = playwright.chromium.connect_over_cdp(
-            f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-        )
+    context = browser.contexts[0]
+    page = context.pages[0]
 
-        context = browser.contexts[0]
-        page = context.pages[0]
+    city = extract_from_table(page, "City")
 
-        city = extract_from_table(page, "City")
+    page.close()
+    browser.close()
 
-        page.close()
-        browser.close()
+    assert city == "Los Angeles"
 
-        assert city == "London"
 
-    # Run the tests
-    test_enable_via_create_session()
-    test_enable_via_querystring_with_created_session()
-    test_geolocation_country()
-    test_geolocation_state()
-    test_geolocation_american_city()
-    test_geolocation_non_american_city()
+def run_geolocation_non_american_city(playwright: Playwright):
+    session = bb.sessions.create(
+        project_id=BROWSERBASE_PROJECT_ID,
+        proxies=[
+            generate_proxy_config(
+                {
+                    "geolocation": {
+                        "city": "London",
+                        "country": "GB",
+                    },
+                    "type": "browserbase",
+                }
+            )
+        ],
+    )
+
+    browser = playwright.chromium.connect_over_cdp(
+        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
+    )
+
+    context = browser.contexts[0]
+    page = context.pages[0]
+
+    city = extract_from_table(page, "City")
+
+    page.close()
+    browser.close()
+
+    assert city == "London"
 
 
 if __name__ == "__main__":
     with sync_playwright() as playwright:
-        run(playwright)
+        run_enable_via_create_session(playwright)
+        run_enable_via_querystring_with_created_session(playwright)
+        run_geolocation_country(playwright)
+        run_geolocation_state(playwright)
+        run_geolocation_american_city(playwright)
+        run_geolocation_non_american_city(playwright)

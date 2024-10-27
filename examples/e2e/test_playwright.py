@@ -10,6 +10,7 @@ from browserbase import Browserbase
 from .. import (
     BROWSERBASE_API_KEY,
     playwright_basic,
+    playwright_proxy,
     playwright_captcha,
     playwright_contexts,
     playwright_downloads,
@@ -18,7 +19,7 @@ from .. import (
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
 load_dotenv()
 
-SKIP_CAPTCHA_SOLVING = os.getenv("SKIP_CAPTCHA_SOLVING", "true").lower() == "true"
+CI = os.getenv("CI", "false").lower() == "true"
 
 
 @pytest.fixture(scope="session")
@@ -31,9 +32,8 @@ def test_playwright_basic(playwright: Playwright) -> None:
     playwright_basic.run(playwright)
 
 
+@pytest.mark.skipif(CI, reason="Flaky and fails on CI")
 def test_playwright_captcha(playwright: Playwright) -> None:
-    if SKIP_CAPTCHA_SOLVING:
-        pytest.skip("Skipping captcha solving")
     playwright_captcha.run(playwright)
 
 
@@ -43,3 +43,31 @@ def test_playwright_contexts(playwright: Playwright) -> None:
 
 def test_playwright_downloads(playwright: Playwright) -> None:
     playwright_downloads.run(playwright)
+
+
+def test_playwright_proxy_enable_via_create_session(playwright: Playwright) -> None:
+    playwright_proxy.run_enable_via_create_session(playwright)
+
+
+def test_playwright_proxy_enable_via_querystring(playwright: Playwright) -> None:
+    playwright_proxy.run_enable_via_querystring_with_created_session(playwright)
+
+
+@pytest.mark.skipif(CI, reason="Flaky and fails on CI")
+def test_playwright_proxy_geolocation_country(playwright: Playwright) -> None:
+    playwright_proxy.run_geolocation_country(playwright)
+
+
+@pytest.mark.skipif(CI, reason="Flaky and fails on CI")
+def test_playwright_proxy_geolocation_state(playwright: Playwright) -> None:
+    playwright_proxy.run_geolocation_state(playwright)
+
+
+@pytest.mark.skipif(CI, reason="Flaky and fails on CI")
+def test_playwright_proxy_geolocation_american_city(playwright: Playwright) -> None:
+    playwright_proxy.run_geolocation_american_city(playwright)
+
+
+@pytest.mark.skipif(CI, reason="Flaky and fails on CI")
+def test_playwright_proxy_geolocation_non_american_city(playwright: Playwright) -> None:
+    playwright_proxy.run_geolocation_non_american_city(playwright)
