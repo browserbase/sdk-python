@@ -24,6 +24,9 @@ class Session(BaseModel):
     project_id: str
     """The Project ID linked to the Session."""
 
+    proxy_bytes: int = FieldInfo(alias="proxyBytes")
+    """Bytes used via the [Proxy](/features/stealth-mode#proxies-and-residential-ips)"""
+
     region: str
 
     started_at: datetime
@@ -46,9 +49,6 @@ class Session(BaseModel):
 
     memory_usage: Optional[int] = None
     """Memory used by the Session"""
-
-    proxy_bytes: Optional[int] = None
-    """Bytes used via the [Proxy](/features/stealth-mode#proxies-and-residential-ips)"""
 
     selenium_remote_url: Optional[str] = FieldInfo(alias="seleniumRemoteUrl", default=None)
 
