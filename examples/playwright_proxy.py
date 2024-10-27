@@ -67,7 +67,7 @@ def generate_proxy_config(proxy_data: Dict[str, Any]) -> ProxiesUnionMember1:
         raise ValueError(f"Invalid proxy type: {proxy_data.get('type')}")
 
 
-def run_enable_via_create_session(playwright: Playwright):
+def run_enable_via_create_session(playwright: Playwright) -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
     browser = playwright.chromium.connect_over_cdp(
@@ -86,7 +86,7 @@ def run_enable_via_create_session(playwright: Playwright):
     check_proxy_bytes(session.id)
 
 
-def run_enable_via_querystring_with_created_session(playwright: Playwright):
+def run_enable_via_querystring_with_created_session(playwright: Playwright) -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
     browser = playwright.chromium.connect_over_cdp(
@@ -117,7 +117,7 @@ def extract_from_table(page: Page, cell: str) -> str:
     return text.strip()
 
 
-def run_geolocation_country(playwright: Playwright):
+def run_geolocation_country(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
@@ -147,7 +147,7 @@ def run_geolocation_country(playwright: Playwright):
     assert country == "Canada"
 
 
-def run_geolocation_state(playwright: Playwright):
+def run_geolocation_state(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
@@ -178,7 +178,7 @@ def run_geolocation_state(playwright: Playwright):
     assert state == "New York"
 
 
-def run_geolocation_american_city(playwright: Playwright):
+def run_geolocation_american_city(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
@@ -210,7 +210,7 @@ def run_geolocation_american_city(playwright: Playwright):
     assert city == "Los Angeles"
 
 
-def run_geolocation_non_american_city(playwright: Playwright):
+def run_geolocation_non_american_city(playwright: Playwright) -> None:
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
         proxies=[
