@@ -17,3 +17,4 @@ from .session_update_params import SessionUpdateParams as SessionUpdateParams
 from .context_create_response import ContextCreateResponse as ContextCreateResponse
 from .context_update_response import ContextUpdateResponse as ContextUpdateResponse
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
+from .session_create_response import SessionCreateResponse as SessionCreateResponse
