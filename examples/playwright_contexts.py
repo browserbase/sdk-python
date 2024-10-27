@@ -3,6 +3,7 @@ from typing import Optional
 
 from playwright.sync_api import Cookie, Browser, Playwright, sync_playwright
 
+
 from examples import (
     BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
@@ -13,6 +14,7 @@ from browserbase.types.session_create_params import (
     BrowserSettings,
     BrowserSettingsContext,
 )
+
 
 CONTEXT_TEST_URL = "https://www.browserbase.com"
 SECOND = 1000
