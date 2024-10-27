@@ -14,4 +14,7 @@ class Context(BaseModel):
 
     created_at: datetime = FieldInfo(alias="createdAt")
 
+    project_id: str = FieldInfo(alias="projectId")
+    """The Project ID linked to the uploaded Context."""
+
     updated_at: datetime = FieldInfo(alias="updatedAt")
