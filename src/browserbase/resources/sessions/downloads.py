@@ -67,7 +67,7 @@ class DownloadsResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "application/zip", **(extra_headers or {})}
         return self._get(
             f"/v1/sessions/{id}/downloads",
             options=make_request_options(
@@ -122,7 +122,7 @@ class AsyncDownloadsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "application/zip", **(extra_headers or {})}
         return await self._get(
             f"/v1/sessions/{id}/downloads",
             options=make_request_options(

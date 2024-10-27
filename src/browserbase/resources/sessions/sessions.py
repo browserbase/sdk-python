@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -57,6 +56,7 @@ from ..._base_client import make_request_options
 from ...types.session import Session
 from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
+from ...types.session_create_response import SessionCreateResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
 
@@ -104,7 +104,8 @@ class SessionsResource(SyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
+        proxies: object | NotGiven = NOT_GIVEN,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -112,7 +113,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
+    ) -> SessionCreateResponse:
         """Create a Session
 
         Args:
@@ -129,6 +130,8 @@ class SessionsResource(SyncAPIResource):
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
+
+          region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
@@ -150,6 +153,7 @@ class SessionsResource(SyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
+                    "region": region,
                     "timeout": api_timeout,
                 },
                 session_create_params.SessionCreateParams,
@@ -157,7 +161,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionCreateResponse,
         )
 
     def retrieve(
@@ -354,7 +358,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
+        proxies: object | NotGiven = NOT_GIVEN,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -362,7 +367,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
+    ) -> SessionCreateResponse:
         """Create a Session
 
         Args:
@@ -379,6 +384,8 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
+
+          region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
@@ -400,6 +407,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
+                    "region": region,
                     "timeout": api_timeout,
                 },
                 session_create_params.SessionCreateParams,
@@ -407,7 +415,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionCreateResponse,
         )
 
     async def retrieve(
