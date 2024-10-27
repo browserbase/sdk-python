@@ -2,57 +2,61 @@
 
 from __future__ import annotations
 
-import httpx
 from typing_extensions import Literal
 
-from ..._base_client import make_request_options
-from ..._compat import cached_property
-from ..._resource import AsyncAPIResource, SyncAPIResource
-from ..._response import (
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-)
-from ..._types import NOT_GIVEN, Body, Headers, NotGiven, Query
-from ..._utils import async_maybe_transform, maybe_transform
-from ...types import session_create_params, session_list_params, session_update_params
-from ...types.session import Session
-from ...types.session_create_response import SessionCreateResponse
-from ...types.session_list_response import SessionListResponse
-from ...types.session_live_urls import SessionLiveURLs
-from .downloads import (
-    AsyncDownloadsResource,
-    AsyncDownloadsResourceWithRawResponse,
-    AsyncDownloadsResourceWithStreamingResponse,
-    DownloadsResource,
-    DownloadsResourceWithRawResponse,
-    DownloadsResourceWithStreamingResponse,
-)
+import httpx
+
 from .logs import (
-    AsyncLogsResource,
-    AsyncLogsResourceWithRawResponse,
-    AsyncLogsResourceWithStreamingResponse,
     LogsResource,
+    AsyncLogsResource,
     LogsResourceWithRawResponse,
+    AsyncLogsResourceWithRawResponse,
     LogsResourceWithStreamingResponse,
+    AsyncLogsResourceWithStreamingResponse,
+)
+from ...types import session_list_params, session_create_params, session_update_params
+from .uploads import (
+    UploadsResource,
+    AsyncUploadsResource,
+    UploadsResourceWithRawResponse,
+    AsyncUploadsResourceWithRawResponse,
+    UploadsResourceWithStreamingResponse,
+    AsyncUploadsResourceWithStreamingResponse,
+)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
+from ..._compat import cached_property
+from .downloads import (
+    DownloadsResource,
+    AsyncDownloadsResource,
+    DownloadsResourceWithRawResponse,
+    AsyncDownloadsResourceWithRawResponse,
+    DownloadsResourceWithStreamingResponse,
+    AsyncDownloadsResourceWithStreamingResponse,
 )
 from .recording import (
-    AsyncRecordingResource,
-    AsyncRecordingResourceWithRawResponse,
-    AsyncRecordingResourceWithStreamingResponse,
     RecordingResource,
+    AsyncRecordingResource,
     RecordingResourceWithRawResponse,
+    AsyncRecordingResourceWithRawResponse,
     RecordingResourceWithStreamingResponse,
+    AsyncRecordingResourceWithStreamingResponse,
 )
-from .uploads import (
-    AsyncUploadsResource,
-    AsyncUploadsResourceWithRawResponse,
-    AsyncUploadsResourceWithStreamingResponse,
-    UploadsResource,
-    UploadsResourceWithRawResponse,
-    UploadsResourceWithStreamingResponse,
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
 )
+from ..._base_client import make_request_options
+from ...types.session import Session
+from ...types.session_live_urls import SessionLiveURLs
+from ...types.session_list_response import SessionListResponse
+from ...types.session_create_response import SessionCreateResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
 
@@ -143,7 +147,7 @@ class SessionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        resp = self._post(
+        return self._post(
             "/v1/sessions",
             body=maybe_transform(
                 {
@@ -165,8 +169,6 @@ class SessionsResource(SyncAPIResource):
             ),
             cast_to=SessionCreateResponse,
         )
-        print("RESP", resp)
-        return resp
 
     def retrieve(
         self,
