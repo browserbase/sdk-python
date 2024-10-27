@@ -4,7 +4,6 @@ from typing import Generator
 import pytest
 from dotenv import load_dotenv
 from playwright.sync_api import Playwright, sync_playwright
-
 from browserbase import Browserbase
 
 from .. import (
@@ -27,7 +26,6 @@ CI = os.getenv("CI", "false").lower() == "true"
 def playwright() -> Generator[Playwright, None, None]:
     with sync_playwright() as p:
         yield p
-
 
 def test_playwright_basic(playwright: Playwright) -> None:
     playwright_basic.run(playwright)
