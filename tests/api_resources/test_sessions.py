@@ -13,6 +13,7 @@ from browserbase.types import (
     Session,
     SessionLiveURLs,
     SessionListResponse,
+    SessionCreateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,7 +27,7 @@ class TestSessions:
         session = client.sessions.create(
             project_id="projectId",
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
@@ -62,10 +63,11 @@ class TestSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
-            proxies=True,
+            proxies={},
+            region="us-west-2",
             api_timeout=60,
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
@@ -76,7 +78,7 @@ class TestSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = response.parse()
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
@@ -87,7 +89,7 @@ class TestSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = response.parse()
-            assert_matches_type(Session, session, path=["response"])
+            assert_matches_type(SessionCreateResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -254,7 +256,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.create(
             project_id="projectId",
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
@@ -290,10 +292,11 @@ class TestAsyncSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
-            proxies=True,
+            proxies={},
+            region="us-west-2",
             api_timeout=60,
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
@@ -304,7 +307,7 @@ class TestAsyncSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = await response.parse()
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
@@ -315,7 +318,7 @@ class TestAsyncSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = await response.parse()
-            assert_matches_type(Session, session, path=["response"])
+            assert_matches_type(SessionCreateResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
