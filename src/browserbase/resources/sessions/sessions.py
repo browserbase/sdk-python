@@ -8,37 +8,51 @@ from typing_extensions import Literal
 from ..._base_client import make_request_options
 from ..._compat import cached_property
 from ..._resource import AsyncAPIResource, SyncAPIResource
-from ..._response import (async_to_raw_response_wrapper,
-                          async_to_streamed_response_wrapper,
-                          to_raw_response_wrapper,
-                          to_streamed_response_wrapper)
+from ..._response import (
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+)
 from ..._types import NOT_GIVEN, Body, Headers, NotGiven, Query
 from ..._utils import async_maybe_transform, maybe_transform
-from ...types import (session_create_params, session_list_params,
-                      session_update_params)
+from ...types import session_create_params, session_list_params, session_update_params
 from ...types.session import Session
 from ...types.session_create_response import SessionCreateResponse
 from ...types.session_list_response import SessionListResponse
 from ...types.session_live_urls import SessionLiveURLs
-from .downloads import (AsyncDownloadsResource,
-                        AsyncDownloadsResourceWithRawResponse,
-                        AsyncDownloadsResourceWithStreamingResponse,
-                        DownloadsResource, DownloadsResourceWithRawResponse,
-                        DownloadsResourceWithStreamingResponse)
-from .logs import (AsyncLogsResource, AsyncLogsResourceWithRawResponse,
-                   AsyncLogsResourceWithStreamingResponse, LogsResource,
-                   LogsResourceWithRawResponse,
-                   LogsResourceWithStreamingResponse)
-from .recording import (AsyncRecordingResource,
-                        AsyncRecordingResourceWithRawResponse,
-                        AsyncRecordingResourceWithStreamingResponse,
-                        RecordingResource, RecordingResourceWithRawResponse,
-                        RecordingResourceWithStreamingResponse)
-from .uploads import (AsyncUploadsResource,
-                      AsyncUploadsResourceWithRawResponse,
-                      AsyncUploadsResourceWithStreamingResponse,
-                      UploadsResource, UploadsResourceWithRawResponse,
-                      UploadsResourceWithStreamingResponse)
+from .downloads import (
+    AsyncDownloadsResource,
+    AsyncDownloadsResourceWithRawResponse,
+    AsyncDownloadsResourceWithStreamingResponse,
+    DownloadsResource,
+    DownloadsResourceWithRawResponse,
+    DownloadsResourceWithStreamingResponse,
+)
+from .logs import (
+    AsyncLogsResource,
+    AsyncLogsResourceWithRawResponse,
+    AsyncLogsResourceWithStreamingResponse,
+    LogsResource,
+    LogsResourceWithRawResponse,
+    LogsResourceWithStreamingResponse,
+)
+from .recording import (
+    AsyncRecordingResource,
+    AsyncRecordingResourceWithRawResponse,
+    AsyncRecordingResourceWithStreamingResponse,
+    RecordingResource,
+    RecordingResourceWithRawResponse,
+    RecordingResourceWithStreamingResponse,
+)
+from .uploads import (
+    AsyncUploadsResource,
+    AsyncUploadsResourceWithRawResponse,
+    AsyncUploadsResourceWithStreamingResponse,
+    UploadsResource,
+    UploadsResourceWithRawResponse,
+    UploadsResourceWithStreamingResponse,
+)
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
 
