@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2024-10-27)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/browserbase/sdk-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** update via SDK Studio ([#16](https://github.com/browserbase/sdk-python/issues/16)) ([78347f5](https://github.com/browserbase/sdk-python/commit/78347f5f2a251eca20ffeb1e5d78ee843ce74415))
+* **api:** update via SDK Studio ([#18](https://github.com/browserbase/sdk-python/issues/18)) ([b958c13](https://github.com/browserbase/sdk-python/commit/b958c13c01fd9f0cedbb5723ee54574ad769b539))
+* **api:** update via SDK Studio ([#19](https://github.com/browserbase/sdk-python/issues/19)) ([90ea00d](https://github.com/browserbase/sdk-python/commit/90ea00def3c88ff0b1a6d71b65abd155b230e2c0))
+* **api:** update via SDK Studio ([#20](https://github.com/browserbase/sdk-python/issues/20)) ([0b9561f](https://github.com/browserbase/sdk-python/commit/0b9561f5c8a91ea372ab68d5679e05e255f302c7))
+* **api:** update via SDK Studio ([#21](https://github.com/browserbase/sdk-python/issues/21)) ([00b8c8b](https://github.com/browserbase/sdk-python/commit/00b8c8be7b5bdf9fbe8da6410cf7dd2d002ad21e))
+
 ## 0.1.0-alpha.3 (2024-10-26)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/browserbase/sdk-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
