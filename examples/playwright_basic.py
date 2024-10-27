@@ -1,19 +1,8 @@
-import os
-
 from playwright.sync_api import Playwright, sync_playwright
 
-from browserbase import Browserbase
-
-BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY", "")
-if not BROWSERBASE_API_KEY:
-    raise ValueError("BROWSERBASE_API_KEY is not set")
-BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID", "")
-if not BROWSERBASE_PROJECT_ID:
-    raise ValueError("BROWSERBASE_PROJECT_ID is not set")
-
-bb = Browserbase(
-    # This is the default and can be omitted
-    api_key=BROWSERBASE_API_KEY,
+from examples import (
+    BROWSERBASE_PROJECT_ID,
+    bb,
 )
 
 
