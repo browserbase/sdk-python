@@ -65,6 +65,7 @@ class TestSessions:
             keep_alive=True,
             proxies={},
             region="us-west-2",
+            api_timeout=60,
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
@@ -293,6 +294,7 @@ class TestAsyncSessions:
             keep_alive=True,
             proxies={},
             region="us-west-2",
+            api_timeout=60,
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 

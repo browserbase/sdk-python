@@ -47,6 +47,12 @@ class SessionCreateParams(TypedDict, total=False):
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
 
+    api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
+    """Duration in seconds after which the session will automatically end.
+
+    Defaults to the Project's `defaultTimeout`.
+    """
+
 
 class BrowserSettingsContext(TypedDict, total=False):
     id: Required[str]
