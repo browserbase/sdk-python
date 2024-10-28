@@ -3,7 +3,6 @@ import time
 from playwright.sync_api import Page, Playwright, sync_playwright
 
 from examples import (
-    BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
     bb,
 )

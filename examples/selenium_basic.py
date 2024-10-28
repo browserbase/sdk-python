@@ -1,7 +1,9 @@
-from examples import bb, BROWSERBASE_PROJECT_ID, BROWSERBASE_API_KEY
+from typing import Dict
+
 from selenium import webdriver
 from selenium.webdriver.remote.remote_connection import RemoteConnection
-from typing import Dict
+
+from examples import BROWSERBASE_API_KEY, BROWSERBASE_PROJECT_ID, bb
 
 
 class BrowserbaseConnection(RemoteConnection):
@@ -24,10 +26,10 @@ class BrowserbaseConnection(RemoteConnection):
         headers["x-bb-api-key"] = BROWSERBASE_API_KEY
         headers["session-id"] = self.session_id
 
-        return headers
+        return headers  # type: ignore
 
 
-def run():
+def run() -> None:
     # Use the custom class to create and connect to a new browser session
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
     connection = BrowserbaseConnection(session.id, session.selenium_remote_url)
@@ -50,8 +52,7 @@ def run():
 
     finally:
         # Make sure to quit the driver so your session is ended!
-        print("Quitting driver")
-        # driver.quit()
+        driver.quit()
 
 
 if __name__ == "__main__":

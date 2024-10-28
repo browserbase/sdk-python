@@ -1,6 +1,5 @@
 from playwright.sync_api import Playwright, ConsoleMessage, sync_playwright
 
-
 from examples import BROWSERBASE_PROJECT_ID, bb
 
 DEFAULT_CAPTCHA_URL = "https://www.google.com/recaptcha/api2/demo"

@@ -4,7 +4,6 @@ import zipfile
 
 from playwright.sync_api import Playwright, sync_playwright
 
-
 from examples import BROWSERBASE_PROJECT_ID, bb
 
 download_re = re.compile(r"sandstorm-(\d{13})+\.mp3")
