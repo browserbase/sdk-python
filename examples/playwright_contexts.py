@@ -1,5 +1,6 @@
 import time
 from typing import Optional
+from pydantic import TypeAdapter
 
 from playwright.sync_api import Cookie, Browser, Playwright, sync_playwright
 
@@ -47,10 +48,11 @@ def run(playwright: Playwright) -> None:
     # Step 2: Creates a session with the context
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
-        browser_settings=BrowserSettings(
-            context=BrowserSettingsContext(id=context_id, persist=True),
+        browser_settings=TypeAdapter(BrowserSettings).validate_python(
+            {"context": {"id": context_id, "persist": True}}
         ),
     )
+    print(session)
 
     assert (
         session.context_id == context_id
