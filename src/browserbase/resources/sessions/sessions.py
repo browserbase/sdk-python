@@ -106,7 +106,6 @@ class SessionsResource(SyncAPIResource):
         keep_alive: bool | NotGiven = NOT_GIVEN,
         proxies: object | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
-        api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -133,9 +132,6 @@ class SessionsResource(SyncAPIResource):
 
           region: The region where the Session should run.
 
-          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -154,7 +150,6 @@ class SessionsResource(SyncAPIResource):
                     "keep_alive": keep_alive,
                     "proxies": proxies,
                     "region": region,
-                    "timeout": api_timeout,
                 },
                 session_create_params.SessionCreateParams,
             ),
@@ -360,7 +355,6 @@ class AsyncSessionsResource(AsyncAPIResource):
         keep_alive: bool | NotGiven = NOT_GIVEN,
         proxies: object | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
-        api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -387,9 +381,6 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           region: The region where the Session should run.
 
-          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -408,7 +399,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "keep_alive": keep_alive,
                     "proxies": proxies,
                     "region": region,
-                    "timeout": api_timeout,
                 },
                 session_create_params.SessionCreateParams,
             ),
