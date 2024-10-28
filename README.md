@@ -37,14 +37,15 @@ BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID")
 bb = Browserbase(
     # This is the default and can be omitted
     api_key=BROWSERBASE_API_KEY,
-    # or 'production' | 'local'; defaults to "production".
-    environment="development",
 )
 
-def run(playwright: Playwright) -> None:
-    # Create a session on Browserbase
-    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+session = client.sessions.create(
+    project_id=BROWSERBASE_PROJECT_ID,
+    proxies=True,
+)
+print(session.id)
 
+def run(playwright: Playwright) -> None:
     # Connect to the remote session
     chromium = playwright.chromium
     browser = chromium.connect_over_cdp(session.connect_url)
@@ -67,9 +68,7 @@ def run(playwright: Playwright) -> None:
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run(playwright)
-
 ```
-
 ## Examples
 
 See the [examples](examples) directory for more usage examples.
@@ -112,8 +111,9 @@ from browserbase import Browserbase
 client = Browserbase()
 
 try:
-    client.contexts.create(
-        project_id="projectId",
+    client.sessions.create(
+        project_id="your_project_id",
+        proxies=True,
     )
 except browserbase.APIConnectionError as e:
     print("The server could not be reached")
@@ -157,8 +157,9 @@ client = Browserbase(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).contexts.create(
-    project_id="projectId",
+client.with_options(max_retries=5).sessions.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 ```
 
@@ -182,8 +183,9 @@ client = Browserbase(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).contexts.create(
-    project_id="projectId",
+client.with_options(timeout=5.0).sessions.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 ```
 
@@ -223,13 +225,14 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from browserbase import Browserbase
 
 client = Browserbase()
-response = client.contexts.with_raw_response.create(
-    project_id="projectId",
+response = client.sessions.with_raw_response.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 print(response.headers.get('X-My-Header'))
 
-context = response.parse()  # get the object that `contexts.create()` would have returned
-print(context.id)
+session = response.parse()  # get the object that `sessions.create()` would have returned
+print(session.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/browserbase/sdk-python/tree/main/src/browserbase/_response.py) object.
@@ -243,8 +246,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.contexts.with_streaming_response.create(
-    project_id="projectId",
+with client.sessions.with_streaming_response.create(
+    project_id="your_project_id",
+    proxies=True,
 ) as response:
     print(response.headers.get("X-My-Header"))
 

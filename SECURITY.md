@@ -20,7 +20,7 @@ or products provided by Browserbase please follow the respective company's secur
 
 ### Browserbase Terms and Policies
 
-Please contact dev-feedback@browserbase.com for any questions or concerns regarding security of our services.
+Please contact support@browserbase.com for any questions or concerns regarding security of our services.
 
 ---
 
