@@ -1,20 +1,14 @@
 import time
 from typing import Optional
 
+from pydantic import TypeAdapter
 from playwright.sync_api import Cookie, Browser, Playwright, sync_playwright
 
-
-from examples import (
-    BROWSERBASE_API_KEY,
-    BROWSERBASE_PROJECT_ID,
-    BROWSERBASE_CONNECT_URL,
-    bb,
-)
+from examples import BROWSERBASE_PROJECT_ID, bb
 from browserbase.types.session_create_params import (
     BrowserSettings,
     BrowserSettingsContext,
 )
-
 
 CONTEXT_TEST_URL = "https://www.browserbase.com"
 SECOND = 1000
@@ -47,10 +41,11 @@ def run(playwright: Playwright) -> None:
     # Step 2: Creates a session with the context
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
-        browser_settings=BrowserSettings(
-            context=BrowserSettingsContext(id=context_id, persist=True),
+        browser_settings=TypeAdapter(BrowserSettings).validate_python(
+            {"context": {"id": context_id, "persist": True}}
         ),
     )
+    print(session)
 
     assert (
         session.context_id == context_id
@@ -59,9 +54,7 @@ def run(playwright: Playwright) -> None:
 
     # Step 3: Populates and persists the context
     print(f"Populating context {context_id} during session {session_id}")
-    connect_url = (
-        f"{BROWSERBASE_CONNECT_URL}?sessionId={session_id}&apiKey={BROWSERBASE_API_KEY}"
-    )
+    connect_url = session.connect_url
     browser = playwright.chromium.connect_over_cdp(connect_url)
     page = browser.contexts[0].pages[0]
 
@@ -108,9 +101,7 @@ def run(playwright: Playwright) -> None:
 
     # Step 5: Uses context to find previous state
     print(f"Reusing context {context_id} during session {session_id}")
-    connect_url = (
-        f"{BROWSERBASE_CONNECT_URL}?sessionId={session_id}&apiKey={BROWSERBASE_API_KEY}"
-    )
+    connect_url = session.connect_url
     browser = playwright.chromium.connect_over_cdp(connect_url)
     page = browser.contexts[0].pages[0]
 

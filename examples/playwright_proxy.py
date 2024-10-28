@@ -3,9 +3,7 @@ import time
 from playwright.sync_api import Page, Playwright, sync_playwright
 
 from examples import (
-    BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
-    BROWSERBASE_CONNECT_URL,
     bb,
 )
 
@@ -26,9 +24,7 @@ def check_proxy_bytes(session_id: str) -> None:
 def run_enable_via_create_session(playwright: Playwright) -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]
@@ -45,9 +41,7 @@ def run_enable_via_create_session(playwright: Playwright) -> None:
 def run_enable_via_querystring_with_created_session(playwright: Playwright) -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}&enableProxy=true"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]
@@ -84,9 +78,7 @@ def run_geolocation_country(playwright: Playwright) -> None:
         ],
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]
@@ -113,9 +105,7 @@ def run_geolocation_state(playwright: Playwright) -> None:
         ],
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]
@@ -143,9 +133,7 @@ def run_geolocation_american_city(playwright: Playwright) -> None:
         ],
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]
@@ -172,9 +160,7 @@ def run_geolocation_non_american_city(playwright: Playwright) -> None:
         ],
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
 
     context = browser.contexts[0]
     page = context.pages[0]

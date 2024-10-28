@@ -7,9 +7,7 @@ from pathlib import Path
 from playwright.sync_api import Page, Playwright, sync_playwright
 
 from examples import (
-    BROWSERBASE_API_KEY,
     BROWSERBASE_PROJECT_ID,
-    BROWSERBASE_CONNECT_URL,
     bb,
 )
 from browserbase.types import Extension, SessionCreateResponse
@@ -100,9 +98,7 @@ def run(playwright: Playwright) -> None:
         extension_id=extension.id,
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session.connect_url)
     context = browser.contexts[0]
     page = context.pages[0]
     check_for_message(page, expected_message)
@@ -116,9 +112,7 @@ def run(playwright: Playwright) -> None:
         proxies=True,
     )
 
-    browser = playwright.chromium.connect_over_cdp(
-        f"{BROWSERBASE_CONNECT_URL}?apiKey={BROWSERBASE_API_KEY}&sessionId={session_with_proxy.id}"
-    )
+    browser = playwright.chromium.connect_over_cdp(session_with_proxy.connect_url)
     context = browser.contexts[0]
     page = context.pages[0]
 

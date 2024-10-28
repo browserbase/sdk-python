@@ -59,6 +59,7 @@ dev-dependencies = [
     "rich>=13.7.1",
     "python-dotenv",
     "playwright",
+    "selenium",
 ]
 
 [tool.rye.scripts]
