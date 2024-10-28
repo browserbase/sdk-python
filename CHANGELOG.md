@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2024-10-28)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/browserbase/sdk-python/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Features
+
+* **api:** update via SDK Studio ([#35](https://github.com/browserbase/sdk-python/issues/35)) ([c694662](https://github.com/browserbase/sdk-python/commit/c69466218e105b524b4ad98208283b96eccf056d))
+
 ## 0.1.0-alpha.6 (2024-10-28)
 
 Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/browserbase/sdk-python/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
