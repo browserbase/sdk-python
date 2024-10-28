@@ -94,7 +94,7 @@ class Browserbase(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("BROWSERBASE_BASE_URL")
         if base_url is None:
-            base_url = f"https://www.browserbase.com"
+            base_url = f"https://api.dev.browserbase.com"
 
         super().__init__(
             version=__version__,
@@ -268,7 +268,7 @@ class AsyncBrowserbase(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("BROWSERBASE_BASE_URL")
         if base_url is None:
-            base_url = f"https://www.browserbase.com"
+            base_url = f"https://api.dev.browserbase.com"
 
         super().__init__(
             version=__version__,
