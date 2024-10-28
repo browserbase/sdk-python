@@ -33,6 +33,8 @@ from browserbase import Browserbase
 client = Browserbase(
     # This is the default and can be omitted
     api_key=os.environ.get("BROWSERBASE_API_KEY"),
+    # or 'production' | 'local'; defaults to "production".
+    environment="development",
 )
 
 context = client.contexts.create(
@@ -58,6 +60,8 @@ from browserbase import AsyncBrowserbase
 client = AsyncBrowserbase(
     # This is the default and can be omitted
     api_key=os.environ.get("BROWSERBASE_API_KEY"),
+    # or 'production' | 'local'; defaults to "production".
+    environment="development",
 )
 
 
