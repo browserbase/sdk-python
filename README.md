@@ -37,6 +37,8 @@ BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID")
 bb = Browserbase(
     # This is the default and can be omitted
     api_key=BROWSERBASE_API_KEY,
+    # or 'production' | 'local'; defaults to "production".
+    environment="development",
 )
 
 def run(playwright: Playwright) -> None:
