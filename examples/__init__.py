@@ -8,9 +8,6 @@ from browserbase import Browserbase
 load_dotenv(override=True)
 
 # Make sure we have the required environment variables
-BROWSERBASE_CONNECT_URL = os.environ.get(
-    "BROWSERBASE_CONNECT_URL", "wss://connect.browserbase.com"
-)
 _BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY")
 if not _BROWSERBASE_API_KEY:
     raise ValueError("BROWSERBASE_API_KEY is not set in environment")

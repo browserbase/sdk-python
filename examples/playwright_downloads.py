@@ -5,12 +5,7 @@ import zipfile
 from playwright.sync_api import Playwright, sync_playwright
 
 
-from examples import (
-    BROWSERBASE_API_KEY,
-    BROWSERBASE_PROJECT_ID,
-    BROWSERBASE_CONNECT_URL,
-    bb,
-)
+from examples import BROWSERBASE_PROJECT_ID, bb
 
 download_re = re.compile(r"sandstorm-(\d{13})+\.mp3")
 
@@ -27,9 +22,7 @@ def run(playwright: Playwright) -> None:
     assert session.status == "RUNNING", f"Session status is {session.status}"
 
     # Connect to the remote session
-    connect_url = (
-        f"{BROWSERBASE_CONNECT_URL}?sessionId={session.id}&apiKey={BROWSERBASE_API_KEY}"
-    )
+    connect_url = session.connect_url
     browser = playwright.chromium.connect_over_cdp(connect_url)
     context = browser.contexts[0]
     page = context.pages[0]
