@@ -1,11 +1,11 @@
 [project]
 name = "browserbase"
 version = "0.1.0-alpha.6"
-description = "The official Python library for the browserbase API"
+description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Browserbase", email = "dev-feedback@browserbase.com" },
+{ name = "Browserbase", email = "support@browserbase.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
