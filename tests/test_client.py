@@ -556,16 +556,6 @@ class TestBrowserbase:
             client = Browserbase(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(BROWSERBASE_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                Browserbase(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = Browserbase(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.browserbase.com")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -728,12 +718,12 @@ class TestBrowserbase:
     @mock.patch("browserbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/contexts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/sessions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/v1/contexts",
-                body=cast(object, dict(project_id="projectId")),
+                "/v1/sessions",
+                body=cast(object, dict(project_id="your_project_id", proxies=True)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -743,12 +733,12 @@ class TestBrowserbase:
     @mock.patch("browserbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/contexts").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/sessions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/v1/contexts",
-                body=cast(object, dict(project_id="projectId")),
+                "/v1/sessions",
+                body=cast(object, dict(project_id="your_project_id", proxies=True)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -779,9 +769,9 @@ class TestBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = client.contexts.with_raw_response.create(project_id="projectId")
+        response = client.sessions.with_raw_response.create(project_id="projectId")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -803,9 +793,9 @@ class TestBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = client.contexts.with_raw_response.create(
+        response = client.sessions.with_raw_response.create(
             project_id="projectId", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -828,9 +818,9 @@ class TestBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = client.contexts.with_raw_response.create(
+        response = client.sessions.with_raw_response.create(
             project_id="projectId", extra_headers={"x-stainless-retry-count": "42"}
         )
 
@@ -1342,16 +1332,6 @@ class TestAsyncBrowserbase:
             client = AsyncBrowserbase(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(BROWSERBASE_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncBrowserbase(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = AsyncBrowserbase(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.browserbase.com")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -1518,12 +1498,12 @@ class TestAsyncBrowserbase:
     @mock.patch("browserbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/contexts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/sessions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/v1/contexts",
-                body=cast(object, dict(project_id="projectId")),
+                "/v1/sessions",
+                body=cast(object, dict(project_id="your_project_id", proxies=True)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1533,12 +1513,12 @@ class TestAsyncBrowserbase:
     @mock.patch("browserbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/contexts").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/sessions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/v1/contexts",
-                body=cast(object, dict(project_id="projectId")),
+                "/v1/sessions",
+                body=cast(object, dict(project_id="your_project_id", proxies=True)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1570,9 +1550,9 @@ class TestAsyncBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = await client.contexts.with_raw_response.create(project_id="projectId")
+        response = await client.sessions.with_raw_response.create(project_id="projectId")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1595,9 +1575,9 @@ class TestAsyncBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = await client.contexts.with_raw_response.create(
+        response = await client.sessions.with_raw_response.create(
             project_id="projectId", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -1621,9 +1601,9 @@ class TestAsyncBrowserbase:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v1/contexts").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/sessions").mock(side_effect=retry_handler)
 
-        response = await client.contexts.with_raw_response.create(
+        response = await client.sessions.with_raw_response.create(
             project_id="projectId", extra_headers={"x-stainless-retry-count": "42"}
         )
 

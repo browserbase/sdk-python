@@ -33,14 +33,13 @@ from browserbase import Browserbase
 client = Browserbase(
     # This is the default and can be omitted
     api_key=os.environ.get("BROWSERBASE_API_KEY"),
-    # or 'production' | 'local'; defaults to "production".
-    environment="development",
 )
 
-context = client.contexts.create(
-    project_id="projectId",
+session = client.sessions.create(
+    project_id="your_project_id",
+    proxies=True,
 )
-print(context.id)
+print(session.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -60,16 +59,15 @@ from browserbase import AsyncBrowserbase
 client = AsyncBrowserbase(
     # This is the default and can be omitted
     api_key=os.environ.get("BROWSERBASE_API_KEY"),
-    # or 'production' | 'local'; defaults to "production".
-    environment="development",
 )
 
 
 async def main() -> None:
-    context = await client.contexts.create(
-        project_id="projectId",
+    session = await client.sessions.create(
+        project_id="your_project_id",
+        proxies=True,
     )
-    print(context.id)
+    print(session.id)
 
 
 asyncio.run(main())
@@ -102,8 +100,9 @@ from browserbase import Browserbase
 client = Browserbase()
 
 try:
-    client.contexts.create(
-        project_id="projectId",
+    client.sessions.create(
+        project_id="your_project_id",
+        proxies=True,
     )
 except browserbase.APIConnectionError as e:
     print("The server could not be reached")
@@ -147,8 +146,9 @@ client = Browserbase(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).contexts.create(
-    project_id="projectId",
+client.with_options(max_retries=5).sessions.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 ```
 
@@ -172,8 +172,9 @@ client = Browserbase(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).contexts.create(
-    project_id="projectId",
+client.with_options(timeout=5.0).sessions.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 ```
 
@@ -213,13 +214,14 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from browserbase import Browserbase
 
 client = Browserbase()
-response = client.contexts.with_raw_response.create(
-    project_id="projectId",
+response = client.sessions.with_raw_response.create(
+    project_id="your_project_id",
+    proxies=True,
 )
 print(response.headers.get('X-My-Header'))
 
-context = response.parse()  # get the object that `contexts.create()` would have returned
-print(context.id)
+session = response.parse()  # get the object that `sessions.create()` would have returned
+print(session.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/browserbase/sdk-python/tree/main/src/browserbase/_response.py) object.
@@ -233,8 +235,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.contexts.with_streaming_response.create(
-    project_id="projectId",
+with client.sessions.with_streaming_response.create(
+    project_id="your_project_id",
+    proxies=True,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
