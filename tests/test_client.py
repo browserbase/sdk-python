@@ -556,6 +556,16 @@ class TestBrowserbase:
             client = Browserbase(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+        # explicit environment arg requires explicitness
+        with update_env(BROWSERBASE_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                Browserbase(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = Browserbase(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.browserbase.com")
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -1331,6 +1341,16 @@ class TestAsyncBrowserbase:
         with update_env(BROWSERBASE_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncBrowserbase(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(BROWSERBASE_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncBrowserbase(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = AsyncBrowserbase(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.browserbase.com")
 
     @pytest.mark.parametrize(
         "client",
