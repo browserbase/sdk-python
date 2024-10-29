@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 
 ```sh
 # install from PyPI
-pip install --pre browserbase
+pip install browserbase
 ```
 
 ## Usage
