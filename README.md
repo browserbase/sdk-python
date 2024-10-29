@@ -15,12 +15,9 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/browserbase/sdk-python.git
+# install from PyPI
+pip install --pre browserbase
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre browserbase`
 
 ## Usage
 
