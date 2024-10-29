@@ -37,7 +37,6 @@ client = Browserbase(
 
 session = client.sessions.create(
     project_id="your_project_id",
-    proxies=True,
 )
 print(session.id)
 ```
@@ -65,7 +64,6 @@ client = AsyncBrowserbase(
 async def main() -> None:
     session = await client.sessions.create(
         project_id="your_project_id",
-        proxies=True,
     )
     print(session.id)
 
@@ -102,7 +100,6 @@ client = Browserbase()
 try:
     client.sessions.create(
         project_id="your_project_id",
-        proxies=True,
     )
 except browserbase.APIConnectionError as e:
     print("The server could not be reached")
@@ -148,7 +145,6 @@ client = Browserbase(
 # Or, configure per-request:
 client.with_options(max_retries=5).sessions.create(
     project_id="your_project_id",
-    proxies=True,
 )
 ```
 
@@ -174,7 +170,6 @@ client = Browserbase(
 # Override per-request:
 client.with_options(timeout=5.0).sessions.create(
     project_id="your_project_id",
-    proxies=True,
 )
 ```
 
@@ -216,7 +211,6 @@ from browserbase import Browserbase
 client = Browserbase()
 response = client.sessions.with_raw_response.create(
     project_id="your_project_id",
-    proxies=True,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -237,7 +231,6 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.sessions.with_streaming_response.create(
     project_id="your_project_id",
-    proxies=True,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
