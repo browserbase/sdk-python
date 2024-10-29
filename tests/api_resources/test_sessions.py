@@ -63,7 +63,7 @@ class TestSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
-            proxies={},
+            proxies=True,
             region="us-west-2",
             api_timeout=60,
         )
@@ -292,7 +292,7 @@ class TestAsyncSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
-            proxies={},
+            proxies=True,
             region="us-west-2",
             api_timeout=60,
         )
