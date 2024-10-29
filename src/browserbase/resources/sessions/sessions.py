@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Union, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -104,7 +105,7 @@ class SessionsResource(SyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: object | NotGiven = NOT_GIVEN,
+        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -358,7 +359,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: object | NotGiven = NOT_GIVEN,
+        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

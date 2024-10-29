@@ -723,7 +723,7 @@ class TestBrowserbase:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id", proxies=True)),
+                body=cast(object, dict(project_id="your_project_id")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -738,7 +738,7 @@ class TestBrowserbase:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id", proxies=True)),
+                body=cast(object, dict(project_id="your_project_id")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1503,7 +1503,7 @@ class TestAsyncBrowserbase:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id", proxies=True)),
+                body=cast(object, dict(project_id="your_project_id")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1518,7 +1518,7 @@ class TestAsyncBrowserbase:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id", proxies=True)),
+                body=cast(object, dict(project_id="your_project_id")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
