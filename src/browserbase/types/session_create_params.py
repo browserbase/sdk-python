@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import List, Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -14,6 +14,10 @@ __all__ = [
     "BrowserSettingsFingerprint",
     "BrowserSettingsFingerprintScreen",
     "BrowserSettingsViewport",
+    "ProxiesUnionMember1",
+    "ProxiesUnionMember1BrowserbaseProxyConfig",
+    "ProxiesUnionMember1BrowserbaseProxyConfigGeolocation",
+    "ProxiesUnionMember1ExternalProxyConfig",
 ]
 
 
@@ -38,7 +42,7 @@ class SessionCreateParams(TypedDict, total=False):
     This is available on the Startup plan only.
     """
 
-    proxies: object
+    proxies: Union[bool, Iterable[ProxiesUnionMember1]]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
@@ -130,3 +134,56 @@ class BrowserSettings(TypedDict, total=False):
     """Enable or disable captcha solving in the browser. Defaults to `true`."""
 
     viewport: BrowserSettingsViewport
+
+
+class ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
+    country: Required[str]
+    """Country code in ISO 3166-1 alpha-2 format"""
+
+    city: str
+    """Name of the city. Use spaces for multi-word city names. Optional."""
+
+    state: str
+    """US state code (2 characters). Must also specify US as the country. Optional."""
+
+
+class ProxiesUnionMember1BrowserbaseProxyConfig(TypedDict, total=False):
+    type: Required[Literal["browserbase"]]
+    """Type of proxy.
+
+    Always use 'browserbase' for the Browserbase managed proxy network.
+    """
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+    geolocation: ProxiesUnionMember1BrowserbaseProxyConfigGeolocation
+    """Configuration for geolocation"""
+
+
+class ProxiesUnionMember1ExternalProxyConfig(TypedDict, total=False):
+    server: Required[str]
+    """Server URL for external proxy. Required."""
+
+    type: Required[Literal["external"]]
+    """Type of proxy. Always 'external' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+    password: str
+    """Password for external proxy authentication. Optional."""
+
+    username: str
+    """Username for external proxy authentication. Optional."""
+
+
+ProxiesUnionMember1: TypeAlias = Union[
+    ProxiesUnionMember1BrowserbaseProxyConfig, ProxiesUnionMember1ExternalProxyConfig
+]
