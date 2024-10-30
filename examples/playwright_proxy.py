@@ -24,15 +24,11 @@ def check_proxy_bytes(session_id: str) -> None:
 def run_enable_via_create_session(playwright: Playwright) -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, proxies=True)
 
-    print("Connecting")
     browser = playwright.chromium.connect_over_cdp(session.connect_url)
-    print("Connected")
 
     context = browser.contexts[0]
     page = context.pages[0]
-    print("Going to google")
     page.goto("https://www.google.com")
-    print("Got title")
     page_title = page.title()
 
     page.close()
@@ -180,26 +176,9 @@ def run_geolocation_non_american_city(playwright: Playwright) -> None:
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         # You can run any of these tests by uncommenting them
-        print("\nRunning: enable_via_create_session")
         run_enable_via_create_session(playwright)
-        print("✓ Completed: enable_via_create_session\n")
-
-        print("Running: enable_via_querystring_with_created_session")
-        run_enable_via_querystring_with_created_session(playwright)
-        print("✓ Completed: enable_via_querystring_with_created_session\n")
-
-        print("Running: geolocation_country")
-        run_geolocation_country(playwright)
-        print("✓ Completed: geolocation_country\n")
-
-        print("Running: geolocation_state")
-        run_geolocation_state(playwright)
-        print("✓ Completed: geolocation_state\n")
-
-        print("Running: geolocation_american_city")
-        run_geolocation_american_city(playwright)
-        print("✓ Completed: geolocation_american_city\n")
-
-        print("Running: geolocation_non_american_city")
-        run_geolocation_non_american_city(playwright)
-        print("✓ Completed: geolocation_non_american_city\n")
+        # run_enable_via_querystring_with_created_session(playwright)
+        # run_geolocation_country(playwright)
+        # run_geolocation_state(playwright)
+        # run_geolocation_american_city(playwright)
+        # run_geolocation_non_american_city(playwright)
