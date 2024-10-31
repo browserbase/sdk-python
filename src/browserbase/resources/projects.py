@@ -84,7 +84,7 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectListResponse:
-        """List all projects"""
+        """List projects"""
         return self._get(
             "/v1/projects",
             options=make_request_options(
@@ -190,7 +190,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectListResponse:
-        """List all projects"""
+        """List projects"""
         return await self._get(
             "/v1/projects",
             options=make_request_options(
