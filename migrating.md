@@ -1,8 +1,64 @@
-# Upgrade guide to v1.0
+# V1 Migration Guide
 
-The Browserbase v1.0.0 Python SDK has been rewritten from the ground up and ships with a ton of new features and better support that we can't wait for you to try. Unfortunately, however, this means that the old SDKs will be deprecated and archived in favor of the new SDK.
+The Browserbase v1 Python SDK has been rewritten from the ground up and ships with a ton of new features and better support that we can't wait for you to try. This guide is designed to help you maximize your experience with V1.
 
 We hope this guide is useful to you; if you have any questions don't hesitate to reach out to support@browserbase.com or [create a new issue](https://github.com/browserbase/sdk-python/issues/new).
+
+## Major Changes
+
+V1 SDK is a complete rewrite of the old SDK. The new SDK is more flexible, easier to use, and has a more consistent API. It is also a lot more modular. The majority of the syntax changes are as follows:
+
+```python
+# Old SDK
+browserbase.list_sessions()
+
+# New SDK
+bb.sessions.list()
+```
+
+### Creating a Session
+
+Similar to the above, the new way to create a session is to use the `create` method on the `sessions` object. However, the `CreateSessionOptions` object is now broken up into several params, saving you from having to import and instantiate a Pydantic object. For more on this, see [below](#create-session).
+
+## Deprecated Methods
+
+`load`, `load_url`, and `screenshot` are fully deprecated. You can use the following example instead that encapsulates the same functionality using Playwright.
+
+```python
+from playwright.sync_api import Playwright, sync_playwright
+from browserbase import Browserbase
+
+bb = Browserbase(api_key=BROWSERBASE_API_KEY)
+
+def run(playwright: Playwright) -> None:
+    # Create a session on Browserbase
+    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+
+    # Connect to the remote session
+    chromium = playwright.chromium
+    browser = chromium.connect_over_cdp(session.connect_url)
+    context = browser.contexts[0]
+    page = context.pages[0]
+
+    # Execute Playwright actions on the remote browser tab
+    page.goto("https://news.ycombinator.com/")
+    page_title = page.title()
+    assert (
+        page_title == "Hacker News"
+    ), f"Page title is not 'Hacker News', it is '{page_title}'"
+    page.screenshot(path="screenshot.png")
+
+    page.close()
+    browser.close()
+    print("Done!")
+
+
+if __name__ == "__main__":
+    with sync_playwright() as playwright:
+        run(playwright)
+```
+
+For async Playwright, you can import `async_playwright` instead.
 
 ## Create Session
 
@@ -45,7 +101,7 @@ session = bb.sessions.create(
     )
 ```
 
-## Get Connection Url
+## Get Connect Url
 
 ### Old SDK
 
@@ -67,9 +123,20 @@ connect_url = browserbase.get_connect_url(session_id=some_session.id)
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
 
-# We must create a session first
-session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
-connect_url = session.connect_url
+def get_connect_url(bb: Browserbase, session_id: str = None):
+	"""
+	Retrieve a connect url for a given session or create a new one.
+
+	If a session id is provided, retrieve the connect url for the existing session.
+	Otherwise, create a new session and return the connect url.
+	"""
+	if session_id:
+		session = bb.sessions.retrieve(id=session_id)
+	else:
+		session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+	return session.connect_url
+
+connect_url = get_connect_url(bb, session_id="some_session_id")
 ```
 
 ## List Sessions
@@ -87,7 +154,14 @@ sessions = browserbase.list_sessions()
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-sessions = bb.sessions.list()
+
+def list_sessions(bb: Browserbase):
+	"""
+	List all sessions for the given project.
+	"""
+	return bb.sessions.list()
+
+sessions = list_sessions(bb)
 ```
 
 ## Complete Session
@@ -106,7 +180,14 @@ browserbase.complete_session(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-bb.sessions.update(id=some_session.id, status="REQUEST_RELEASE")
+
+def complete_session(bb: Browserbase, session_id: str):
+	"""
+	Complete a session by updating its status to REQUEST_RELEASE.
+	"""
+	bb.sessions.update(id=session_id, status="REQUEST_RELEASE")
+
+complete_session(bb, session_id="some_session_id")
 ```
 
 ## Get Session
@@ -116,7 +197,7 @@ bb.sessions.update(id=some_session.id, status="REQUEST_RELEASE")
 ```python
 from browserbase import Browserbase
 browserbase = Browserbase(api_key=BROWSERBASE_API_KEY, project_id=BROWSERBASE_PROJECT_ID)
-session = browserbase.get_session(session_id=some_session.id)
+session = browserbase.get_session(session_id="some_session_id")
 ```
 
 ### New SDK
@@ -124,7 +205,14 @@ session = browserbase.get_session(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-session = bb.sessions.retrieve(id=some_session.id)
+
+def get_session(bb: Browserbase, session_id: str):
+	"""
+	Retrieve a session by id.
+	"""
+	return bb.sessions.retrieve(id=session_id)
+
+session = get_session(bb, session_id="some_session_id")
 ```
 
 ## Get Session Recording
@@ -142,7 +230,13 @@ recording = browserbase.get_session_recording(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-recording = bb.sessions.recording.retrieve(id=some_session.id)
+def get_session_recording(bb: Browserbase, session_id: str):
+	"""
+	Retrieve a session recording by id.
+	"""
+	return bb.sessions.recording.retrieve(id=session_id)
+
+recording = get_session_recording(bb, session_id="some_session_id")
 ```
 
 ## Get Session Downloads
@@ -165,7 +259,14 @@ downloads = browserbase.get_session_downloads(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-downloads = bb.sessions.downloads.list(id=some_session.id)
+
+def get_session_downloads(bb: Browserbase, session_id: str):
+	"""
+	Retrieve a session's downloads by id.
+	"""
+	return bb.sessions.downloads.list(id=session_id)
+
+downloads = get_session_downloads(bb, session_id="some_session_id")
 ```
 
 ## Get Debug Connection URLs
@@ -183,7 +284,14 @@ debug_urls = browserbase.get_debug_connection_urls(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-debug_urls = bb.sessions.debug(id=some_session.id)
+
+def get_debug_connection_urls(bb: Browserbase, session_id: str):
+	"""
+	Retrieve a session's debug connection urls by id.
+	"""
+	return bb.sessions.debug(id=session_id)
+
+debug_urls = get_debug_connection_urls(bb, session_id="some_session_id")
 ```
 
 ## Get Session Logs
@@ -201,43 +309,12 @@ logs = browserbase.get_session_logs(session_id=some_session.id)
 ```python
 from browserbase import Browserbase
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-logs = bb.sessions.logs.list(id=some_session.id)
-```
 
-# Deprecated Methods
+def get_session_logs(bb: Browserbase, session_id: str):
+	"""
+	Retrieve a session's logs by id.
+	"""
+	return bb.sessions.logs.list(id=session_id)
 
-`load`, `load_url`, and `screenshot` are fully deprecated. You can use the following example instead that encapsulates the same functionality using Playwright
-
-```python
-from playwright.sync_api import Playwright, sync_playwright
-from browserbase import Browserbase
-
-bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-
-def run(playwright: Playwright) -> None:
-    # Create a session on Browserbase
-    session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
-
-    # Connect to the remote session
-    chromium = playwright.chromium
-    browser = chromium.connect_over_cdp(session.connect_url)
-    context = browser.contexts[0]
-    page = context.pages[0]
-
-    # Execute Playwright actions on the remote browser tab
-    page.goto("https://news.ycombinator.com/")
-    page_title = page.title()
-    assert (
-        page_title == "Hacker News"
-    ), f"Page title is not 'Hacker News', it is '{page_title}'"
-    page.screenshot(path="screenshot.png")
-
-    page.close()
-    browser.close()
-    print("Done!")
-
-
-if __name__ == "__main__":
-    with sync_playwright() as playwright:
-        run(playwright)
+logs = get_session_logs(bb, session_id="some_session_id")
 ```
