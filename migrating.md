@@ -4,6 +4,8 @@ The Browserbase v1 Python SDK has been rewritten from the ground up and ships wi
 
 We hope this guide is useful to you; if you have any questions don't hesitate to reach out to support@browserbase.com or [create a new issue](https://github.com/browserbase/sdk-python/issues/new).
 
+We've also rewritten our old SDK functionalities to use the new SDK with analogous function signatures below.
+
 ## Major Changes
 
 V1 SDK is a complete rewrite of the old SDK. The new SDK is more flexible, easier to use, and has a more consistent API. It is also a lot more modular. The majority of the syntax changes are as follows:
