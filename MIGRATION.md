@@ -82,9 +82,10 @@ Function signature: `def create_session(self, options: Optional[CreateSessionOpt
 
 ```python
 from browserbase import Browserbase
+from pydantic import TypeAdapter
 
 bb = Browserbase(api_key=BROWSERBASE_API_KEY)
-session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
+session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID, extension_id="some_extension_id")
 ```
 
 For more complex session creation, you can import `BrowserSettings` and use Pydantic's `TypeAdapter` to conform JSON spec to the appropriate Pydantic class. You can also import each individual subclass, but this may be rather tedious.
@@ -96,7 +97,7 @@ from browserbase.types.session_create_params import BrowserSettings
 
 session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
-		extension_id="some_extension_id"
+		extension_id="some_extension_id",
         browser_settings=TypeAdapter(BrowserSettings).validate_python(
             {"context": {"id": context_id, "persist": True}}
         ),
