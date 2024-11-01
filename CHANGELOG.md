@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 (2024-11-01)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/browserbase/sdk-python/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **api:** api update ([#48](https://github.com/browserbase/sdk-python/issues/48)) ([645e897](https://github.com/browserbase/sdk-python/commit/645e897348d54bef40cb2d9470838da6617cfb34))
+* comment ([c04f506](https://github.com/browserbase/sdk-python/commit/c04f506802c8b4995883433e41e52b6f6a3cc4e6))
+* following migration guide ([6389dcf](https://github.com/browserbase/sdk-python/commit/6389dcfa255f2dbccba21e213697f45130985f29))
+* migrating docs ([f5c9093](https://github.com/browserbase/sdk-python/commit/f5c90937330f2acfe4c6a97983136f3f482c7d39))
+* migration guide final ([0992323](https://github.com/browserbase/sdk-python/commit/09923239bf5206adc9d119f89bad9608681a5d30))
+* rm scratch ([bc333a4](https://github.com/browserbase/sdk-python/commit/bc333a4d9ab906e73bfbdd145bb6698ce9842318))
+* syntax ([27c1113](https://github.com/browserbase/sdk-python/commit/27c1113c47fdca5306d3d87c924d24ab66e8ab78))
+* undo playwright_roxy ([2530a9c](https://github.com/browserbase/sdk-python/commit/2530a9c6aa9c8aa29b180a7a5a912251dca4b2d9))
+* uppacase ([9ffd582](https://github.com/browserbase/sdk-python/commit/9ffd582fa4b869dbfdd91154eb17c0cbe7aa7120))
+
 ## 1.0.0 (2024-10-29)
 
 Full Changelog: [v1.0.0-alpha.0...v1.0.0](https://github.com/browserbase/sdk-python/compare/v1.0.0-alpha.0...v1.0.0)
