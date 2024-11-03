@@ -13,7 +13,9 @@ def main(args: Optional[List[str]] = None) -> int:
 
     # Execute the command
     try:
-        result = subprocess.run(args, check=True)
+        # Join arguments into a single string for shell execution
+        cmd = " ".join(args)
+        result = subprocess.run(cmd, shell=True, check=True)
         return result.returncode
     except subprocess.CalledProcessError as e:
         print(f"Command failed with exit code {e.returncode}")
