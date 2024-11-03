@@ -39,7 +39,8 @@ classifiers = [
 Homepage = "https://github.com/browserbase/sdk-python"
 Repository = "https://github.com/browserbase/sdk-python"
 
-
+[project.scripts]
+browserbase = "browserbase.cli:main"
 
 [tool.rye]
 managed = true
