@@ -10,8 +10,6 @@ __all__ = ["SessionRecording"]
 
 
 class SessionRecording(BaseModel):
-    id: str
-
     data: Dict[str, object]
     """
     See
