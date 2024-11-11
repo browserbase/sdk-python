@@ -28,8 +28,7 @@ import os
 from browserbase import Browserbase
 
 client = Browserbase(
-    # This is the default and can be omitted
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),
+    api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
 )
 
 session = client.sessions.create(
@@ -53,8 +52,7 @@ import asyncio
 from browserbase import AsyncBrowserbase
 
 client = AsyncBrowserbase(
-    # This is the default and can be omitted
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),
+    api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
 )
 
 
