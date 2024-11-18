@@ -41,11 +41,11 @@ class TestSessions:
                 },
                 "extension_id": "extensionId",
                 "fingerprint": {
-                    "browsers": ["chrome", "edge", "firefox"],
-                    "devices": ["desktop", "mobile"],
+                    "browsers": ["chrome"],
+                    "devices": ["desktop"],
                     "http_version": 1,
-                    "locales": ["string", "string", "string"],
-                    "operating_systems": ["android", "ios", "linux"],
+                    "locales": ["string"],
+                    "operating_systems": ["android"],
                     "screen": {
                         "max_height": 0,
                         "max_width": 0,
@@ -270,11 +270,11 @@ class TestAsyncSessions:
                 },
                 "extension_id": "extensionId",
                 "fingerprint": {
-                    "browsers": ["chrome", "edge", "firefox"],
-                    "devices": ["desktop", "mobile"],
+                    "browsers": ["chrome"],
+                    "devices": ["desktop"],
                     "http_version": 1,
-                    "locales": ["string", "string", "string"],
-                    "operating_systems": ["android", "ios", "linux"],
+                    "locales": ["string"],
+                    "operating_systems": ["android"],
                     "screen": {
                         "max_height": 0,
                         "max_width": 0,
