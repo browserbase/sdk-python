@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.1 (2024-11-18)
+
+Full Changelog: [v1.0.0...v1.0.1](https://github.com/browserbase/sdk-python/compare/v1.0.0...v1.0.1)
+
+### Features
+
+* **api:** api update ([#48](https://github.com/browserbase/sdk-python/issues/48)) ([b17a3b8](https://github.com/browserbase/sdk-python/commit/b17a3b8e6984447421a7581ca56c0521cb3b55dd))
+* **api:** api update ([#51](https://github.com/browserbase/sdk-python/issues/51)) ([dc2da25](https://github.com/browserbase/sdk-python/commit/dc2da25d2e33d55e5655cbb8000fd4afdd6bbf62))
+
+
+### Chores
+
+* rebuild project due to codegen change ([#53](https://github.com/browserbase/sdk-python/issues/53)) ([b1684fa](https://github.com/browserbase/sdk-python/commit/b1684fa889aecf2fe7965a37ebd9c73977136ef6))
+* rebuild project due to codegen change ([#54](https://github.com/browserbase/sdk-python/issues/54)) ([e6a41da](https://github.com/browserbase/sdk-python/commit/e6a41dab6f0de6894a97067611166b1bc61893a2))
+* rebuild project due to codegen change ([#55](https://github.com/browserbase/sdk-python/issues/55)) ([ff17087](https://github.com/browserbase/sdk-python/commit/ff1708757bdeaa4e6b8d1959d1830105bd7f4b92))
+* rebuild project due to codegen change ([#57](https://github.com/browserbase/sdk-python/issues/57)) ([dfd0e19](https://github.com/browserbase/sdk-python/commit/dfd0e199c2447d4bd1b6704745d22f959a6b6bb1))
+* rebuild project due to codegen change ([#58](https://github.com/browserbase/sdk-python/issues/58)) ([f3be0be](https://github.com/browserbase/sdk-python/commit/f3be0bec13d95c65ab4cc81565b456cb566a62e2))
+
 ## 1.0.0 (2024-10-29)
 
 Full Changelog: [v1.0.0-alpha.0...v1.0.0](https://github.com/browserbase/sdk-python/compare/v1.0.0-alpha.0...v1.0.0)
