@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.2 (2024-11-19)
+
+Full Changelog: [v1.0.1...v1.0.2](https://github.com/browserbase/sdk-python/compare/v1.0.1...v1.0.2)
+
+### Chores
+
+* rebuild project due to codegen change ([#59](https://github.com/browserbase/sdk-python/issues/59)) ([bd52098](https://github.com/browserbase/sdk-python/commit/bd520989c50f8353c7184930d0da661bdc8625fa))
+
 ## 1.0.1 (2024-11-18)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/browserbase/sdk-python/compare/v1.0.0...v1.0.1)
