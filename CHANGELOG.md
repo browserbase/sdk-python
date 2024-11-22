@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.3 (2024-11-22)
+
+Full Changelog: [v1.0.2...v1.0.3](https://github.com/browserbase/sdk-python/compare/v1.0.2...v1.0.3)
+
+### Chores
+
+* **internal:** fix compat model_dump method when warnings are passed ([#65](https://github.com/browserbase/sdk-python/issues/65)) ([4e999de](https://github.com/browserbase/sdk-python/commit/4e999de99372f6b348e74aa37663dd809c5d0da7))
+
 ## 1.0.2 (2024-11-19)
 
 Full Changelog: [v1.0.1...v1.0.2](https://github.com/browserbase/sdk-python/compare/v1.0.1...v1.0.2)
