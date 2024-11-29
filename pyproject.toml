@@ -1,6 +1,6 @@
 [project]
 name = "browserbase"
-version = "1.0.3"
+version = "1.0.4"
 description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -14,7 +14,6 @@ dependencies = [
     "anyio>=3.5.0, <5",
     "distro>=1.7.0, <2",
     "sniffio",
-    "cached-property; python_version < '3.8'",
 ]
 requires-python = ">= 3.8"
 classifiers = [

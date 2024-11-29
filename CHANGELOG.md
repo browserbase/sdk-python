@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.4 (2024-11-29)
+
+Full Changelog: [v1.0.3...v1.0.4](https://github.com/browserbase/sdk-python/compare/v1.0.3...v1.0.4)
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#71](https://github.com/browserbase/sdk-python/issues/71)) ([7b87947](https://github.com/browserbase/sdk-python/commit/7b87947d0cdf555c73a1527b3e396cd40175d0b4))
+
+
+### Chores
+
+* **internal:** codegen related update ([#68](https://github.com/browserbase/sdk-python/issues/68)) ([3e4372e](https://github.com/browserbase/sdk-python/commit/3e4372ed8790e32850e1196c402e0023cd8a0f9d))
+* **internal:** exclude mypy from running on tests ([#70](https://github.com/browserbase/sdk-python/issues/70)) ([edd3628](https://github.com/browserbase/sdk-python/commit/edd3628710ed8f863bce5df336385dd6d380041e))
+
 ## 1.0.3 (2024-11-22)
 
 Full Changelog: [v1.0.2...v1.0.3](https://github.com/browserbase/sdk-python/compare/v1.0.2...v1.0.3)
