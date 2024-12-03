@@ -1,6 +1,6 @@
 [project]
 name = "browserbase"
-version = "1.0.4"
+version = "1.0.5"
 description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"

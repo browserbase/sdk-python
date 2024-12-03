@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.5 (2024-12-03)
+
+Full Changelog: [v1.0.4...v1.0.5](https://github.com/browserbase/sdk-python/compare/v1.0.4...v1.0.5)
+
+### Chores
+
+* **internal:** bump pyright ([#73](https://github.com/browserbase/sdk-python/issues/73)) ([d5f9711](https://github.com/browserbase/sdk-python/commit/d5f97119b2ec2334f47029541173e78ca846abae))
+
 ## 1.0.4 (2024-11-29)
 
 Full Changelog: [v1.0.3...v1.0.4](https://github.com/browserbase/sdk-python/compare/v1.0.3...v1.0.4)
