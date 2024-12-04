@@ -31,7 +31,7 @@ from browserbase import Browserbase
 BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY")
 BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID")
 
-bb = Browserbase(
+client = Browserbase(
     # This is the default and can be omitted
     api_key=BROWSERBASE_API_KEY,
 )
