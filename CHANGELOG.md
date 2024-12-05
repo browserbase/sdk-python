@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.6 (2024-12-05)
+
+Full Changelog: [v1.0.5...v1.0.6](https://github.com/browserbase/sdk-python/compare/v1.0.5...v1.0.6)
+
+### Chores
+
+* make the `Omit` type public ([#78](https://github.com/browserbase/sdk-python/issues/78)) ([a7bdc57](https://github.com/browserbase/sdk-python/commit/a7bdc57ab7f327da61121986ba7b006238d0e5b5))
+
 ## 1.0.5 (2024-12-03)
 
 Full Changelog: [v1.0.4...v1.0.5](https://github.com/browserbase/sdk-python/compare/v1.0.4...v1.0.5)
