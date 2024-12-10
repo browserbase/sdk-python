@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.6 (2024-12-10)
+
+Full Changelog: [v1.0.5...v1.0.6](https://github.com/browserbase/sdk-python/compare/v1.0.5...v1.0.6)
+
+### Chores
+
+* **internal:** bump pydantic dependency ([#81](https://github.com/browserbase/sdk-python/issues/81)) ([e35a0d8](https://github.com/browserbase/sdk-python/commit/e35a0d85ef0e45aed1a5f58757427bf7c16a76f5))
+* make the `Omit` type public ([#78](https://github.com/browserbase/sdk-python/issues/78)) ([a7bdc57](https://github.com/browserbase/sdk-python/commit/a7bdc57ab7f327da61121986ba7b006238d0e5b5))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#82](https://github.com/browserbase/sdk-python/issues/82)) ([cc67c77](https://github.com/browserbase/sdk-python/commit/cc67c773b11b42b406b677f466c7c0ef090b254e))
+
 ## 1.0.5 (2024-12-03)
 
 Full Changelog: [v1.0.4...v1.0.5](https://github.com/browserbase/sdk-python/compare/v1.0.4...v1.0.5)

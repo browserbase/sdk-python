@@ -81,9 +81,9 @@ playwright==1.48.0
     # via pytest-playwright
 pluggy==1.5.0
     # via pytest
-pydantic==2.9.2
+pydantic==2.10.3
     # via browserbase
-pydantic-core==2.23.4
+pydantic-core==2.27.1
     # via pydantic
 pyee==12.0.0
     # via playwright
