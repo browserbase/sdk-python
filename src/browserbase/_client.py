@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,6 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
+from .resources import contexts, projects, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, BrowserbaseError
 from ._base_client import (
@@ -31,13 +32,13 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.sessions import sessions
 
 __all__ = [
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "resources",
     "Browserbase",
     "AsyncBrowserbase",
     "Client",
@@ -46,10 +47,10 @@ __all__ = [
 
 
 class Browserbase(SyncAPIClient):
-    contexts: resources.ContextsResource
-    extensions: resources.ExtensionsResource
-    projects: resources.ProjectsResource
-    sessions: resources.SessionsResource
+    contexts: contexts.ContextsResource
+    extensions: extensions.ExtensionsResource
+    projects: projects.ProjectsResource
+    sessions: sessions.SessionsResource
     with_raw_response: BrowserbaseWithRawResponse
     with_streaming_response: BrowserbaseWithStreamedResponse
 
@@ -107,10 +108,10 @@ class Browserbase(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contexts = resources.ContextsResource(self)
-        self.extensions = resources.ExtensionsResource(self)
-        self.projects = resources.ProjectsResource(self)
-        self.sessions = resources.SessionsResource(self)
+        self.contexts = contexts.ContextsResource(self)
+        self.extensions = extensions.ExtensionsResource(self)
+        self.projects = projects.ProjectsResource(self)
+        self.sessions = sessions.SessionsResource(self)
         self.with_raw_response = BrowserbaseWithRawResponse(self)
         self.with_streaming_response = BrowserbaseWithStreamedResponse(self)
 
@@ -220,10 +221,10 @@ class Browserbase(SyncAPIClient):
 
 
 class AsyncBrowserbase(AsyncAPIClient):
-    contexts: resources.AsyncContextsResource
-    extensions: resources.AsyncExtensionsResource
-    projects: resources.AsyncProjectsResource
-    sessions: resources.AsyncSessionsResource
+    contexts: contexts.AsyncContextsResource
+    extensions: extensions.AsyncExtensionsResource
+    projects: projects.AsyncProjectsResource
+    sessions: sessions.AsyncSessionsResource
     with_raw_response: AsyncBrowserbaseWithRawResponse
     with_streaming_response: AsyncBrowserbaseWithStreamedResponse
 
@@ -281,10 +282,10 @@ class AsyncBrowserbase(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contexts = resources.AsyncContextsResource(self)
-        self.extensions = resources.AsyncExtensionsResource(self)
-        self.projects = resources.AsyncProjectsResource(self)
-        self.sessions = resources.AsyncSessionsResource(self)
+        self.contexts = contexts.AsyncContextsResource(self)
+        self.extensions = extensions.AsyncExtensionsResource(self)
+        self.projects = projects.AsyncProjectsResource(self)
+        self.sessions = sessions.AsyncSessionsResource(self)
         self.with_raw_response = AsyncBrowserbaseWithRawResponse(self)
         self.with_streaming_response = AsyncBrowserbaseWithStreamedResponse(self)
 
@@ -395,34 +396,34 @@ class AsyncBrowserbase(AsyncAPIClient):
 
 class BrowserbaseWithRawResponse:
     def __init__(self, client: Browserbase) -> None:
-        self.contexts = resources.ContextsResourceWithRawResponse(client.contexts)
-        self.extensions = resources.ExtensionsResourceWithRawResponse(client.extensions)
-        self.projects = resources.ProjectsResourceWithRawResponse(client.projects)
-        self.sessions = resources.SessionsResourceWithRawResponse(client.sessions)
+        self.contexts = contexts.ContextsResourceWithRawResponse(client.contexts)
+        self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
+        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
+        self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
 
 
 class AsyncBrowserbaseWithRawResponse:
     def __init__(self, client: AsyncBrowserbase) -> None:
-        self.contexts = resources.AsyncContextsResourceWithRawResponse(client.contexts)
-        self.extensions = resources.AsyncExtensionsResourceWithRawResponse(client.extensions)
-        self.projects = resources.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.sessions = resources.AsyncSessionsResourceWithRawResponse(client.sessions)
+        self.contexts = contexts.AsyncContextsResourceWithRawResponse(client.contexts)
+        self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
+        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
+        self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
 
 
 class BrowserbaseWithStreamedResponse:
     def __init__(self, client: Browserbase) -> None:
-        self.contexts = resources.ContextsResourceWithStreamingResponse(client.contexts)
-        self.extensions = resources.ExtensionsResourceWithStreamingResponse(client.extensions)
-        self.projects = resources.ProjectsResourceWithStreamingResponse(client.projects)
-        self.sessions = resources.SessionsResourceWithStreamingResponse(client.sessions)
+        self.contexts = contexts.ContextsResourceWithStreamingResponse(client.contexts)
+        self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
+        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
+        self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
 
 
 class AsyncBrowserbaseWithStreamedResponse:
     def __init__(self, client: AsyncBrowserbase) -> None:
-        self.contexts = resources.AsyncContextsResourceWithStreamingResponse(client.contexts)
-        self.extensions = resources.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
-        self.projects = resources.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.sessions = resources.AsyncSessionsResourceWithStreamingResponse(client.sessions)
+        self.contexts = contexts.AsyncContextsResourceWithStreamingResponse(client.contexts)
+        self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
+        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
+        self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
 
 
 Client = Browserbase
