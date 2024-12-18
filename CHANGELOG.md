@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.0.6 (2024-12-18)
+
+Full Changelog: [v1.0.5...v1.0.6](https://github.com/browserbase/sdk-python/compare/v1.0.5...v1.0.6)
+
+### Chores
+
+* **internal:** add support for TypeAliasType ([#85](https://github.com/browserbase/sdk-python/issues/85)) ([64448c6](https://github.com/browserbase/sdk-python/commit/64448c6e020aaeb4b39b7ec8f1b28a6b8f0c746a))
+* **internal:** bump pydantic dependency ([#81](https://github.com/browserbase/sdk-python/issues/81)) ([e35a0d8](https://github.com/browserbase/sdk-python/commit/e35a0d85ef0e45aed1a5f58757427bf7c16a76f5))
+* **internal:** bump pyright ([#83](https://github.com/browserbase/sdk-python/issues/83)) ([894b4c4](https://github.com/browserbase/sdk-python/commit/894b4c45b0c36963822923535391aa34dbfec766))
+* **internal:** codegen related update ([#86](https://github.com/browserbase/sdk-python/issues/86)) ([ab76578](https://github.com/browserbase/sdk-python/commit/ab76578bdce5eba2410b09f497758fbf0e0d8cf0))
+* **internal:** codegen related update ([#87](https://github.com/browserbase/sdk-python/issues/87)) ([f7f189e](https://github.com/browserbase/sdk-python/commit/f7f189ec317394f2fc532b8f95c3d15304298027))
+* **internal:** codegen related update ([#88](https://github.com/browserbase/sdk-python/issues/88)) ([85f1492](https://github.com/browserbase/sdk-python/commit/85f1492efc58d86ebc34511ca1269a0db2a4d223))
+* **internal:** fix some typos ([#92](https://github.com/browserbase/sdk-python/issues/92)) ([51d9f42](https://github.com/browserbase/sdk-python/commit/51d9f42a32d17d2d2277eb8a7b8f35a980c7c485))
+* **internal:** remove some duplicated imports ([#89](https://github.com/browserbase/sdk-python/issues/89)) ([a82ae7d](https://github.com/browserbase/sdk-python/commit/a82ae7d418b1daf68c85e70dea61e628eb785b79))
+* **internal:** updated imports ([#90](https://github.com/browserbase/sdk-python/issues/90)) ([dc6e187](https://github.com/browserbase/sdk-python/commit/dc6e187bfe9585692b2de1b67fc83f027a52c43c))
+* make the `Omit` type public ([#78](https://github.com/browserbase/sdk-python/issues/78)) ([a7bdc57](https://github.com/browserbase/sdk-python/commit/a7bdc57ab7f327da61121986ba7b006238d0e5b5))
+
+
+### Documentation
+
+* **readme:** example snippet for client context manager ([#91](https://github.com/browserbase/sdk-python/issues/91)) ([950c8af](https://github.com/browserbase/sdk-python/commit/950c8af19db4581fabd5b965ca4f0af3cc5cd6dc))
+* **readme:** fix http client proxies example ([#82](https://github.com/browserbase/sdk-python/issues/82)) ([cc67c77](https://github.com/browserbase/sdk-python/commit/cc67c773b11b42b406b677f466c7c0ef090b254e))
+
 ## 1.0.5 (2024-12-03)
 
 Full Changelog: [v1.0.4...v1.0.5](https://github.com/browserbase/sdk-python/compare/v1.0.4...v1.0.5)
