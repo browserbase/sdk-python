@@ -41,15 +41,11 @@ def run(playwright: Playwright) -> None:
     # Step 2: Creates a session with the context
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
-        browser_settings=TypeAdapter(BrowserSettings).validate_python(
-            {"context": {"id": context_id, "persist": True}}
-        ),
+        browser_settings=TypeAdapter(BrowserSettings).validate_python({"context": {"id": context_id, "persist": True}}),
     )
     print(session)
 
-    assert (
-        session.context_id == context_id
-    ), f"Session context_id is {session.context_id}, expected {context_id}"
+    assert session.context_id == context_id, f"Session context_id is {session.context_id}, expected {context_id}"
     session_id = session.id
 
     # Step 3: Populates and persists the context
@@ -90,13 +86,9 @@ def run(playwright: Playwright) -> None:
     # Step 4: Creates another session with the same context
     session = bb.sessions.create(
         project_id=BROWSERBASE_PROJECT_ID,
-        browser_settings=BrowserSettings(
-            context=BrowserSettingsContext(id=context_id, persist=True)
-        ),
+        browser_settings=BrowserSettings(context=BrowserSettingsContext(id=context_id, persist=True)),
     )
-    assert (
-        session.context_id == context_id
-    ), f"Session context_id is {session.context_id}, expected {context_id}"
+    assert session.context_id == context_id, f"Session context_id is {session.context_id}, expected {context_id}"
     session_id = session.id
 
     # Step 5: Uses context to find previous state

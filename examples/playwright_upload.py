@@ -33,12 +33,8 @@ def run(playwright: Playwright) -> None:
         file_size = int(file_size_span.inner_text())
 
         # Assert the file name and size
-        assert (
-            file_name == "logo.png"
-        ), f"Expected file name to be 'logo.png', but got '{file_name}'"
-        assert (
-            file_size > 0
-        ), f"Expected file size to be greater than 0, but got {file_size}"
+        assert file_name == "logo.png", f"Expected file name to be 'logo.png', but got '{file_name}'"
+        assert file_size > 0, f"Expected file size to be greater than 0, but got {file_size}"
 
         print("File upload test passed successfully!")
 

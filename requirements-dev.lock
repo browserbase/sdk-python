@@ -4,7 +4,7 @@
 # last locked with the following flags:
 #   pre: false
 #   features: []
-#   all-features: false
+#   all-features: true
 #   with-sources: false
 #   generate-hashes: false
 #   universal: false
@@ -89,7 +89,7 @@ pyee==12.0.0
     # via playwright
 pygments==2.18.0
     # via rich
-pyright==1.1.386
+pyright==1.1.390
 pysocks==1.7.1
     # via urllib3
 pytest==8.3.3
