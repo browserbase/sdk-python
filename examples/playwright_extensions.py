@@ -12,9 +12,7 @@ from examples import (
 )
 from browserbase.types import Extension, SessionCreateResponse
 
-PATH_TO_EXTENSION = (
-    Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
-)
+PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
 
 
 def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> BytesIO:
@@ -23,9 +21,7 @@ def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> B
     Mark save_local=True to save the zip file to a local file.
     """
     # Ensure we're looking at an extension
-    assert "manifest.json" in os.listdir(
-        path
-    ), "No manifest.json found in the extension folder."
+    assert "manifest.json" in os.listdir(path), "No manifest.json found in the extension folder."
 
     # Create a BytesIO object to hold the zip file in memory
     memory_zip = BytesIO()
@@ -51,9 +47,7 @@ def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> B
 
 def create_extension() -> str:
     zip_data = zip_extension(save_local=True)
-    extension: Extension = bb.extensions.create(
-        file=("extension.zip", zip_data.getvalue())
-    )
+    extension: Extension = bb.extensions.create(file=("extension.zip", zip_data.getvalue()))
     return extension.id
 
 
@@ -75,9 +69,7 @@ def check_for_message(page: Page, message: str) -> None:
     while time.time() - start < 10:
         if message in console_messages:
             break
-    assert (
-        message in console_messages
-    ), f"Expected message not found in console logs. Messages: {console_messages}"
+    assert message in console_messages, f"Expected message not found in console logs. Messages: {console_messages}"
 
 
 def run(playwright: Playwright) -> None:
@@ -141,9 +133,7 @@ def run(playwright: Playwright) -> None:
             project_id=BROWSERBASE_PROJECT_ID,
             extension_id=extension_id,
         )
-        raise AssertionError(
-            "Expected to fail when creating session with deleted extension"
-        )
+        raise AssertionError("Expected to fail when creating session with deleted extension")
     except Exception as e:
         print(f"Failed to create session with deleted extension as expected: {str(e)}")
 

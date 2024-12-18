@@ -34,7 +34,8 @@ def run() -> None:
     session = bb.sessions.create(project_id=BROWSERBASE_PROJECT_ID)
     connection = BrowserbaseConnection(session.id, session.selenium_remote_url)
     driver = webdriver.Remote(
-        command_executor=connection, options=webdriver.ChromeOptions()  # type: ignore
+        command_executor=connection,
+        options=webdriver.ChromeOptions(),  # type: ignore
     )
 
     # Print a bit of info about the browser we've connected to

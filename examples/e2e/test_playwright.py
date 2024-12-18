@@ -29,6 +29,7 @@ def playwright() -> Generator[Playwright, None, None]:
     with sync_playwright() as p:
         yield p
 
+
 def test_playwright_basic(playwright: Playwright) -> None:
     playwright_basic.run(playwright)
 
