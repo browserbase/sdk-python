@@ -108,6 +108,7 @@ class SessionsResource(SyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
+        user_metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -137,6 +138,8 @@ class SessionsResource(SyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
+          user_metadata: Arbitrary user metadata to attach to the session.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -156,6 +159,7 @@ class SessionsResource(SyncAPIResource):
                     "proxies": proxies,
                     "region": region,
                     "api_timeout": api_timeout,
+                    "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,
             ),
@@ -362,6 +366,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
+        user_metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -391,6 +396,8 @@ class AsyncSessionsResource(AsyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
+          user_metadata: Arbitrary user metadata to attach to the session.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -410,6 +417,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "proxies": proxies,
                     "region": region,
                     "api_timeout": api_timeout,
+                    "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,
             ),
