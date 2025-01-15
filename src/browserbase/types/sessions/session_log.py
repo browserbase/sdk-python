@@ -28,8 +28,6 @@ class Response(BaseModel):
 
 
 class SessionLog(BaseModel):
-    event_id: str = FieldInfo(alias="eventId")
-
     method: str
 
     page_id: int = FieldInfo(alias="pageId")

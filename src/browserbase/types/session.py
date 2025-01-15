@@ -46,3 +46,6 @@ class Session(BaseModel):
 
     memory_usage: Optional[int] = FieldInfo(alias="memoryUsage", default=None)
     """Memory used by the Session"""
+
+    user_metadata: Optional[object] = FieldInfo(alias="userMetadata", default=None)
+    """Arbitrary user metadata to attach to the session."""

@@ -57,6 +57,9 @@ class SessionCreateParams(TypedDict, total=False):
     Defaults to the Project's `defaultTimeout`.
     """
 
+    user_metadata: Annotated[object, PropertyInfo(alias="userMetadata")]
+    """Arbitrary user metadata to attach to the session."""
+
 
 class BrowserSettingsContext(TypedDict, total=False):
     id: Required[str]
