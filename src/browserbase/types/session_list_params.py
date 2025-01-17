@@ -8,4 +8,6 @@ __all__ = ["SessionListParams"]
 
 
 class SessionListParams(TypedDict, total=False):
+    q: str
+
     status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"]
