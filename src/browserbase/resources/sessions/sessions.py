@@ -254,6 +254,7 @@ class SessionsResource(SyncAPIResource):
     def list(
         self,
         *,
+        q: str | NotGiven = NOT_GIVEN,
         status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -281,7 +282,13 @@ class SessionsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"status": status}, session_list_params.SessionListParams),
+                query=maybe_transform(
+                    {
+                        "q": q,
+                        "status": status,
+                    },
+                    session_list_params.SessionListParams,
+                ),
             ),
             cast_to=SessionListResponse,
         )
@@ -512,6 +519,7 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        q: str | NotGiven = NOT_GIVEN,
         status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -539,7 +547,13 @@ class AsyncSessionsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"status": status}, session_list_params.SessionListParams),
+                query=await async_maybe_transform(
+                    {
+                        "q": q,
+                        "status": status,
+                    },
+                    session_list_params.SessionListParams,
+                ),
             ),
             cast_to=SessionListResponse,
         )
