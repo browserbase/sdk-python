@@ -110,6 +110,9 @@ class BrowserSettingsViewport(TypedDict, total=False):
 
 
 class BrowserSettings(TypedDict, total=False):
+    advanced_stealth: Annotated[bool, PropertyInfo(alias="advancedStealth")]
+    """Advanced Browser Stealth Mode"""
+
     block_ads: Annotated[bool, PropertyInfo(alias="blockAds")]
     """Enable or disable ad blocking in the browser. Defaults to `false`."""
 
