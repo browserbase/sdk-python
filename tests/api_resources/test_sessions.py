@@ -34,6 +34,7 @@ class TestSessions:
         session = client.sessions.create(
             project_id="projectId",
             browser_settings={
+                "advanced_stealth": True,
                 "block_ads": True,
                 "context": {
                     "id": "id",
@@ -265,6 +266,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.create(
             project_id="projectId",
             browser_settings={
+                "advanced_stealth": True,
                 "block_ads": True,
                 "context": {
                     "id": "id",
