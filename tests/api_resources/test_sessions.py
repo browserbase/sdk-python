@@ -67,7 +67,7 @@ class TestSessions:
             proxies=True,
             region="us-west-2",
             api_timeout=60,
-            user_metadata={},
+            user_metadata={"foo": "bar"},
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
@@ -299,7 +299,7 @@ class TestAsyncSessions:
             proxies=True,
             region="us-west-2",
             api_timeout=60,
-            user_metadata={},
+            user_metadata={"foo": "bar"},
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 

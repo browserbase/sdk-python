@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Dict, List, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
@@ -57,8 +57,12 @@ class SessionCreateParams(TypedDict, total=False):
     Defaults to the Project's `defaultTimeout`.
     """
 
-    user_metadata: Annotated[object, PropertyInfo(alias="userMetadata")]
-    """Arbitrary user metadata to attach to the session."""
+    user_metadata: Annotated[Dict[str, object], PropertyInfo(alias="userMetadata")]
+    """Arbitrary user metadata to attach to the session.
+
+    To learn more about user metadata, see
+    [User Metadata](/features/sessions#user-metadata).
+    """
 
 
 class BrowserSettingsContext(TypedDict, total=False):

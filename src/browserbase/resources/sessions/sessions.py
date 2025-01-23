@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -108,7 +108,7 @@ class SessionsResource(SyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
-        user_metadata: object | NotGiven = NOT_GIVEN,
+        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -138,7 +138,8 @@ class SessionsResource(SyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
-          user_metadata: Arbitrary user metadata to attach to the session.
+          user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
+              metadata, see [User Metadata](/features/sessions#user-metadata).
 
           extra_headers: Send extra headers
 
@@ -263,10 +264,15 @@ class SessionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionListResponse:
-        """
-        List Sessions
+        """List Sessions
 
         Args:
+          q: Query sessions by user metadata.
+
+        See
+              [Querying Sessions by User Metadata](/features/sessions#querying-sessions-by-user-metadata)
+              for the schema of this query.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -373,7 +379,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
-        user_metadata: object | NotGiven = NOT_GIVEN,
+        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -403,7 +409,8 @@ class AsyncSessionsResource(AsyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
-          user_metadata: Arbitrary user metadata to attach to the session.
+          user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
+              metadata, see [User Metadata](/features/sessions#user-metadata).
 
           extra_headers: Send extra headers
 
@@ -528,10 +535,15 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionListResponse:
-        """
-        List Sessions
+        """List Sessions
 
         Args:
+          q: Query sessions by user metadata.
+
+        See
+              [Querying Sessions by User Metadata](/features/sessions#querying-sessions-by-user-metadata)
+              for the schema of this query.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
