@@ -14,7 +14,7 @@ class Request(BaseModel):
 
     raw_body: str = FieldInfo(alias="rawBody")
 
-    timestamp: int
+    timestamp: Optional[int] = None
     """milliseconds that have elapsed since the UNIX epoch"""
 
 
@@ -23,7 +23,7 @@ class Response(BaseModel):
 
     result: Dict[str, object]
 
-    timestamp: int
+    timestamp: Optional[int] = None
     """milliseconds that have elapsed since the UNIX epoch"""
 
 
@@ -34,9 +34,6 @@ class SessionLog(BaseModel):
 
     session_id: str = FieldInfo(alias="sessionId")
 
-    timestamp: int
-    """milliseconds that have elapsed since the UNIX epoch"""
-
     frame_id: Optional[str] = FieldInfo(alias="frameId", default=None)
 
     loader_id: Optional[str] = FieldInfo(alias="loaderId", default=None)
@@ -44,3 +41,6 @@ class SessionLog(BaseModel):
     request: Optional[Request] = None
 
     response: Optional[Response] = None
+
+    timestamp: Optional[int] = None
+    """milliseconds that have elapsed since the UNIX epoch"""
