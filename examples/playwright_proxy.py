@@ -11,9 +11,7 @@ GRACEFUL_SHUTDOWN_TIMEOUT = 30000  # Assuming 30 seconds, adjust as needed
 
 
 def check_proxy_bytes(session_id: str) -> None:
-    bb.sessions.update(
-        id=session_id, project_id=BROWSERBASE_PROJECT_ID, status="REQUEST_RELEASE"
-    )
+    bb.sessions.update(id=session_id, project_id=BROWSERBASE_PROJECT_ID, status="REQUEST_RELEASE")
     time.sleep(GRACEFUL_SHUTDOWN_TIMEOUT / 1000)
     updated_session = bb.sessions.retrieve(id=session_id)
     assert (

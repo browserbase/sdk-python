@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -82,7 +82,7 @@ class SessionsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SessionsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/browserbase/sdk-python#accessing-raw-response-data-eg-headers
@@ -108,6 +108,7 @@ class SessionsResource(SyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
+        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -137,6 +138,9 @@ class SessionsResource(SyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
+          user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
+              metadata, see [User Metadata](/features/sessions#user-metadata).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -156,6 +160,7 @@ class SessionsResource(SyncAPIResource):
                     "proxies": proxies,
                     "region": region,
                     "api_timeout": api_timeout,
+                    "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,
             ),
@@ -250,6 +255,7 @@ class SessionsResource(SyncAPIResource):
     def list(
         self,
         *,
+        q: str | NotGiven = NOT_GIVEN,
         status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -258,10 +264,15 @@ class SessionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionListResponse:
-        """
-        List Sessions
+        """List Sessions
 
         Args:
+          q: Query sessions by user metadata.
+
+        See
+              [Querying Sessions by User Metadata](/features/sessions#querying-sessions-by-user-metadata)
+              for the schema of this query.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -277,7 +288,13 @@ class SessionsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"status": status}, session_list_params.SessionListParams),
+                query=maybe_transform(
+                    {
+                        "q": q,
+                        "status": status,
+                    },
+                    session_list_params.SessionListParams,
+                ),
             ),
             cast_to=SessionListResponse,
         )
@@ -336,7 +353,7 @@ class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncSessionsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/browserbase/sdk-python#accessing-raw-response-data-eg-headers
@@ -362,6 +379,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
+        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -391,6 +409,9 @@ class AsyncSessionsResource(AsyncAPIResource):
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`.
 
+          user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
+              metadata, see [User Metadata](/features/sessions#user-metadata).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -410,6 +431,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "proxies": proxies,
                     "region": region,
                     "api_timeout": api_timeout,
+                    "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,
             ),
@@ -504,6 +526,7 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        q: str | NotGiven = NOT_GIVEN,
         status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -512,10 +535,15 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionListResponse:
-        """
-        List Sessions
+        """List Sessions
 
         Args:
+          q: Query sessions by user metadata.
+
+        See
+              [Querying Sessions by User Metadata](/features/sessions#querying-sessions-by-user-metadata)
+              for the schema of this query.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -531,7 +559,13 @@ class AsyncSessionsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"status": status}, session_list_params.SessionListParams),
+                query=await async_maybe_transform(
+                    {
+                        "q": q,
+                        "status": status,
+                    },
+                    session_list_params.SessionListParams,
+                ),
             ),
             cast_to=SessionListResponse,
         )

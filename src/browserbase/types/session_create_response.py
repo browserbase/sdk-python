@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -55,3 +55,10 @@ class SessionCreateResponse(BaseModel):
 
     memory_usage: Optional[int] = FieldInfo(alias="memoryUsage", default=None)
     """Memory used by the Session"""
+
+    user_metadata: Optional[Dict[str, object]] = FieldInfo(alias="userMetadata", default=None)
+    """Arbitrary user metadata to attach to the session.
+
+    To learn more about user metadata, see
+    [User Metadata](/features/sessions#user-metadata).
+    """

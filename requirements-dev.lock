@@ -4,7 +4,7 @@
 # last locked with the following flags:
 #   pre: false
 #   features: []
-#   all-features: false
+#   all-features: true
 #   with-sources: false
 #   generate-hashes: false
 #   universal: false
@@ -48,7 +48,7 @@ h11==0.14.0
     # via wsproto
 httpcore==1.0.6
     # via httpx
-httpx==0.27.2
+httpx==0.28.1
     # via browserbase
     # via respx
 idna==3.10
@@ -63,7 +63,7 @@ markdown-it-py==3.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.13.0
+mypy==1.14.1
 mypy-extensions==1.0.0
     # via mypy
 nest-asyncio==1.6.0
@@ -81,15 +81,15 @@ playwright==1.48.0
     # via pytest-playwright
 pluggy==1.5.0
     # via pytest
-pydantic==2.9.2
+pydantic==2.10.3
     # via browserbase
-pydantic-core==2.23.4
+pydantic-core==2.27.1
     # via pydantic
 pyee==12.0.0
     # via playwright
 pygments==2.18.0
     # via rich
-pyright==1.1.386
+pyright==1.1.392.post0
 pysocks==1.7.1
     # via urllib3
 pytest==8.3.3
@@ -107,7 +107,7 @@ python-slugify==8.0.4
     # via pytest-playwright
 requests==2.32.3
     # via pytest-base-url
-respx==0.21.1
+respx==0.22.0
 rich==13.9.3
 ruff==0.7.1
 selenium==4.25.0
@@ -116,7 +116,6 @@ six==1.16.0
 sniffio==1.3.1
     # via anyio
     # via browserbase
-    # via httpx
     # via trio
 sortedcontainers==2.4.0
     # via trio

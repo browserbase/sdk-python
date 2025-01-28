@@ -34,9 +34,7 @@ def run(playwright: Playwright) -> None:
     page.on("console", handle_console)
 
     page.goto(DEFAULT_CAPTCHA_URL, wait_until="networkidle")
-    page.wait_for_function(
-        "() => window.captchaSolvingFinished === true", timeout=OVERRIDE_TIMEOUT
-    )
+    page.wait_for_function("() => window.captchaSolvingFinished === true", timeout=OVERRIDE_TIMEOUT)
 
     assert captcha_solving_started, "Captcha solving did not start"
     assert captcha_solving_finished, "Captcha solving did not finish"

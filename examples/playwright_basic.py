@@ -19,9 +19,7 @@ def run(playwright: Playwright) -> None:
     # Execute Playwright actions on the remote browser tab
     page.goto("https://news.ycombinator.com/")
     page_title = page.title()
-    assert (
-        page_title == "Hacker News"
-    ), f"Page title is not 'Hacker News', it is '{page_title}'"
+    assert page_title == "Hacker News", f"Page title is not 'Hacker News', it is '{page_title}'"
     page.screenshot(path="screenshot.png")
 
     page.close()
