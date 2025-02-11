@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0 (2025-02-11)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/browserbase/sdk-python/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **client:** send `X-Stainless-Read-Timeout` header ([#117](https://github.com/browserbase/sdk-python/issues/117)) ([e53c47a](https://github.com/browserbase/sdk-python/commit/e53c47ae14f4dca507cc146b37b81d5e59845806))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#115](https://github.com/browserbase/sdk-python/issues/115)) ([f687590](https://github.com/browserbase/sdk-python/commit/f68759062445e8336ca0f6c9b0bde3b0d2ca1e62))
+* **internal:** change default timeout to an int ([#113](https://github.com/browserbase/sdk-python/issues/113)) ([081bb21](https://github.com/browserbase/sdk-python/commit/081bb216f4b9a4df0dfdd51bcbcacef0154fe636))
+* **internal:** fix type traversing dictionary params ([#118](https://github.com/browserbase/sdk-python/issues/118)) ([cc59fe8](https://github.com/browserbase/sdk-python/commit/cc59fe8950fa4e66ee5efd598b69da9c0c8f08a0))
+* **internal:** minor type handling changes ([#119](https://github.com/browserbase/sdk-python/issues/119)) ([7be3940](https://github.com/browserbase/sdk-python/commit/7be3940cfb0bb947a6774ec225b5eb450a951e88))
+
 ## 1.1.0 (2025-01-28)
 
 Full Changelog: [v1.0.5...v1.1.0](https://github.com/browserbase/sdk-python/compare/v1.0.5...v1.1.0)
