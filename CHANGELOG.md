@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.3.0 (2025-02-22)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/browserbase/sdk-python/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* **client:** allow passing `NotGiven` for body ([#125](https://github.com/browserbase/sdk-python/issues/125)) ([6cdee1b](https://github.com/browserbase/sdk-python/commit/6cdee1ba5775d3c72e0cbd9fe757a1b7452780bd))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#123](https://github.com/browserbase/sdk-python/issues/123)) ([c8b2cd7](https://github.com/browserbase/sdk-python/commit/c8b2cd77f4cb07d06a00a09cac3eaa55cf6c6925))
+* **client:** mark some request bodies as optional ([6cdee1b](https://github.com/browserbase/sdk-python/commit/6cdee1ba5775d3c72e0cbd9fe757a1b7452780bd))
+
+
+### Chores
+
+* **internal:** codegen related update ([#124](https://github.com/browserbase/sdk-python/issues/124)) ([0678102](https://github.com/browserbase/sdk-python/commit/0678102eee40182b0fc2c2a2b2e3f965a2885a50))
+* **internal:** fix devcontainers setup ([#126](https://github.com/browserbase/sdk-python/issues/126)) ([eaf577b](https://github.com/browserbase/sdk-python/commit/eaf577b05bd72e2bb40105131a65e7c13172c3bb))
+* **internal:** update client tests ([#121](https://github.com/browserbase/sdk-python/issues/121)) ([862cd7e](https://github.com/browserbase/sdk-python/commit/862cd7efb4c694866ab385c5a70fd450b917f057))
+
 ## 1.2.0 (2025-02-11)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/browserbase/sdk-python/compare/v1.1.0...v1.2.0)
