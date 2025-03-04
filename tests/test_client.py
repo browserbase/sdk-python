@@ -23,6 +23,7 @@ from pydantic import ValidationError
 
 from browserbase import Browserbase, AsyncBrowserbase, APIResponseValidationError
 from browserbase._types import Omit
+from browserbase._utils import maybe_transform
 from browserbase._models import BaseModel, FinalRequestOptions
 from browserbase._constants import RAW_RESPONSE_HEADER
 from browserbase._exceptions import APIStatusError, APITimeoutError, BrowserbaseError, APIResponseValidationError
@@ -32,6 +33,7 @@ from browserbase._base_client import (
     BaseClient,
     make_request_options,
 )
+from browserbase.types.session_create_params import SessionCreateParams
 
 from .utils import update_env
 
@@ -727,7 +729,7 @@ class TestBrowserbase:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id")),
+                body=cast(object, maybe_transform(dict(project_id="your_project_id"), SessionCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -742,7 +744,7 @@ class TestBrowserbase:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id")),
+                body=cast(object, maybe_transform(dict(project_id="your_project_id"), SessionCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1507,7 +1509,7 @@ class TestAsyncBrowserbase:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id")),
+                body=cast(object, maybe_transform(dict(project_id="your_project_id"), SessionCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1522,7 +1524,7 @@ class TestAsyncBrowserbase:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/v1/sessions",
-                body=cast(object, dict(project_id="your_project_id")),
+                body=cast(object, maybe_transform(dict(project_id="your_project_id"), SessionCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
