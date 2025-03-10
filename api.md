@@ -45,13 +45,19 @@ Methods:
 Types:
 
 ```python
-from browserbase.types import Session, SessionLiveURLs, SessionCreateResponse, SessionListResponse
+from browserbase.types import (
+    Session,
+    SessionLiveURLs,
+    SessionCreateResponse,
+    SessionRetrieveResponse,
+    SessionListResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /v1/sessions">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">create</a>(\*\*<a href="src/browserbase/types/session_create_params.py">params</a>) -> <a href="./src/browserbase/types/session_create_response.py">SessionCreateResponse</a></code>
-- <code title="get /v1/sessions/{id}">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">retrieve</a>(id) -> <a href="./src/browserbase/types/session.py">Session</a></code>
+- <code title="get /v1/sessions/{id}">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">retrieve</a>(id) -> <a href="./src/browserbase/types/session_retrieve_response.py">SessionRetrieveResponse</a></code>
 - <code title="post /v1/sessions/{id}">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">update</a>(id, \*\*<a href="src/browserbase/types/session_update_params.py">params</a>) -> <a href="./src/browserbase/types/session.py">Session</a></code>
 - <code title="get /v1/sessions">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">list</a>(\*\*<a href="src/browserbase/types/session_list_params.py">params</a>) -> <a href="./src/browserbase/types/session_list_response.py">SessionListResponse</a></code>
 - <code title="get /v1/sessions/{id}/debug">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">debug</a>(id) -> <a href="./src/browserbase/types/session_live_urls.py">SessionLiveURLs</a></code>
