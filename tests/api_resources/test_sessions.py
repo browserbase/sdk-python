@@ -14,6 +14,7 @@ from browserbase.types import (
     SessionLiveURLs,
     SessionListResponse,
     SessionCreateResponse,
+    SessionRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -100,7 +101,7 @@ class TestSessions:
         session = client.sessions.retrieve(
             "id",
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
@@ -111,7 +112,7 @@ class TestSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = response.parse()
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
@@ -122,7 +123,7 @@ class TestSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = response.parse()
-            assert_matches_type(Session, session, path=["response"])
+            assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -332,7 +333,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.retrieve(
             "id",
         )
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -343,7 +344,7 @@ class TestAsyncSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = await response.parse()
-        assert_matches_type(Session, session, path=["response"])
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -354,7 +355,7 @@ class TestAsyncSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = await response.parse()
-            assert_matches_type(Session, session, path=["response"])
+            assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

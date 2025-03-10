@@ -58,6 +58,7 @@ from ...types.session import Session
 from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
 from ...types.session_create_response import SessionCreateResponse
+from ...types.session_retrieve_response import SessionRetrieveResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
 
@@ -180,7 +181,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
+    ) -> SessionRetrieveResponse:
         """
         Session
 
@@ -200,7 +201,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionRetrieveResponse,
         )
 
     def update(
@@ -451,7 +452,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
+    ) -> SessionRetrieveResponse:
         """
         Session
 
@@ -471,7 +472,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionRetrieveResponse,
         )
 
     async def update(
