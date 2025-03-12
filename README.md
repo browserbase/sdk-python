@@ -112,7 +112,7 @@ session = client.sessions.create(
         "fingerprint": {
             "browsers": ["chrome"],
             "devices": ["desktop"],
-            "http_version": 1,
+            "http_version": "1",
             "locales": ["string"],
             "operating_systems": ["android"],
             "screen": {

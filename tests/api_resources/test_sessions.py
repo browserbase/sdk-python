@@ -45,7 +45,7 @@ class TestSessions:
                 "fingerprint": {
                     "browsers": ["chrome"],
                     "devices": ["desktop"],
-                    "http_version": 1,
+                    "http_version": "1",
                     "locales": ["string"],
                     "operating_systems": ["android"],
                     "screen": {
@@ -277,7 +277,7 @@ class TestAsyncSessions:
                 "fingerprint": {
                     "browsers": ["chrome"],
                     "devices": ["desktop"],
-                    "http_version": 1,
+                    "http_version": "1",
                     "locales": ["string"],
                     "operating_systems": ["android"],
                     "screen": {

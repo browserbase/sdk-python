@@ -88,7 +88,7 @@ class BrowserSettingsFingerprint(TypedDict, total=False):
 
     devices: List[Literal["desktop", "mobile"]]
 
-    http_version: Annotated[Literal[1, 2], PropertyInfo(alias="httpVersion")]
+    http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
 
     locales: List[str]
     """
