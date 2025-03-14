@@ -38,7 +38,6 @@ Homepage = "https://github.com/browserbase/sdk-python"
 Repository = "https://github.com/browserbase/sdk-python"
 
 
-
 [tool.rye]
 managed = true
 # version pins are in requirements-dev.lock
@@ -160,7 +159,6 @@ reportImplicitOverride = true
 
 reportImportCycles = false
 reportPrivateUsage = false
-
 
 [tool.ruff]
 line-length = 120
