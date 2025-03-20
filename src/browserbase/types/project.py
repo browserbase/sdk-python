@@ -12,6 +12,8 @@ __all__ = ["Project"]
 class Project(BaseModel):
     id: str
 
+    concurrency: int
+
     created_at: datetime = FieldInfo(alias="createdAt")
 
     default_timeout: int = FieldInfo(alias="defaultTimeout")
