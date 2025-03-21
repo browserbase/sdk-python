@@ -13,6 +13,7 @@ class Project(BaseModel):
     id: str
 
     concurrency: int
+    """The maximum number of sessions that this project can run concurrently."""
 
     created_at: datetime = FieldInfo(alias="createdAt")
 
