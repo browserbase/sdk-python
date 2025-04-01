@@ -39,7 +39,7 @@ class SessionCreateParams(TypedDict, total=False):
     keep_alive: Annotated[bool, PropertyInfo(alias="keepAlive")]
     """Set to true to keep the session alive even after disconnections.
 
-    This is available on the Startup plan only.
+    Available on the Hobby Plan and above.
     """
 
     proxies: Union[bool, Iterable[ProxiesUnionMember1]]
