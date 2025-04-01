@@ -128,8 +128,8 @@ class SessionsResource(SyncAPIResource):
           extension_id: The uploaded Extension ID. See
               [Upload Extension](/reference/api/upload-an-extension).
 
-          keep_alive: Set to true to keep the session alive even after disconnections. This is
-              available on the Startup plan only.
+          keep_alive: Set to true to keep the session alive even after disconnections. Available on
+              the Hobby Plan and above.
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
@@ -399,8 +399,8 @@ class AsyncSessionsResource(AsyncAPIResource):
           extension_id: The uploaded Extension ID. See
               [Upload Extension](/reference/api/upload-an-extension).
 
-          keep_alive: Set to true to keep the session alive even after disconnections. This is
-              available on the Startup plan only.
+          keep_alive: Set to true to keep the session alive even after disconnections. Available on
+              the Hobby Plan and above.
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
