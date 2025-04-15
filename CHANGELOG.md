@@ -1,5 +1,55 @@
 # Changelog
 
+## 1.3.0 (2025-04-15)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/browserbase/sdk-python/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* **api:** api update ([#131](https://github.com/browserbase/sdk-python/issues/131)) ([1be828d](https://github.com/browserbase/sdk-python/commit/1be828d5c83e48af8740886303f73620bc71b1ba))
+* **api:** api update ([#133](https://github.com/browserbase/sdk-python/issues/133)) ([2a08d98](https://github.com/browserbase/sdk-python/commit/2a08d98914d26cdc36d080bccebd66786b5247ff))
+* **api:** api update ([#140](https://github.com/browserbase/sdk-python/issues/140)) ([134049e](https://github.com/browserbase/sdk-python/commit/134049e29ba480a2238a08c327070bda96b05109))
+* **api:** api update ([#141](https://github.com/browserbase/sdk-python/issues/141)) ([145e5cb](https://github.com/browserbase/sdk-python/commit/145e5cbfc76ac2731b1d6eb3c069cba59a9fbcd9))
+* **api:** api update ([#143](https://github.com/browserbase/sdk-python/issues/143)) ([d55e411](https://github.com/browserbase/sdk-python/commit/d55e4118972d7badbe09a2dd46257d2e66822b85))
+* **client:** allow passing `NotGiven` for body ([#125](https://github.com/browserbase/sdk-python/issues/125)) ([6cdee1b](https://github.com/browserbase/sdk-python/commit/6cdee1ba5775d3c72e0cbd9fe757a1b7452780bd))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#123](https://github.com/browserbase/sdk-python/issues/123)) ([c8b2cd7](https://github.com/browserbase/sdk-python/commit/c8b2cd77f4cb07d06a00a09cac3eaa55cf6c6925))
+* **ci:** ensure pip is always available ([#138](https://github.com/browserbase/sdk-python/issues/138)) ([173fdde](https://github.com/browserbase/sdk-python/commit/173fddeea8867f93428bddc5ab1d9e1fcd5a925e))
+* **ci:** remove publishing patch ([#139](https://github.com/browserbase/sdk-python/issues/139)) ([bd66d56](https://github.com/browserbase/sdk-python/commit/bd66d56eec53a7778ca624a7ccd00fcf8a9f69af))
+* **client:** mark some request bodies as optional ([6cdee1b](https://github.com/browserbase/sdk-python/commit/6cdee1ba5775d3c72e0cbd9fe757a1b7452780bd))
+* **perf:** optimize some hot paths ([042f048](https://github.com/browserbase/sdk-python/commit/042f048847634ed606d475a0aaeedc5fd129ddbd))
+* **perf:** skip traversing types for NotGiven values ([5cc6c58](https://github.com/browserbase/sdk-python/commit/5cc6c58561556e2b50fccbeed5e123adf3aba72d))
+* **types:** handle more discriminated union shapes ([#137](https://github.com/browserbase/sdk-python/issues/137)) ([d9e09e3](https://github.com/browserbase/sdk-python/commit/d9e09e3d2428a92c29a4411533564637ce5b3121))
+
+
+### Chores
+
+* **client:** minor internal fixes ([47df6f5](https://github.com/browserbase/sdk-python/commit/47df6f5956507649f684df46bf2b5bb18aa7bc93))
+* **docs:** update client docstring ([#129](https://github.com/browserbase/sdk-python/issues/129)) ([b2201f1](https://github.com/browserbase/sdk-python/commit/b2201f1d9f99f67a3b8fa21ba19560e72a245611))
+* fix typos ([#142](https://github.com/browserbase/sdk-python/issues/142)) ([0157632](https://github.com/browserbase/sdk-python/commit/015763281689247799dd97e46884ba3be520c2f5))
+* **internal:** bump rye to 0.44.0 ([#136](https://github.com/browserbase/sdk-python/issues/136)) ([9aeac01](https://github.com/browserbase/sdk-python/commit/9aeac01a20df8303f806e22b274bdd10adaeea49))
+* **internal:** codegen related update ([#124](https://github.com/browserbase/sdk-python/issues/124)) ([0678102](https://github.com/browserbase/sdk-python/commit/0678102eee40182b0fc2c2a2b2e3f965a2885a50))
+* **internal:** codegen related update ([#132](https://github.com/browserbase/sdk-python/issues/132)) ([3248d7e](https://github.com/browserbase/sdk-python/commit/3248d7e6242808bcb74427cb1b78ac52dee0948c))
+* **internal:** expand CI branch coverage ([4494839](https://github.com/browserbase/sdk-python/commit/449483977d4af8b56b916d555bea966f25304ac7))
+* **internal:** fix devcontainers setup ([#126](https://github.com/browserbase/sdk-python/issues/126)) ([eaf577b](https://github.com/browserbase/sdk-python/commit/eaf577b05bd72e2bb40105131a65e7c13172c3bb))
+* **internal:** properly set __pydantic_private__ ([#127](https://github.com/browserbase/sdk-python/issues/127)) ([5236106](https://github.com/browserbase/sdk-python/commit/52361065d4547b06c44a07396e0679f588181053))
+* **internal:** reduce CI branch coverage ([1bd4d8b](https://github.com/browserbase/sdk-python/commit/1bd4d8bf088ac47c01a12048cb7b3c963d18eb4a))
+* **internal:** remove extra empty newlines ([#134](https://github.com/browserbase/sdk-python/issues/134)) ([2206050](https://github.com/browserbase/sdk-python/commit/22060504e0f57402decfff129778a472717e29e1))
+* **internal:** remove trailing character ([#145](https://github.com/browserbase/sdk-python/issues/145)) ([2b055d7](https://github.com/browserbase/sdk-python/commit/2b055d730b2313227a0193cfc2b95056d4731464))
+* **internal:** remove unused http client options forwarding ([#130](https://github.com/browserbase/sdk-python/issues/130)) ([c63a3bd](https://github.com/browserbase/sdk-python/commit/c63a3bdad3f35658d87d48bbd5e746a36228a8ab))
+* **internal:** slight transform perf improvement ([#147](https://github.com/browserbase/sdk-python/issues/147)) ([2d46582](https://github.com/browserbase/sdk-python/commit/2d46582e5bb55d3ca74c2a4191144743d5f0058b))
+* **internal:** update client tests ([#121](https://github.com/browserbase/sdk-python/issues/121)) ([862cd7e](https://github.com/browserbase/sdk-python/commit/862cd7efb4c694866ab385c5a70fd450b917f057))
+* **internal:** update pyright settings ([0f0e110](https://github.com/browserbase/sdk-python/commit/0f0e110388f893b86881aa67badc30af8e271b8a))
+* slight wording improvement in README ([#148](https://github.com/browserbase/sdk-python/issues/148)) ([c40603c](https://github.com/browserbase/sdk-python/commit/c40603cafa809128edeff23eca37db97dda8de54))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#128](https://github.com/browserbase/sdk-python/issues/128)) ([5e2932f](https://github.com/browserbase/sdk-python/commit/5e2932f5c13c19eb454116ffdce38863556feaf1))
+
 ## 1.2.0 (2025-02-11)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/browserbase/sdk-python/compare/v1.1.0...v1.2.0)
