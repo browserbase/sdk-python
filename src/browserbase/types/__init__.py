@@ -18,3 +18,4 @@ from .context_create_response import ContextCreateResponse as ContextCreateRespo
 from .context_update_response import ContextUpdateResponse as ContextUpdateResponse
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
+from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse

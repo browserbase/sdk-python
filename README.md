@@ -6,7 +6,7 @@ The Browserbase Python library provides convenient access to the Browserbase RES
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
@@ -89,6 +89,67 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from browserbase import Browserbase
+
+client = Browserbase()
+
+session = client.sessions.create(
+    project_id="projectId",
+    browser_settings={
+        "advanced_stealth": True,
+        "block_ads": True,
+        "context": {
+            "id": "id",
+            "persist": True,
+        },
+        "extension_id": "extensionId",
+        "fingerprint": {
+            "browsers": ["chrome"],
+            "devices": ["desktop"],
+            "http_version": "1",
+            "locales": ["string"],
+            "operating_systems": ["android"],
+            "screen": {
+                "max_height": 0,
+                "max_width": 0,
+                "min_height": 0,
+                "min_width": 0,
+            },
+        },
+        "log_session": True,
+        "record_session": True,
+        "solve_captchas": True,
+        "viewport": {
+            "height": 0,
+            "width": 0,
+        },
+    },
+)
+print(session.browser_settings)
+```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from browserbase import Browserbase
+
+client = Browserbase()
+
+client.extensions.create(
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
