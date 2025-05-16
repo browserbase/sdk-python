@@ -91,6 +91,8 @@ session = client.sessions.create(
     browser_settings={
         "advanced_stealth": True,
         "block_ads": True,
+        "captcha_image_selector": "captchaImageSelector",
+        "captcha_input_selector": "captchaInputSelector",
         "context": {
             "id": "id",
             "persist": True,
