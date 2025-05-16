@@ -1,6 +1,6 @@
 [project]
 name = "browserbase"
-version = "1.3.0"
+version = "1.4.0"
 description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -42,7 +42,7 @@ Repository = "https://github.com/browserbase/sdk-python"
 managed = true
 # version pins are in requirements-dev.lock
 dev-dependencies = [
-    "pyright>=1.1.359",
+    "pyright==1.1.399",
     "mypy",
     "respx",
     "pytest",
@@ -185,7 +185,7 @@ select = [
   "T201",
   "T203",
   # misuse of typing.TYPE_CHECKING
-  "TC004",
+  # "TC004", # fails lint
   # import rules
   "TID251",
 ]
