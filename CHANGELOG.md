@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.4.0 (2025-05-16)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/browserbase/sdk-python/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* **api:** api update ([d3b2ee1](https://github.com/browserbase/sdk-python/commit/d3b2ee1e3c69efbdcb2f0e53b4625e2c8a2a7430))
+
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([8feb502](https://github.com/browserbase/sdk-python/commit/8feb502c7e73e8abed43afae5a0526282c4f0dfe))
+* **pydantic v1:** more robust ModelField.annotation check ([5292730](https://github.com/browserbase/sdk-python/commit/5292730dd7b1585210d7ab8e640ed78a5dd9740a))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([ffe29f8](https://github.com/browserbase/sdk-python/commit/ffe29f8dc99d5e7462a0a9bbd488c368e836acdc))
+* **ci:** add timeout thresholds for CI jobs ([3ca4458](https://github.com/browserbase/sdk-python/commit/3ca4458cf31650ce8749c56bee4549811cadec1f))
+* **ci:** fix installation instructions ([99a7328](https://github.com/browserbase/sdk-python/commit/99a7328f22f6da3cd96d70b00c2a6fa0d4c82b37))
+* **ci:** only use depot for staging repos ([646f7d8](https://github.com/browserbase/sdk-python/commit/646f7d832f269d383a0da5fe5732a52ec10787b2))
+* **ci:** upload sdks to package manager ([ff18efd](https://github.com/browserbase/sdk-python/commit/ff18efdf051eabcb52863739942b652d86ed2231))
+* **internal:** avoid errors for isinstance checks on proxies ([b33d222](https://github.com/browserbase/sdk-python/commit/b33d222fd5fdd6eaaca62fb6eb6d9f878a01d31d))
+* **internal:** base client updates ([44f575e](https://github.com/browserbase/sdk-python/commit/44f575efd621315d9bd28e7921554980045af6ed))
+* **internal:** bump pyright version ([bb6bbd3](https://github.com/browserbase/sdk-python/commit/bb6bbd36b3b0fb7595bcc6bd9b25c0aafd6a08af))
+* **internal:** codegen related update ([9f4f8d1](https://github.com/browserbase/sdk-python/commit/9f4f8d1172d5c4b9fa36c8c97ab6e10958ff2959))
+* **internal:** fix list file params ([74b3df7](https://github.com/browserbase/sdk-python/commit/74b3df7160585d981ff5390b6f354926188aaa2a))
+* **internal:** import reformatting ([bba19e4](https://github.com/browserbase/sdk-python/commit/bba19e44eb67116740b27e1fea04abe06a97e4cd))
+* **internal:** minor formatting changes ([0c58843](https://github.com/browserbase/sdk-python/commit/0c58843c75075e3803c9a5a9790f48558a78e712))
+* **internal:** refactor retries to not use recursion ([4161fdb](https://github.com/browserbase/sdk-python/commit/4161fdbcf76a18deee8b790944369225fb4331ff))
+* **internal:** update models test ([5e5dc11](https://github.com/browserbase/sdk-python/commit/5e5dc11c53c60164829b145762818545cfe36f52))
+
 ## 1.3.0 (2025-04-15)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/browserbase/sdk-python/compare/v1.2.0...v1.3.0)
