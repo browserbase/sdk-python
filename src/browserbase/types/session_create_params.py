@@ -120,6 +120,18 @@ class BrowserSettings(TypedDict, total=False):
     block_ads: Annotated[bool, PropertyInfo(alias="blockAds")]
     """Enable or disable ad blocking in the browser. Defaults to `false`."""
 
+    captcha_image_selector: Annotated[str, PropertyInfo(alias="captchaImageSelector")]
+    """Custom selector for captcha image.
+
+    See [Custom Captcha Solving](/features/stealth-mode#custom-captcha-solving)
+    """
+
+    captcha_input_selector: Annotated[str, PropertyInfo(alias="captchaInputSelector")]
+    """Custom selector for captcha input.
+
+    See [Custom Captcha Solving](/features/stealth-mode#custom-captcha-solving)
+    """
+
     context: BrowserSettingsContext
 
     extension_id: Annotated[str, PropertyInfo(alias="extensionId")]
