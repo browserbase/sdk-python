@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.1 (2025-05-22)
+
+Full Changelog: [v1.4.0...v1.4.1](https://github.com/browserbase/sdk-python/compare/v1.4.0...v1.4.1)
+
+### Chores
+
+* **docs:** grammar improvements ([f32a9e2](https://github.com/browserbase/sdk-python/commit/f32a9e258a9b0b4d29c24137d5a7207907f00f9b))
+
 ## 1.4.0 (2025-05-16)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/browserbase/sdk-python/compare/v1.3.0...v1.4.0)
