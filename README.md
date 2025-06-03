@@ -101,37 +101,7 @@ client = Browserbase()
 
 session = client.sessions.create(
     project_id="projectId",
-    browser_settings={
-        "advanced_stealth": True,
-        "block_ads": True,
-        "captcha_image_selector": "captchaImageSelector",
-        "captcha_input_selector": "captchaInputSelector",
-        "context": {
-            "id": "id",
-            "persist": True,
-        },
-        "extension_id": "extensionId",
-        "fingerprint": {
-            "browsers": ["chrome"],
-            "devices": ["desktop"],
-            "http_version": "1",
-            "locales": ["string"],
-            "operating_systems": ["android"],
-            "screen": {
-                "max_height": 0,
-                "max_width": 0,
-                "min_height": 0,
-                "min_width": 0,
-            },
-        },
-        "log_session": True,
-        "record_session": True,
-        "solve_captchas": True,
-        "viewport": {
-            "height": 0,
-            "width": 0,
-        },
-    },
+    browser_settings={},
 )
 print(session.browser_settings)
 ```
