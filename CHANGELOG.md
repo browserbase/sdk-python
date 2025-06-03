@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.5.0 (2025-06-03)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/browserbase/sdk-python/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* **client:** add follow_redirects request option ([a8b0b5e](https://github.com/browserbase/sdk-python/commit/a8b0b5e4c6445e0e8c0d3673a090aabab09a50fd))
+
+
+### Chores
+
+* **docs:** grammar improvements ([f32a9e2](https://github.com/browserbase/sdk-python/commit/f32a9e258a9b0b4d29c24137d5a7207907f00f9b))
+* **docs:** remove reference to rye shell ([07d129a](https://github.com/browserbase/sdk-python/commit/07d129a04211037d123b06d36347741960e75323))
+* **docs:** remove unnecessary param examples ([62209dc](https://github.com/browserbase/sdk-python/commit/62209dcac034f40ac8b3b8a119e532201a227680))
+
 ## 1.4.0 (2025-05-16)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/browserbase/sdk-python/compare/v1.3.0...v1.4.0)
