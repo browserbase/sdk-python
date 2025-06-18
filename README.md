@@ -1,6 +1,6 @@
 # Browserbase Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/browserbase.svg)](https://pypi.org/project/browserbase/)
+[![PyPI version](<https://img.shields.io/pypi/v/browserbase.svg?label=pypi%20(stable)>)](https://pypi.org/project/browserbase/)
 
 The Browserbase Python library provides convenient access to the Browserbase REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
