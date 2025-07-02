@@ -6,7 +6,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SessionLiveURLs", "Page"]
+__all__ = ["SessionDebugResponse", "Page"]
 
 
 class Page(BaseModel):
@@ -23,7 +23,7 @@ class Page(BaseModel):
     url: str
 
 
-class SessionLiveURLs(BaseModel):
+class SessionDebugResponse(BaseModel):
     debugger_fullscreen_url: str = FieldInfo(alias="debuggerFullscreenUrl")
 
     debugger_url: str = FieldInfo(alias="debuggerUrl")

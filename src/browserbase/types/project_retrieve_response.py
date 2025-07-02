@@ -6,17 +6,21 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Extension"]
+__all__ = ["ProjectRetrieveResponse"]
 
 
-class Extension(BaseModel):
+class ProjectRetrieveResponse(BaseModel):
     id: str
+
+    concurrency: int
+    """The maximum number of sessions that this project can run concurrently."""
 
     created_at: datetime = FieldInfo(alias="createdAt")
 
-    file_name: str = FieldInfo(alias="fileName")
+    default_timeout: int = FieldInfo(alias="defaultTimeout")
 
-    project_id: str = FieldInfo(alias="projectId")
-    """The Project ID linked to the uploaded Extension."""
+    name: str
+
+    owner_id: str = FieldInfo(alias="ownerId")
 
     updated_at: datetime = FieldInfo(alias="updatedAt")

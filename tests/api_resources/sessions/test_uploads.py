@@ -20,7 +20,7 @@ class TestUploads:
     @parametrize
     def test_method_create(self, client: Browserbase) -> None:
         upload = client.sessions.uploads.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
@@ -28,7 +28,7 @@ class TestUploads:
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
         response = client.sessions.uploads.with_raw_response.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -40,7 +40,7 @@ class TestUploads:
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
         with client.sessions.uploads.with_streaming_response.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed
@@ -68,7 +68,7 @@ class TestAsyncUploads:
     @parametrize
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
         upload = await async_client.sessions.uploads.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
@@ -76,7 +76,7 @@ class TestAsyncUploads:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.uploads.with_raw_response.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -88,7 +88,7 @@ class TestAsyncUploads:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.uploads.with_streaming_response.create(
-            id="id",
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed

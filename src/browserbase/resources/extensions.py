@@ -18,7 +18,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.extension import Extension
+from ..types.extension_create_response import ExtensionCreateResponse
+from ..types.extension_retrieve_response import ExtensionRetrieveResponse
 
 __all__ = ["ExtensionsResource", "AsyncExtensionsResource"]
 
@@ -53,7 +54,7 @@ class ExtensionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Extension:
+    ) -> ExtensionCreateResponse:
         """
         Upload an Extension
 
@@ -79,7 +80,7 @@ class ExtensionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Extension,
+            cast_to=ExtensionCreateResponse,
         )
 
     def retrieve(
@@ -92,9 +93,9 @@ class ExtensionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Extension:
+    ) -> ExtensionRetrieveResponse:
         """
-        Extension
+        Get an Extension
 
         Args:
           extra_headers: Send extra headers
@@ -112,7 +113,7 @@ class ExtensionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Extension,
+            cast_to=ExtensionRetrieveResponse,
         )
 
     def delete(
@@ -127,7 +128,7 @@ class ExtensionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete Extension
+        Delete an Extension
 
         Args:
           extra_headers: Send extra headers
@@ -180,7 +181,7 @@ class AsyncExtensionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Extension:
+    ) -> ExtensionCreateResponse:
         """
         Upload an Extension
 
@@ -206,7 +207,7 @@ class AsyncExtensionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Extension,
+            cast_to=ExtensionCreateResponse,
         )
 
     async def retrieve(
@@ -219,9 +220,9 @@ class AsyncExtensionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Extension:
+    ) -> ExtensionRetrieveResponse:
         """
-        Extension
+        Get an Extension
 
         Args:
           extra_headers: Send extra headers
@@ -239,7 +240,7 @@ class AsyncExtensionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Extension,
+            cast_to=ExtensionRetrieveResponse,
         )
 
     async def delete(
@@ -254,7 +255,7 @@ class AsyncExtensionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete Extension
+        Delete an Extension
 
         Args:
           extra_headers: Send extra headers
