@@ -14,10 +14,10 @@ __all__ = [
     "BrowserSettingsFingerprint",
     "BrowserSettingsFingerprintScreen",
     "BrowserSettingsViewport",
-    "ProxiesUnionMember1",
-    "ProxiesUnionMember1BrowserbaseProxyConfig",
-    "ProxiesUnionMember1BrowserbaseProxyConfigGeolocation",
-    "ProxiesUnionMember1ExternalProxyConfig",
+    "ProxiesUnionMember0",
+    "ProxiesUnionMember0UnionMember0",
+    "ProxiesUnionMember0UnionMember0Geolocation",
+    "ProxiesUnionMember0UnionMember1",
 ]
 
 
@@ -42,7 +42,7 @@ class SessionCreateParams(TypedDict, total=False):
     Available on the Hobby Plan and above.
     """
 
-    proxies: Union[bool, Iterable[ProxiesUnionMember1]]
+    proxies: Union[Iterable[ProxiesUnionMember0], bool]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
@@ -74,13 +74,13 @@ class BrowserSettingsContext(TypedDict, total=False):
 
 
 class BrowserSettingsFingerprintScreen(TypedDict, total=False):
-    max_height: Annotated[int, PropertyInfo(alias="maxHeight")]
+    max_height: Required[Annotated[int, PropertyInfo(alias="maxHeight")]]
 
-    max_width: Annotated[int, PropertyInfo(alias="maxWidth")]
+    max_width: Required[Annotated[int, PropertyInfo(alias="maxWidth")]]
 
-    min_height: Annotated[int, PropertyInfo(alias="minHeight")]
+    min_height: Required[Annotated[int, PropertyInfo(alias="minHeight")]]
 
-    min_width: Annotated[int, PropertyInfo(alias="minWidth")]
+    min_width: Required[Annotated[int, PropertyInfo(alias="minWidth")]]
 
 
 class BrowserSettingsFingerprint(TypedDict, total=False):
@@ -91,26 +91,20 @@ class BrowserSettingsFingerprint(TypedDict, total=False):
     http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
 
     locales: List[str]
-    """
-    Full list of locales is available
-    [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language).
-    """
 
     operating_systems: Annotated[
         List[Literal["android", "ios", "linux", "macos", "windows"]], PropertyInfo(alias="operatingSystems")
     ]
-    """
-    Note: `operatingSystems` set to `ios` or `android` requires `devices` to include
-    `"mobile"`.
-    """
 
     screen: BrowserSettingsFingerprintScreen
 
 
 class BrowserSettingsViewport(TypedDict, total=False):
     height: int
+    """The height of the browser."""
 
     width: int
+    """The width of the browser."""
 
 
 class BrowserSettings(TypedDict, total=False):
@@ -141,10 +135,6 @@ class BrowserSettings(TypedDict, total=False):
     """
 
     fingerprint: BrowserSettingsFingerprint
-    """
-    See usage examples
-    [in the Stealth Mode page](/features/stealth-mode#fingerprinting).
-    """
 
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
@@ -158,7 +148,7 @@ class BrowserSettings(TypedDict, total=False):
     viewport: BrowserSettingsViewport
 
 
-class ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
+class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
     country: Required[str]
     """Country code in ISO 3166-1 alpha-2 format"""
 
@@ -169,7 +159,7 @@ class ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(TypedDict, total=Fals
     """US state code (2 characters). Must also specify US as the country. Optional."""
 
 
-class ProxiesUnionMember1BrowserbaseProxyConfig(TypedDict, total=False):
+class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
     type: Required[Literal["browserbase"]]
     """Type of proxy.
 
@@ -182,11 +172,11 @@ class ProxiesUnionMember1BrowserbaseProxyConfig(TypedDict, total=False):
     If omitted, defaults to all domains. Optional.
     """
 
-    geolocation: ProxiesUnionMember1BrowserbaseProxyConfigGeolocation
-    """Configuration for geolocation"""
+    geolocation: ProxiesUnionMember0UnionMember0Geolocation
+    """Geographic location for the proxy. Optional."""
 
 
-class ProxiesUnionMember1ExternalProxyConfig(TypedDict, total=False):
+class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     server: Required[str]
     """Server URL for external proxy. Required."""
 
@@ -206,6 +196,4 @@ class ProxiesUnionMember1ExternalProxyConfig(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-ProxiesUnionMember1: TypeAlias = Union[
-    ProxiesUnionMember1BrowserbaseProxyConfig, ProxiesUnionMember1ExternalProxyConfig
-]
+ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
