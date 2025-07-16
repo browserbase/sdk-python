@@ -74,13 +74,13 @@ class BrowserSettingsContext(TypedDict, total=False):
 
 
 class BrowserSettingsFingerprintScreen(TypedDict, total=False):
-    max_height: Required[Annotated[int, PropertyInfo(alias="maxHeight")]]
+    max_height: Annotated[int, PropertyInfo(alias="maxHeight")]
 
-    max_width: Required[Annotated[int, PropertyInfo(alias="maxWidth")]]
+    max_width: Annotated[int, PropertyInfo(alias="maxWidth")]
 
-    min_height: Required[Annotated[int, PropertyInfo(alias="minHeight")]]
+    min_height: Annotated[int, PropertyInfo(alias="minHeight")]
 
-    min_width: Required[Annotated[int, PropertyInfo(alias="minWidth")]]
+    min_width: Annotated[int, PropertyInfo(alias="minWidth")]
 
 
 class BrowserSettingsFingerprint(TypedDict, total=False):
@@ -135,6 +135,10 @@ class BrowserSettings(TypedDict, total=False):
     """
 
     fingerprint: BrowserSettingsFingerprint
+    """
+    See usage examples
+    [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
+    """
 
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
