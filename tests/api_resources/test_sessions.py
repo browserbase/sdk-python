@@ -26,24 +26,24 @@ class TestSessions:
     @parametrize
     def test_method_create(self, client: Browserbase) -> None:
         session = client.sessions.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         session = client.sessions.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
             browser_settings={
                 "advanced_stealth": True,
                 "block_ads": True,
                 "captcha_image_selector": "captchaImageSelector",
                 "captcha_input_selector": "captchaInputSelector",
                 "context": {
-                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "id": "id",
                     "persist": True,
                 },
-                "extension_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "extension_id": "extensionId",
                 "fingerprint": {
                     "browsers": ["chrome"],
                     "devices": ["desktop"],
@@ -65,7 +65,7 @@ class TestSessions:
                     "width": 0,
                 },
             },
-            extension_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            extension_id="extensionId",
             keep_alive=True,
             proxies=[
                 {
@@ -87,7 +87,7 @@ class TestSessions:
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -98,7 +98,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -111,14 +111,14 @@ class TestSessions:
     @parametrize
     def test_method_retrieve(self, client: Browserbase) -> None:
         session = client.sessions.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -129,7 +129,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -149,8 +149,8 @@ class TestSessions:
     @parametrize
     def test_method_update(self, client: Browserbase) -> None:
         session = client.sessions.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         )
         assert_matches_type(SessionUpdateResponse, session, path=["response"])
@@ -158,8 +158,8 @@ class TestSessions:
     @parametrize
     def test_raw_response_update(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         )
 
@@ -171,8 +171,8 @@ class TestSessions:
     @parametrize
     def test_streaming_response_update(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         ) as response:
             assert not response.is_closed
@@ -188,7 +188,7 @@ class TestSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sessions.with_raw_response.update(
                 id="",
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                project_id="projectId",
                 status="REQUEST_RELEASE",
             )
 
@@ -228,14 +228,14 @@ class TestSessions:
     @parametrize
     def test_method_debug(self, client: Browserbase) -> None:
         session = client.sessions.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(SessionDebugResponse, session, path=["response"])
 
     @parametrize
     def test_raw_response_debug(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -246,7 +246,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_debug(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -272,24 +272,24 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
             browser_settings={
                 "advanced_stealth": True,
                 "block_ads": True,
                 "captcha_image_selector": "captchaImageSelector",
                 "captcha_input_selector": "captchaInputSelector",
                 "context": {
-                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "id": "id",
                     "persist": True,
                 },
-                "extension_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "extension_id": "extensionId",
                 "fingerprint": {
                     "browsers": ["chrome"],
                     "devices": ["desktop"],
@@ -311,7 +311,7 @@ class TestAsyncSessions:
                     "width": 0,
                 },
             },
-            extension_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            extension_id="extensionId",
             keep_alive=True,
             proxies=[
                 {
@@ -333,7 +333,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -344,7 +344,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.create(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -357,14 +357,14 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -375,7 +375,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -395,8 +395,8 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_update(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         )
         assert_matches_type(SessionUpdateResponse, session, path=["response"])
@@ -404,8 +404,8 @@ class TestAsyncSessions:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         )
 
@@ -417,8 +417,8 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="id",
+            project_id="projectId",
             status="REQUEST_RELEASE",
         ) as response:
             assert not response.is_closed
@@ -434,7 +434,7 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.with_raw_response.update(
                 id="",
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                project_id="projectId",
                 status="REQUEST_RELEASE",
             )
 
@@ -474,14 +474,14 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_debug(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(SessionDebugResponse, session, path=["response"])
 
     @parametrize
     async def test_raw_response_debug(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -492,7 +492,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_debug(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.debug(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

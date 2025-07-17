@@ -26,11 +26,9 @@ class TestDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_list(self, client: Browserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         download = client.sessions.downloads.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert download.is_closed
         assert download.json() == {"foo": "bar"}
@@ -40,12 +38,10 @@ class TestDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_list(self, client: Browserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         download = client.sessions.downloads.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert download.is_closed is True
@@ -56,11 +52,9 @@ class TestDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_list(self, client: Browserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         with client.sessions.downloads.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as download:
             assert not download.is_closed
             assert download.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -88,11 +82,9 @@ class TestAsyncDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_list(self, async_client: AsyncBrowserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         download = await async_client.sessions.downloads.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert download.is_closed
         assert await download.json() == {"foo": "bar"}
@@ -102,12 +94,10 @@ class TestAsyncDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_list(self, async_client: AsyncBrowserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         download = await async_client.sessions.downloads.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert download.is_closed is True
@@ -118,11 +108,9 @@ class TestAsyncDownloads:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_list(self, async_client: AsyncBrowserbase, respx_mock: MockRouter) -> None:
-        respx_mock.get("/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads").mock(
-            return_value=httpx.Response(200, json={"foo": "bar"})
-        )
+        respx_mock.get("/v1/sessions/id/downloads").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         async with async_client.sessions.downloads.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as download:
             assert not download.is_closed
             assert download.http_request.headers.get("X-Stainless-Lang") == "python"

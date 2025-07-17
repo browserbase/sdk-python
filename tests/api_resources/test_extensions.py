@@ -51,14 +51,14 @@ class TestExtensions:
     @parametrize
     def test_method_retrieve(self, client: Browserbase) -> None:
         extension = client.extensions.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
         response = client.extensions.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -69,7 +69,7 @@ class TestExtensions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
         with client.extensions.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -89,14 +89,14 @@ class TestExtensions:
     @parametrize
     def test_method_delete(self, client: Browserbase) -> None:
         extension = client.extensions.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert extension is None
 
     @parametrize
     def test_raw_response_delete(self, client: Browserbase) -> None:
         response = client.extensions.with_raw_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -107,7 +107,7 @@ class TestExtensions:
     @parametrize
     def test_streaming_response_delete(self, client: Browserbase) -> None:
         with client.extensions.with_streaming_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,14 +164,14 @@ class TestAsyncExtensions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrowserbase) -> None:
         extension = await async_client.extensions.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.extensions.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -182,7 +182,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.extensions.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -202,14 +202,14 @@ class TestAsyncExtensions:
     @parametrize
     async def test_method_delete(self, async_client: AsyncBrowserbase) -> None:
         extension = await async_client.extensions.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert extension is None
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.extensions.with_raw_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -220,7 +220,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.extensions.with_streaming_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

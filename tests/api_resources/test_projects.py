@@ -20,14 +20,14 @@ class TestProjects:
     @parametrize
     def test_method_retrieve(self, client: Browserbase) -> None:
         project = client.projects.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
         response = client.projects.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
         with client.projects.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -83,14 +83,14 @@ class TestProjects:
     @parametrize
     def test_method_usage(self, client: Browserbase) -> None:
         project = client.projects.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     def test_raw_response_usage(self, client: Browserbase) -> None:
         response = client.projects.with_raw_response.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -101,7 +101,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_usage(self, client: Browserbase) -> None:
         with client.projects.with_streaming_response.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -127,14 +127,14 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrowserbase) -> None:
         project = await async_client.projects.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.projects.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -145,7 +145,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.projects.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -190,14 +190,14 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_usage(self, async_client: AsyncBrowserbase) -> None:
         project = await async_client.projects.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
         assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     async def test_raw_response_usage(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.projects.with_raw_response.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         )
 
         assert response.is_closed is True
@@ -208,7 +208,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_usage(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.projects.with_streaming_response.usage(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
