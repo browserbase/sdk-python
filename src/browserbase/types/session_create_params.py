@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, List, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
@@ -90,7 +91,7 @@ class BrowserSettingsFingerprint(TypedDict, total=False):
 
     http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
 
-    locales: List[str]
+    locales: SequenceNotStr[str]
 
     operating_systems: Annotated[
         List[Literal["android", "ios", "linux", "macos", "windows"]], PropertyInfo(alias="operatingSystems")
