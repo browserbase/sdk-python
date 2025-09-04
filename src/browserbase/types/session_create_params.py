@@ -144,6 +144,12 @@ class BrowserSettings(TypedDict, total=False):
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
 
+    os: Literal["windows", "mac", "linux", "mobile", "tablet"]
+    """Operating system for stealth mode.
+
+    Valid values: windows, mac, linux, mobile, tablet
+    """
+
     record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
     """Enable or disable session recording. Defaults to `true`."""
 
