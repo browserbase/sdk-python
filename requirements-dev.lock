@@ -39,6 +39,8 @@ exceptiongroup==1.2.2
     # via pytest
     # via trio
     # via trio-websocket
+execnet==2.1.1
+    # via pytest-xdist
 filelock==3.16.1
     # via virtualenv
 greenlet==3.1.1
@@ -89,17 +91,19 @@ pyee==12.0.0
     # via playwright
 pygments==2.18.0
     # via rich
+pyright==1.1.399
 pysocks==1.7.1
     # via urllib3
-pyright==1.1.399
 pytest==8.3.3
     # via pytest-asyncio
     # via pytest-base-url
     # via pytest-playwright
+    # via pytest-xdist
 pytest-asyncio==0.24.0
 pytest-base-url==2.1.0
     # via pytest-playwright
 pytest-playwright==0.5.2
+pytest-xdist==3.8.0
 python-dateutil==2.9.0.post0
     # via time-machine
 python-dotenv==1.0.1
