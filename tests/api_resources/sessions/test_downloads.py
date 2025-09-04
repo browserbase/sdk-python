@@ -73,6 +73,44 @@ class TestDownloads:
                 "",
             )
 
+    @parametrize
+    def test_method_delete(self, client: Browserbase) -> None:
+        download = client.sessions.downloads.delete(
+            "id",
+        )
+        assert download is None
+
+    @parametrize
+    def test_raw_response_delete(self, client: Browserbase) -> None:
+        response = client.sessions.downloads.with_raw_response.delete(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        download = response.parse()
+        assert download is None
+
+    @parametrize
+    def test_streaming_response_delete(self, client: Browserbase) -> None:
+        with client.sessions.downloads.with_streaming_response.delete(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            download = response.parse()
+            assert download is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_delete(self, client: Browserbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sessions.downloads.with_raw_response.delete(
+                "",
+            )
+
 
 class TestAsyncDownloads:
     parametrize = pytest.mark.parametrize(
@@ -126,5 +164,43 @@ class TestAsyncDownloads:
     async def test_path_params_list(self, async_client: AsyncBrowserbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.downloads.with_raw_response.list(
+                "",
+            )
+
+    @parametrize
+    async def test_method_delete(self, async_client: AsyncBrowserbase) -> None:
+        download = await async_client.sessions.downloads.delete(
+            "id",
+        )
+        assert download is None
+
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncBrowserbase) -> None:
+        response = await async_client.sessions.downloads.with_raw_response.delete(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        download = await response.parse()
+        assert download is None
+
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncBrowserbase) -> None:
+        async with async_client.sessions.downloads.with_streaming_response.delete(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            download = await response.parse()
+            assert download is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_delete(self, async_client: AsyncBrowserbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.sessions.downloads.with_raw_response.delete(
                 "",
             )

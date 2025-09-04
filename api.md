@@ -11,6 +11,7 @@ Methods:
 - <code title="post /v1/contexts">client.contexts.<a href="./src/browserbase/resources/contexts.py">create</a>(\*\*<a href="src/browserbase/types/context_create_params.py">params</a>) -> <a href="./src/browserbase/types/context_create_response.py">ContextCreateResponse</a></code>
 - <code title="get /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">retrieve</a>(id) -> <a href="./src/browserbase/types/context_retrieve_response.py">ContextRetrieveResponse</a></code>
 - <code title="put /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">update</a>(id) -> <a href="./src/browserbase/types/context_update_response.py">ContextUpdateResponse</a></code>
+- <code title="delete /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">delete</a>(id) -> None</code>
 
 # Extensions
 
@@ -67,6 +68,7 @@ Methods:
 Methods:
 
 - <code title="get /v1/sessions/{id}/downloads">client.sessions.downloads.<a href="./src/browserbase/resources/sessions/downloads.py">list</a>(id) -> BinaryAPIResponse</code>
+- <code title="delete /v1/sessions/{id}/downloads">client.sessions.downloads.<a href="./src/browserbase/resources/sessions/downloads.py">delete</a>(id) -> None</code>
 
 ## Logs
 

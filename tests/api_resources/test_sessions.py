@@ -58,6 +58,7 @@ class TestSessions:
                     },
                 },
                 "log_session": True,
+                "os": "windows",
                 "record_session": True,
                 "solve_captchas": True,
                 "viewport": {
@@ -304,6 +305,7 @@ class TestAsyncSessions:
                     },
                 },
                 "log_session": True,
+                "os": "windows",
                 "record_session": True,
                 "solve_captchas": True,
                 "viewport": {
