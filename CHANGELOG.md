@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0-alpha.1 (2025-09-05)
+
+Full Changelog: [v1.5.0-alpha.0...v1.5.0-alpha.1](https://github.com/browserbase/sdk-python/compare/v1.5.0-alpha.0...v1.5.0-alpha.1)
+
+### Features
+
+* **api:** api update ([3bdf24e](https://github.com/browserbase/sdk-python/commit/3bdf24e69fd14e6e488af830e6e5a7786c21640d))
+
+
+### Chores
+
+* **internal:** move mypy configurations to `pyproject.toml` file ([545938f](https://github.com/browserbase/sdk-python/commit/545938fde4ace7142c413f9e0ac25e3b9c717980))
+
 ## 1.5.0-alpha.0 (2025-09-05)
 
 Full Changelog: [v1.4.0...v1.5.0-alpha.0](https://github.com/browserbase/sdk-python/compare/v1.4.0...v1.5.0-alpha.0)
