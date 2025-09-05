@@ -10,7 +10,7 @@ from examples import (
     BROWSERBASE_PROJECT_ID,
     bb,
 )
-from browserbase.types import Extension, SessionCreateResponse
+from browserbase.types import SessionCreateResponse, ExtensionRetrieveResponse
 
 PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
 
@@ -47,11 +47,11 @@ def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> B
 
 def create_extension() -> str:
     zip_data = zip_extension(save_local=True)
-    extension: Extension = bb.extensions.create(file=("extension.zip", zip_data.getvalue()))
+    extension = bb.extensions.create(file=("extension.zip", zip_data.getvalue()))
     return extension.id
 
 
-def get_extension(id: str) -> Extension:
+def get_extension(id: str) -> ExtensionRetrieveResponse:
     return bb.extensions.retrieve(id)
 
 
