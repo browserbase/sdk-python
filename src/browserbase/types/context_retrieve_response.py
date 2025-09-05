@@ -6,10 +6,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Context"]
+__all__ = ["ContextRetrieveResponse"]
 
 
-class Context(BaseModel):
+class ContextRetrieveResponse(BaseModel):
     id: str
 
     created_at: datetime = FieldInfo(alias="createdAt")

@@ -1,6 +1,6 @@
 [project]
 name = "browserbase"
-version = "1.4.0"
+version = "1.5.0-alpha.0"
 description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Operating System :: OS Independent",
   "Operating System :: POSIX",
   "Operating System :: MacOS",
@@ -37,6 +38,8 @@ classifiers = [
 Homepage = "https://github.com/browserbase/sdk-python"
 Repository = "https://github.com/browserbase/sdk-python"
 
+[project.optional-dependencies]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
 
 [tool.rye]
 managed = true
@@ -55,6 +58,7 @@ dev-dependencies = [
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
     "nest_asyncio==1.6.0",
+    "pytest-xdist>=3.6.1",
     "python-dotenv",
     "playwright",
     "selenium",
@@ -134,7 +138,7 @@ replacement = '[\1](https://github.com/browserbase/sdk-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--tb=short"
+addopts = "--tb=short -n auto"
 xfail_strict = true
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
@@ -153,6 +157,7 @@ exclude = [
     "_dev",
     ".venv",
     ".nox",
+    ".git",
 ]
 
 reportImplicitOverride = true
@@ -164,7 +169,7 @@ reportPrivateUsage = false
 [tool.ruff]
 line-length = 120
 output-format = "grouped"
-target-version = "py37"
+target-version = "py38"
 
 [tool.ruff.format]
 docstring-code-format = true

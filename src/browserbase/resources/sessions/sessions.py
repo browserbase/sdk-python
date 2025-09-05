@@ -51,10 +51,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.session import Session
-from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
+from ...types.session_debug_response import SessionDebugResponse
 from ...types.session_create_response import SessionCreateResponse
+from ...types.session_update_response import SessionUpdateResponse
 from ...types.session_retrieve_response import SessionRetrieveResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
@@ -103,7 +103,7 @@ class SessionsResource(SyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
+        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
@@ -180,7 +180,7 @@ class SessionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionRetrieveResponse:
         """
-        Session
+        Get a Session
 
         Args:
           extra_headers: Send extra headers
@@ -213,8 +213,8 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
-        """Update Session
+    ) -> SessionUpdateResponse:
+        """Update a Session
 
         Args:
           project_id: The Project ID.
@@ -247,7 +247,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionUpdateResponse,
         )
 
     def list(
@@ -307,7 +307,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SessionLiveURLs:
+    ) -> SessionDebugResponse:
         """
         Session Live URLs
 
@@ -327,7 +327,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionLiveURLs,
+            cast_to=SessionDebugResponse,
         )
 
 
@@ -374,7 +374,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
         extension_id: str | NotGiven = NOT_GIVEN,
         keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | NotGiven = NOT_GIVEN,
+        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | NotGiven = NOT_GIVEN,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
         api_timeout: int | NotGiven = NOT_GIVEN,
         user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
@@ -451,7 +451,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SessionRetrieveResponse:
         """
-        Session
+        Get a Session
 
         Args:
           extra_headers: Send extra headers
@@ -484,8 +484,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
-        """Update Session
+    ) -> SessionUpdateResponse:
+        """Update a Session
 
         Args:
           project_id: The Project ID.
@@ -518,7 +518,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Session,
+            cast_to=SessionUpdateResponse,
         )
 
     async def list(
@@ -578,7 +578,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SessionLiveURLs:
+    ) -> SessionDebugResponse:
         """
         Session Live URLs
 
@@ -598,7 +598,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionLiveURLs,
+            cast_to=SessionDebugResponse,
         )
 
 

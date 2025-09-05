@@ -1,5 +1,79 @@
 # Changelog
 
+## 1.5.0-alpha.0 (2025-09-05)
+
+Full Changelog: [v1.4.0...v1.5.0-alpha.0](https://github.com/browserbase/sdk-python/compare/v1.4.0...v1.5.0-alpha.0)
+
+### Features
+
+* **api:** api update ([e94ddbd](https://github.com/browserbase/sdk-python/commit/e94ddbd8777b97d4e8ab193e1bf3eaad983ecec9))
+* **api:** api update ([28115fb](https://github.com/browserbase/sdk-python/commit/28115fb584336dbf5b08043ad8f9cf1d911240ea))
+* **api:** api update ([3209287](https://github.com/browserbase/sdk-python/commit/32092872a3d4d48824b4d77d517ffdb06470ad95))
+* **api:** api update ([f38e029](https://github.com/browserbase/sdk-python/commit/f38e02981ae0777cb3d922845902b2673dc832fa))
+* **api:** api update ([1d9f769](https://github.com/browserbase/sdk-python/commit/1d9f7694bc0d465ce758ddcec41359e9cd1a08ad))
+* **api:** api update ([d72f39f](https://github.com/browserbase/sdk-python/commit/d72f39fbe29342cfc77e9b224f2ad0a5a77aaae4))
+* **api:** api update ([6d449b3](https://github.com/browserbase/sdk-python/commit/6d449b3deb284a72528877a8729f4cf7a418275d))
+* **api:** api update ([8bd5f8b](https://github.com/browserbase/sdk-python/commit/8bd5f8bcca3a2e5baadfc06009546692e63eb744))
+* **api:** api update ([1ce99ef](https://github.com/browserbase/sdk-python/commit/1ce99efe89c1d0757ca3100cca8619faa4082f74))
+* **api:** api update ([1cbb849](https://github.com/browserbase/sdk-python/commit/1cbb8498bf70c15c001f620b821519216cbadd97))
+* **api:** manual updates ([5893fc6](https://github.com/browserbase/sdk-python/commit/5893fc6165cfd88378d6725317e30c7cb6faf8df))
+* **api:** manual updates ([074f06d](https://github.com/browserbase/sdk-python/commit/074f06d0dfb08554229348828afd2cc1defe94ee))
+* clean up environment call outs ([82c38c4](https://github.com/browserbase/sdk-python/commit/82c38c494a175c1b6b38bab3615916c30ba25d14))
+* **client:** add follow_redirects request option ([a8b0b5e](https://github.com/browserbase/sdk-python/commit/a8b0b5e4c6445e0e8c0d3673a090aabab09a50fd))
+* **client:** add support for aiohttp ([3516092](https://github.com/browserbase/sdk-python/commit/35160921e262f147cc723a754f14cfd9875603f5))
+* **client:** support file upload requests ([2f338f0](https://github.com/browserbase/sdk-python/commit/2f338f009e556ef9be05f49816b17cef138bda17))
+* improve future compat with pydantic v3 ([8b5256c](https://github.com/browserbase/sdk-python/commit/8b5256c801e1423a4daf6bf49de7509a32ebfde2))
+* **types:** replace List[str] with SequenceNotStr in params ([55083f6](https://github.com/browserbase/sdk-python/commit/55083f678b68020fae835af5cd58e0e5deea2888))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([85f597b](https://github.com/browserbase/sdk-python/commit/85f597b34d149138f1b5afdc52062cb131e3a30a))
+* **ci:** correct conditional ([a36b873](https://github.com/browserbase/sdk-python/commit/a36b87379b404613673720dd9f498ed76dfe5c3a))
+* **ci:** release-doctor — report correct token name ([61b97ff](https://github.com/browserbase/sdk-python/commit/61b97fff5ea92bade293c5f5f4a84b0d991375e7))
+* **client:** correctly parse binary response | stream ([9614c4c](https://github.com/browserbase/sdk-python/commit/9614c4c05bc57ea60100aec9a194aee7a39e701b))
+* **client:** don't send Content-Type header on GET requests ([c4c4185](https://github.com/browserbase/sdk-python/commit/c4c4185de32b28c09565b6fe84efd65fd411abb9))
+* fix extension types in playwright_extensions ([8b652e7](https://github.com/browserbase/sdk-python/commit/8b652e78be1493d03e13d2a116cbc6969a880e58))
+* **parsing:** correctly handle nested discriminated unions ([d020678](https://github.com/browserbase/sdk-python/commit/d0206786894ecfb22e0924edb8a227414b17788d))
+* **parsing:** ignore empty metadata ([118c4d4](https://github.com/browserbase/sdk-python/commit/118c4d41bda811d2d942793d8ab029b272c7a5c6))
+* **parsing:** parse extra field types ([c7ef875](https://github.com/browserbase/sdk-python/commit/c7ef87549e324fb06fab945e1754ef7b56b30031))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([e298407](https://github.com/browserbase/sdk-python/commit/e2984077537fd6dee0191329a083ad0ccf9fd76f))
+
+
+### Chores
+
+* **ci:** change upload type ([e42da7c](https://github.com/browserbase/sdk-python/commit/e42da7c1fed216ff2b15223c49f1111bc0ef16e5))
+* **ci:** enable for pull requests ([03a6db7](https://github.com/browserbase/sdk-python/commit/03a6db72e98bf1606bf68928b2ac5029cba088df))
+* **ci:** only run for pushes and fork pull requests ([c8cb51f](https://github.com/browserbase/sdk-python/commit/c8cb51f311f4d39863127fab189c95d84a186bc6))
+* **docs:** grammar improvements ([f32a9e2](https://github.com/browserbase/sdk-python/commit/f32a9e258a9b0b4d29c24137d5a7207907f00f9b))
+* **docs:** remove reference to rye shell ([07d129a](https://github.com/browserbase/sdk-python/commit/07d129a04211037d123b06d36347741960e75323))
+* **docs:** remove unnecessary param examples ([62209dc](https://github.com/browserbase/sdk-python/commit/62209dcac034f40ac8b3b8a119e532201a227680))
+* **internal:** add Sequence related utils ([34b0dd6](https://github.com/browserbase/sdk-python/commit/34b0dd6b4297fafc2bcb9e8243c8d3c2e2e435fc))
+* **internal:** bump pinned h11 dep ([5e3270d](https://github.com/browserbase/sdk-python/commit/5e3270da2e4f41efdd345d073a42d6791eb22a84))
+* **internal:** change ci workflow machines ([14c0ac4](https://github.com/browserbase/sdk-python/commit/14c0ac49a6d9d42f5401a5c24ddb8586b3998fb2))
+* **internal:** codegen related update ([f979aff](https://github.com/browserbase/sdk-python/commit/f979aff605c0d74efb561e0b169ad39b486ab5a0))
+* **internal:** codegen related update ([12de9f3](https://github.com/browserbase/sdk-python/commit/12de9f324fbb40bec91cd7c6b16af1440c4f7373))
+* **internal:** codegen related update ([c4157cb](https://github.com/browserbase/sdk-python/commit/c4157cb8470b1d0ca67e6757f4fe9146a630cc82))
+* **internal:** codegen related update ([ccb2c95](https://github.com/browserbase/sdk-python/commit/ccb2c95002bb6a38e1eb8b9a84e4a335d5ee1a13))
+* **internal:** fix ruff target version ([e6a3df4](https://github.com/browserbase/sdk-python/commit/e6a3df40564b4ba3d23514e0b42221010d465bf6))
+* **internal:** update comment in script ([a7aec17](https://github.com/browserbase/sdk-python/commit/a7aec17c02632684dfeb7759dd6a5322efe092ce))
+* **internal:** update conftest.py ([5d3a2b1](https://github.com/browserbase/sdk-python/commit/5d3a2b1906ca5fca5c84c6d6684a8a62b6700479))
+* **internal:** update pyright exclude list ([33ba4b4](https://github.com/browserbase/sdk-python/commit/33ba4b47ddeb8c0aa19a11f35a7cea9aa9a0966d))
+* **package:** mark python 3.13 as supported ([2450b8e](https://github.com/browserbase/sdk-python/commit/2450b8eb2349adde689febd09269915d41e7a590))
+* **project:** add settings file for vscode ([a406241](https://github.com/browserbase/sdk-python/commit/a4062413b2fce397d59ea9ceaec7ed0565880fe2))
+* **readme:** fix version rendering on pypi ([a8afe1a](https://github.com/browserbase/sdk-python/commit/a8afe1a67c48080ef202cac88da9b5d59534799a))
+* **readme:** update badges ([869a3f4](https://github.com/browserbase/sdk-python/commit/869a3f4dd7e6f19225b697aeee89ce98a2174c0a))
+* **tests:** add tests for httpx client instantiation & proxies ([9c5d88c](https://github.com/browserbase/sdk-python/commit/9c5d88cb4cbbda5aa618cba2f5217bacd4a228cc))
+* **tests:** run tests in parallel ([94308de](https://github.com/browserbase/sdk-python/commit/94308dea065f54268145b175a13e0dbfd2a9cc81))
+* **tests:** skip some failing tests on the latest python versions ([7bc40f0](https://github.com/browserbase/sdk-python/commit/7bc40f068d290a479a0d4070ef54e8f8c4ef598d))
+* update @stainless-api/prism-cli to v5.15.0 ([b48933b](https://github.com/browserbase/sdk-python/commit/b48933b2f68eafaa554662eb7f41bf960a74d8b6))
+* update github action ([d57dc03](https://github.com/browserbase/sdk-python/commit/d57dc0398b083556ed7ceee265efcf282062005d))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([4bbda56](https://github.com/browserbase/sdk-python/commit/4bbda56cdb4adf677f67011f42f5c3e324a5f60e))
+
 ## 1.4.0 (2025-05-16)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/browserbase/sdk-python/compare/v1.3.0...v1.4.0)

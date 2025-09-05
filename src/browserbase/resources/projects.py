@@ -14,9 +14,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.project import Project
-from ..types.project_usage import ProjectUsage
 from ..types.project_list_response import ProjectListResponse
+from ..types.project_usage_response import ProjectUsageResponse
+from ..types.project_retrieve_response import ProjectRetrieveResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -51,9 +51,9 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Project:
+    ) -> ProjectRetrieveResponse:
         """
-        Project
+        Get a Project
 
         Args:
           extra_headers: Send extra headers
@@ -71,7 +71,7 @@ class ProjectsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Project,
+            cast_to=ProjectRetrieveResponse,
         )
 
     def list(
@@ -84,7 +84,7 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectListResponse:
-        """List projects"""
+        """List Projects"""
         return self._get(
             "/v1/projects",
             options=make_request_options(
@@ -103,9 +103,9 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUsage:
+    ) -> ProjectUsageResponse:
         """
-        Project Usage
+        Get Project Usage
 
         Args:
           extra_headers: Send extra headers
@@ -123,7 +123,7 @@ class ProjectsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectUsage,
+            cast_to=ProjectUsageResponse,
         )
 
 
@@ -157,9 +157,9 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Project:
+    ) -> ProjectRetrieveResponse:
         """
-        Project
+        Get a Project
 
         Args:
           extra_headers: Send extra headers
@@ -177,7 +177,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Project,
+            cast_to=ProjectRetrieveResponse,
         )
 
     async def list(
@@ -190,7 +190,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectListResponse:
-        """List projects"""
+        """List Projects"""
         return await self._get(
             "/v1/projects",
             options=make_request_options(
@@ -209,9 +209,9 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUsage:
+    ) -> ProjectUsageResponse:
         """
-        Project Usage
+        Get Project Usage
 
         Args:
           extra_headers: Send extra headers
@@ -229,7 +229,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectUsage,
+            cast_to=ProjectUsageResponse,
         )
 
 

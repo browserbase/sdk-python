@@ -9,7 +9,11 @@ import pytest
 
 from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
-from browserbase.types import Context, ContextCreateResponse, ContextUpdateResponse
+from browserbase.types import (
+    ContextCreateResponse,
+    ContextUpdateResponse,
+    ContextRetrieveResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -53,7 +57,7 @@ class TestContexts:
         context = client.contexts.retrieve(
             "id",
         )
-        assert_matches_type(Context, context, path=["response"])
+        assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
@@ -64,7 +68,7 @@ class TestContexts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         context = response.parse()
-        assert_matches_type(Context, context, path=["response"])
+        assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
@@ -75,7 +79,7 @@ class TestContexts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             context = response.parse()
-            assert_matches_type(Context, context, path=["response"])
+            assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -126,7 +130,9 @@ class TestContexts:
 
 
 class TestAsyncContexts:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
@@ -164,7 +170,7 @@ class TestAsyncContexts:
         context = await async_client.contexts.retrieve(
             "id",
         )
-        assert_matches_type(Context, context, path=["response"])
+        assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -175,7 +181,7 @@ class TestAsyncContexts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         context = await response.parse()
-        assert_matches_type(Context, context, path=["response"])
+        assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -186,7 +192,7 @@ class TestAsyncContexts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             context = await response.parse()
-            assert_matches_type(Context, context, path=["response"])
+            assert_matches_type(ContextRetrieveResponse, context, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

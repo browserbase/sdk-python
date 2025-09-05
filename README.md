@@ -1,6 +1,7 @@
 # Browserbase Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/browserbase.svg)](https://pypi.org/project/browserbase/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/browserbase.svg?label=pypi%20(stable))](https://pypi.org/project/browserbase/)
 
 The Browserbase Python library provides convenient access to the Browserbase REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -16,7 +17,7 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 
 ```sh
 # install from PyPI
-pip install browserbase
+pip install --pre browserbase
 ```
 
 ## Usage
@@ -81,6 +82,39 @@ rye run example playwright_basic # replace with the example you want to run
 > [!NOTE]
 > Make sure you have a `.env` file that matches the [.env.example](.env.example) file in the root of this repository.
 
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install --pre browserbase[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import asyncio
+from browserbase import DefaultAioHttpClient
+from browserbase import AsyncBrowserbase
+
+
+async def main() -> None:
+    async with AsyncBrowserbase(
+        api_key="My API Key",
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        session = await client.sessions.create(
+            project_id="your_project_id",
+        )
+        print(session.id)
+
+
+asyncio.run(main())
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
@@ -101,37 +135,7 @@ client = Browserbase()
 
 session = client.sessions.create(
     project_id="projectId",
-    browser_settings={
-        "advanced_stealth": True,
-        "block_ads": True,
-        "captcha_image_selector": "captchaImageSelector",
-        "captcha_input_selector": "captchaInputSelector",
-        "context": {
-            "id": "id",
-            "persist": True,
-        },
-        "extension_id": "extensionId",
-        "fingerprint": {
-            "browsers": ["chrome"],
-            "devices": ["desktop"],
-            "http_version": "1",
-            "locales": ["string"],
-            "operating_systems": ["android"],
-            "screen": {
-                "max_height": 0,
-                "max_width": 0,
-                "min_height": 0,
-                "min_width": 0,
-            },
-        },
-        "log_session": True,
-        "record_session": True,
-        "solve_captchas": True,
-        "viewport": {
-            "height": 0,
-            "width": 0,
-        },
-    },
+    browser_settings={},
 )
 print(session.browser_settings)
 ```
@@ -222,7 +226,7 @@ client.with_options(max_retries=5).sessions.create(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from browserbase import Browserbase

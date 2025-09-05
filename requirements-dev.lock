@@ -10,6 +10,13 @@
 #   universal: false
 
 -e file:.
+aiohappyeyeballs==2.6.1
+    # via aiohttp
+aiohttp==3.12.15
+    # via browserbase
+    # via httpx-aiohttp
+aiosignal==1.4.0
+    # via aiohttp
 annotated-types==0.7.0
     # via pydantic
 anyio==4.6.2.post1
@@ -17,7 +24,10 @@ anyio==4.6.2.post1
     # via httpx
 argcomplete==3.5.1
     # via nox
+async-timeout==5.0.1
+    # via aiohttp
 attrs==24.2.0
+    # via aiohttp
     # via outcome
     # via trio
 certifi==2024.8.30
@@ -39,8 +49,13 @@ exceptiongroup==1.2.2
     # via pytest
     # via trio
     # via trio-websocket
+execnet==2.1.1
+    # via pytest-xdist
 filelock==3.16.1
     # via virtualenv
+frozenlist==1.7.0
+    # via aiohttp
+    # via aiosignal
 greenlet==3.1.1
     # via playwright
 h11==0.14.0
@@ -50,12 +65,16 @@ httpcore==1.0.6
     # via httpx
 httpx==0.28.1
     # via browserbase
+    # via httpx-aiohttp
     # via respx
+httpx-aiohttp==0.1.8
+    # via browserbase
 idna==3.10
     # via anyio
     # via httpx
     # via requests
     # via trio
+    # via yarl
 importlib-metadata==8.5.0
 iniconfig==2.0.0
     # via pytest
@@ -63,6 +82,9 @@ markdown-it-py==3.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
+multidict==6.6.4
+    # via aiohttp
+    # via yarl
 mypy==1.14.1
 mypy-extensions==1.0.0
     # via mypy
@@ -81,6 +103,9 @@ playwright==1.48.0
     # via pytest-playwright
 pluggy==1.5.0
     # via pytest
+propcache==0.3.2
+    # via aiohttp
+    # via yarl
 pydantic==2.10.3
     # via browserbase
 pydantic-core==2.27.1
@@ -89,17 +114,19 @@ pyee==12.0.0
     # via playwright
 pygments==2.18.0
     # via rich
+pyright==1.1.399
 pysocks==1.7.1
     # via urllib3
-pyright==1.1.399
 pytest==8.3.3
     # via pytest-asyncio
     # via pytest-base-url
     # via pytest-playwright
+    # via pytest-xdist
 pytest-asyncio==0.24.0
 pytest-base-url==2.1.0
     # via pytest-playwright
 pytest-playwright==0.5.2
+pytest-xdist==3.8.0
 python-dateutil==2.9.0.post0
     # via time-machine
 python-dotenv==1.0.1
@@ -132,8 +159,10 @@ trio==0.27.0
 trio-websocket==0.11.1
     # via selenium
 typing-extensions==4.12.2
+    # via aiosignal
     # via anyio
     # via browserbase
+    # via multidict
     # via mypy
     # via pydantic
     # via pydantic-core
@@ -150,5 +179,7 @@ websocket-client==1.8.0
     # via selenium
 wsproto==1.2.0
     # via trio-websocket
+yarl==1.20.1
+    # via aiohttp
 zipp==3.20.2
     # via importlib-metadata
