@@ -141,6 +141,9 @@ class BrowserSettings(TypedDict, total=False):
     [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
     """
 
+    headful: bool
+    """[NOT IN DOCS] Enable or disable headful mode. Defaults to `false`."""
+
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
 
