@@ -79,7 +79,6 @@ class TestSessions:
                     },
                 }
             ],
-            proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             region="us-west-2",
             api_timeout=60,
             user_metadata={"foo": "bar"},
@@ -327,7 +326,6 @@ class TestAsyncSessions:
                     },
                 }
             ],
-            proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             region="us-west-2",
             api_timeout=60,
             user_metadata={"foo": "bar"},

@@ -104,7 +104,6 @@ class SessionsResource(SyncAPIResource):
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
-        proxy_settings: session_create_params.ProxySettings | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
         api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
@@ -132,8 +131,6 @@ class SessionsResource(SyncAPIResource):
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
 
-          proxy_settings: [NOT IN DOCS] Supplementary proxy settings. Optional.
-
           region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
@@ -159,7 +156,6 @@ class SessionsResource(SyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
-                    "proxy_settings": proxy_settings,
                     "region": region,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
@@ -379,7 +375,6 @@ class AsyncSessionsResource(AsyncAPIResource):
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
-        proxy_settings: session_create_params.ProxySettings | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
         api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
@@ -407,8 +402,6 @@ class AsyncSessionsResource(AsyncAPIResource):
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
 
-          proxy_settings: [NOT IN DOCS] Supplementary proxy settings. Optional.
-
           region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
@@ -434,7 +427,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
-                    "proxy_settings": proxy_settings,
                     "region": region,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
