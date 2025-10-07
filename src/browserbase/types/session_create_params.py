@@ -19,7 +19,6 @@ __all__ = [
     "ProxiesUnionMember0UnionMember0",
     "ProxiesUnionMember0UnionMember0Geolocation",
     "ProxiesUnionMember0UnionMember1",
-    "ProxySettings",
 ]
 
 
@@ -49,9 +48,6 @@ class SessionCreateParams(TypedDict, total=False):
 
     Can be true for default proxy, or an array of proxy configurations.
     """
-
-    proxy_settings: Annotated[ProxySettings, PropertyInfo(alias="proxySettings")]
-    """[NOT IN DOCS] Supplementary proxy settings. Optional."""
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
@@ -212,8 +208,3 @@ class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
 
 
 ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
-
-
-class ProxySettings(TypedDict, total=False):
-    ca_certificates: Required[Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]]
-    """[NOT IN DOCS] The TLS certificate IDs to trust. Optional."""
