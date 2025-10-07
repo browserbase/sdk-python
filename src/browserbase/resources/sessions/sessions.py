@@ -24,7 +24,7 @@ from .uploads import (
     UploadsResourceWithStreamingResponse,
     AsyncUploadsResourceWithStreamingResponse,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .downloads import (
@@ -100,19 +100,20 @@ class SessionsResource(SyncAPIResource):
         self,
         *,
         project_id: str,
-        browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
-        extension_id: str | NotGiven = NOT_GIVEN,
-        keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | NotGiven = NOT_GIVEN,
-        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
-        api_timeout: int | NotGiven = NOT_GIVEN,
-        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        browser_settings: session_create_params.BrowserSettings | Omit = omit,
+        extension_id: str | Omit = omit,
+        keep_alive: bool | Omit = omit,
+        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
+        proxy_settings: session_create_params.ProxySettings | Omit = omit,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
+        api_timeout: int | Omit = omit,
+        user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
         """Create a Session
 
@@ -130,6 +131,8 @@ class SessionsResource(SyncAPIResource):
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
+
+          proxy_settings: [NOT IN DOCS] Supplementary proxy settings. Optional.
 
           region: The region where the Session should run.
 
@@ -156,6 +159,7 @@ class SessionsResource(SyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
+                    "proxy_settings": proxy_settings,
                     "region": region,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
@@ -177,7 +181,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveResponse:
         """
         Get a Session
@@ -212,7 +216,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionUpdateResponse:
         """Update a Session
 
@@ -253,14 +257,14 @@ class SessionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        q: str | NotGiven = NOT_GIVEN,
-        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
+        q: str | Omit = omit,
+        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionListResponse:
         """List Sessions
 
@@ -306,7 +310,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionDebugResponse:
         """
         Session Live URLs
@@ -371,19 +375,20 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         *,
         project_id: str,
-        browser_settings: session_create_params.BrowserSettings | NotGiven = NOT_GIVEN,
-        extension_id: str | NotGiven = NOT_GIVEN,
-        keep_alive: bool | NotGiven = NOT_GIVEN,
-        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | NotGiven = NOT_GIVEN,
-        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | NotGiven = NOT_GIVEN,
-        api_timeout: int | NotGiven = NOT_GIVEN,
-        user_metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        browser_settings: session_create_params.BrowserSettings | Omit = omit,
+        extension_id: str | Omit = omit,
+        keep_alive: bool | Omit = omit,
+        proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
+        proxy_settings: session_create_params.ProxySettings | Omit = omit,
+        region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
+        api_timeout: int | Omit = omit,
+        user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
         """Create a Session
 
@@ -401,6 +406,8 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           proxies: Proxy configuration. Can be true for default proxy, or an array of proxy
               configurations.
+
+          proxy_settings: [NOT IN DOCS] Supplementary proxy settings. Optional.
 
           region: The region where the Session should run.
 
@@ -427,6 +434,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "proxies": proxies,
+                    "proxy_settings": proxy_settings,
                     "region": region,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
@@ -448,7 +456,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveResponse:
         """
         Get a Session
@@ -483,7 +491,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionUpdateResponse:
         """Update a Session
 
@@ -524,14 +532,14 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        q: str | NotGiven = NOT_GIVEN,
-        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | NotGiven = NOT_GIVEN,
+        q: str | Omit = omit,
+        status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionListResponse:
         """List Sessions
 
@@ -577,7 +585,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionDebugResponse:
         """
         Session Live URLs
