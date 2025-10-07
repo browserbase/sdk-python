@@ -105,9 +105,9 @@ pluggy==1.5.0
 propcache==0.3.2
     # via aiohttp
     # via yarl
-pydantic==2.10.3
+pydantic==2.11.9
     # via browserbase
-pydantic-core==2.27.1
+pydantic-core==2.33.2
     # via pydantic
 pyee==12.0.0
     # via playwright
@@ -167,6 +167,9 @@ typing-extensions==4.12.2
     # via pydantic-core
     # via pyee
     # via pyright
+    # via typing-inspection
+typing-inspection==0.4.1
+    # via pydantic
     # via rich
     # via selenium
 urllib3==2.2.3
