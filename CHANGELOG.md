@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.5.0-alpha.1 (2025-10-07)
+
+Full Changelog: [v1.5.0-alpha.0...v1.5.0-alpha.1](https://github.com/browserbase/sdk-python/compare/v1.5.0-alpha.0...v1.5.0-alpha.1)
+
+### Features
+
+* **api:** api update ([3bdf24e](https://github.com/browserbase/sdk-python/commit/3bdf24e69fd14e6e488af830e6e5a7786c21640d))
+* **api:** manual updates ([99b1cfb](https://github.com/browserbase/sdk-python/commit/99b1cfb41a51af014f5c350f0850331cd73abf08))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([6915700](https://github.com/browserbase/sdk-python/commit/69157006cc0df8f9e5effd0f53d79df88fe14e7d))
+* **internal:** move mypy configurations to `pyproject.toml` file ([545938f](https://github.com/browserbase/sdk-python/commit/545938fde4ace7142c413f9e0ac25e3b9c717980))
+* **internal:** update pydantic dependency ([4dcad8e](https://github.com/browserbase/sdk-python/commit/4dcad8e96f1220e79f3e9b5cdee2e19dfb5a1e11))
+* **tests:** simplify `get_platform` test ([6421017](https://github.com/browserbase/sdk-python/commit/64210177c60ca05c5d0eead33c3ecee3f4d18718))
+* **types:** change optional parameter type from NotGiven to Omit ([a46d293](https://github.com/browserbase/sdk-python/commit/a46d293766d0eb89b93739af0fbbd038eea083bd))
+
 ## 1.5.0-alpha.0 (2025-09-05)
 
 Full Changelog: [v1.4.0...v1.5.0-alpha.0](https://github.com/browserbase/sdk-python/compare/v1.4.0...v1.5.0-alpha.0)
