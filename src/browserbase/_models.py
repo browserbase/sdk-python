@@ -90,7 +90,7 @@ class BaseModel(pydantic.BaseModel):
             return self.__fields_set__  # type: ignore
 
         class Config(pydantic.BaseConfig):  # pyright: ignore[reportDeprecated]
-            extra: Any = pydantic.Extra.ignore  # type: ignore
+            extra: Any = pydantic.Extra.allow  # type: ignore
     else:
         model_config: ClassVar[ConfigDict] = ConfigDict(
             extra="ignore", defer_build=coerce_boolean(os.environ.get("DEFER_PYDANTIC_BUILD", "true"))
