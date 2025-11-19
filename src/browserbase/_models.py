@@ -91,7 +91,7 @@ class BaseModel(pydantic.BaseModel):
             return self.__fields_set__  # type: ignore
 
         class Config(pydantic.BaseConfig):  # pyright: ignore[reportDeprecated]
-            extra: Any = pydantic.Extra.allow  # type: ignore
+            extra: Any = pydantic.Extra.ignore  # type: ignore
     else:
         model_config: ClassVar[ConfigDict] = ConfigDict(
             extra="ignore", defer_build=coerce_boolean(os.environ.get("DEFER_PYDANTIC_BUILD", "true"))
@@ -209,18 +209,28 @@ class BaseModel(pydantic.BaseModel):
             else:
                 fields_values[name] = field_get_default(field)
 
+        # Get the extra configuration to determine if we should include extra fields
+        config = get_model_config(__cls)
+        if PYDANTIC_V1:
+            extra_config = getattr(config, 'extra', None)
+            should_include_extras = extra_config != pydantic.Extra.ignore
+        else:
+            extra_config = config.get('extra') if isinstance(config, dict) else None
+            should_include_extras = extra_config != 'ignore'
+
         extra_field_type = _get_extra_fields_type(__cls)
 
         _extra = {}
-        for key, value in values.items():
-            if key not in model_fields:
-                parsed = construct_type(value=value, type_=extra_field_type) if extra_field_type is not None else value
+        if should_include_extras:
+            for key, value in values.items():
+                if key not in model_fields:
+                    parsed = construct_type(value=value, type_=extra_field_type) if extra_field_type is not None else value
 
-                if PYDANTIC_V1:
-                    _fields_set.add(key)
-                    fields_values[key] = parsed
-                else:
-                    _extra[key] = parsed
+                    if PYDANTIC_V1:
+                        _fields_set.add(key)
+                        fields_values[key] = parsed
+                    else:
+                        _extra[key] = parsed
 
         object.__setattr__(m, "__dict__", fields_values)
 
