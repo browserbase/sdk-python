@@ -96,6 +96,7 @@ pip install --pre browserbase[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from browserbase import DefaultAioHttpClient
 from browserbase import AsyncBrowserbase
@@ -103,7 +104,7 @@ from browserbase import AsyncBrowserbase
 
 async def main() -> None:
     async with AsyncBrowserbase(
-        api_key="My API Key",
+        api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         session = await client.sessions.create(
