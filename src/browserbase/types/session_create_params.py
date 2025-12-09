@@ -85,6 +85,10 @@ class BrowserSettingsFingerprintScreen(TypedDict, total=False):
 
 
 class BrowserSettingsFingerprint(TypedDict, total=False):
+    """
+    See usage examples [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
+    """
+
     browsers: List[Literal["chrome", "edge", "firefox", "safari"]]
 
     devices: List[Literal["desktop", "mobile"]]
@@ -160,6 +164,8 @@ class BrowserSettings(TypedDict, total=False):
 
 
 class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
+    """Geographic location for the proxy. Optional."""
+
     country: Required[str]
     """Country code in ISO 3166-1 alpha-2 format"""
 
