@@ -4,10 +4,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["ProjectUsageResponse"]
+__all__ = ["ProjectUsage"]
 
 
-class ProjectUsageResponse(BaseModel):
+class ProjectUsage(BaseModel):
     browser_minutes: int = FieldInfo(alias="browserMinutes")
 
     proxy_bytes: int = FieldInfo(alias="proxyBytes")

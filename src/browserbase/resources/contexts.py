@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import context_create_params
-from .._types import Body, Query, Headers, NotGiven, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -16,9 +16,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.context import Context
 from ..types.context_create_response import ContextCreateResponse
 from ..types.context_update_response import ContextUpdateResponse
-from ..types.context_retrieve_response import ContextRetrieveResponse
 
 __all__ = ["ContextsResource", "AsyncContextsResource"]
 
@@ -46,7 +46,7 @@ class ContextsResource(SyncAPIResource):
     def create(
         self,
         *,
-        project_id: str,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -89,9 +89,9 @@ class ContextsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ContextRetrieveResponse:
+    ) -> Context:
         """
-        Get a Context
+        Context
 
         Args:
           extra_headers: Send extra headers
@@ -109,7 +109,7 @@ class ContextsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContextRetrieveResponse,
+            cast_to=Context,
         )
 
     def update(
@@ -124,7 +124,7 @@ class ContextsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ContextUpdateResponse:
         """
-        Update a Context
+        Update Context
 
         Args:
           extra_headers: Send extra headers
@@ -143,6 +143,40 @@ class ContextsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ContextUpdateResponse,
+        )
+
+    def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Delete Context
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/v1/contexts/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
 
@@ -169,7 +203,7 @@ class AsyncContextsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        project_id: str,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -212,9 +246,9 @@ class AsyncContextsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ContextRetrieveResponse:
+    ) -> Context:
         """
-        Get a Context
+        Context
 
         Args:
           extra_headers: Send extra headers
@@ -232,7 +266,7 @@ class AsyncContextsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContextRetrieveResponse,
+            cast_to=Context,
         )
 
     async def update(
@@ -247,7 +281,7 @@ class AsyncContextsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ContextUpdateResponse:
         """
-        Update a Context
+        Update Context
 
         Args:
           extra_headers: Send extra headers
@@ -268,6 +302,40 @@ class AsyncContextsResource(AsyncAPIResource):
             cast_to=ContextUpdateResponse,
         )
 
+    async def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Delete Context
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/v1/contexts/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class ContextsResourceWithRawResponse:
     def __init__(self, contexts: ContextsResource) -> None:
@@ -281,6 +349,9 @@ class ContextsResourceWithRawResponse:
         )
         self.update = to_raw_response_wrapper(
             contexts.update,
+        )
+        self.delete = to_raw_response_wrapper(
+            contexts.delete,
         )
 
 
@@ -297,6 +368,9 @@ class AsyncContextsResourceWithRawResponse:
         self.update = async_to_raw_response_wrapper(
             contexts.update,
         )
+        self.delete = async_to_raw_response_wrapper(
+            contexts.delete,
+        )
 
 
 class ContextsResourceWithStreamingResponse:
@@ -312,6 +386,9 @@ class ContextsResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             contexts.update,
         )
+        self.delete = to_streamed_response_wrapper(
+            contexts.delete,
+        )
 
 
 class AsyncContextsResourceWithStreamingResponse:
@@ -326,4 +403,7 @@ class AsyncContextsResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             contexts.update,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            contexts.delete,
         )
