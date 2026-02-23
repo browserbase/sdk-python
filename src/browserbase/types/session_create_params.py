@@ -19,16 +19,11 @@ __all__ = [
     "ProxiesUnionMember0UnionMember0",
     "ProxiesUnionMember0UnionMember0Geolocation",
     "ProxiesUnionMember0UnionMember1",
+    "ProxiesUnionMember0UnionMember2",
 ]
 
 
 class SessionCreateParams(TypedDict, total=False):
-    project_id: Required[Annotated[str, PropertyInfo(alias="projectId")]]
-    """The Project ID.
-
-    Can be found in [Settings](https://www.browserbase.com/settings).
-    """
-
     browser_settings: Annotated[BrowserSettings, PropertyInfo(alias="browserSettings")]
 
     extension_id: Annotated[str, PropertyInfo(alias="extensionId")]
@@ -41,6 +36,12 @@ class SessionCreateParams(TypedDict, total=False):
     """Set to true to keep the session alive even after disconnections.
 
     Available on the Hobby Plan and above.
+    """
+
+    project_id: Annotated[str, PropertyInfo(alias="projectId")]
+    """The Project ID.
+
+    Can be found in [Settings](https://www.browserbase.com/settings).
     """
 
     proxies: Union[Iterable[ProxiesUnionMember0], bool]
@@ -213,4 +214,17 @@ class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
+class ProxiesUnionMember0UnionMember2(TypedDict, total=False):
+    type: Required[Literal["none"]]
+    """Type of proxy. Always 'none' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+
+ProxiesUnionMember0: TypeAlias = Union[
+    ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1, ProxiesUnionMember0UnionMember2
+]
