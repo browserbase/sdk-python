@@ -31,6 +31,7 @@ class TestSessions:
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         session = client.sessions.create(
+            api_timeout=60,
             browser_settings={
                 "advanced_stealth": True,
                 "block_ads": True,
@@ -55,7 +56,6 @@ class TestSessions:
             project_id="projectId",
             proxies=True,
             region="us-west-2",
-            api_timeout=60,
             user_metadata={"foo": "bar"},
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
@@ -254,6 +254,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.create(
+            api_timeout=60,
             browser_settings={
                 "advanced_stealth": True,
                 "block_ads": True,
@@ -278,7 +279,6 @@ class TestAsyncSessions:
             project_id="projectId",
             proxies=True,
             region="us-west-2",
-            api_timeout=60,
             user_metadata={"foo": "bar"},
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])

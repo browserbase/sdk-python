@@ -99,13 +99,13 @@ class SessionsResource(SyncAPIResource):
     def create(
         self,
         *,
+        api_timeout: int | Omit = omit,
         browser_settings: session_create_params.BrowserSettings | Omit = omit,
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         project_id: str | Omit = omit,
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
-        api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -114,12 +114,14 @@ class SessionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
-        """Create a Session
+        """
+        Create a Session
 
         Args:
-          extension_id: The uploaded Extension ID.
+          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
+              the Project's `defaultTimeout`.
 
-        See
+          extension_id: The uploaded Extension ID. See
               [Upload Extension](/reference/api/upload-an-extension).
 
           keep_alive: Set to true to keep the session alive even after disconnections. Available on
@@ -132,9 +134,6 @@ class SessionsResource(SyncAPIResource):
               configurations.
 
           region: The region where the Session should run.
-
-          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
 
           user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
               metadata, see [User Metadata](/features/sessions#user-metadata).
@@ -151,13 +150,13 @@ class SessionsResource(SyncAPIResource):
             "/v1/sessions",
             body=maybe_transform(
                 {
+                    "api_timeout": api_timeout,
                     "browser_settings": browser_settings,
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "project_id": project_id,
                     "proxies": proxies,
                     "region": region,
-                    "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,
@@ -369,13 +368,13 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        api_timeout: int | Omit = omit,
         browser_settings: session_create_params.BrowserSettings | Omit = omit,
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         project_id: str | Omit = omit,
         proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
-        api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -384,12 +383,14 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
-        """Create a Session
+        """
+        Create a Session
 
         Args:
-          extension_id: The uploaded Extension ID.
+          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
+              the Project's `defaultTimeout`.
 
-        See
+          extension_id: The uploaded Extension ID. See
               [Upload Extension](/reference/api/upload-an-extension).
 
           keep_alive: Set to true to keep the session alive even after disconnections. Available on
@@ -402,9 +403,6 @@ class AsyncSessionsResource(AsyncAPIResource):
               configurations.
 
           region: The region where the Session should run.
-
-          api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
 
           user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
               metadata, see [User Metadata](/features/sessions#user-metadata).
@@ -421,13 +419,13 @@ class AsyncSessionsResource(AsyncAPIResource):
             "/v1/sessions",
             body=await async_maybe_transform(
                 {
+                    "api_timeout": api_timeout,
                     "browser_settings": browser_settings,
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
                     "project_id": project_id,
                     "proxies": proxies,
                     "region": region,
-                    "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
                 },
                 session_create_params.SessionCreateParams,

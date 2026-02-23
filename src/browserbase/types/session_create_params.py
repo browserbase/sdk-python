@@ -21,6 +21,12 @@ __all__ = [
 
 
 class SessionCreateParams(TypedDict, total=False):
+    api_timeout: int
+    """Duration in seconds after which the session will automatically end.
+
+    Defaults to the Project's `defaultTimeout`.
+    """
+
     browser_settings: Annotated[BrowserSettings, PropertyInfo(alias="browserSettings")]
 
     extension_id: Annotated[str, PropertyInfo(alias="extensionId")]
@@ -49,12 +55,6 @@ class SessionCreateParams(TypedDict, total=False):
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
-
-    api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
-    """Duration in seconds after which the session will automatically end.
-
-    Defaults to the Project's `defaultTimeout`.
-    """
 
     user_metadata: Annotated[Dict[str, object], PropertyInfo(alias="userMetadata")]
     """Arbitrary user metadata to attach to the session.
