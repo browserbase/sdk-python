@@ -9,7 +9,7 @@ import pytest
 
 from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
-from browserbase.types import Project, ProjectUsage, ProjectListResponse
+from browserbase.types import ProjectListResponse, ProjectUsageResponse, ProjectRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestProjects:
         project = client.projects.retrieve(
             "id",
         )
-        assert_matches_type(Project, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
@@ -33,7 +33,7 @@ class TestProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = response.parse()
-        assert_matches_type(Project, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
@@ -44,7 +44,7 @@ class TestProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = response.parse()
-            assert_matches_type(Project, project, path=["response"])
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -85,7 +85,7 @@ class TestProjects:
         project = client.projects.usage(
             "id",
         )
-        assert_matches_type(ProjectUsage, project, path=["response"])
+        assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     def test_raw_response_usage(self, client: Browserbase) -> None:
@@ -96,7 +96,7 @@ class TestProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = response.parse()
-        assert_matches_type(ProjectUsage, project, path=["response"])
+        assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     def test_streaming_response_usage(self, client: Browserbase) -> None:
@@ -107,7 +107,7 @@ class TestProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = response.parse()
-            assert_matches_type(ProjectUsage, project, path=["response"])
+            assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -129,7 +129,7 @@ class TestAsyncProjects:
         project = await async_client.projects.retrieve(
             "id",
         )
-        assert_matches_type(Project, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -140,7 +140,7 @@ class TestAsyncProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = await response.parse()
-        assert_matches_type(Project, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -151,7 +151,7 @@ class TestAsyncProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = await response.parse()
-            assert_matches_type(Project, project, path=["response"])
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -192,7 +192,7 @@ class TestAsyncProjects:
         project = await async_client.projects.usage(
             "id",
         )
-        assert_matches_type(ProjectUsage, project, path=["response"])
+        assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     async def test_raw_response_usage(self, async_client: AsyncBrowserbase) -> None:
@@ -203,7 +203,7 @@ class TestAsyncProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = await response.parse()
-        assert_matches_type(ProjectUsage, project, path=["response"])
+        assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
     @parametrize
     async def test_streaming_response_usage(self, async_client: AsyncBrowserbase) -> None:
@@ -214,7 +214,7 @@ class TestAsyncProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = await response.parse()
-            assert_matches_type(ProjectUsage, project, path=["response"])
+            assert_matches_type(ProjectUsageResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
