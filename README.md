@@ -122,6 +122,7 @@ from browserbase import Browserbase
 client = Browserbase()
 
 session = client.sessions.create(
+    project_id="projectId",
     browser_settings={},
 )
 print(session.browser_settings)
