@@ -2,29 +2,31 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Dict, List, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
     "SessionCreateParams",
     "BrowserSettings",
     "BrowserSettingsContext",
+    "BrowserSettingsFingerprint",
+    "BrowserSettingsFingerprintScreen",
     "BrowserSettingsViewport",
-    "ProxiesUnionArrayVariant1",
-    "ProxiesUnionArrayVariant1BrowserbaseProxyConfig",
-    "ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation",
-    "ProxiesUnionArrayVariant1ExternalProxyConfig",
-    "ProxiesUnionArrayVariant1NoneProxyConfig",
+    "ProxiesUnionMember0",
+    "ProxiesUnionMember0UnionMember0",
+    "ProxiesUnionMember0UnionMember0Geolocation",
+    "ProxiesUnionMember0UnionMember1",
 ]
 
 
 class SessionCreateParams(TypedDict, total=False):
-    api_timeout: int
-    """Duration in seconds after which the session will automatically end.
+    project_id: Required[Annotated[str, PropertyInfo(alias="projectId")]]
+    """The Project ID.
 
-    Defaults to the Project's `defaultTimeout`.
+    Can be found in [Settings](https://www.browserbase.com/settings).
     """
 
     browser_settings: Annotated[BrowserSettings, PropertyInfo(alias="browserSettings")]
@@ -41,13 +43,7 @@ class SessionCreateParams(TypedDict, total=False):
     Available on the Hobby Plan and above.
     """
 
-    project_id: Annotated[str, PropertyInfo(alias="projectId")]
-    """The Project ID.
-
-    Can be found in [Settings](https://www.browserbase.com/settings).
-    """
-
-    proxies: Union[bool, Iterable[ProxiesUnionArrayVariant1]]
+    proxies: Union[Iterable[ProxiesUnionMember0], bool]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
@@ -55,6 +51,12 @@ class SessionCreateParams(TypedDict, total=False):
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
+
+    api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
+    """Duration in seconds after which the session will automatically end.
+
+    Defaults to the Project's `defaultTimeout`.
+    """
 
     user_metadata: Annotated[Dict[str, object], PropertyInfo(alias="userMetadata")]
     """Arbitrary user metadata to attach to the session.
@@ -72,10 +74,42 @@ class BrowserSettingsContext(TypedDict, total=False):
     """Whether or not to persist the context after browsing. Defaults to `false`."""
 
 
+class BrowserSettingsFingerprintScreen(TypedDict, total=False):
+    max_height: Annotated[int, PropertyInfo(alias="maxHeight")]
+
+    max_width: Annotated[int, PropertyInfo(alias="maxWidth")]
+
+    min_height: Annotated[int, PropertyInfo(alias="minHeight")]
+
+    min_width: Annotated[int, PropertyInfo(alias="minWidth")]
+
+
+class BrowserSettingsFingerprint(TypedDict, total=False):
+    """
+    See usage examples [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
+    """
+
+    browsers: List[Literal["chrome", "edge", "firefox", "safari"]]
+
+    devices: List[Literal["desktop", "mobile"]]
+
+    http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
+
+    locales: SequenceNotStr[str]
+
+    operating_systems: Annotated[
+        List[Literal["android", "ios", "linux", "macos", "windows"]], PropertyInfo(alias="operatingSystems")
+    ]
+
+    screen: BrowserSettingsFingerprintScreen
+
+
 class BrowserSettingsViewport(TypedDict, total=False):
     height: int
+    """The height of the browser."""
 
     width: int
+    """The width of the browser."""
 
 
 class BrowserSettings(TypedDict, total=False):
@@ -105,6 +139,12 @@ class BrowserSettings(TypedDict, total=False):
     See [Upload Extension](/reference/api/upload-an-extension).
     """
 
+    fingerprint: BrowserSettingsFingerprint
+    """
+    See usage examples
+    [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
+    """
+
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
 
@@ -123,8 +163,8 @@ class BrowserSettings(TypedDict, total=False):
     viewport: BrowserSettingsViewport
 
 
-class ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
-    """Configuration for geolocation"""
+class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
+    """Geographic location for the proxy. Optional."""
 
     country: Required[str]
     """Country code in ISO 3166-1 alpha-2 format"""
@@ -136,7 +176,7 @@ class ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation(TypedDict, tota
     """US state code (2 characters). Must also specify US as the country. Optional."""
 
 
-class ProxiesUnionArrayVariant1BrowserbaseProxyConfig(TypedDict, total=False):
+class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
     type: Required[Literal["browserbase"]]
     """Type of proxy.
 
@@ -149,11 +189,11 @@ class ProxiesUnionArrayVariant1BrowserbaseProxyConfig(TypedDict, total=False):
     If omitted, defaults to all domains. Optional.
     """
 
-    geolocation: ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation
-    """Configuration for geolocation"""
+    geolocation: ProxiesUnionMember0UnionMember0Geolocation
+    """Geographic location for the proxy. Optional."""
 
 
-class ProxiesUnionArrayVariant1ExternalProxyConfig(TypedDict, total=False):
+class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     server: Required[str]
     """Server URL for external proxy. Required."""
 
@@ -173,16 +213,4 @@ class ProxiesUnionArrayVariant1ExternalProxyConfig(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-class ProxiesUnionArrayVariant1NoneProxyConfig(TypedDict, total=False):
-    domain_pattern: Required[Annotated[str, PropertyInfo(alias="domainPattern")]]
-    """Domain pattern for which site should have proxies disabled."""
-
-    type: Required[Literal["none"]]
-    """Type of proxy. Use 'none' to disable proxy for matching domains."""
-
-
-ProxiesUnionArrayVariant1: TypeAlias = Union[
-    ProxiesUnionArrayVariant1BrowserbaseProxyConfig,
-    ProxiesUnionArrayVariant1ExternalProxyConfig,
-    ProxiesUnionArrayVariant1NoneProxyConfig,
-]
+ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
