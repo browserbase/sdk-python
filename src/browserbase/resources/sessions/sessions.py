@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Dict, Union
 from typing_extensions import Literal
 
 import httpx
@@ -104,7 +104,7 @@ class SessionsResource(SyncAPIResource):
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         project_id: str | Omit = omit,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | Omit = omit,
+        proxies: Union[bool, object] | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -373,7 +373,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
         project_id: str | Omit = omit,
-        proxies: Union[bool, Iterable[session_create_params.ProxiesUnionMember1]] | Omit = omit,
+        proxies: Union[bool, object] | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
