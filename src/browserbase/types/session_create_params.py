@@ -12,11 +12,11 @@ __all__ = [
     "BrowserSettings",
     "BrowserSettingsContext",
     "BrowserSettingsViewport",
-    "ProxiesUnionMember1",
-    "ProxiesUnionMember1BrowserbaseProxyConfig",
-    "ProxiesUnionMember1BrowserbaseProxyConfigGeolocation",
-    "ProxiesUnionMember1ExternalProxyConfig",
-    "ProxiesUnionMember1NoneProxyConfig",
+    "ProxiesUnionArrayVariant1",
+    "ProxiesUnionArrayVariant1BrowserbaseProxyConfig",
+    "ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation",
+    "ProxiesUnionArrayVariant1ExternalProxyConfig",
+    "ProxiesUnionArrayVariant1NoneProxyConfig",
 ]
 
 
@@ -47,7 +47,7 @@ class SessionCreateParams(TypedDict, total=False):
     Can be found in [Settings](https://www.browserbase.com/settings).
     """
 
-    proxies: Union[bool, Iterable[ProxiesUnionMember1]]
+    proxies: Union[bool, Iterable[ProxiesUnionArrayVariant1]]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
@@ -123,7 +123,7 @@ class BrowserSettings(TypedDict, total=False):
     viewport: BrowserSettingsViewport
 
 
-class ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
+class ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
     """Configuration for geolocation"""
 
     country: Required[str]
@@ -136,7 +136,7 @@ class ProxiesUnionMember1BrowserbaseProxyConfigGeolocation(TypedDict, total=Fals
     """US state code (2 characters). Must also specify US as the country. Optional."""
 
 
-class ProxiesUnionMember1BrowserbaseProxyConfig(TypedDict, total=False):
+class ProxiesUnionArrayVariant1BrowserbaseProxyConfig(TypedDict, total=False):
     type: Required[Literal["browserbase"]]
     """Type of proxy.
 
@@ -149,11 +149,11 @@ class ProxiesUnionMember1BrowserbaseProxyConfig(TypedDict, total=False):
     If omitted, defaults to all domains. Optional.
     """
 
-    geolocation: ProxiesUnionMember1BrowserbaseProxyConfigGeolocation
+    geolocation: ProxiesUnionArrayVariant1BrowserbaseProxyConfigGeolocation
     """Configuration for geolocation"""
 
 
-class ProxiesUnionMember1ExternalProxyConfig(TypedDict, total=False):
+class ProxiesUnionArrayVariant1ExternalProxyConfig(TypedDict, total=False):
     server: Required[str]
     """Server URL for external proxy. Required."""
 
@@ -173,7 +173,7 @@ class ProxiesUnionMember1ExternalProxyConfig(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-class ProxiesUnionMember1NoneProxyConfig(TypedDict, total=False):
+class ProxiesUnionArrayVariant1NoneProxyConfig(TypedDict, total=False):
     domain_pattern: Required[Annotated[str, PropertyInfo(alias="domainPattern")]]
     """Domain pattern for which site should have proxies disabled."""
 
@@ -181,8 +181,8 @@ class ProxiesUnionMember1NoneProxyConfig(TypedDict, total=False):
     """Type of proxy. Use 'none' to disable proxy for matching domains."""
 
 
-ProxiesUnionMember1: TypeAlias = Union[
-    ProxiesUnionMember1BrowserbaseProxyConfig,
-    ProxiesUnionMember1ExternalProxyConfig,
-    ProxiesUnionMember1NoneProxyConfig,
+ProxiesUnionArrayVariant1: TypeAlias = Union[
+    ProxiesUnionArrayVariant1BrowserbaseProxyConfig,
+    ProxiesUnionArrayVariant1ExternalProxyConfig,
+    ProxiesUnionArrayVariant1NoneProxyConfig,
 ]
