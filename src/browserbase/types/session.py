@@ -8,10 +8,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SessionUpdateResponse"]
+__all__ = ["Session"]
 
 
-class SessionUpdateResponse(BaseModel):
+class Session(BaseModel):
     id: str
 
     created_at: datetime = FieldInfo(alias="createdAt")
