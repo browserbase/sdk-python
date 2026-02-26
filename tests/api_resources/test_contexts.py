@@ -23,6 +23,11 @@ class TestContexts:
 
     @parametrize
     def test_method_create(self, client: Browserbase) -> None:
+        context = client.contexts.create()
+        assert_matches_type(ContextCreateResponse, context, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params(self, client: Browserbase) -> None:
         context = client.contexts.create(
             project_id="projectId",
         )
@@ -30,9 +35,7 @@ class TestContexts:
 
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
-        response = client.contexts.with_raw_response.create(
-            project_id="projectId",
-        )
+        response = client.contexts.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -41,9 +44,7 @@ class TestContexts:
 
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
-        with client.contexts.with_streaming_response.create(
-            project_id="projectId",
-        ) as response:
+        with client.contexts.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -174,6 +175,11 @@ class TestAsyncContexts:
 
     @parametrize
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
+        context = await async_client.contexts.create()
+        assert_matches_type(ContextCreateResponse, context, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         context = await async_client.contexts.create(
             project_id="projectId",
         )
@@ -181,9 +187,7 @@ class TestAsyncContexts:
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
-        response = await async_client.contexts.with_raw_response.create(
-            project_id="projectId",
-        )
+        response = await async_client.contexts.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,9 +196,7 @@ class TestAsyncContexts:
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
-        async with async_client.contexts.with_streaming_response.create(
-            project_id="projectId",
-        ) as response:
+        async with async_client.contexts.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

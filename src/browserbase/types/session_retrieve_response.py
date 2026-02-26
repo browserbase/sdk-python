@@ -36,9 +36,6 @@ class SessionRetrieveResponse(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
 
-    avg_cpu_usage: Optional[int] = FieldInfo(alias="avgCpuUsage", default=None)
-    """CPU used by the Session"""
-
     connect_url: Optional[str] = FieldInfo(alias="connectUrl", default=None)
     """WebSocket URL to connect to the Session."""
 
@@ -46,9 +43,6 @@ class SessionRetrieveResponse(BaseModel):
     """Optional. The Context linked to the Session."""
 
     ended_at: Optional[datetime] = FieldInfo(alias="endedAt", default=None)
-
-    memory_usage: Optional[int] = FieldInfo(alias="memoryUsage", default=None)
-    """Memory used by the Session"""
 
     selenium_remote_url: Optional[str] = FieldInfo(alias="seleniumRemoteUrl", default=None)
     """HTTP URL to connect to the Session."""
