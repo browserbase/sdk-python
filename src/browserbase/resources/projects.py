@@ -14,9 +14,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.project import Project
+from ..types.project_usage import ProjectUsage
 from ..types.project_list_response import ProjectListResponse
-from ..types.project_usage_response import ProjectUsageResponse
-from ..types.project_retrieve_response import ProjectRetrieveResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -51,7 +51,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveResponse:
+    ) -> Project:
         """
         Get a Project
 
@@ -71,7 +71,7 @@ class ProjectsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectRetrieveResponse,
+            cast_to=Project,
         )
 
     def list(
@@ -103,7 +103,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectUsageResponse:
+    ) -> ProjectUsage:
         """
         Get Project Usage
 
@@ -123,7 +123,7 @@ class ProjectsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectUsageResponse,
+            cast_to=ProjectUsage,
         )
 
 
@@ -157,7 +157,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveResponse:
+    ) -> Project:
         """
         Get a Project
 
@@ -177,7 +177,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectRetrieveResponse,
+            cast_to=Project,
         )
 
     async def list(
@@ -209,7 +209,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectUsageResponse:
+    ) -> ProjectUsage:
         """
         Get Project Usage
 
@@ -229,7 +229,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectUsageResponse,
+            cast_to=ProjectUsage,
         )
 
 

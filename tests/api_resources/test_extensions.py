@@ -9,7 +9,7 @@ import pytest
 
 from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
-from browserbase.types import ExtensionCreateResponse, ExtensionRetrieveResponse
+from browserbase.types import Extension
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestExtensions:
         extension = client.extensions.create(
             file=b"raw file contents",
         )
-        assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
@@ -33,7 +33,7 @@ class TestExtensions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         extension = response.parse()
-        assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
@@ -44,7 +44,7 @@ class TestExtensions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             extension = response.parse()
-            assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+            assert_matches_type(Extension, extension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -53,7 +53,7 @@ class TestExtensions:
         extension = client.extensions.retrieve(
             "id",
         )
-        assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
@@ -64,7 +64,7 @@ class TestExtensions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         extension = response.parse()
-        assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
@@ -75,7 +75,7 @@ class TestExtensions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             extension = response.parse()
-            assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+            assert_matches_type(Extension, extension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -135,7 +135,7 @@ class TestAsyncExtensions:
         extension = await async_client.extensions.create(
             file=b"raw file contents",
         )
-        assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
@@ -146,7 +146,7 @@ class TestAsyncExtensions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         extension = await response.parse()
-        assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
@@ -157,7 +157,7 @@ class TestAsyncExtensions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             extension = await response.parse()
-            assert_matches_type(ExtensionCreateResponse, extension, path=["response"])
+            assert_matches_type(Extension, extension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -166,7 +166,7 @@ class TestAsyncExtensions:
         extension = await async_client.extensions.retrieve(
             "id",
         )
-        assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -177,7 +177,7 @@ class TestAsyncExtensions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         extension = await response.parse()
-        assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+        assert_matches_type(Extension, extension, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
@@ -188,7 +188,7 @@ class TestAsyncExtensions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             extension = await response.parse()
-            assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
+            assert_matches_type(Extension, extension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

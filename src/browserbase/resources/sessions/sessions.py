@@ -51,10 +51,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.session import Session
+from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
-from ...types.session_debug_response import SessionDebugResponse
 from ...types.session_create_response import SessionCreateResponse
-from ...types.session_update_response import SessionUpdateResponse
 from ...types.session_retrieve_response import SessionRetrieveResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
@@ -214,7 +214,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionUpdateResponse:
+    ) -> Session:
         """
         Update a Session
 
@@ -248,7 +248,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionUpdateResponse,
+            cast_to=Session,
         )
 
     def list(
@@ -308,7 +308,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionDebugResponse:
+    ) -> SessionLiveURLs:
         """
         Session Live URLs
 
@@ -328,7 +328,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionDebugResponse,
+            cast_to=SessionLiveURLs,
         )
 
 
@@ -486,7 +486,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionUpdateResponse:
+    ) -> Session:
         """
         Update a Session
 
@@ -520,7 +520,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionUpdateResponse,
+            cast_to=Session,
         )
 
     async def list(
@@ -580,7 +580,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionDebugResponse:
+    ) -> SessionLiveURLs:
         """
         Session Live URLs
 
@@ -600,7 +600,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionDebugResponse,
+            cast_to=SessionLiveURLs,
         )
 
 

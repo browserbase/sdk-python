@@ -13,10 +13,10 @@ __all__ = [
     "BrowserSettingsContext",
     "BrowserSettingsViewport",
     "ProxiesUnionMember0",
-    "ProxiesUnionMember0UnionMember0",
-    "ProxiesUnionMember0UnionMember0Geolocation",
-    "ProxiesUnionMember0UnionMember1",
-    "ProxiesUnionMember0UnionMember2",
+    "ProxiesUnionMember0BrowserbaseProxyConfig",
+    "ProxiesUnionMember0BrowserbaseProxyConfigGeolocation",
+    "ProxiesUnionMember0ExternalProxyConfig",
+    "ProxiesUnionMember0NoneProxyConfig",
 ]
 
 
@@ -126,7 +126,7 @@ class BrowserSettings(TypedDict, total=False):
     viewport: BrowserSettingsViewport
 
 
-class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
+class ProxiesUnionMember0BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
     """Geographic location for the proxy. Optional."""
 
     country: Required[str]
@@ -139,7 +139,7 @@ class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
     """US state code (2 characters). Must also specify US as the country. Optional."""
 
 
-class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
+class ProxiesUnionMember0BrowserbaseProxyConfig(TypedDict, total=False):
     type: Required[Literal["browserbase"]]
     """Type of proxy.
 
@@ -152,11 +152,11 @@ class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
     If omitted, defaults to all domains. Optional.
     """
 
-    geolocation: ProxiesUnionMember0UnionMember0Geolocation
+    geolocation: ProxiesUnionMember0BrowserbaseProxyConfigGeolocation
     """Geographic location for the proxy. Optional."""
 
 
-class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
+class ProxiesUnionMember0ExternalProxyConfig(TypedDict, total=False):
     server: Required[str]
     """Server URL for external proxy. Required."""
 
@@ -176,7 +176,7 @@ class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-class ProxiesUnionMember0UnionMember2(TypedDict, total=False):
+class ProxiesUnionMember0NoneProxyConfig(TypedDict, total=False):
     type: Required[Literal["none"]]
     """Type of proxy. Always 'none' for this config."""
 
@@ -188,5 +188,7 @@ class ProxiesUnionMember0UnionMember2(TypedDict, total=False):
 
 
 ProxiesUnionMember0: TypeAlias = Union[
-    ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1, ProxiesUnionMember0UnionMember2
+    ProxiesUnionMember0BrowserbaseProxyConfig,
+    ProxiesUnionMember0ExternalProxyConfig,
+    ProxiesUnionMember0NoneProxyConfig,
 ]

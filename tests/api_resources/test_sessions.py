@@ -10,10 +10,10 @@ import pytest
 from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
 from browserbase.types import (
+    Session,
+    SessionLiveURLs,
     SessionListResponse,
-    SessionDebugResponse,
     SessionCreateResponse,
-    SessionUpdateResponse,
     SessionRetrieveResponse,
 )
 
@@ -134,7 +134,7 @@ class TestSessions:
             id="id",
             status="REQUEST_RELEASE",
         )
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Browserbase) -> None:
@@ -143,7 +143,7 @@ class TestSessions:
             status="REQUEST_RELEASE",
             project_id="projectId",
         )
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Browserbase) -> None:
@@ -155,7 +155,7 @@ class TestSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = response.parse()
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     def test_streaming_response_update(self, client: Browserbase) -> None:
@@ -167,7 +167,7 @@ class TestSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = response.parse()
-            assert_matches_type(SessionUpdateResponse, session, path=["response"])
+            assert_matches_type(Session, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -217,7 +217,7 @@ class TestSessions:
         session = client.sessions.debug(
             "id",
         )
-        assert_matches_type(SessionDebugResponse, session, path=["response"])
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     def test_raw_response_debug(self, client: Browserbase) -> None:
@@ -228,7 +228,7 @@ class TestSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = response.parse()
-        assert_matches_type(SessionDebugResponse, session, path=["response"])
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     def test_streaming_response_debug(self, client: Browserbase) -> None:
@@ -239,7 +239,7 @@ class TestSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = response.parse()
-            assert_matches_type(SessionDebugResponse, session, path=["response"])
+            assert_matches_type(SessionLiveURLs, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -367,7 +367,7 @@ class TestAsyncSessions:
             id="id",
             status="REQUEST_RELEASE",
         )
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBrowserbase) -> None:
@@ -376,7 +376,7 @@ class TestAsyncSessions:
             status="REQUEST_RELEASE",
             project_id="projectId",
         )
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBrowserbase) -> None:
@@ -388,7 +388,7 @@ class TestAsyncSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = await response.parse()
-        assert_matches_type(SessionUpdateResponse, session, path=["response"])
+        assert_matches_type(Session, session, path=["response"])
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBrowserbase) -> None:
@@ -400,7 +400,7 @@ class TestAsyncSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = await response.parse()
-            assert_matches_type(SessionUpdateResponse, session, path=["response"])
+            assert_matches_type(Session, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -450,7 +450,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.debug(
             "id",
         )
-        assert_matches_type(SessionDebugResponse, session, path=["response"])
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     async def test_raw_response_debug(self, async_client: AsyncBrowserbase) -> None:
@@ -461,7 +461,7 @@ class TestAsyncSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = await response.parse()
-        assert_matches_type(SessionDebugResponse, session, path=["response"])
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     async def test_streaming_response_debug(self, async_client: AsyncBrowserbase) -> None:
@@ -472,7 +472,7 @@ class TestAsyncSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = await response.parse()
-            assert_matches_type(SessionDebugResponse, session, path=["response"])
+            assert_matches_type(SessionLiveURLs, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

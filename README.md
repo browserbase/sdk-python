@@ -35,7 +35,6 @@ client = Browserbase(
 session = client.sessions.create(
     project_id="your_project_id",
 )
-print(session.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -61,7 +60,6 @@ async def main() -> None:
     session = await client.sessions.create(
         project_id="your_project_id",
     )
-    print(session.id)
 
 
 asyncio.run(main())
@@ -97,7 +95,6 @@ async def main() -> None:
         session = await client.sessions.create(
             project_id="your_project_id",
         )
-        print(session.id)
 
 
 asyncio.run(main())
@@ -279,7 +276,7 @@ response = client.sessions.with_raw_response.create(
 print(response.headers.get('X-My-Header'))
 
 session = response.parse()  # get the object that `sessions.create()` would have returned
-print(session.id)
+print(session)
 ```
 
 These methods return an [`APIResponse`](https://github.com/browserbase/sdk-python/tree/main/src/browserbase/_response.py) object.
