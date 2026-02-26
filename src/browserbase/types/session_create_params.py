@@ -2,33 +2,25 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
     "SessionCreateParams",
     "BrowserSettings",
     "BrowserSettingsContext",
-    "BrowserSettingsFingerprint",
-    "BrowserSettingsFingerprintScreen",
     "BrowserSettingsViewport",
     "ProxiesUnionMember0",
     "ProxiesUnionMember0UnionMember0",
     "ProxiesUnionMember0UnionMember0Geolocation",
     "ProxiesUnionMember0UnionMember1",
+    "ProxiesUnionMember0UnionMember2",
 ]
 
 
 class SessionCreateParams(TypedDict, total=False):
-    project_id: Required[Annotated[str, PropertyInfo(alias="projectId")]]
-    """The Project ID.
-
-    Can be found in [Settings](https://www.browserbase.com/settings).
-    """
-
     browser_settings: Annotated[BrowserSettings, PropertyInfo(alias="browserSettings")]
 
     extension_id: Annotated[str, PropertyInfo(alias="extensionId")]
@@ -41,6 +33,13 @@ class SessionCreateParams(TypedDict, total=False):
     """Set to true to keep the session alive even after disconnections.
 
     Available on the Hobby Plan and above.
+    """
+
+    project_id: Annotated[str, PropertyInfo(alias="projectId")]
+    """The Project ID.
+
+    Can be found in [Settings](https://www.browserbase.com/settings). Optional - if
+    not provided, the project will be inferred from the API key.
     """
 
     proxies: Union[Iterable[ProxiesUnionMember0], bool]
@@ -72,36 +71,6 @@ class BrowserSettingsContext(TypedDict, total=False):
 
     persist: bool
     """Whether or not to persist the context after browsing. Defaults to `false`."""
-
-
-class BrowserSettingsFingerprintScreen(TypedDict, total=False):
-    max_height: Annotated[int, PropertyInfo(alias="maxHeight")]
-
-    max_width: Annotated[int, PropertyInfo(alias="maxWidth")]
-
-    min_height: Annotated[int, PropertyInfo(alias="minHeight")]
-
-    min_width: Annotated[int, PropertyInfo(alias="minWidth")]
-
-
-class BrowserSettingsFingerprint(TypedDict, total=False):
-    """
-    See usage examples [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
-    """
-
-    browsers: List[Literal["chrome", "edge", "firefox", "safari"]]
-
-    devices: List[Literal["desktop", "mobile"]]
-
-    http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
-
-    locales: SequenceNotStr[str]
-
-    operating_systems: Annotated[
-        List[Literal["android", "ios", "linux", "macos", "windows"]], PropertyInfo(alias="operatingSystems")
-    ]
-
-    screen: BrowserSettingsFingerprintScreen
 
 
 class BrowserSettingsViewport(TypedDict, total=False):
@@ -137,12 +106,6 @@ class BrowserSettings(TypedDict, total=False):
     """The uploaded Extension ID.
 
     See [Upload Extension](/reference/api/upload-an-extension).
-    """
-
-    fingerprint: BrowserSettingsFingerprint
-    """
-    See usage examples
-    [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
     """
 
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
@@ -213,4 +176,17 @@ class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
+class ProxiesUnionMember0UnionMember2(TypedDict, total=False):
+    type: Required[Literal["none"]]
+    """Type of proxy. Always 'none' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+
+ProxiesUnionMember0: TypeAlias = Union[
+    ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1, ProxiesUnionMember0UnionMember2
+]

@@ -36,16 +36,10 @@ class SessionListResponseItem(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
 
-    avg_cpu_usage: Optional[int] = FieldInfo(alias="avgCpuUsage", default=None)
-    """CPU used by the Session"""
-
     context_id: Optional[str] = FieldInfo(alias="contextId", default=None)
     """Optional. The Context linked to the Session."""
 
     ended_at: Optional[datetime] = FieldInfo(alias="endedAt", default=None)
-
-    memory_usage: Optional[int] = FieldInfo(alias="memoryUsage", default=None)
-    """Memory used by the Session"""
 
     user_metadata: Optional[Dict[str, object]] = FieldInfo(alias="userMetadata", default=None)
     """Arbitrary user metadata to attach to the session.
