@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import contexts, projects, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, BrowserbaseError
 from ._base_client import (
@@ -29,7 +29,13 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.sessions import sessions
+
+if TYPE_CHECKING:
+    from .resources import contexts, projects, sessions, extensions
+    from .resources.contexts import ContextsResource, AsyncContextsResource
+    from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
+    from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
 
 __all__ = [
     "Timeout",
@@ -44,13 +50,6 @@ __all__ = [
 
 
 class Browserbase(SyncAPIClient):
-    contexts: contexts.ContextsResource
-    extensions: extensions.ExtensionsResource
-    projects: projects.ProjectsResource
-    sessions: sessions.SessionsResource
-    with_raw_response: BrowserbaseWithRawResponse
-    with_streaming_response: BrowserbaseWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -105,12 +104,37 @@ class Browserbase(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contexts = contexts.ContextsResource(self)
-        self.extensions = extensions.ExtensionsResource(self)
-        self.projects = projects.ProjectsResource(self)
-        self.sessions = sessions.SessionsResource(self)
-        self.with_raw_response = BrowserbaseWithRawResponse(self)
-        self.with_streaming_response = BrowserbaseWithStreamedResponse(self)
+    @cached_property
+    def contexts(self) -> ContextsResource:
+        from .resources.contexts import ContextsResource
+
+        return ContextsResource(self)
+
+    @cached_property
+    def extensions(self) -> ExtensionsResource:
+        from .resources.extensions import ExtensionsResource
+
+        return ExtensionsResource(self)
+
+    @cached_property
+    def projects(self) -> ProjectsResource:
+        from .resources.projects import ProjectsResource
+
+        return ProjectsResource(self)
+
+    @cached_property
+    def sessions(self) -> SessionsResource:
+        from .resources.sessions import SessionsResource
+
+        return SessionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> BrowserbaseWithRawResponse:
+        return BrowserbaseWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> BrowserbaseWithStreamedResponse:
+        return BrowserbaseWithStreamedResponse(self)
 
     @property
     @override
@@ -218,13 +242,6 @@ class Browserbase(SyncAPIClient):
 
 
 class AsyncBrowserbase(AsyncAPIClient):
-    contexts: contexts.AsyncContextsResource
-    extensions: extensions.AsyncExtensionsResource
-    projects: projects.AsyncProjectsResource
-    sessions: sessions.AsyncSessionsResource
-    with_raw_response: AsyncBrowserbaseWithRawResponse
-    with_streaming_response: AsyncBrowserbaseWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -279,12 +296,37 @@ class AsyncBrowserbase(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contexts = contexts.AsyncContextsResource(self)
-        self.extensions = extensions.AsyncExtensionsResource(self)
-        self.projects = projects.AsyncProjectsResource(self)
-        self.sessions = sessions.AsyncSessionsResource(self)
-        self.with_raw_response = AsyncBrowserbaseWithRawResponse(self)
-        self.with_streaming_response = AsyncBrowserbaseWithStreamedResponse(self)
+    @cached_property
+    def contexts(self) -> AsyncContextsResource:
+        from .resources.contexts import AsyncContextsResource
+
+        return AsyncContextsResource(self)
+
+    @cached_property
+    def extensions(self) -> AsyncExtensionsResource:
+        from .resources.extensions import AsyncExtensionsResource
+
+        return AsyncExtensionsResource(self)
+
+    @cached_property
+    def projects(self) -> AsyncProjectsResource:
+        from .resources.projects import AsyncProjectsResource
+
+        return AsyncProjectsResource(self)
+
+    @cached_property
+    def sessions(self) -> AsyncSessionsResource:
+        from .resources.sessions import AsyncSessionsResource
+
+        return AsyncSessionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncBrowserbaseWithRawResponse:
+        return AsyncBrowserbaseWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncBrowserbaseWithStreamedResponse:
+        return AsyncBrowserbaseWithStreamedResponse(self)
 
     @property
     @override
@@ -392,35 +434,127 @@ class AsyncBrowserbase(AsyncAPIClient):
 
 
 class BrowserbaseWithRawResponse:
+    _client: Browserbase
+
     def __init__(self, client: Browserbase) -> None:
-        self.contexts = contexts.ContextsResourceWithRawResponse(client.contexts)
-        self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
-        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
-        self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
+        self._client = client
+
+    @cached_property
+    def contexts(self) -> contexts.ContextsResourceWithRawResponse:
+        from .resources.contexts import ContextsResourceWithRawResponse
+
+        return ContextsResourceWithRawResponse(self._client.contexts)
+
+    @cached_property
+    def extensions(self) -> extensions.ExtensionsResourceWithRawResponse:
+        from .resources.extensions import ExtensionsResourceWithRawResponse
+
+        return ExtensionsResourceWithRawResponse(self._client.extensions)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        from .resources.projects import ProjectsResourceWithRawResponse
+
+        return ProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithRawResponse:
+        from .resources.sessions import SessionsResourceWithRawResponse
+
+        return SessionsResourceWithRawResponse(self._client.sessions)
 
 
 class AsyncBrowserbaseWithRawResponse:
+    _client: AsyncBrowserbase
+
     def __init__(self, client: AsyncBrowserbase) -> None:
-        self.contexts = contexts.AsyncContextsResourceWithRawResponse(client.contexts)
-        self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
-        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
+        self._client = client
+
+    @cached_property
+    def contexts(self) -> contexts.AsyncContextsResourceWithRawResponse:
+        from .resources.contexts import AsyncContextsResourceWithRawResponse
+
+        return AsyncContextsResourceWithRawResponse(self._client.contexts)
+
+    @cached_property
+    def extensions(self) -> extensions.AsyncExtensionsResourceWithRawResponse:
+        from .resources.extensions import AsyncExtensionsResourceWithRawResponse
+
+        return AsyncExtensionsResourceWithRawResponse(self._client.extensions)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        from .resources.projects import AsyncProjectsResourceWithRawResponse
+
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
+        from .resources.sessions import AsyncSessionsResourceWithRawResponse
+
+        return AsyncSessionsResourceWithRawResponse(self._client.sessions)
 
 
 class BrowserbaseWithStreamedResponse:
+    _client: Browserbase
+
     def __init__(self, client: Browserbase) -> None:
-        self.contexts = contexts.ContextsResourceWithStreamingResponse(client.contexts)
-        self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
-        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
-        self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
+        self._client = client
+
+    @cached_property
+    def contexts(self) -> contexts.ContextsResourceWithStreamingResponse:
+        from .resources.contexts import ContextsResourceWithStreamingResponse
+
+        return ContextsResourceWithStreamingResponse(self._client.contexts)
+
+    @cached_property
+    def extensions(self) -> extensions.ExtensionsResourceWithStreamingResponse:
+        from .resources.extensions import ExtensionsResourceWithStreamingResponse
+
+        return ExtensionsResourceWithStreamingResponse(self._client.extensions)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        from .resources.projects import ProjectsResourceWithStreamingResponse
+
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
+        from .resources.sessions import SessionsResourceWithStreamingResponse
+
+        return SessionsResourceWithStreamingResponse(self._client.sessions)
 
 
 class AsyncBrowserbaseWithStreamedResponse:
+    _client: AsyncBrowserbase
+
     def __init__(self, client: AsyncBrowserbase) -> None:
-        self.contexts = contexts.AsyncContextsResourceWithStreamingResponse(client.contexts)
-        self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
-        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
+        self._client = client
+
+    @cached_property
+    def contexts(self) -> contexts.AsyncContextsResourceWithStreamingResponse:
+        from .resources.contexts import AsyncContextsResourceWithStreamingResponse
+
+        return AsyncContextsResourceWithStreamingResponse(self._client.contexts)
+
+    @cached_property
+    def extensions(self) -> extensions.AsyncExtensionsResourceWithStreamingResponse:
+        from .resources.extensions import AsyncExtensionsResourceWithStreamingResponse
+
+        return AsyncExtensionsResourceWithStreamingResponse(self._client.extensions)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:
+        from .resources.sessions import AsyncSessionsResourceWithStreamingResponse
+
+        return AsyncSessionsResourceWithStreamingResponse(self._client.sessions)
 
 
 Client = Browserbase

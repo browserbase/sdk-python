@@ -3,7 +3,7 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/browserbase.svg?label=pypi%20(stable))](https://pypi.org/project/browserbase/)
 
-The Browserbase Python library provides convenient access to the Browserbase REST API from any Python 3.8+
+The Browserbase Python library provides convenient access to the Browserbase REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 
 ```sh
 # install from PyPI
-pip install --pre browserbase
+pip install '--pre browserbase'
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ client = Browserbase(
 session = client.sessions.create(
     project_id=BROWSERBASE_PROJECT_ID,
 )
-print(session.id)
+```
 
 
 def run(playwright: Playwright) -> None:
@@ -90,12 +90,13 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre browserbase[aiohttp]
+pip install '--pre browserbase[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from browserbase import DefaultAioHttpClient
 from browserbase import AsyncBrowserbase
@@ -103,13 +104,12 @@ from browserbase import AsyncBrowserbase
 
 async def main() -> None:
     async with AsyncBrowserbase(
-        api_key="My API Key",
+        api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         session = await client.sessions.create(
             project_id="your_project_id",
         )
-        print(session.id)
 
 
 asyncio.run(main())
@@ -134,7 +134,6 @@ from browserbase import Browserbase
 client = Browserbase()
 
 session = client.sessions.create(
-    project_id="projectId",
     browser_settings={},
 )
 print(session.browser_settings)
@@ -292,7 +291,7 @@ response = client.sessions.with_raw_response.create(
 print(response.headers.get('X-My-Header'))
 
 session = response.parse()  # get the object that `sessions.create()` would have returned
-print(session.id)
+print(session)
 ```
 
 These methods return an [`APIResponse`](https://github.com/browserbase/sdk-python/tree/main/src/browserbase/_response.py) object.
@@ -418,7 +417,7 @@ print(browserbase.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 

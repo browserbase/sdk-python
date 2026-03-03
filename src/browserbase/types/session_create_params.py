@@ -2,34 +2,25 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
     "SessionCreateParams",
     "BrowserSettings",
     "BrowserSettingsContext",
-    "BrowserSettingsFingerprint",
-    "BrowserSettingsFingerprintScreen",
     "BrowserSettingsViewport",
     "ProxiesUnionMember0",
-    "ProxiesUnionMember0UnionMember0",
-    "ProxiesUnionMember0UnionMember0Geolocation",
-    "ProxiesUnionMember0UnionMember1",
-    "ProxySettings",
+    "ProxiesUnionMember0BrowserbaseProxyConfig",
+    "ProxiesUnionMember0BrowserbaseProxyConfigGeolocation",
+    "ProxiesUnionMember0ExternalProxyConfig",
+    "ProxiesUnionMember0NoneProxyConfig",
 ]
 
 
 class SessionCreateParams(TypedDict, total=False):
-    project_id: Required[Annotated[str, PropertyInfo(alias="projectId")]]
-    """The Project ID.
-
-    Can be found in [Settings](https://www.browserbase.com/settings).
-    """
-
     browser_settings: Annotated[BrowserSettings, PropertyInfo(alias="browserSettings")]
 
     extension_id: Annotated[str, PropertyInfo(alias="extensionId")]
@@ -44,14 +35,18 @@ class SessionCreateParams(TypedDict, total=False):
     Available on the Hobby Plan and above.
     """
 
+    project_id: Annotated[str, PropertyInfo(alias="projectId")]
+    """The Project ID.
+
+    Can be found in [Settings](https://www.browserbase.com/settings). Optional - if
+    not provided, the project will be inferred from the API key.
+    """
+
     proxies: Union[Iterable[ProxiesUnionMember0], bool]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
     """
-
-    proxy_settings: Annotated[ProxySettings, PropertyInfo(alias="proxySettings")]
-    """[NOT IN DOCS] Supplementary proxy settings. Optional."""
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
@@ -76,32 +71,6 @@ class BrowserSettingsContext(TypedDict, total=False):
 
     persist: bool
     """Whether or not to persist the context after browsing. Defaults to `false`."""
-
-
-class BrowserSettingsFingerprintScreen(TypedDict, total=False):
-    max_height: Annotated[int, PropertyInfo(alias="maxHeight")]
-
-    max_width: Annotated[int, PropertyInfo(alias="maxWidth")]
-
-    min_height: Annotated[int, PropertyInfo(alias="minHeight")]
-
-    min_width: Annotated[int, PropertyInfo(alias="minWidth")]
-
-
-class BrowserSettingsFingerprint(TypedDict, total=False):
-    browsers: List[Literal["chrome", "edge", "firefox", "safari"]]
-
-    devices: List[Literal["desktop", "mobile"]]
-
-    http_version: Annotated[Literal["1", "2"], PropertyInfo(alias="httpVersion")]
-
-    locales: SequenceNotStr[str]
-
-    operating_systems: Annotated[
-        List[Literal["android", "ios", "linux", "macos", "windows"]], PropertyInfo(alias="operatingSystems")
-    ]
-
-    screen: BrowserSettingsFingerprintScreen
 
 
 class BrowserSettingsViewport(TypedDict, total=False):
@@ -139,12 +108,6 @@ class BrowserSettings(TypedDict, total=False):
     See [Upload Extension](/reference/api/upload-an-extension).
     """
 
-    fingerprint: BrowserSettingsFingerprint
-    """
-    See usage examples
-    [on the Stealth Mode page](/features/stealth-mode#fingerprinting)
-    """
-
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
 
@@ -163,7 +126,9 @@ class BrowserSettings(TypedDict, total=False):
     viewport: BrowserSettingsViewport
 
 
-class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
+class ProxiesUnionMember0BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
+    """Geographic location for the proxy. Optional."""
+
     country: Required[str]
     """Country code in ISO 3166-1 alpha-2 format"""
 
@@ -174,7 +139,7 @@ class ProxiesUnionMember0UnionMember0Geolocation(TypedDict, total=False):
     """US state code (2 characters). Must also specify US as the country. Optional."""
 
 
-class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
+class ProxiesUnionMember0BrowserbaseProxyConfig(TypedDict, total=False):
     type: Required[Literal["browserbase"]]
     """Type of proxy.
 
@@ -187,11 +152,11 @@ class ProxiesUnionMember0UnionMember0(TypedDict, total=False):
     If omitted, defaults to all domains. Optional.
     """
 
-    geolocation: ProxiesUnionMember0UnionMember0Geolocation
+    geolocation: ProxiesUnionMember0BrowserbaseProxyConfigGeolocation
     """Geographic location for the proxy. Optional."""
 
 
-class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
+class ProxiesUnionMember0ExternalProxyConfig(TypedDict, total=False):
     server: Required[str]
     """Server URL for external proxy. Required."""
 
@@ -211,9 +176,19 @@ class ProxiesUnionMember0UnionMember1(TypedDict, total=False):
     """Username for external proxy authentication. Optional."""
 
 
-ProxiesUnionMember0: TypeAlias = Union[ProxiesUnionMember0UnionMember0, ProxiesUnionMember0UnionMember1]
+class ProxiesUnionMember0NoneProxyConfig(TypedDict, total=False):
+    type: Required[Literal["none"]]
+    """Type of proxy. Always 'none' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
 
 
-class ProxySettings(TypedDict, total=False):
-    ca_certificates: Required[Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]]
-    """[NOT IN DOCS] The TLS certificate IDs to trust. Optional."""
+ProxiesUnionMember0: TypeAlias = Union[
+    ProxiesUnionMember0BrowserbaseProxyConfig,
+    ProxiesUnionMember0ExternalProxyConfig,
+    ProxiesUnionMember0NoneProxyConfig,
+]

@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import inspect
 from types import TracebackType
-from typing import TYPE_CHECKING, Any, Generic, TypeVar, Iterator, AsyncIterator, cast
+from typing import TYPE_CHECKING, Any, Generic, TypeVar, Iterator, Optional, AsyncIterator, cast
 from typing_extensions import Self, Protocol, TypeGuard, override, get_origin, runtime_checkable
 
 import httpx
@@ -13,6 +13,7 @@ from ._utils import extract_type_var_from_base
 
 if TYPE_CHECKING:
     from ._client import Browserbase, AsyncBrowserbase
+    from ._models import FinalRequestOptions
 
 
 _T = TypeVar("_T")
@@ -22,7 +23,7 @@ class Stream(Generic[_T]):
     """Provides the core interface to iterate over a synchronous stream response."""
 
     response: httpx.Response
-
+    _options: Optional[FinalRequestOptions] = None
     _decoder: SSEBytesDecoder
 
     def __init__(
@@ -31,10 +32,12 @@ class Stream(Generic[_T]):
         cast_to: type[_T],
         response: httpx.Response,
         client: Browserbase,
+        options: Optional[FinalRequestOptions] = None,
     ) -> None:
         self.response = response
         self._cast_to = cast_to
         self._client = client
+        self._options = options
         self._decoder = client._make_sse_decoder()
         self._iterator = self.__stream__()
 
@@ -54,12 +57,12 @@ class Stream(Generic[_T]):
         process_data = self._client._process_response_data
         iterator = self._iter_events()
 
-        for sse in iterator:
-            yield process_data(data=sse.json(), cast_to=cast_to, response=response)
-
-        # Ensure the entire stream is consumed
-        for _sse in iterator:
-            ...
+        try:
+            for sse in iterator:
+                yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+        finally:
+            # Ensure the response is closed even if the consumer doesn't read all data
+            response.close()
 
     def __enter__(self) -> Self:
         return self
@@ -85,7 +88,7 @@ class AsyncStream(Generic[_T]):
     """Provides the core interface to iterate over an asynchronous stream response."""
 
     response: httpx.Response
-
+    _options: Optional[FinalRequestOptions] = None
     _decoder: SSEDecoder | SSEBytesDecoder
 
     def __init__(
@@ -94,10 +97,12 @@ class AsyncStream(Generic[_T]):
         cast_to: type[_T],
         response: httpx.Response,
         client: AsyncBrowserbase,
+        options: Optional[FinalRequestOptions] = None,
     ) -> None:
         self.response = response
         self._cast_to = cast_to
         self._client = client
+        self._options = options
         self._decoder = client._make_sse_decoder()
         self._iterator = self.__stream__()
 
@@ -118,12 +123,12 @@ class AsyncStream(Generic[_T]):
         process_data = self._client._process_response_data
         iterator = self._iter_events()
 
-        async for sse in iterator:
-            yield process_data(data=sse.json(), cast_to=cast_to, response=response)
-
-        # Ensure the entire stream is consumed
-        async for _sse in iterator:
-            ...
+        try:
+            async for sse in iterator:
+                yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+        finally:
+            # Ensure the response is closed even if the consumer doesn't read all data
+            await response.aclose()
 
     async def __aenter__(self) -> Self:
         return self
