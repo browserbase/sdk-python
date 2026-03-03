@@ -1,5 +1,67 @@
 # Changelog
 
+## 1.5.0-alpha.2 (2026-03-03)
+
+Full Changelog: [v1.5.0-alpha.1...v1.5.0-alpha.2](https://github.com/browserbase/sdk-python/compare/v1.5.0-alpha.1...v1.5.0-alpha.2)
+
+### Features
+
+* [CORE-] Restore models and components in SDK ([49f2dab](https://github.com/browserbase/sdk-python/commit/49f2dab3af74ead628337f9475c381023505db6f))
+* **api:** api update ([1c149cb](https://github.com/browserbase/sdk-python/commit/1c149cb5559ce87c275e8e3ff8dabe60f44cb592))
+* **api:** api update ([72aa790](https://github.com/browserbase/sdk-python/commit/72aa790fc596e3762ea73a605134ebbc4ffe0d74))
+* **api:** api update ([a0edac2](https://github.com/browserbase/sdk-python/commit/a0edac2143ff73bc099bf5455191970d46b63628))
+* **api:** api update ([0b8da8a](https://github.com/browserbase/sdk-python/commit/0b8da8acb8aa4a299655719a2b31d472f8d9750f))
+* **api:** api update ([20dcbdc](https://github.com/browserbase/sdk-python/commit/20dcbdc81a95efe53e2e57ff7b205e8a3c023bbc))
+* **api:** api update ([97edfd0](https://github.com/browserbase/sdk-python/commit/97edfd04ce506478373c878b68cab3a8d6adc80d))
+* **api:** manual updates ([892fe71](https://github.com/browserbase/sdk-python/commit/892fe7135c9c454526e7bcf76b4c830b57aa6c22))
+* **api:** manual updates ([32e4d51](https://github.com/browserbase/sdk-python/commit/32e4d5194c9b2da94b7d0da9ce16de2208b47a2d))
+* **api:** manual updates ([3bf8100](https://github.com/browserbase/sdk-python/commit/3bf8100929de96894b568a39a85a1763d46a6cc9))
+* **api:** manual updates ([f46e475](https://github.com/browserbase/sdk-python/commit/f46e475d63812af0f7e53971429adee2dd207d33))
+* **api:** manual updates ([7ace939](https://github.com/browserbase/sdk-python/commit/7ace9396d265afabebd57169e6a32dcedec3b0d4))
+* **api:** manual updates ([94d9db6](https://github.com/browserbase/sdk-python/commit/94d9db6142e868b739649027144eade26e092cb3))
+* **api:** manual updates ([e281b89](https://github.com/browserbase/sdk-python/commit/e281b8958b9a5b30ca90af0db36693a1eeaed8c5))
+* **api:** manual updates ([f0ba58f](https://github.com/browserbase/sdk-python/commit/f0ba58f620f3b30e4f275cce521de1d6e7fd7164))
+* **client:** add custom JSON encoder for extended type support ([da8ce14](https://github.com/browserbase/sdk-python/commit/da8ce14deb91e1da722dbafa3f7e35bfd1fbd983))
+* **client:** add support for binary request streaming ([972c837](https://github.com/browserbase/sdk-python/commit/972c8370ed69360de2479cf0fc818be3df4679cf))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([bb617be](https://github.com/browserbase/sdk-python/commit/bb617bee85cc709ea14c4b53eac06058f28318e9))
+* compat with Python 3.14 ([8f4df7c](https://github.com/browserbase/sdk-python/commit/8f4df7c2a20dd87d54d5ca12a8060a25223d2ef5))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([135104e](https://github.com/browserbase/sdk-python/commit/135104eec5555bd650d25743dd91587e9c74e549))
+* ensure streams are always closed ([588f8f4](https://github.com/browserbase/sdk-python/commit/588f8f480efaa914d5bbcb693dadd97936d66750))
+* **pydantic:** ignore model extras in pydantic v2 ([#156](https://github.com/browserbase/sdk-python/issues/156)) ([9cae18c](https://github.com/browserbase/sdk-python/commit/9cae18c71078c8baae46bfb13298a8eadcfe5675))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([6e13710](https://github.com/browserbase/sdk-python/commit/6e1371033109ed3a2519660bcc0da3f44f65f097))
+* use async_to_httpx_files in patch method ([4370dab](https://github.com/browserbase/sdk-python/commit/4370dab0f116d5535259ee557c0dddf3fc006c80))
+
+
+### Chores
+
+* add missing docstrings ([0332edf](https://github.com/browserbase/sdk-python/commit/0332edf2964f32119e074d86baf3ef35e30f1b8d))
+* add Python 3.14 classifier and testing ([ec88bf3](https://github.com/browserbase/sdk-python/commit/ec88bf3f829ced4db3ee9bbaa249d0f447d0095d))
+* bump `httpx-aiohttp` version to 0.1.9 ([42685a1](https://github.com/browserbase/sdk-python/commit/42685a189cf7a465d8696fbc8902123567f1e9e0))
+* **ci:** upgrade `actions/github-script` ([9363c3d](https://github.com/browserbase/sdk-python/commit/9363c3dd4142917eca9e7f5872d68d73b0400a17))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([b0d4efb](https://github.com/browserbase/sdk-python/commit/b0d4efb5945050ddfa449e468306e39aadeccf6a))
+* **docs:** use environment variables for authentication in code snippets ([97a777f](https://github.com/browserbase/sdk-python/commit/97a777f837a1f06940e05506e4b0237ace54cef8))
+* format all `api.md` files ([36b3fc5](https://github.com/browserbase/sdk-python/commit/36b3fc50c44221848b583e5d5f66e06e9f857a14))
+* **internal/tests:** avoid race condition with implicit client cleanup ([6ca21dc](https://github.com/browserbase/sdk-python/commit/6ca21dcf117d076b9baaa43e0b1efd676c518845))
+* **internal:** add `--fix` argument to lint script ([b96137c](https://github.com/browserbase/sdk-python/commit/b96137ced74f55b77e904026ab76b8bf306a7543))
+* **internal:** add missing files argument to base client ([851f268](https://github.com/browserbase/sdk-python/commit/851f268b6fbfa815f819bd3390d732ee26445b09))
+* **internal:** add request options to SSE classes ([0451d35](https://github.com/browserbase/sdk-python/commit/0451d3509b3bd14695e506ecc5ece3367a91eba6))
+* **internal:** bump dependencies ([b0c3306](https://github.com/browserbase/sdk-python/commit/b0c33068ffe4c033748a4ca7e4394cdd7c4c97be))
+* **internal:** codegen related update ([5dad097](https://github.com/browserbase/sdk-python/commit/5dad0978043a3fe8d65c5ff06a064e2d9b40cda9))
+* **internal:** detect missing future annotations with ruff ([ea60157](https://github.com/browserbase/sdk-python/commit/ea60157e52c3f8477ecf20f2a39ec2a722c83fed))
+* **internal:** fix lint error on Python 3.14 ([ba06a3e](https://github.com/browserbase/sdk-python/commit/ba06a3e6d617c4b10be4874856006797fdec6e93))
+* **internal:** grammar fix (it's -&gt; its) ([1d6aebd](https://github.com/browserbase/sdk-python/commit/1d6aebda8211f3ffe1602420cfca5672d84561bd))
+* **internal:** make `test_proxy_environment_variables` more resilient ([b768b4f](https://github.com/browserbase/sdk-python/commit/b768b4f48ad6ed219cb3b7407baf0f598452f044))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([976c1fb](https://github.com/browserbase/sdk-python/commit/976c1fb236eddec936bdcbc73844a36a91f41397))
+* **internal:** update `actions/checkout` version ([7b01d95](https://github.com/browserbase/sdk-python/commit/7b01d951f1e4abaa345ee686d8b08c9066f183ca))
+* **package:** drop Python 3.8 support ([e36cf2b](https://github.com/browserbase/sdk-python/commit/e36cf2bcad59f24078b30d5e463e0e2325f9439c))
+* speedup initial import ([ca27085](https://github.com/browserbase/sdk-python/commit/ca270852b7f1c3dd5544f73daeec8ddb41eac253))
+* update lockfile ([738e9be](https://github.com/browserbase/sdk-python/commit/738e9be4acd99ad82e69ea876f1249948310f896))
+* update mock server docs ([9c92875](https://github.com/browserbase/sdk-python/commit/9c928759fb88085da94df9921ef35663d1da926e))
+
 ## 1.5.0-alpha.1 (2025-10-07)
 
 Full Changelog: [v1.5.0-alpha.0...v1.5.0-alpha.1](https://github.com/browserbase/sdk-python/compare/v1.5.0-alpha.0...v1.5.0-alpha.1)
