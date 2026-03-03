@@ -10,7 +10,7 @@ from examples import (
     BROWSERBASE_PROJECT_ID,
     bb,
 )
-from browserbase.types import SessionCreateResponse, Extension
+from browserbase.types import Extension, SessionCreateResponse
 
 PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
 
