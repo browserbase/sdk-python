@@ -107,7 +107,7 @@ class BaseModel(pydantic.BaseModel):
             extra: Any = pydantic.Extra.allow  # type: ignore
     else:
         model_config: ClassVar[ConfigDict] = ConfigDict(
-            extra="ignore", defer_build=coerce_boolean(os.environ.get("DEFER_PYDANTIC_BUILD", "true"))
+            extra="allow", defer_build=coerce_boolean(os.environ.get("DEFER_PYDANTIC_BUILD", "true"))
         )
 
     def to_dict(

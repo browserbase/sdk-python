@@ -10,7 +10,7 @@ from examples import (
     BROWSERBASE_PROJECT_ID,
     bb,
 )
-from browserbase.types import SessionCreateResponse, ExtensionRetrieveResponse
+from browserbase.types import SessionCreateResponse, Extension
 
 PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
 
@@ -51,7 +51,7 @@ def create_extension() -> str:
     return extension.id
 
 
-def get_extension(id: str) -> ExtensionRetrieveResponse:
+def get_extension(id: str) -> Extension:
     return bb.extensions.retrieve(id)
 
 
