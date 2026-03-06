@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.6.0 (2026-03-06)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/browserbase/sdk-python/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** api update ([#39](https://github.com/browserbase/sdk-python/issues/39)) ([8c98d9e](https://github.com/browserbase/sdk-python/commit/8c98d9e9da61daba527262aa1b0a1334da22a596))
+* **api:** api update ([#41](https://github.com/browserbase/sdk-python/issues/41)) ([0557ee5](https://github.com/browserbase/sdk-python/commit/0557ee507fc35faa9aabd8d06ce8047bb07843aa))
+* **api:** api update ([#44](https://github.com/browserbase/sdk-python/issues/44)) ([718ef11](https://github.com/browserbase/sdk-python/commit/718ef11db8e865347c24b2205b22f906bccb24e7))
+* **api:** update via SDK Studio ([#10](https://github.com/browserbase/sdk-python/issues/10)) ([712cb9f](https://github.com/browserbase/sdk-python/commit/712cb9f5d36d3f882e36848413fb96f32558b67c))
+* **api:** update via SDK Studio ([#13](https://github.com/browserbase/sdk-python/issues/13)) ([ec90079](https://github.com/browserbase/sdk-python/commit/ec900790bd56f92b174304bb227461a65209cbdb))
+* **api:** update via SDK Studio ([#16](https://github.com/browserbase/sdk-python/issues/16)) ([3739129](https://github.com/browserbase/sdk-python/commit/37391297ef3c3d59105c618ba9026ecae551a77b))
+* **api:** update via SDK Studio ([#18](https://github.com/browserbase/sdk-python/issues/18)) ([c8ff679](https://github.com/browserbase/sdk-python/commit/c8ff67974dbcf8a99dae87aea6e9b18046bf5acd))
+* **api:** update via SDK Studio ([#19](https://github.com/browserbase/sdk-python/issues/19)) ([1556b70](https://github.com/browserbase/sdk-python/commit/1556b7064ad2ec507d74536a1d074e5f464c3d12))
+* **api:** update via SDK Studio ([#20](https://github.com/browserbase/sdk-python/issues/20)) ([8876008](https://github.com/browserbase/sdk-python/commit/887600814fca35fbaf4cb4ddd2a0112a51a3f068))
+* **api:** update via SDK Studio ([#21](https://github.com/browserbase/sdk-python/issues/21)) ([8f22de1](https://github.com/browserbase/sdk-python/commit/8f22de1da97f9157ef52647f20895cabe5ecfd26))
+* **api:** update via SDK Studio ([#27](https://github.com/browserbase/sdk-python/issues/27)) ([b1facb8](https://github.com/browserbase/sdk-python/commit/b1facb8db6d821a2d3c5465dbeb474e0140ed90e))
+* **api:** update via SDK Studio ([#28](https://github.com/browserbase/sdk-python/issues/28)) ([0735db2](https://github.com/browserbase/sdk-python/commit/0735db24fb833dbeb5d09f30b8fd18e67d7a2e5d))
+* **api:** update via SDK Studio ([#29](https://github.com/browserbase/sdk-python/issues/29)) ([c1e0eb9](https://github.com/browserbase/sdk-python/commit/c1e0eb9d84a8b83b30fce673a4c5e6262ce732b2))
+* **api:** update via SDK Studio ([#32](https://github.com/browserbase/sdk-python/issues/32)) ([54a7ed4](https://github.com/browserbase/sdk-python/commit/54a7ed479088a68434961cd92ae225064bf8e8a1))
+* **api:** update via SDK Studio ([#35](https://github.com/browserbase/sdk-python/issues/35)) ([cdc05f9](https://github.com/browserbase/sdk-python/commit/cdc05f947c676bd56bed22e77fcfd48c313f3596))
+* **api:** update via SDK Studio ([#7](https://github.com/browserbase/sdk-python/issues/7)) ([90f80c7](https://github.com/browserbase/sdk-python/commit/90f80c7d8a44b155cac6dc9ed73ac55dbbb9596d))
+* various codegen changes ([a70c78e](https://github.com/browserbase/sdk-python/commit/a70c78ecf5c0f4763c9222a332c164249c1060bc))
+
+
+### Chores
+
+* **test:** do not count install time for mock server timeout ([b19e21b](https://github.com/browserbase/sdk-python/commit/b19e21bf4d411face9fd8f252f35bac1981370ef))
+* update SDK settings ([#1](https://github.com/browserbase/sdk-python/issues/1)) ([dc1e229](https://github.com/browserbase/sdk-python/commit/dc1e229189470b0f3df3c5a2e7da4e789fc76279))
+
 ## 1.5.0-alpha.2 (2026-03-03)
 
 Full Changelog: [v1.5.0-alpha.1...v1.5.0-alpha.2](https://github.com/browserbase/sdk-python/compare/v1.5.0-alpha.1...v1.5.0-alpha.2)
