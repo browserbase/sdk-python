@@ -17,5 +17,7 @@ from .session_update_params import SessionUpdateParams as SessionUpdateParams
 from .context_create_response import ContextCreateResponse as ContextCreateResponse
 from .context_update_response import ContextUpdateResponse as ContextUpdateResponse
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
+from .fetch_api_create_params import FetchAPICreateParams as FetchAPICreateParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
+from .fetch_api_create_response import FetchAPICreateResponse as FetchAPICreateResponse
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse

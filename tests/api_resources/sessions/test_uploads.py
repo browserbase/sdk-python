@@ -21,7 +21,7 @@ class TestUploads:
     def test_method_create(self, client: Browserbase) -> None:
         upload = client.sessions.uploads.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
 
@@ -29,7 +29,7 @@ class TestUploads:
     def test_raw_response_create(self, client: Browserbase) -> None:
         response = client.sessions.uploads.with_raw_response.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestUploads:
     def test_streaming_response_create(self, client: Browserbase) -> None:
         with client.sessions.uploads.with_streaming_response.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -56,7 +56,7 @@ class TestUploads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sessions.uploads.with_raw_response.create(
                 id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
 
@@ -69,7 +69,7 @@ class TestAsyncUploads:
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
         upload = await async_client.sessions.uploads.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
 
@@ -77,7 +77,7 @@ class TestAsyncUploads:
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.uploads.with_raw_response.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -89,7 +89,7 @@ class TestAsyncUploads:
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.uploads.with_streaming_response.create(
             id="id",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -104,5 +104,5 @@ class TestAsyncUploads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.uploads.with_raw_response.create(
                 id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )
