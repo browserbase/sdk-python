@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2026-03-11)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/browserbase/sdk-python/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* [CORE-1796][apps/api] Update Node.js SDK ([ecafbb5](https://github.com/browserbase/sdk-python/commit/ecafbb511dbe9be78e84f4e1d34e1feefa1fce8e))
+
 ## 1.6.0 (2026-03-11)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/browserbase/sdk-python/compare/v1.5.0...v1.6.0)
