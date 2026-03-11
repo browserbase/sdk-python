@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 
 ```sh
 # install from PyPI
-pip install '--pre browserbase'
+pip install browserbase
 ```
 
 ## Usage
@@ -75,7 +75,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install '--pre browserbase[aiohttp]'
+pip install browserbase[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
