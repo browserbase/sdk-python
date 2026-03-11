@@ -31,9 +31,10 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import contexts, projects, sessions, extensions
+    from .resources import contexts, projects, sessions, fetch_api, extensions
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
 
@@ -115,6 +116,12 @@ class Browserbase(SyncAPIClient):
         from .resources.extensions import ExtensionsResource
 
         return ExtensionsResource(self)
+
+    @cached_property
+    def fetch_api(self) -> FetchAPIResource:
+        from .resources.fetch_api import FetchAPIResource
+
+        return FetchAPIResource(self)
 
     @cached_property
     def projects(self) -> ProjectsResource:
@@ -309,6 +316,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncExtensionsResource(self)
 
     @cached_property
+    def fetch_api(self) -> AsyncFetchAPIResource:
+        from .resources.fetch_api import AsyncFetchAPIResource
+
+        return AsyncFetchAPIResource(self)
+
+    @cached_property
     def projects(self) -> AsyncProjectsResource:
         from .resources.projects import AsyncProjectsResource
 
@@ -452,6 +465,12 @@ class BrowserbaseWithRawResponse:
         return ExtensionsResourceWithRawResponse(self._client.extensions)
 
     @cached_property
+    def fetch_api(self) -> fetch_api.FetchAPIResourceWithRawResponse:
+        from .resources.fetch_api import FetchAPIResourceWithRawResponse
+
+        return FetchAPIResourceWithRawResponse(self._client.fetch_api)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithRawResponse:
         from .resources.projects import ProjectsResourceWithRawResponse
 
@@ -481,6 +500,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.extensions import AsyncExtensionsResourceWithRawResponse
 
         return AsyncExtensionsResourceWithRawResponse(self._client.extensions)
+
+    @cached_property
+    def fetch_api(self) -> fetch_api.AsyncFetchAPIResourceWithRawResponse:
+        from .resources.fetch_api import AsyncFetchAPIResourceWithRawResponse
+
+        return AsyncFetchAPIResourceWithRawResponse(self._client.fetch_api)
 
     @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
@@ -514,6 +539,12 @@ class BrowserbaseWithStreamedResponse:
         return ExtensionsResourceWithStreamingResponse(self._client.extensions)
 
     @cached_property
+    def fetch_api(self) -> fetch_api.FetchAPIResourceWithStreamingResponse:
+        from .resources.fetch_api import FetchAPIResourceWithStreamingResponse
+
+        return FetchAPIResourceWithStreamingResponse(self._client.fetch_api)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
         from .resources.projects import ProjectsResourceWithStreamingResponse
 
@@ -543,6 +574,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.extensions import AsyncExtensionsResourceWithStreamingResponse
 
         return AsyncExtensionsResourceWithStreamingResponse(self._client.extensions)
+
+    @cached_property
+    def fetch_api(self) -> fetch_api.AsyncFetchAPIResourceWithStreamingResponse:
+        from .resources.fetch_api import AsyncFetchAPIResourceWithStreamingResponse
+
+        return AsyncFetchAPIResourceWithStreamingResponse(self._client.fetch_api)
 
     @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:

@@ -24,6 +24,14 @@ from .sessions import (
     SessionsResourceWithStreamingResponse,
     AsyncSessionsResourceWithStreamingResponse,
 )
+from .fetch_api import (
+    FetchAPIResource,
+    AsyncFetchAPIResource,
+    FetchAPIResourceWithRawResponse,
+    AsyncFetchAPIResourceWithRawResponse,
+    FetchAPIResourceWithStreamingResponse,
+    AsyncFetchAPIResourceWithStreamingResponse,
+)
 from .extensions import (
     ExtensionsResource,
     AsyncExtensionsResource,
@@ -46,6 +54,12 @@ __all__ = [
     "AsyncExtensionsResourceWithRawResponse",
     "ExtensionsResourceWithStreamingResponse",
     "AsyncExtensionsResourceWithStreamingResponse",
+    "FetchAPIResource",
+    "AsyncFetchAPIResource",
+    "FetchAPIResourceWithRawResponse",
+    "AsyncFetchAPIResourceWithRawResponse",
+    "FetchAPIResourceWithStreamingResponse",
+    "AsyncFetchAPIResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",
