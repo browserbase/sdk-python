@@ -10,8 +10,6 @@ __all__ = ["FetchAPICreateResponse"]
 
 
 class FetchAPICreateResponse(BaseModel):
-    """Response body for fetch"""
-
     id: str
     """Unique identifier for the fetch request"""
 
