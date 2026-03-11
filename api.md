@@ -27,6 +27,18 @@ Methods:
 - <code title="get /v1/extensions/{id}">client.extensions.<a href="./src/browserbase/resources/extensions.py">retrieve</a>(id) -> <a href="./src/browserbase/types/extension.py">Extension</a></code>
 - <code title="delete /v1/extensions/{id}">client.extensions.<a href="./src/browserbase/resources/extensions.py">delete</a>(id) -> None</code>
 
+# FetchAPI
+
+Types:
+
+```python
+from browserbase.types import FetchAPICreateResponse
+```
+
+Methods:
+
+- <code title="post /v1/fetch">client.fetch_api.<a href="./src/browserbase/resources/fetch_api.py">create</a>(\*\*<a href="src/browserbase/types/fetch_api_create_params.py">params</a>) -> <a href="./src/browserbase/types/fetch_api_create_response.py">FetchAPICreateResponse</a></code>
+
 # Projects
 
 Types:
