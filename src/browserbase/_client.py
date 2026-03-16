@@ -31,7 +31,8 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import contexts, projects, sessions, fetch_api, extensions
+    from .resources import search, contexts, projects, sessions, fetch_api, extensions
+    from .resources.search import SearchResource, AsyncSearchResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
@@ -128,6 +129,12 @@ class Browserbase(SyncAPIClient):
         from .resources.projects import ProjectsResource
 
         return ProjectsResource(self)
+
+    @cached_property
+    def search(self) -> SearchResource:
+        from .resources.search import SearchResource
+
+        return SearchResource(self)
 
     @cached_property
     def sessions(self) -> SessionsResource:
@@ -328,6 +335,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncProjectsResource(self)
 
     @cached_property
+    def search(self) -> AsyncSearchResource:
+        from .resources.search import AsyncSearchResource
+
+        return AsyncSearchResource(self)
+
+    @cached_property
     def sessions(self) -> AsyncSessionsResource:
         from .resources.sessions import AsyncSessionsResource
 
@@ -477,6 +490,12 @@ class BrowserbaseWithRawResponse:
         return ProjectsResourceWithRawResponse(self._client.projects)
 
     @cached_property
+    def search(self) -> search.SearchResourceWithRawResponse:
+        from .resources.search import SearchResourceWithRawResponse
+
+        return SearchResourceWithRawResponse(self._client.search)
+
+    @cached_property
     def sessions(self) -> sessions.SessionsResourceWithRawResponse:
         from .resources.sessions import SessionsResourceWithRawResponse
 
@@ -512,6 +531,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.projects import AsyncProjectsResourceWithRawResponse
 
         return AsyncProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def search(self) -> search.AsyncSearchResourceWithRawResponse:
+        from .resources.search import AsyncSearchResourceWithRawResponse
+
+        return AsyncSearchResourceWithRawResponse(self._client.search)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
@@ -551,6 +576,12 @@ class BrowserbaseWithStreamedResponse:
         return ProjectsResourceWithStreamingResponse(self._client.projects)
 
     @cached_property
+    def search(self) -> search.SearchResourceWithStreamingResponse:
+        from .resources.search import SearchResourceWithStreamingResponse
+
+        return SearchResourceWithStreamingResponse(self._client.search)
+
+    @cached_property
     def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
         from .resources.sessions import SessionsResourceWithStreamingResponse
 
@@ -586,6 +617,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.projects import AsyncProjectsResourceWithStreamingResponse
 
         return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def search(self) -> search.AsyncSearchResourceWithStreamingResponse:
+        from .resources.search import AsyncSearchResourceWithStreamingResponse
+
+        return AsyncSearchResourceWithStreamingResponse(self._client.search)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:
