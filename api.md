@@ -53,6 +53,18 @@ Methods:
 - <code title="get /v1/projects">client.projects.<a href="./src/browserbase/resources/projects.py">list</a>() -> <a href="./src/browserbase/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="get /v1/projects/{id}/usage">client.projects.<a href="./src/browserbase/resources/projects.py">usage</a>(id) -> <a href="./src/browserbase/types/project_usage.py">ProjectUsage</a></code>
 
+# Search
+
+Types:
+
+```python
+from browserbase.types import SearchWebResponse
+```
+
+Methods:
+
+- <code title="post /v1/search">client.search.<a href="./src/browserbase/resources/search.py">web</a>(\*\*<a href="src/browserbase/types/search_web_params.py">params</a>) -> <a href="./src/browserbase/types/search_web_response.py">SearchWebResponse</a></code>
+
 # Sessions
 
 Types:

@@ -7,7 +7,9 @@ from .project import Project as Project
 from .session import Session as Session
 from .extension import Extension as Extension
 from .project_usage import ProjectUsage as ProjectUsage
+from .search_web_params import SearchWebParams as SearchWebParams
 from .session_live_urls import SessionLiveURLs as SessionLiveURLs
+from .search_web_response import SearchWebResponse as SearchWebResponse
 from .session_list_params import SessionListParams as SessionListParams
 from .context_create_params import ContextCreateParams as ContextCreateParams
 from .project_list_response import ProjectListResponse as ProjectListResponse
