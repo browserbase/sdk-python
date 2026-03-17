@@ -34,8 +34,6 @@ class Result(BaseModel):
 
 
 class SearchWebResponse(BaseModel):
-    """Response body for web search"""
-
     query: str
     """The search query that was executed"""
 
