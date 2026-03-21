@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.8.0 (2026-03-21)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/browserbase/sdk-python/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* Update search docs by removing description from typebox schemas ([7913112](https://github.com/browserbase/sdk-python/commit/7913112d697666bf4381119f5962c284bd91b410))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([962e72a](https://github.com/browserbase/sdk-python/commit/962e72a121f27a603f92311917426c9aee84d805))
+* **pydantic:** do not pass `by_alias` unless set ([3e6a912](https://github.com/browserbase/sdk-python/commit/3e6a912dc0a117c2deb229bb5230d2294de3b129))
+* sanitize endpoint path params ([8a63eb5](https://github.com/browserbase/sdk-python/commit/8a63eb5e275eb25849f22cf210d42487e8283078))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([9901c59](https://github.com/browserbase/sdk-python/commit/9901c595fa68e1ab213ac22eb06aeebc722edb03))
+* **tests:** bump steady to v0.19.4 ([f81180d](https://github.com/browserbase/sdk-python/commit/f81180d7502d612aaaab8665740f2cc133da1e80))
+* **tests:** bump steady to v0.19.5 ([10d0b70](https://github.com/browserbase/sdk-python/commit/10d0b70f04059ff66f199b9512ffb4ab11699262))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([39217ea](https://github.com/browserbase/sdk-python/commit/39217ea5ffd68b03900a6272378a3b3a8d5efc4a))
+
 ## 1.7.0 (2026-03-16)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/browserbase/sdk-python/compare/v1.6.0...v1.7.0)

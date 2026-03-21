@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -69,7 +70,7 @@ class DownloadsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "application/zip", **(extra_headers or {})}
         return self._get(
-            f"/v1/sessions/{id}/downloads",
+            path_template("/v1/sessions/{id}/downloads", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -124,7 +125,7 @@ class AsyncDownloadsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "application/zip", **(extra_headers or {})}
         return await self._get(
-            f"/v1/sessions/{id}/downloads",
+            path_template("/v1/sessions/{id}/downloads", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
