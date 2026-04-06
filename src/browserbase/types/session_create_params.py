@@ -123,6 +123,9 @@ class BrowserSettings(TypedDict, total=False):
     solve_captchas: Annotated[bool, PropertyInfo(alias="solveCaptchas")]
     """Enable or disable captcha solving in the browser. Defaults to `true`."""
 
+    verified: bool
+    """Verified Browser Mode"""
+
     viewport: BrowserSettingsViewport
 
 
