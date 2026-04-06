@@ -7,7 +7,7 @@ from typing import Mapping, cast
 import httpx
 
 from ..._types import Body, Query, Headers, NotGiven, FileTypes, not_given
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -76,7 +76,7 @@ class UploadsResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/v1/sessions/{id}/uploads",
+            path_template("/v1/sessions/{id}/uploads", id=id),
             body=maybe_transform(body, upload_create_params.UploadCreateParams),
             files=files,
             options=make_request_options(
@@ -139,7 +139,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/v1/sessions/{id}/uploads",
+            path_template("/v1/sessions/{id}/uploads", id=id),
             body=await async_maybe_transform(body, upload_create_params.UploadCreateParams),
             files=files,
             options=make_request_options(
