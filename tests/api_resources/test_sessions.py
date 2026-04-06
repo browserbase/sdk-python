@@ -45,6 +45,7 @@ class TestSessions:
                 "os": "windows",
                 "record_session": True,
                 "solve_captchas": True,
+                "verified": True,
                 "viewport": {
                     "height": 0,
                     "width": 0,
@@ -278,6 +279,7 @@ class TestAsyncSessions:
                 "os": "windows",
                 "record_session": True,
                 "solve_captchas": True,
+                "verified": True,
                 "viewport": {
                     "height": 0,
                     "width": 0,
