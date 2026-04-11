@@ -16,4 +16,4 @@ class SessionListParams(TypedDict, total=False):
     for the schema of this query.
     """
 
-    status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"]
+    status: Literal["PENDING", "RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"]

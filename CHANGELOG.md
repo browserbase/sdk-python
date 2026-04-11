@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.9.0 (2026-04-11)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/browserbase/sdk-python/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* [CORE-1928][apps/api] Add `PENDING` as a valid session state ([4f1248d](https://github.com/browserbase/sdk-python/commit/4f1248dfb1bf79194f65854a6fcd6a0d53433ba1))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([953fd3e](https://github.com/browserbase/sdk-python/commit/953fd3ecd54a7ffc2ee390eac67f2063df89b8e9))
+* ensure file data are only sent as 1 parameter ([a837357](https://github.com/browserbase/sdk-python/commit/a83735708037eec6cb4807e4220ca7452b5b6503))
+
 ## 1.8.0 (2026-04-06)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/browserbase/sdk-python/compare/v1.7.0...v1.8.0)

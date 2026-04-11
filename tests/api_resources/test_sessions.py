@@ -189,7 +189,7 @@ class TestSessions:
     def test_method_list_with_all_params(self, client: Browserbase) -> None:
         session = client.sessions.list(
             q="q",
-            status="RUNNING",
+            status="PENDING",
         )
         assert_matches_type(SessionListResponse, session, path=["response"])
 
@@ -423,7 +423,7 @@ class TestAsyncSessions:
     async def test_method_list_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.list(
             q="q",
-            status="RUNNING",
+            status="PENDING",
         )
         assert_matches_type(SessionListResponse, session, path=["response"])
 
