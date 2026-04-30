@@ -108,6 +108,12 @@ class BrowserSettings(TypedDict, total=False):
     See [Upload Extension](/reference/api/upload-an-extension).
     """
 
+    ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
+    """Enable or disable ignoring of certificate errors in the browser.
+
+    Defaults to `true`.
+    """
+
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
 
