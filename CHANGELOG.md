@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.9.0 (2026-05-01)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/browserbase/sdk-python/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* [CORE-1928][apps/api] Add `PENDING` as a valid session state ([4f1248d](https://github.com/browserbase/sdk-python/commit/4f1248dfb1bf79194f65854a6fcd6a0d53433ba1))
+* [CORE-1979] [apps/api] Regenerate OpenAPI spec to match current routes ([0e366a6](https://github.com/browserbase/sdk-python/commit/0e366a6a0a01e2ce8e661d73f9fa312e56d1a582))
+* support setting headers via env ([308d35e](https://github.com/browserbase/sdk-python/commit/308d35edb58454e542fcf58f379061fb742bd83b))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([953fd3e](https://github.com/browserbase/sdk-python/commit/953fd3ecd54a7ffc2ee390eac67f2063df89b8e9))
+* ensure file data are only sent as 1 parameter ([a837357](https://github.com/browserbase/sdk-python/commit/a83735708037eec6cb4807e4220ca7452b5b6503))
+* use correct field name format for multipart file arrays ([9488fb3](https://github.com/browserbase/sdk-python/commit/9488fb39a656b0aaaf740ccec0a9dce57b996b02))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([4146f22](https://github.com/browserbase/sdk-python/commit/4146f22bb6c054e7491e4c10021dff3e9e2c8824))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([83d1f68](https://github.com/browserbase/sdk-python/commit/83d1f686936e4593c3017c719056573089bbd1e0))
+* **internal:** reformat pyproject.toml ([979436a](https://github.com/browserbase/sdk-python/commit/979436a2cb86944f8bf400a2e623e946188d87c1))
+* **tests:** bump steady to v0.22.1 ([bafb680](https://github.com/browserbase/sdk-python/commit/bafb68055a4f36ef6b7d6a308606db9e8d33257b))
+
 ## 1.8.0 (2026-04-06)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/browserbase/sdk-python/compare/v1.7.0...v1.8.0)
