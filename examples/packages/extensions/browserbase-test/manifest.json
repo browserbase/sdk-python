@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Browserbase Extension Test",
+  "description": "Test extension for browserbase",
+  "version": "1.0",
+  "action": {
+    "default_popup": "hello.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.browserbase.com/*"],
+      "js": ["scripts/content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/logo.png"],
+      "matches": ["https://www.browserbase.com/*"]
+    }
+  ]
+}
