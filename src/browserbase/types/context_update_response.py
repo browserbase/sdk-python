@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
+
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
@@ -25,5 +27,8 @@ class ContextUpdateResponse(BaseModel):
     public_key: str = FieldInfo(alias="publicKey")
     """The public key to encrypt the user-data-directory."""
 
-    upload_url: str = FieldInfo(alias="uploadUrl")
-    """An upload URL to upload a custom user-data-directory."""
+    upload_url: Optional[str] = FieldInfo(alias="uploadUrl", default=None)
+    """An upload URL to upload a custom user-data-directory.
+
+    Omitted when context uploads are disabled for the project.
+    """
