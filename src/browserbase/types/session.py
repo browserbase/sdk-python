@@ -32,7 +32,7 @@ class Session(BaseModel):
 
     started_at: datetime = FieldInfo(alias="startedAt")
 
-    status: Literal["RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"]
+    status: Literal["PENDING", "RUNNING", "ERROR", "TIMED_OUT", "COMPLETED"]
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
 
