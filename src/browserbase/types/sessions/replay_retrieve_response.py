@@ -10,11 +10,11 @@ __all__ = ["ReplayRetrieveResponse", "Page"]
 
 
 class Page(BaseModel):
-    end_time_ms: float = FieldInfo(alias="endTimeMs")
+    end_time_ms: int = FieldInfo(alias="endTimeMs")
 
     page_id: str = FieldInfo(alias="pageId")
 
-    start_time_ms: float = FieldInfo(alias="startTimeMs")
+    start_time_ms: int = FieldInfo(alias="startTimeMs")
 
     url: str
 
