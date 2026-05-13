@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.10.0 (2026-05-13)
+
+Full Changelog: [v1.9.0...v1.10.0](https://github.com/browserbase/sdk-python/compare/v1.9.0...v1.10.0)
+
+### Features
+
+* Cast replay page start/end times as integer ([ef3642a](https://github.com/browserbase/sdk-python/commit/ef3642a11680a1cda0de0ad46f15b23ef7de99d3))
+
 ## 1.9.0 (2026-05-13)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/browserbase/sdk-python/compare/v1.8.0...v1.9.0)
