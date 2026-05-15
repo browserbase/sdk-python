@@ -52,6 +52,7 @@ dev-dependencies = [
     "respx",
     "pytest",
     "pytest-asyncio",
+    "pytest-playwright",
     "ruff",
     "time-machine",
     "nox",
@@ -59,6 +60,9 @@ dev-dependencies = [
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
     "pytest-xdist>=3.6.1",
+    "python-dotenv",
+    "playwright",
+    "selenium",
 ]
 
 [tool.rye.scripts]
@@ -82,10 +86,15 @@ format = { chain = [
 
 "check:importable" = "python -c 'import browserbase'"
 
+"example" = "python -c 'import sys; from pathlib import Path; example = Path(\"examples\") / (sys.argv[1] + \".py\"); exec(open(example).read())'"
+
+"test:e2e" = "python -m pytest examples/e2e"
+
 typecheck = { chain = [
   "typecheck:pyright",
   "typecheck:mypy"
 ]}
+
 "typecheck:pyright" = "pyright"
 "typecheck:verify-types" = "pyright --verifytypes browserbase --ignoreexternal"
 "typecheck:mypy" = "mypy ."
@@ -236,7 +245,7 @@ select = [
   "T201",
   "T203",
   # misuse of typing.TYPE_CHECKING
-  "TC004",
+  # "TC004", # fails lint
   # import rules
   "TID251",
 ]
