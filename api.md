@@ -128,16 +128,3 @@ from browserbase.types.sessions import UploadCreateResponse
 Methods:
 
 - <code title="post /v1/sessions/{id}/uploads">client.sessions.uploads.<a href="./src/browserbase/resources/sessions/uploads.py">create</a>(id, \*\*<a href="src/browserbase/types/sessions/upload_create_params.py">params</a>) -> <a href="./src/browserbase/types/sessions/upload_create_response.py">UploadCreateResponse</a></code>
-
-## Replays
-
-Types:
-
-```python
-from browserbase.types.sessions import ReplayRetrieveResponse
-```
-
-Methods:
-
-- <code title="get /v1/sessions/{id}/replays">client.sessions.replays.<a href="./src/browserbase/resources/sessions/replays.py">retrieve</a>(id) -> <a href="./src/browserbase/types/sessions/replay_retrieve_response.py">ReplayRetrieveResponse</a></code>
-- <code title="get /v1/sessions/{id}/replays/{pageId}">client.sessions.replays.<a href="./src/browserbase/resources/sessions/replays.py">retrieve_page</a>(page_id, \*, id) -> BinaryAPIResponse</code>

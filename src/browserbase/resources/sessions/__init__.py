@@ -8,14 +8,6 @@ from .logs import (
     LogsResourceWithStreamingResponse,
     AsyncLogsResourceWithStreamingResponse,
 )
-from .replays import (
-    ReplaysResource,
-    AsyncReplaysResource,
-    ReplaysResourceWithRawResponse,
-    AsyncReplaysResourceWithRawResponse,
-    ReplaysResourceWithStreamingResponse,
-    AsyncReplaysResourceWithStreamingResponse,
-)
 from .uploads import (
     UploadsResource,
     AsyncUploadsResource,
@@ -74,12 +66,6 @@ __all__ = [
     "AsyncUploadsResourceWithRawResponse",
     "UploadsResourceWithStreamingResponse",
     "AsyncUploadsResourceWithStreamingResponse",
-    "ReplaysResource",
-    "AsyncReplaysResource",
-    "ReplaysResourceWithRawResponse",
-    "AsyncReplaysResourceWithRawResponse",
-    "ReplaysResourceWithStreamingResponse",
-    "AsyncReplaysResourceWithStreamingResponse",
     "SessionsResource",
     "AsyncSessionsResource",
     "SessionsResourceWithRawResponse",
