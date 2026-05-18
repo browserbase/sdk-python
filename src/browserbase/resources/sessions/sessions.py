@@ -16,14 +16,6 @@ from .logs import (
     AsyncLogsResourceWithStreamingResponse,
 )
 from ...types import session_list_params, session_create_params, session_update_params
-from .replays import (
-    ReplaysResource,
-    AsyncReplaysResource,
-    ReplaysResourceWithRawResponse,
-    AsyncReplaysResourceWithRawResponse,
-    ReplaysResourceWithStreamingResponse,
-    AsyncReplaysResourceWithStreamingResponse,
-)
 from .uploads import (
     UploadsResource,
     AsyncUploadsResource,
@@ -84,10 +76,6 @@ class SessionsResource(SyncAPIResource):
     @cached_property
     def uploads(self) -> UploadsResource:
         return UploadsResource(self._client)
-
-    @cached_property
-    def replays(self) -> ReplaysResource:
-        return ReplaysResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SessionsResourceWithRawResponse:
@@ -360,10 +348,6 @@ class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
     def uploads(self) -> AsyncUploadsResource:
         return AsyncUploadsResource(self._client)
-
-    @cached_property
-    def replays(self) -> AsyncReplaysResource:
-        return AsyncReplaysResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSessionsResourceWithRawResponse:
@@ -656,10 +640,6 @@ class SessionsResourceWithRawResponse:
     def uploads(self) -> UploadsResourceWithRawResponse:
         return UploadsResourceWithRawResponse(self._sessions.uploads)
 
-    @cached_property
-    def replays(self) -> ReplaysResourceWithRawResponse:
-        return ReplaysResourceWithRawResponse(self._sessions.replays)
-
 
 class AsyncSessionsResourceWithRawResponse:
     def __init__(self, sessions: AsyncSessionsResource) -> None:
@@ -696,10 +676,6 @@ class AsyncSessionsResourceWithRawResponse:
     @cached_property
     def uploads(self) -> AsyncUploadsResourceWithRawResponse:
         return AsyncUploadsResourceWithRawResponse(self._sessions.uploads)
-
-    @cached_property
-    def replays(self) -> AsyncReplaysResourceWithRawResponse:
-        return AsyncReplaysResourceWithRawResponse(self._sessions.replays)
 
 
 class SessionsResourceWithStreamingResponse:
@@ -738,10 +714,6 @@ class SessionsResourceWithStreamingResponse:
     def uploads(self) -> UploadsResourceWithStreamingResponse:
         return UploadsResourceWithStreamingResponse(self._sessions.uploads)
 
-    @cached_property
-    def replays(self) -> ReplaysResourceWithStreamingResponse:
-        return ReplaysResourceWithStreamingResponse(self._sessions.replays)
-
 
 class AsyncSessionsResourceWithStreamingResponse:
     def __init__(self, sessions: AsyncSessionsResource) -> None:
@@ -778,7 +750,3 @@ class AsyncSessionsResourceWithStreamingResponse:
     @cached_property
     def uploads(self) -> AsyncUploadsResourceWithStreamingResponse:
         return AsyncUploadsResourceWithStreamingResponse(self._sessions.uploads)
-
-    @cached_property
-    def replays(self) -> AsyncReplaysResourceWithStreamingResponse:
-        return AsyncReplaysResourceWithStreamingResponse(self._sessions.replays)
