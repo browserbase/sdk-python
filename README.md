@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.browserbase.com](https://docs.b
 
 ```sh
 # install from PyPI
-pip install browserbase
+pip install '--pre browserbase'
 ```
 
 ## Usage
@@ -26,46 +26,61 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
+from playwright.sync_api import Playwright, sync_playwright
 from browserbase import Browserbase
 
+BROWSERBASE_API_KEY = os.environ.get("BROWSERBASE_API_KEY")
+BROWSERBASE_PROJECT_ID = os.environ.get("BROWSERBASE_PROJECT_ID")
+
 client = Browserbase(
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
+    # This is the default and can be omitted
+    api_key=BROWSERBASE_API_KEY,
 )
 
 session = client.sessions.create(
-    project_id="your_project_id",
+    project_id=BROWSERBASE_PROJECT_ID,
 )
 ```
 
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BROWSERBASE_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
-## Async usage
+def run(playwright: Playwright) -> None:
+    # Connect to the remote session
+    chromium = playwright.chromium
+    browser = chromium.connect_over_cdp(session.connect_url)
+    context = browser.contexts[0]
+    page = context.pages[0]
 
-Simply import `AsyncBrowserbase` instead of `Browserbase` and use `await` with each API call:
+    # Execute Playwright actions on the remote browser tab
+    page.goto("https://news.ycombinator.com/")
+    page_title = page.title()
+    assert page_title == "Hacker News", f"Page title is not 'Hacker News', it is '{page_title}'"
+    page.screenshot(path="screenshot.png")
 
-```python
-import os
-import asyncio
-from browserbase import AsyncBrowserbase
-
-client = AsyncBrowserbase(
-    api_key=os.environ.get("BROWSERBASE_API_KEY"),  # This is the default and can be omitted
-)
-
-
-async def main() -> None:
-    session = await client.sessions.create(
-        project_id="your_project_id",
-    )
+    page.close()
+    browser.close()
+    print("Done!")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    with sync_playwright() as playwright:
+        run(playwright)
+```
+## Examples
+
+See the [examples](examples) directory for more usage examples.
+
+> [!NOTE]
+> Running the examples requires [Rye](https://rye.astral.sh/) to be installed.
+
+To run the examples, clone this repository and run the following commands from the project root (this directory):
+
+```bash
+rye sync
+rye run example playwright_basic # replace with the example you want to run
 ```
 
-Functionality between the synchronous and asynchronous clients is otherwise identical.
+> [!NOTE]
+> Make sure you have a `.env` file that matches the [.env.example](.env.example) file in the root of this repository.
 
 ### With aiohttp
 
@@ -75,7 +90,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install browserbase[aiohttp]
+pip install '--pre browserbase[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
