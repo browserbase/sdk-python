@@ -30,7 +30,9 @@ class TestFetchAPI:
             url="https://example.com",
             allow_insecure_ssl=True,
             allow_redirects=True,
+            format="raw",
             proxies=True,
+            schema={"foo": "bar"},
         )
         assert_matches_type(FetchAPICreateResponse, fetch_api, path=["response"])
 
@@ -77,7 +79,9 @@ class TestAsyncFetchAPI:
             url="https://example.com",
             allow_insecure_ssl=True,
             allow_redirects=True,
+            format="raw",
             proxies=True,
+            schema={"foo": "bar"},
         )
         assert_matches_type(FetchAPICreateResponse, fetch_api, path=["response"])
 
