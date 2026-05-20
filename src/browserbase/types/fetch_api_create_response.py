@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Union
+from typing import Dict
 
 from pydantic import Field as FieldInfo
 
@@ -13,12 +13,8 @@ class FetchAPICreateResponse(BaseModel):
     id: str
     """Unique identifier for the fetch request"""
 
-    content: Union[str, Dict[str, object]]
-    """The response body content.
-
-    A string for `raw` and `markdown` formats; a structured object for `json` format
-    (the schema-extracted result).
-    """
+    content: str
+    """The response body content"""
 
     content_type: str = FieldInfo(alias="contentType")
     """The MIME type of the response"""

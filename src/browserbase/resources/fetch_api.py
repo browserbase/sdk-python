@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict
-from typing_extensions import Literal
-
 import httpx
 
 from ..types import fetch_api_create_params
@@ -50,9 +47,7 @@ class FetchAPIResource(SyncAPIResource):
         url: str,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
-        format: Literal["raw", "json", "markdown"] | Omit = omit,
         proxies: bool | Omit = omit,
-        schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,14 +65,7 @@ class FetchAPIResource(SyncAPIResource):
 
           allow_redirects: Whether to follow HTTP redirects
 
-          format: Output format for the response content. `raw` (default) returns the response
-              body unchanged; `json` returns structured data (requires `schema`); `markdown`
-              returns the page as markdown.
-
           proxies: Whether to enable proxy support for the request
-
-          schema: JSON Schema describing the desired structure of the response. Only used when
-              `format` is `json`.
 
           extra_headers: Send extra headers
 
@@ -94,9 +82,7 @@ class FetchAPIResource(SyncAPIResource):
                     "url": url,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
-                    "format": format,
                     "proxies": proxies,
-                    "schema": schema,
                 },
                 fetch_api_create_params.FetchAPICreateParams,
             ),
@@ -133,9 +119,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
         url: str,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
-        format: Literal["raw", "json", "markdown"] | Omit = omit,
         proxies: bool | Omit = omit,
-        schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -153,14 +137,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
 
           allow_redirects: Whether to follow HTTP redirects
 
-          format: Output format for the response content. `raw` (default) returns the response
-              body unchanged; `json` returns structured data (requires `schema`); `markdown`
-              returns the page as markdown.
-
           proxies: Whether to enable proxy support for the request
-
-          schema: JSON Schema describing the desired structure of the response. Only used when
-              `format` is `json`.
 
           extra_headers: Send extra headers
 
@@ -177,9 +154,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
                     "url": url,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
-                    "format": format,
                     "proxies": proxies,
-                    "schema": schema,
                 },
                 fetch_api_create_params.FetchAPICreateParams,
             ),
