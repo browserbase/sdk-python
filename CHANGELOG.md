@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.11.0 (2026-05-20)
+
+Full Changelog: [v1.10.0...v1.11.0](https://github.com/browserbase/sdk-python/compare/v1.10.0...v1.11.0)
+
+### Features
+
+* [AI-1748][apps/api] Obtain custom certificates in API during session reservation ([9c0b78d](https://github.com/browserbase/sdk-python/commit/9c0b78d40adf9e9e2f49a2dbb34e37aa622b8991))
+* [AI-1972] - Move fetch v2 handler into /v1/fetch ([de76605](https://github.com/browserbase/sdk-python/commit/de766051f87c90c307b93f0614b2df48fd4d4ee9))
+* [AI-1993] - Surface structured JSON content on /v2/fetch ([97f1c02](https://github.com/browserbase/sdk-python/commit/97f1c02a520d433abe467b11a04f7fbab85fd3f3))
+* **api:** manual updates ([1d7beb8](https://github.com/browserbase/sdk-python/commit/1d7beb84745bd33ae11c9948a4f057f8240467a0))
+* **api:** manual updates ([23a3a2f](https://github.com/browserbase/sdk-python/commit/23a3a2f0d156d438b0c9aa1430663dc51f49f11e))
+
 ## 1.10.0 (2026-05-13)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/browserbase/sdk-python/compare/v1.9.0...v1.10.0)
