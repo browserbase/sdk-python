@@ -6,6 +6,7 @@ from .context import Context as Context
 from .project import Project as Project
 from .session import Session as Session
 from .extension import Extension as Extension
+from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
 from .search_web_params import SearchWebParams as SearchWebParams
 from .session_live_urls import SessionLiveURLs as SessionLiveURLs
@@ -21,5 +22,7 @@ from .context_update_response import ContextUpdateResponse as ContextUpdateRespo
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
 from .fetch_api_create_params import FetchAPICreateParams as FetchAPICreateParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
+from .certificate_create_params import CertificateCreateParams as CertificateCreateParams
+from .certificate_list_response import CertificateListResponse as CertificateListResponse
 from .fetch_api_create_response import FetchAPICreateResponse as FetchAPICreateResponse
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse

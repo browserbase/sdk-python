@@ -35,12 +35,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import search, contexts, projects, sessions, fetch_api, extensions
+    from .resources import search, contexts, projects, sessions, fetch_api, extensions, certificates
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
+    from .resources.certificates import CertificatesResource, AsyncCertificatesResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
 
 __all__ = [
@@ -118,6 +119,12 @@ class Browserbase(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+    @cached_property
+    def certificates(self) -> CertificatesResource:
+        from .resources.certificates import CertificatesResource
+
+        return CertificatesResource(self)
 
     @cached_property
     def contexts(self) -> ContextsResource:
@@ -333,6 +340,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         )
 
     @cached_property
+    def certificates(self) -> AsyncCertificatesResource:
+        from .resources.certificates import AsyncCertificatesResource
+
+        return AsyncCertificatesResource(self)
+
+    @cached_property
     def contexts(self) -> AsyncContextsResource:
         from .resources.contexts import AsyncContextsResource
 
@@ -488,6 +501,12 @@ class BrowserbaseWithRawResponse:
         self._client = client
 
     @cached_property
+    def certificates(self) -> certificates.CertificatesResourceWithRawResponse:
+        from .resources.certificates import CertificatesResourceWithRawResponse
+
+        return CertificatesResourceWithRawResponse(self._client.certificates)
+
+    @cached_property
     def contexts(self) -> contexts.ContextsResourceWithRawResponse:
         from .resources.contexts import ContextsResourceWithRawResponse
 
@@ -529,6 +548,12 @@ class AsyncBrowserbaseWithRawResponse:
 
     def __init__(self, client: AsyncBrowserbase) -> None:
         self._client = client
+
+    @cached_property
+    def certificates(self) -> certificates.AsyncCertificatesResourceWithRawResponse:
+        from .resources.certificates import AsyncCertificatesResourceWithRawResponse
+
+        return AsyncCertificatesResourceWithRawResponse(self._client.certificates)
 
     @cached_property
     def contexts(self) -> contexts.AsyncContextsResourceWithRawResponse:
@@ -574,6 +599,12 @@ class BrowserbaseWithStreamedResponse:
         self._client = client
 
     @cached_property
+    def certificates(self) -> certificates.CertificatesResourceWithStreamingResponse:
+        from .resources.certificates import CertificatesResourceWithStreamingResponse
+
+        return CertificatesResourceWithStreamingResponse(self._client.certificates)
+
+    @cached_property
     def contexts(self) -> contexts.ContextsResourceWithStreamingResponse:
         from .resources.contexts import ContextsResourceWithStreamingResponse
 
@@ -615,6 +646,12 @@ class AsyncBrowserbaseWithStreamedResponse:
 
     def __init__(self, client: AsyncBrowserbase) -> None:
         self._client = client
+
+    @cached_property
+    def certificates(self) -> certificates.AsyncCertificatesResourceWithStreamingResponse:
+        from .resources.certificates import AsyncCertificatesResourceWithStreamingResponse
+
+        return AsyncCertificatesResourceWithStreamingResponse(self._client.certificates)
 
     @cached_property
     def contexts(self) -> contexts.AsyncContextsResourceWithStreamingResponse:
