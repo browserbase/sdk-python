@@ -1,3 +1,18 @@
+# Certificates
+
+Types:
+
+```python
+from browserbase.types import Certificate, CertificateListResponse
+```
+
+Methods:
+
+- <code title="post /v1/certificates">client.certificates.<a href="./src/browserbase/resources/certificates.py">create</a>(\*\*<a href="src/browserbase/types/certificate_create_params.py">params</a>) -> <a href="./src/browserbase/types/certificate.py">Certificate</a></code>
+- <code title="get /v1/certificates/{id}">client.certificates.<a href="./src/browserbase/resources/certificates.py">retrieve</a>(id) -> <a href="./src/browserbase/types/certificate.py">Certificate</a></code>
+- <code title="get /v1/certificates">client.certificates.<a href="./src/browserbase/resources/certificates.py">list</a>() -> <a href="./src/browserbase/types/certificate_list_response.py">CertificateListResponse</a></code>
+- <code title="delete /v1/certificates/{id}">client.certificates.<a href="./src/browserbase/resources/certificates.py">delete</a>(id) -> None</code>
+
 # Contexts
 
 Types:

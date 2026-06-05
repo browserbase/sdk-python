@@ -48,8 +48,22 @@ from .extensions import (
     ExtensionsResourceWithStreamingResponse,
     AsyncExtensionsResourceWithStreamingResponse,
 )
+from .certificates import (
+    CertificatesResource,
+    AsyncCertificatesResource,
+    CertificatesResourceWithRawResponse,
+    AsyncCertificatesResourceWithRawResponse,
+    CertificatesResourceWithStreamingResponse,
+    AsyncCertificatesResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "CertificatesResource",
+    "AsyncCertificatesResource",
+    "CertificatesResourceWithRawResponse",
+    "AsyncCertificatesResourceWithRawResponse",
+    "CertificatesResourceWithStreamingResponse",
+    "AsyncCertificatesResourceWithStreamingResponse",
     "ContextsResource",
     "AsyncContextsResource",
     "ContextsResourceWithRawResponse",
