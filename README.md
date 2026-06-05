@@ -149,7 +149,7 @@ from browserbase import Browserbase
 
 client = Browserbase()
 
-client.extensions.create(
+client.certificates.create(
     file=Path("/path/to/file"),
 )
 ```
