@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.0 (2026-06-05)
+
+Full Changelog: [v1.11.0...v1.12.0](https://github.com/browserbase/sdk-python/compare/v1.11.0...v1.12.0)
+
+### Features
+
+* [CORE-2194][apps/api] Add BYOC (cert) CRUD to SDKs ([5ed9746](https://github.com/browserbase/sdk-python/commit/5ed9746938237ae4eaa78f8652a9b576e6be0e7c))
+
 ## 1.11.0 (2026-05-20)
 
 Full Changelog: [v1.10.0...v1.11.0](https://github.com/browserbase/sdk-python/compare/v1.10.0...v1.11.0)
