@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.13.0 (2026-06-08)
+
+Full Changelog: [v1.12.0...v1.13.0](https://github.com/browserbase/sdk-python/compare/v1.12.0...v1.13.0)
+
+### Features
+
+* [AI-2206][apps/api] Surface proxySettings.caCertificates in public SDK & docs ([0cf47ff](https://github.com/browserbase/sdk-python/commit/0cf47fff59d50d3624b7106c3c0cebfe1a4fdde0))
+
 ## 1.12.0 (2026-06-05)
 
 Full Changelog: [v1.11.0...v1.12.0](https://github.com/browserbase/sdk-python/compare/v1.11.0...v1.12.0)
