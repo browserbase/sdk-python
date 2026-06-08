@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
@@ -17,6 +18,7 @@ __all__ = [
     "ProxiesUnionMember0BrowserbaseProxyConfigGeolocation",
     "ProxiesUnionMember0ExternalProxyConfig",
     "ProxiesUnionMember0NoneProxyConfig",
+    "ProxySettings",
 ]
 
 
@@ -47,6 +49,9 @@ class SessionCreateParams(TypedDict, total=False):
 
     Can be true for default proxy, or an array of proxy configurations.
     """
+
+    proxy_settings: Annotated[ProxySettings, PropertyInfo(alias="proxySettings")]
+    """Supplementary proxy settings. Optional."""
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
@@ -201,3 +206,10 @@ ProxiesUnionMember0: TypeAlias = Union[
     ProxiesUnionMember0ExternalProxyConfig,
     ProxiesUnionMember0NoneProxyConfig,
 ]
+
+
+class ProxySettings(TypedDict, total=False):
+    """Supplementary proxy settings. Optional."""
+
+    ca_certificates: Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]
+    """The TLS certificate IDs to trust. Optional."""
