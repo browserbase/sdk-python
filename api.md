@@ -156,3 +156,44 @@ Methods:
 
 - <code title="get /v1/sessions/{id}/replays">client.sessions.replays.<a href="./src/browserbase/resources/sessions/replays.py">retrieve</a>(id) -> <a href="./src/browserbase/types/sessions/replay_retrieve_response.py">ReplayRetrieveResponse</a></code>
 - <code title="get /v1/sessions/{id}/replays/{pageId}">client.sessions.replays.<a href="./src/browserbase/resources/sessions/replays.py">retrieve_page</a>(page_id, \*, id) -> BinaryAPIResponse</code>
+
+# Agents
+
+Types:
+
+```python
+from browserbase.types import (
+    AgentCreateResponse,
+    AgentRetrieveResponse,
+    AgentUpdateResponse,
+    AgentListResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/agents">client.agents.<a href="./src/browserbase/resources/agents/agents.py">create</a>(\*\*<a href="src/browserbase/types/agent_create_params.py">params</a>) -> <a href="./src/browserbase/types/agent_create_response.py">AgentCreateResponse</a></code>
+- <code title="get /v1/agents/{agentId}">client.agents.<a href="./src/browserbase/resources/agents/agents.py">retrieve</a>(agent_id) -> <a href="./src/browserbase/types/agent_retrieve_response.py">AgentRetrieveResponse</a></code>
+- <code title="patch /v1/agents/{agentId}">client.agents.<a href="./src/browserbase/resources/agents/agents.py">update</a>(agent_id, \*\*<a href="src/browserbase/types/agent_update_params.py">params</a>) -> <a href="./src/browserbase/types/agent_update_response.py">AgentUpdateResponse</a></code>
+- <code title="get /v1/agents">client.agents.<a href="./src/browserbase/resources/agents/agents.py">list</a>(\*\*<a href="src/browserbase/types/agent_list_params.py">params</a>) -> <a href="./src/browserbase/types/agent_list_response.py">AgentListResponse</a></code>
+- <code title="delete /v1/agents/{agentId}">client.agents.<a href="./src/browserbase/resources/agents/agents.py">delete</a>(agent_id) -> None</code>
+
+## Runs
+
+Types:
+
+```python
+from browserbase.types.agents import (
+    RunCreateResponse,
+    RunRetrieveResponse,
+    RunListResponse,
+    RunListMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/agents/runs">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">create</a>(\*\*<a href="src/browserbase/types/agents/run_create_params.py">params</a>) -> <a href="./src/browserbase/types/agents/run_create_response.py">RunCreateResponse</a></code>
+- <code title="get /v1/agents/runs/{runId}">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">retrieve</a>(run_id) -> <a href="./src/browserbase/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
+- <code title="get /v1/agents/runs">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">list</a>(\*\*<a href="src/browserbase/types/agents/run_list_params.py">params</a>) -> <a href="./src/browserbase/types/agents/run_list_response.py">RunListResponse</a></code>
+- <code title="get /v1/agents/runs/{runId}/messages">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">list_messages</a>(run_id, \*\*<a href="src/browserbase/types/agents/run_list_messages_params.py">params</a>) -> <a href="./src/browserbase/types/agents/run_list_messages_response.py">RunListMessagesResponse</a></code>
