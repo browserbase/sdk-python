@@ -35,13 +35,14 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import search, contexts, projects, sessions, fetch_api, extensions, certificates
+    from .resources import agents, search, contexts, projects, sessions, fetch_api, extensions, certificates
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.certificates import CertificatesResource, AsyncCertificatesResource
+    from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
 
 __all__ = [
@@ -161,6 +162,12 @@ class Browserbase(SyncAPIClient):
         from .resources.sessions import SessionsResource
 
         return SessionsResource(self)
+
+    @cached_property
+    def agents(self) -> AgentsResource:
+        from .resources.agents import AgentsResource
+
+        return AgentsResource(self)
 
     @cached_property
     def with_raw_response(self) -> BrowserbaseWithRawResponse:
@@ -382,6 +389,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncSessionsResource(self)
 
     @cached_property
+    def agents(self) -> AsyncAgentsResource:
+        from .resources.agents import AsyncAgentsResource
+
+        return AsyncAgentsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBrowserbaseWithRawResponse:
         return AsyncBrowserbaseWithRawResponse(self)
 
@@ -542,6 +555,12 @@ class BrowserbaseWithRawResponse:
 
         return SessionsResourceWithRawResponse(self._client.sessions)
 
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        from .resources.agents import AgentsResourceWithRawResponse
+
+        return AgentsResourceWithRawResponse(self._client.agents)
+
 
 class AsyncBrowserbaseWithRawResponse:
     _client: AsyncBrowserbase
@@ -590,6 +609,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.sessions import AsyncSessionsResourceWithRawResponse
 
         return AsyncSessionsResourceWithRawResponse(self._client.sessions)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        from .resources.agents import AsyncAgentsResourceWithRawResponse
+
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
 
 
 class BrowserbaseWithStreamedResponse:
@@ -640,6 +665,12 @@ class BrowserbaseWithStreamedResponse:
 
         return SessionsResourceWithStreamingResponse(self._client.sessions)
 
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        from .resources.agents import AgentsResourceWithStreamingResponse
+
+        return AgentsResourceWithStreamingResponse(self._client.agents)
+
 
 class AsyncBrowserbaseWithStreamedResponse:
     _client: AsyncBrowserbase
@@ -688,6 +719,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.sessions import AsyncSessionsResourceWithStreamingResponse
 
         return AsyncSessionsResourceWithStreamingResponse(self._client.sessions)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
 
 
 Client = Browserbase
