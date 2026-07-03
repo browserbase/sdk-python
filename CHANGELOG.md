@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.14.0 (2026-07-02)
+
+Full Changelog: [v1.13.0...v1.14.0](https://github.com/browserbase/sdk-python/compare/v1.13.0...v1.14.0)
+
+### Features
+
+* [CORE-000][apps/sdk] Add agents to SDK ([580ec55](https://github.com/browserbase/sdk-python/commit/580ec554b66c71ecaeb1133e28173fc3275c43e9))
+
+
+### Documentation
+
+* document and un-gate allowedDomains session setting ([126cf6d](https://github.com/browserbase/sdk-python/commit/126cf6d331da97cc4c67b2b8f34c467f4449a010))
+
 ## 1.13.0 (2026-06-08)
 
 Full Changelog: [v1.12.0...v1.13.0](https://github.com/browserbase/sdk-python/compare/v1.12.0...v1.13.0)

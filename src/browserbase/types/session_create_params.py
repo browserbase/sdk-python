@@ -90,6 +90,18 @@ class BrowserSettings(TypedDict, total=False):
     advanced_stealth: Annotated[bool, PropertyInfo(alias="advancedStealth")]
     """Advanced Browser Stealth Mode"""
 
+    allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
+    """An optional list of allowed domains for the session.
+
+    If you pass one or more domains, Browserbase restricts top-level (main-frame)
+    page navigations to the listed domains and their subdomains. For example,
+    `example.com` also permits `www.example.com` and `a.b.example.com`, but not
+    `notexample.com`. Matching is domain-based, not full-URL. An empty list (the
+    default) disables the restriction entirely. Browserbase enforces only main-frame
+    navigations; it does not block iframe/subframe loads or other in-page resource
+    requests (images, scripts, XHR, etc.).
+    """
+
     block_ads: Annotated[bool, PropertyInfo(alias="blockAds")]
     """Enable or disable ad blocking in the browser. Defaults to `false`."""
 

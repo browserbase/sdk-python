@@ -33,6 +33,7 @@ class TestSessions:
         session = client.sessions.create(
             browser_settings={
                 "advanced_stealth": True,
+                "allowed_domains": ["string"],
                 "block_ads": True,
                 "captcha_image_selector": "captchaImageSelector",
                 "captcha_input_selector": "captchaInputSelector",
@@ -269,6 +270,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.create(
             browser_settings={
                 "advanced_stealth": True,
+                "allowed_domains": ["string"],
                 "block_ads": True,
                 "captcha_image_selector": "captchaImageSelector",
                 "captcha_input_selector": "captchaInputSelector",
