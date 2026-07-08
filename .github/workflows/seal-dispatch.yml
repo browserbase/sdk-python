@@ -1,0 +1,89 @@
+name: Seal custom code (dispatch)
+
+# Optional, eager variant of the config repo's scheduled tracking-file sync.
+#
+# When genuine out-of-band custom code is merged to this SDK repo's `main`
+# (a direct staging commit, or a contribution pulled back from production),
+# notify the config repo to reseal so the custom-code tracking JSON absorbs it
+# promptly instead of waiting for the config repo's poll. stlc-authored commits
+# are skipped by the loop guards below, so the bot's own pushes (the "Build SDK"
+# squash commit and any regen commit) cannot trigger a reseal loop.
+#
+# This workflow is itself custom code on the SDK repo: seal it once with
+# `stlc build --commit` to bootstrap, after which scaffold preservation keeps it
+# across regenerations. If you would rather keep things simple, drop this file
+# and rely on the config repo's scheduled `stlc-sync-tracking.yml` poll alone.
+#
+# Lives in the STAGING repo. Requires CONFIG_DISPATCH_TOKEN — a token that can
+# send a repository_dispatch to the config repo.
+on:
+  push:
+    # main only. stlc preview/integrated/codegen branches never push to main.
+    branches: [main]
+
+concurrency:
+  group: seal-dispatch-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    if: github.repository == 'stainless-sdks/browserbase-python-staging'
+    env:
+      CONFIG_REPO: stainless-sdks/browserbase-config
+    steps:
+      - name: Loop-guard and send reseal dispatch
+        env:
+          DISPATCH_TOKEN: ${{ secrets.CONFIG_DISPATCH_TOKEN }}
+          HEAD_MSG: ${{ github.event.head_commit.message }}
+          HEAD_AUTHOR_NAME: ${{ github.event.head_commit.author.name }}
+          SHA: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Loop guard 1: skip the stlc "Build SDK" squash commit (it carries
+          # the Stainless-Generated-From trailer in its message).
+          if printf '%s' "$HEAD_MSG" | grep -q 'Stainless-Generated-From'; then
+            echo "Head commit is an stlc build — skipping reseal dispatch."
+            exit 0
+          fi
+
+          # Loop guard 2: skip stlc-bot commits (e.g. a regen commit).
+          if [ "$HEAD_AUTHOR_NAME" = "stlc-bot" ]; then
+            echo "Head commit authored by stlc-bot — skipping reseal dispatch."
+            exit 0
+          fi
+
+          [ -n "${DISPATCH_TOKEN:-}" ] || { echo "CONFIG_DISPATCH_TOKEN not set" >&2; exit 1; }
+          payload=$(jq -n --arg sha "$SHA" --arg repo "$REPO" \
+            '{event_type:"seal-custom-code",client_payload:{target:"all",sha:$sha,repo:$repo}}')
+          code=$(curl -sS -o /tmp/dispatch.txt -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${CONFIG_REPO}/dispatches" \
+            -d "$payload")
+          if [ "$code" = "204" ]; then
+            echo "Reseal dispatched to ${CONFIG_REPO}."
+          else
+            echo "Dispatch failed (HTTP $code)" >&2; cat /tmp/dispatch.txt >&2; exit 1
+          fi
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc seal-dispatch failed in ${{ github.repository }} — the config repo was NOT notified to reseal (likely an expired CONFIG_DISPATCH_TOKEN). The config repo's scheduled poll is the backstop, but verify the token. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
