@@ -1,0 +1,89 @@
+name: Sync from production
+
+# Bring production's commits back onto staging `main` by fast-forwarding.
+# This keeps staging and production identical and linear so the next `stlc build` 
+# reseals against the released state.
+#
+# Triggered by the production-side release dispatch and by a periodic poll.
+on:
+  schedule:
+    # Polls for non-release production changes. If you take frequent 
+    # community PRs, tighten this or add an eager `on: push: [main]`
+    # dispatch on production alongside the release one.
+    - cron: '17 */6 * * *'
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [prod-released]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stlc-sync-from-production
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.repository == 'stainless-sdks/browserbase-python-staging'
+    env:
+      PRODUCTION_REPO: stainless-sdks/browserbase-python-prod
+    steps:
+      - name: Check out staging
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch production main
+        run: |
+          # Production is public, so the built-in token reads it with no
+          # credential. If your production repo is private, add a remote with
+          # PRODUCTION_REPO_TOKEN instead (the same token the promote uses).
+          git remote add production "https://github.com/${PRODUCTION_REPO}.git"
+          git fetch production main
+
+      - name: Check whether production has content staging lacks
+        id: diff
+        run: |
+          # Inverse of the promote guard: would merging production into 
+          # staging change staging's tree? If not, staging already has
+          # production's content.
+          MERGED=$(git merge-tree --write-tree origin/main production/main) || MERGED=conflict
+          STAGING_TREE=$(git rev-parse 'origin/main^{tree}')
+          if [ "$MERGED" = "$STAGING_TREE" ]; then
+            echo "Staging already has production's content. Nothing to pull back."
+            echo "behind=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "behind=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync production to staging (fast-forward)
+        if: steps.diff.outputs.behind == 'true'
+        run: |
+          # Refuse unless staging/main is an ancestor of production/main. If it
+          # isn't, the trunks have forked (staging advanced out of band while a
+          # production change was unsynced) and a fast-forward is unsafe.
+          # 
+          # The trunk-sync lock (trunk-sync-lock.yml) is what normally
+          # prevents this by freezing staging merges until the back-sync lands.
+          if ! git merge-base --is-ancestor origin/main production/main; then
+            echo "::error title=Back-sync blocked::staging main is not an ancestor of production/main."
+            exit 1
+          fi
+          git push origin production/main:refs/heads/main
+          echo "Fast-forwarded staging/main to production/main."
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc back-sync (sync from production) failed in ${{ github.repository }}. A stalled back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
