@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   promote:
-    runs-on: ubuntu-latest
+    runs-on: ${{ startsWith(github.repository, 'stainless-sdks/') && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.repository == 'stainless-sdks/browserbase-python-staging'
     # Optional: add required reviewers on each promote run before the fast-forward push. 
     # With no reviewers it only scopes secrets/variables and adds no gate, so the manual dispatch
