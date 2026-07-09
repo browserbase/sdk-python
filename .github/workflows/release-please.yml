@@ -11,7 +11,7 @@ permissions:
 jobs:
   release-please:
     if: github.repository == 'stainless-sdks/browserbase-python-prod'
-    runs-on: ubuntu-latest
+    runs-on: ${{ startsWith(github.repository, 'stainless-sdks/') && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
 
     steps:
       - uses: googleapis/release-please-action@v4

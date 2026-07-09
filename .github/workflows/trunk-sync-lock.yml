@@ -38,7 +38,7 @@ permissions:
 
 jobs:
   lock:
-    runs-on: ubuntu-latest
+    runs-on: ${{ startsWith(github.repository, 'stainless-sdks/') && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.repository == 'stainless-sdks/browserbase-python-staging'
     env:
       PRODUCTION_REPO: stainless-sdks/browserbase-python-prod
