@@ -41,7 +41,9 @@ jobs:
           # credential. If your production repo is private, add a remote with
           # PRODUCTION_REPO_TOKEN instead (the same token the promote uses).
           if [ -n "${PRODUCTION_REPO_TOKEN:-}" ]; then git remote add production "https://x-access-token:${PRODUCTION_REPO_TOKEN}@github.com/${PRODUCTION_REPO}.git"; else git remote add production "https://github.com/${PRODUCTION_REPO}.git"; fi
-          git fetch production main
+          # actions/checkout persists the staging GITHUB_TOKEN as an auth header
+          # that would override the URL credential; blank it for this fetch only.
+          git -c "http.https://github.com/.extraheader=" fetch production main
 
       - name: Check whether production has content staging lacks
         id: diff
