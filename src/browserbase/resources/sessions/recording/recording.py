@@ -4,23 +4,35 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import Body, Query, Headers, NotGiven, not_given
-from ..._utils import path_template
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._types import Body, Query, Headers, NotGiven, not_given
+from ...._utils import path_template
+from .downloads import (
+    DownloadsResource,
+    AsyncDownloadsResource,
+    DownloadsResourceWithRawResponse,
+    AsyncDownloadsResourceWithRawResponse,
+    DownloadsResourceWithStreamingResponse,
+    AsyncDownloadsResourceWithStreamingResponse,
+)
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.sessions.recording_retrieve_response import RecordingRetrieveResponse
+from ...._base_client import make_request_options
+from ....types.sessions.recording_retrieve_response import RecordingRetrieveResponse
 
 __all__ = ["RecordingResource", "AsyncRecordingResource"]
 
 
 class RecordingResource(SyncAPIResource):
+    @cached_property
+    def downloads(self) -> DownloadsResource:
+        return DownloadsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> RecordingResourceWithRawResponse:
         """
@@ -75,6 +87,10 @@ class RecordingResource(SyncAPIResource):
 
 
 class AsyncRecordingResource(AsyncAPIResource):
+    @cached_property
+    def downloads(self) -> AsyncDownloadsResource:
+        return AsyncDownloadsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncRecordingResourceWithRawResponse:
         """
@@ -136,6 +152,10 @@ class RecordingResourceWithRawResponse:
             recording.retrieve,
         )
 
+    @cached_property
+    def downloads(self) -> DownloadsResourceWithRawResponse:
+        return DownloadsResourceWithRawResponse(self._recording.downloads)
+
 
 class AsyncRecordingResourceWithRawResponse:
     def __init__(self, recording: AsyncRecordingResource) -> None:
@@ -144,6 +164,10 @@ class AsyncRecordingResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             recording.retrieve,
         )
+
+    @cached_property
+    def downloads(self) -> AsyncDownloadsResourceWithRawResponse:
+        return AsyncDownloadsResourceWithRawResponse(self._recording.downloads)
 
 
 class RecordingResourceWithStreamingResponse:
@@ -154,6 +178,10 @@ class RecordingResourceWithStreamingResponse:
             recording.retrieve,
         )
 
+    @cached_property
+    def downloads(self) -> DownloadsResourceWithStreamingResponse:
+        return DownloadsResourceWithStreamingResponse(self._recording.downloads)
+
 
 class AsyncRecordingResourceWithStreamingResponse:
     def __init__(self, recording: AsyncRecordingResource) -> None:
@@ -162,3 +190,7 @@ class AsyncRecordingResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             recording.retrieve,
         )
+
+    @cached_property
+    def downloads(self) -> AsyncDownloadsResourceWithStreamingResponse:
+        return AsyncDownloadsResourceWithStreamingResponse(self._recording.downloads)
