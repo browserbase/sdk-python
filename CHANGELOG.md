@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.15.0 (2026-07-14)
+
+Full Changelog: [v1.14.0...v1.15.0](https://github.com/browserbase/sdk-python/compare/v1.14.0...v1.15.0)
+
+### Features
+
+* **api:** manual updates ([39fee02](https://github.com/browserbase/sdk-python/commit/39fee028ec9f64b472dcbe2cac94f044bed79a4b))
+
 ## 1.14.0 (2026-07-02)
 
 Full Changelog: [v1.13.0...v1.14.0](https://github.com/browserbase/sdk-python/compare/v1.13.0...v1.14.0)
