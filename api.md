@@ -130,7 +130,24 @@ from browserbase.types.sessions import SessionRecording, RecordingRetrieveRespon
 
 Methods:
 
-- <code title="get /v1/sessions/{id}/recording">client.sessions.recording.<a href="./src/browserbase/resources/sessions/recording.py">retrieve</a>(id) -> <a href="./src/browserbase/types/sessions/recording_retrieve_response.py">RecordingRetrieveResponse</a></code>
+- <code title="get /v1/sessions/{id}/recording">client.sessions.recording.<a href="./src/browserbase/resources/sessions/recording/recording.py">retrieve</a>(id) -> <a href="./src/browserbase/types/sessions/recording_retrieve_response.py">RecordingRetrieveResponse</a></code>
+
+### Downloads
+
+Types:
+
+```python
+from browserbase.types.sessions.recording import (
+    RecordingDownload,
+    DownloadCreateResponse,
+    DownloadListResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/sessions/{id}/recording/downloads">client.sessions.recording.downloads.<a href="./src/browserbase/resources/sessions/recording/downloads.py">create</a>(id) -> <a href="./src/browserbase/types/sessions/recording/download_create_response.py">DownloadCreateResponse</a></code>
+- <code title="get /v1/sessions/{id}/recording/downloads">client.sessions.recording.downloads.<a href="./src/browserbase/resources/sessions/recording/downloads.py">list</a>(id) -> <a href="./src/browserbase/types/sessions/recording/download_list_response.py">DownloadListResponse</a></code>
 
 ## Uploads
 

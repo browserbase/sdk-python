@@ -43,14 +43,6 @@ from .downloads import (
     DownloadsResourceWithStreamingResponse,
     AsyncDownloadsResourceWithStreamingResponse,
 )
-from .recording import (
-    RecordingResource,
-    AsyncRecordingResource,
-    RecordingResourceWithRawResponse,
-    AsyncRecordingResourceWithRawResponse,
-    RecordingResourceWithStreamingResponse,
-    AsyncRecordingResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -60,6 +52,14 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.session import Session
+from .recording.recording import (
+    RecordingResource,
+    AsyncRecordingResource,
+    RecordingResourceWithRawResponse,
+    AsyncRecordingResourceWithRawResponse,
+    RecordingResourceWithStreamingResponse,
+    AsyncRecordingResourceWithStreamingResponse,
+)
 from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
 from ...types.session_create_response import SessionCreateResponse
