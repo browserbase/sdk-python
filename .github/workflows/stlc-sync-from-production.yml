@@ -28,6 +28,7 @@ jobs:
     if: github.repository == 'stainless-sdks/browserbase-python-staging'
     env:
       PRODUCTION_REPO: stainless-sdks/browserbase-python-prod
+      PRODUCTION_REPO_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
     steps:
       - name: Check out staging
         uses: actions/checkout@v6
@@ -39,8 +40,10 @@ jobs:
           # Production is public, so the built-in token reads it with no
           # credential. If your production repo is private, add a remote with
           # PRODUCTION_REPO_TOKEN instead (the same token the promote uses).
-          git remote add production "https://github.com/${PRODUCTION_REPO}.git"
-          git fetch production main
+          if [ -n "${PRODUCTION_REPO_TOKEN:-}" ]; then git remote add production "https://x-access-token:${PRODUCTION_REPO_TOKEN}@github.com/${PRODUCTION_REPO}.git"; else git remote add production "https://github.com/${PRODUCTION_REPO}.git"; fi
+          # actions/checkout persists the staging GITHUB_TOKEN as an auth header
+          # that would override the URL credential; blank it for this fetch only.
+          git -c "http.https://github.com/.extraheader=" fetch production main
 
       - name: Check whether production has content staging lacks
         id: diff
