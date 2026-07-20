@@ -42,6 +42,7 @@ jobs:
     if: github.repository == 'stainless-sdks/browserbase-python-staging'
     env:
       PRODUCTION_REPO: stainless-sdks/browserbase-python-prod
+      PRODUCTION_REPO_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
@@ -52,7 +53,7 @@ jobs:
         run: |
           set -euo pipefail
           # Production is public; the built-in token reads it with no credential.
-          git remote add production "https://github.com/${PRODUCTION_REPO}.git"
+          if [ -n "${PRODUCTION_REPO_TOKEN:-}" ]; then git remote add production "https://x-access-token:${PRODUCTION_REPO_TOKEN}@github.com/${PRODUCTION_REPO}.git"; else git remote add production "https://github.com/${PRODUCTION_REPO}.git"; fi
           git fetch --no-tags production main
           if git merge-base --is-ancestor production/main HEAD; then
             state=success; desc="staging main is in sync with production"
