@@ -14,5 +14,3 @@ dist
 .envrc
 codegen.log
 Brewfile.lock.json
-screenshot.png
-**/.DS_Store
