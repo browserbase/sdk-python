@@ -70,13 +70,13 @@ if __name__ == "__main__":
 See the [examples](examples) directory for more usage examples.
 
 > [!NOTE]
-> Running the examples requires [Rye](https://rye.astral.sh/) to be installed.
+> Running the examples requires [uv](https://docs.astral.sh/uv/) to be installed.
 
 To run the examples, clone this repository and run the following commands from the project root (this directory):
 
 ```bash
-rye sync
-rye run example playwright_basic # replace with the example you want to run
+./scripts/bootstrap
+./scripts/example playwright_basic # replace with the example you want to run
 ```
 
 > [!NOTE]

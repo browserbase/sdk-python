@@ -1,0 +1,77 @@
+name: Trunk sync lock
+
+# OPTIONAL: copy into .github/workflows/ if your production repo takes community PRs
+# or if custom-code PRs merge on staging during release windows. This workflow posts
+# a `trunk-synced` status to open PRs against staging main.
+#
+# Make it a required check on staging. It gates PRs only; the back-sync pushes staging main directly.
+#
+# Never route the back-sync through a PR gated by this check or it deadlocks.
+# First-run: a check counts as "required" only after it reports once, so trigger this workflow once before marking trunk-synced required.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ["Sync SDK repos"]
+    types: [completed]
+  repository_dispatch:
+    types: [prod-released]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: read
+  statuses: write
+  pull-requests: read
+
+jobs:
+  lock:
+    # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    if: github.repository == 'browserbase/browserbase-python-staging'
+    env:
+      PRODUCTION_REPO: browserbase/sdk-python
+      PRODUCTION_REPO_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Evaluate sync state and post status to open main PRs
+        run: |
+          set -euo pipefail
+          # Public production reads with no credential; a private production
+          # repo needs PRODUCTION_REPO_TOKEN (the same token the promote uses).
+          if [ -n "${PRODUCTION_REPO_TOKEN:-}" ]; then
+            git remote add production "https://x-access-token:${PRODUCTION_REPO_TOKEN}@github.com/${PRODUCTION_REPO}.git"
+          else
+            git remote add production "https://github.com/${PRODUCTION_REPO}.git"
+          fi
+          git fetch --no-tags production main
+          if git merge-base --is-ancestor production/main HEAD; then
+            state=success; desc="staging main is in sync with production"
+          else
+            state=failure; desc="production is ahead — wait for the back-sync before merging"
+          fi
+          echo "trunk-synced => $state ($desc)"
+          # Retry: a transient API failure here would otherwise fail the job even though
+          # the trunk check above already succeeded. A missing status still blocks a gated
+          # PR, so giving up after retries and exiting 0 is safe.
+          shas=""
+          for attempt in 1 2 3 4 5; do
+            if shas=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open --json headRefOid --jq '.[].headRefOid'); then
+              break
+            fi
+            echo "::notice::could not list open PRs (attempt $attempt/5); retrying"
+            shas=""
+            sleep $((attempt * 5))
+          done
+          if [ -z "$shas" ]; then echo "no open PRs targeting main (or PR list unavailable)"; exit 0; fi
+          for sha in $shas; do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" \
+              -f state="$state" -f context="trunk-synced" -f description="$desc" >/dev/null
+            echo "posted trunk-synced=$state to $sha"
+          done

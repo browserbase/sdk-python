@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# uv has no script table, so this replaces `rye run example <name>`.
+
+if [ -z "${1:-}" ]; then
+  echo "usage: ./scripts/example <name>" >&2
+  echo >&2
+  echo "Runs examples/<name>.py. Available examples:" >&2
+  for f in examples/*.py; do
+    name=$(basename "$f" .py)
+    [ "$name" = "__init__" ] && continue
+    echo "  $name" >&2
+  done
+  exit 1
+fi
+
+example="examples/$1.py"
+if [ ! -f "$example" ]; then
+  echo "no such example: $example" >&2
+  exit 1
+fi
+
+echo "==> Running $example"
+uv run python "$example"

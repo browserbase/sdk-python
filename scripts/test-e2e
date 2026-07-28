@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# These hit the real API, so they stay out of ./scripts/test.
+# Replaces `rye run test:e2e`.
+
+echo "==> Running e2e tests"
+uv run pytest examples/e2e "$@"

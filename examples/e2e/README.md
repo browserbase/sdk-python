@@ -14,7 +14,7 @@ You can set these variables in a `.env` file in the root of this directory.
 Then, run the tests with:
 
 ```sh
-$ rye run test:e2e
+$ ./scripts/test-e2e
 ```
 
 ## Writing tests
