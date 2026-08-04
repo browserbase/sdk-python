@@ -10,6 +10,13 @@ __all__ = ["ContextCreateParams"]
 
 
 class ContextCreateParams(TypedDict, total=False):
+    name: str
+    """Optional user-defined name for the Context.
+
+    Leading and trailing whitespace is trimmed before storage. Names are unique
+    within the project among active Contexts, compared case-insensitively.
+    """
+
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """The Project ID.
 

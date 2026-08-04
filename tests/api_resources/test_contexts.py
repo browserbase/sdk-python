@@ -25,6 +25,7 @@ class TestContexts:
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         context = client.contexts.create(
+            name="x",
             project_id="projectId",
         )
         assert_matches_type(ContextCreateResponse, context, path=["response"])
@@ -177,6 +178,7 @@ class TestAsyncContexts:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         context = await async_client.contexts.create(
+            name="x",
             project_id="projectId",
         )
         assert_matches_type(ContextCreateResponse, context, path=["response"])
