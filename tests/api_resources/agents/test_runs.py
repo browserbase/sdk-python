@@ -40,7 +40,17 @@ class TestRuns:
                     "id": "id",
                     "persist": True,
                 },
-                "proxies": True,
+                "proxies": [
+                    {
+                        "type": "browserbase",
+                        "domain_pattern": "domainPattern",
+                        "geolocation": {
+                            "country": "xx",
+                            "city": "city",
+                            "state": "xx",
+                        },
+                    }
+                ],
                 "verified": True,
             },
             result_schema={"foo": "bar"},
@@ -223,7 +233,17 @@ class TestAsyncRuns:
                     "id": "id",
                     "persist": True,
                 },
-                "proxies": True,
+                "proxies": [
+                    {
+                        "type": "browserbase",
+                        "domain_pattern": "domainPattern",
+                        "geolocation": {
+                            "country": "xx",
+                            "city": "city",
+                            "state": "xx",
+                        },
+                    }
+                ],
                 "verified": True,
             },
             result_schema={"foo": "bar"},
