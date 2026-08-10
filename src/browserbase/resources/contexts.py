@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing_extensions
+
 import httpx
 
 from ..types import context_create_params
@@ -124,6 +126,7 @@ class ContextsResource(SyncAPIResource):
             cast_to=Context,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def update(
         self,
         id: str,
@@ -293,6 +296,7 @@ class AsyncContextsResource(AsyncAPIResource):
             cast_to=Context,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def update(
         self,
         id: str,
@@ -371,8 +375,10 @@ class ContextsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             contexts.retrieve,
         )
-        self.update = to_raw_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = to_raw_response_wrapper(
             contexts.delete,
@@ -389,8 +395,10 @@ class AsyncContextsResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             contexts.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = async_to_raw_response_wrapper(
             contexts.delete,
@@ -407,8 +415,10 @@ class ContextsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             contexts.retrieve,
         )
-        self.update = to_streamed_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = to_streamed_response_wrapper(
             contexts.delete,
@@ -425,8 +435,10 @@ class AsyncContextsResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             contexts.retrieve,
         )
-        self.update = async_to_streamed_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = async_to_streamed_response_wrapper(
             contexts.delete,
