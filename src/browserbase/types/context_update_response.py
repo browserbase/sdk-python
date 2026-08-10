@@ -26,4 +26,9 @@ class ContextUpdateResponse(BaseModel):
     """The public key to encrypt the user-data-directory."""
 
     upload_url: str = FieldInfo(alias="uploadUrl")
-    """An upload URL to upload a custom user-data-directory."""
+    """Deprecated.
+
+    Browserbase no longer supports context uploads via the API; this field always
+    contains a non-functional sentinel URL and remains only for backwards
+    compatibility.
+    """
