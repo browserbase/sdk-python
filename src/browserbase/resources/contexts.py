@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing_extensions
+
 import httpx
 
 from ..types import context_create_params
@@ -46,6 +48,7 @@ class ContextsResource(SyncAPIResource):
     def create(
         self,
         *,
+        name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -57,9 +60,13 @@ class ContextsResource(SyncAPIResource):
         """Create a Context
 
         Args:
-          project_id: The Project ID.
+          name: Optional user-defined name for the Context.
 
-        Can be found in
+        Leading and trailing whitespace is
+              trimmed before storage. Names are unique within the project among active
+              Contexts, compared case-insensitively.
+
+          project_id: The Project ID. Can be found in
               [Settings](https://www.browserbase.com/settings). Optional - if not provided,
               the project will be inferred from the API key.
 
@@ -73,7 +80,13 @@ class ContextsResource(SyncAPIResource):
         """
         return self._post(
             "/v1/contexts",
-            body=maybe_transform({"project_id": project_id}, context_create_params.ContextCreateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "project_id": project_id,
+                },
+                context_create_params.ContextCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -113,6 +126,7 @@ class ContextsResource(SyncAPIResource):
             cast_to=Context,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def update(
         self,
         id: str,
@@ -204,6 +218,7 @@ class AsyncContextsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -215,9 +230,13 @@ class AsyncContextsResource(AsyncAPIResource):
         """Create a Context
 
         Args:
-          project_id: The Project ID.
+          name: Optional user-defined name for the Context.
 
-        Can be found in
+        Leading and trailing whitespace is
+              trimmed before storage. Names are unique within the project among active
+              Contexts, compared case-insensitively.
+
+          project_id: The Project ID. Can be found in
               [Settings](https://www.browserbase.com/settings). Optional - if not provided,
               the project will be inferred from the API key.
 
@@ -231,7 +250,13 @@ class AsyncContextsResource(AsyncAPIResource):
         """
         return await self._post(
             "/v1/contexts",
-            body=await async_maybe_transform({"project_id": project_id}, context_create_params.ContextCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "project_id": project_id,
+                },
+                context_create_params.ContextCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -271,6 +296,7 @@ class AsyncContextsResource(AsyncAPIResource):
             cast_to=Context,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def update(
         self,
         id: str,
@@ -349,8 +375,10 @@ class ContextsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             contexts.retrieve,
         )
-        self.update = to_raw_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = to_raw_response_wrapper(
             contexts.delete,
@@ -367,8 +395,10 @@ class AsyncContextsResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             contexts.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = async_to_raw_response_wrapper(
             contexts.delete,
@@ -385,8 +415,10 @@ class ContextsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             contexts.retrieve,
         )
-        self.update = to_streamed_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = to_streamed_response_wrapper(
             contexts.delete,
@@ -403,8 +435,10 @@ class AsyncContextsResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             contexts.retrieve,
         )
-        self.update = async_to_streamed_response_wrapper(
-            contexts.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                contexts.update,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.delete = async_to_streamed_response_wrapper(
             contexts.delete,

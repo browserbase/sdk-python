@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.16.0 (2026-08-10)
+
+Full Changelog: [v1.15.0...v1.16.0](https://github.com/browserbase/sdk-python/compare/v1.15.0...v1.16.0)
+
+### Features
+
+* [AI-2679] Deprecate presigned-url context uploads ([72cc359](https://github.com/browserbase/sdk-python/commit/72cc35934740f8ccb84f036bba455051177e80b5))
+* [CORE-2365] Add optional name to create and get Context API ([b2f4057](https://github.com/browserbase/sdk-python/commit/b2f4057417297ea0f6626e72b51d8a6c435960f6))
+* [STG-2717] Pass-thru `proxy` config for session creation in `/v1/agents/runs` ([37ac241](https://github.com/browserbase/sdk-python/commit/37ac24172e12a3a6417714d12afa7984217dde06))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([c9098bb](https://github.com/browserbase/sdk-python/commit/c9098bb75d7ad2a4a84e55c0f0b0c65a5a61078b))
+
 ## 1.15.0 (2026-07-14)
 
 Full Changelog: [v1.14.0...v1.15.0](https://github.com/browserbase/sdk-python/compare/v1.14.0...v1.15.0)
