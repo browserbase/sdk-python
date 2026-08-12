@@ -11,6 +11,8 @@ from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
 from browserbase.types import Context, ContextCreateResponse, ContextUpdateResponse
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -25,6 +27,7 @@ class TestContexts:
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         context = client.contexts.create(
+            name="x",
             project_id="projectId",
         )
         assert_matches_type(ContextCreateResponse, context, path=["response"])
@@ -89,16 +92,19 @@ class TestContexts:
 
     @parametrize
     def test_method_update(self, client: Browserbase) -> None:
-        context = client.contexts.update(
-            "id",
-        )
+        with pytest.warns(DeprecationWarning):
+            context = client.contexts.update(
+                "id",
+            )
+
         assert_matches_type(ContextUpdateResponse, context, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Browserbase) -> None:
-        response = client.contexts.with_raw_response.update(
-            "id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.contexts.with_raw_response.update(
+                "id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -107,23 +113,25 @@ class TestContexts:
 
     @parametrize
     def test_streaming_response_update(self, client: Browserbase) -> None:
-        with client.contexts.with_streaming_response.update(
-            "id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.contexts.with_streaming_response.update(
+                "id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            context = response.parse()
-            assert_matches_type(ContextUpdateResponse, context, path=["response"])
+                context = response.parse()
+                assert_matches_type(ContextUpdateResponse, context, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_update(self, client: Browserbase) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.contexts.with_raw_response.update(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+                client.contexts.with_raw_response.update(
+                    "",
+                )
 
     @parametrize
     def test_method_delete(self, client: Browserbase) -> None:
@@ -177,6 +185,7 @@ class TestAsyncContexts:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         context = await async_client.contexts.create(
+            name="x",
             project_id="projectId",
         )
         assert_matches_type(ContextCreateResponse, context, path=["response"])
@@ -241,16 +250,19 @@ class TestAsyncContexts:
 
     @parametrize
     async def test_method_update(self, async_client: AsyncBrowserbase) -> None:
-        context = await async_client.contexts.update(
-            "id",
-        )
+        with pytest.warns(DeprecationWarning):
+            context = await async_client.contexts.update(
+                "id",
+            )
+
         assert_matches_type(ContextUpdateResponse, context, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBrowserbase) -> None:
-        response = await async_client.contexts.with_raw_response.update(
-            "id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.contexts.with_raw_response.update(
+                "id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -259,23 +271,25 @@ class TestAsyncContexts:
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBrowserbase) -> None:
-        async with async_client.contexts.with_streaming_response.update(
-            "id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.contexts.with_streaming_response.update(
+                "id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            context = await response.parse()
-            assert_matches_type(ContextUpdateResponse, context, path=["response"])
+                context = await response.parse()
+                assert_matches_type(ContextUpdateResponse, context, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBrowserbase) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.contexts.with_raw_response.update(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+                await async_client.contexts.with_raw_response.update(
+                    "",
+                )
 
     @parametrize
     async def test_method_delete(self, async_client: AsyncBrowserbase) -> None:

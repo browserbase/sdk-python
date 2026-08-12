@@ -2,12 +2,22 @@
 
 from __future__ import annotations
 
-from typing import Dict
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Dict, Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["RunCreateParams", "BrowserSettings", "BrowserSettingsContext", "Variables"]
+__all__ = [
+    "RunCreateParams",
+    "BrowserSettings",
+    "BrowserSettingsContext",
+    "BrowserSettingsProxiesUnionMember0",
+    "BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfig",
+    "BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfigGeolocation",
+    "BrowserSettingsProxiesUnionMember0ExternalProxyConfig",
+    "BrowserSettingsProxiesUnionMember0NoneProxyConfig",
+    "Variables",
+]
 
 
 class RunCreateParams(TypedDict, total=False):
@@ -52,6 +62,74 @@ class BrowserSettingsContext(TypedDict, total=False):
     """Whether to persist the context after browsing. Defaults to false."""
 
 
+class BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfigGeolocation(TypedDict, total=False):
+    """Geographic location for the proxy. Optional."""
+
+    country: Required[str]
+    """Country code in ISO 3166-1 alpha-2 format"""
+
+    city: str
+    """Name of the city. Use spaces for multi-word city names. Optional."""
+
+    state: str
+    """US state code (2 characters). Must also specify US as the country. Optional."""
+
+
+class BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfig(TypedDict, total=False):
+    type: Required[Literal["browserbase"]]
+    """Type of proxy.
+
+    Always use 'browserbase' for the Browserbase managed proxy network.
+    """
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+    geolocation: BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfigGeolocation
+    """Geographic location for the proxy. Optional."""
+
+
+class BrowserSettingsProxiesUnionMember0ExternalProxyConfig(TypedDict, total=False):
+    server: Required[str]
+    """Server URL for external proxy. Required."""
+
+    type: Required[Literal["external"]]
+    """Type of proxy. Always 'external' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+    password: str
+    """Password for external proxy authentication. Optional."""
+
+    username: str
+    """Username for external proxy authentication. Optional."""
+
+
+class BrowserSettingsProxiesUnionMember0NoneProxyConfig(TypedDict, total=False):
+    type: Required[Literal["none"]]
+    """Type of proxy. Always 'none' for this config."""
+
+    domain_pattern: Annotated[str, PropertyInfo(alias="domainPattern")]
+    """Domain pattern for which this proxy should be used.
+
+    If omitted, defaults to all domains. Optional.
+    """
+
+
+BrowserSettingsProxiesUnionMember0: TypeAlias = Union[
+    BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfig,
+    BrowserSettingsProxiesUnionMember0ExternalProxyConfig,
+    BrowserSettingsProxiesUnionMember0NoneProxyConfig,
+]
+
+
 class BrowserSettings(TypedDict, total=False):
     """Browser configuration for the agent's session.
 
@@ -60,8 +138,11 @@ class BrowserSettings(TypedDict, total=False):
 
     context: BrowserSettingsContext
 
-    proxies: bool
-    """Set true to route the agent's browser session through the default proxy."""
+    proxies: Union[Iterable[BrowserSettingsProxiesUnionMember0], bool]
+    """Proxy configuration.
+
+    Can be true for default proxy, or an array of proxy configurations.
+    """
 
     verified: bool
     """Set true to enable Browserbase Verified for the session."""
