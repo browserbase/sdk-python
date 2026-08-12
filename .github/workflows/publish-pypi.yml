@@ -11,6 +11,10 @@ on:
 jobs:
   publish:
     name: publish
+    # Same file lives on staging and production (the promote keeps the trees
+    # identical); only production may publish. A stray GitHub Release on the
+    # staging repo must never reach PyPI.
+    if: github.repository == 'browserbase/sdk-python'
     runs-on: ubuntu-latest
 
     steps:

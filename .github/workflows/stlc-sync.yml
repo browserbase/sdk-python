@@ -161,7 +161,7 @@ jobs:
       group: seal-dispatch-${{ github.ref }}
       cancel-in-progress: false
     env:
-      CONFIG_REPO: browserbase/browserbase-config
+      CONFIG_REPO: browserbase/browserbase-stlc-config
     steps:
       - name: Loop-guard and send re-seal dispatch
         env:
