@@ -14,7 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # App token in place of the RELEASE_PLEASE_TOKEN PAT (CB-19). App-created
+      # releases still trigger the publish workflow, unlike GITHUB_TOKEN ones.
+      - name: Mint bot token
+        id: bot-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.STLC_BOT_APP_ID }}
+          private-key: ${{ secrets.STLC_BOT_PRIVATE_KEY }}
+          owner: browserbase
+          repositories: sdk-python
+
       - uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
         id: release
         with:
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          token: ${{ steps.bot-token.outputs.token }}
