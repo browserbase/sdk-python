@@ -20,7 +20,6 @@ jobs:
     environment: production
     env:
       PRODUCTION_REPO: browserbase/sdk-python
-      GH_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
     steps:
       - name: Check out staging
         uses: actions/checkout@v6
@@ -28,7 +27,20 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      # Short-lived installation token for browserbase-stlc-bot (CB-19) —
+      # replaces the PRODUCTION_REPO_TOKEN PAT the upstream template expects.
+      - name: Mint bot token
+        id: bot-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.STLC_BOT_APP_ID }}
+          private-key: ${{ secrets.STLC_BOT_PRIVATE_KEY }}
+          owner: browserbase
+          repositories: sdk-python
+
       - name: Fetch production main
+        env:
+          GH_TOKEN: ${{ steps.bot-token.outputs.token }}
         run: |
           git remote add production \
             "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCTION_REPO}.git"
