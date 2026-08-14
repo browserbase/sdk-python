@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.17.0](https://github.com/browserbase/sdk-python/compare/v1.16.0...v1.17.0) (2026-08-14)
+
+
+### Features
+
+* stlc workspace + generate workflow ([146f1a0](https://github.com/browserbase/sdk-python/commit/146f1a0ee1cfe8685131f62338003ff54c5ebd1b))
+
+
+### Bug Fixes
+
+* **api:** document session timeout bounds in create-session description ([d597f3c](https://github.com/browserbase/sdk-python/commit/d597f3c6e6456ce7f616afc85a066c28654a4ce3))
+
+
+### Chores
+
+* sync production releases back into staging ([6d0d634](https://github.com/browserbase/sdk-python/commit/6d0d634331d2527372f8e1a737822f6ae2056ff6))
+
 ## 1.16.0 (2026-08-10)
 
 Full Changelog: [v1.15.0...v1.16.0](https://github.com/browserbase/sdk-python/compare/v1.15.0...v1.16.0)
