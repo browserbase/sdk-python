@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.16.1 (2026-08-14)
+
+Full Changelog: [v1.16.0...v1.16.1](https://github.com/browserbase/sdk-python/compare/v1.16.0...v1.16.1)
+
+### Bug Fixes
+
+* **api:** document session timeout bounds in create-session description ([fddefb2](https://github.com/browserbase/sdk-python/commit/fddefb29a064413d42ae87b71975002bcd462c1b))
+
 ## 1.16.0 (2026-08-10)
 
 Full Changelog: [v1.15.0...v1.16.0](https://github.com/browserbase/sdk-python/compare/v1.15.0...v1.16.0)
