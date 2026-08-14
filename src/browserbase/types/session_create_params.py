@@ -59,7 +59,8 @@ class SessionCreateParams(TypedDict, total=False):
     api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
     """Duration in seconds after which the session will automatically end.
 
-    Defaults to the Project's `defaultTimeout`.
+    Defaults to the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600
+    seconds (6 hours).
     """
 
     user_metadata: Annotated[Dict[str, object], PropertyInfo(alias="userMetadata")]

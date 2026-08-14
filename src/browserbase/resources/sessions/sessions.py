@@ -150,7 +150,8 @@ class SessionsResource(SyncAPIResource):
           region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
+              the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
+              hours).
 
           user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
               metadata, see [User Metadata](/features/sessions#user-metadata).
@@ -430,7 +431,8 @@ class AsyncSessionsResource(AsyncAPIResource):
           region: The region where the Session should run.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
-              the Project's `defaultTimeout`.
+              the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
+              hours).
 
           user_metadata: Arbitrary user metadata to attach to the session. To learn more about user
               metadata, see [User Metadata](/features/sessions#user-metadata).
