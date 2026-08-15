@@ -979,8 +979,6 @@ class TestBrowserbase:
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
     def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        # Test that the proxy environment variables are set correctly
-        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
         # Delete in case our environment has any proxy env vars set
         monkeypatch.delenv("HTTP_PROXY", raising=False)
         monkeypatch.delenv("ALL_PROXY", raising=False)
@@ -989,6 +987,9 @@ class TestBrowserbase:
         monkeypatch.delenv("https_proxy", raising=False)
         monkeypatch.delenv("all_proxy", raising=False)
         monkeypatch.delenv("no_proxy", raising=False)
+        # Set this after deleting both casing variants. Windows environment
+        # variable names are case-insensitive.
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
 
         client = DefaultHttpxClient()
 
@@ -1919,8 +1920,6 @@ class TestAsyncBrowserbase:
         assert isinstance(platform, (str, OtherPlatform))
 
     async def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        # Test that the proxy environment variables are set correctly
-        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
         # Delete in case our environment has any proxy env vars set
         monkeypatch.delenv("HTTP_PROXY", raising=False)
         monkeypatch.delenv("ALL_PROXY", raising=False)
@@ -1929,6 +1928,9 @@ class TestAsyncBrowserbase:
         monkeypatch.delenv("https_proxy", raising=False)
         monkeypatch.delenv("all_proxy", raising=False)
         monkeypatch.delenv("no_proxy", raising=False)
+        # Set this after deleting both casing variants. Windows environment
+        # variable names are case-insensitive.
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
 
         client = DefaultAsyncHttpxClient()
 
