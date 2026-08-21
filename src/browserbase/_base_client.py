@@ -550,6 +550,21 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
 
         is_body_allowed = options.method.lower() != "get"
 
+        # DELETE operations in the Browserbase API do not define request bodies.
+        # Avoid advertising JSON when the generated request has no JSON, binary,
+        # or multipart body; Fastify correctly rejects that combination as an
+        # empty JSON document. Preserve an explicitly supplied Content-Type.
+        is_bodyless_delete = (
+            options.method.lower() == "delete"
+            and options.content is None
+            and (not is_given(json_data) or json_data is None)
+            and not files
+        )
+        explicit_headers = {header.lower() for header in self._custom_headers}
+        explicit_headers.update(header.lower() for header in (options.headers or {}))
+        if is_bodyless_delete and "content-type" not in explicit_headers:
+            headers.pop("Content-Type", None)
+
         if is_body_allowed:
             if options.content is not None and json_data is not None:
                 raise TypeError("Passing both `content` and `json_data` is not supported")

@@ -509,6 +509,36 @@ class TestBrowserbase:
         )
         assert request.headers.get("X-Bar") == "false"
 
+    def test_delete_without_body_omits_default_content_type(self, client: Browserbase) -> None:
+        request = client._build_request(FinalRequestOptions(method="delete", url="/v1/contexts/id"))
+
+        assert request.headers.get("Content-Type") is None
+        assert request.content == b""
+
+    def test_delete_with_json_body_keeps_default_content_type(self, client: Browserbase) -> None:
+        request = client._build_request(
+            FinalRequestOptions(method="delete", url="/v1/contexts/id", json_data={}),
+        )
+
+        assert request.headers.get("Content-Type") == "application/json"
+        assert request.content == b"{}"
+
+    def test_bodyless_delete_preserves_explicit_content_type(self, client: Browserbase) -> None:
+        request = client._build_request(
+            FinalRequestOptions(
+                method="delete",
+                url="/v1/contexts/id",
+                headers={"Content-Type": "application/custom"},
+            ),
+        )
+
+        assert request.headers.get("Content-Type") == "application/custom"
+
+    def test_post_without_body_keeps_default_content_type(self, client: Browserbase) -> None:
+        request = client._build_request(FinalRequestOptions(method="post", url="/foo"))
+
+        assert request.headers.get("Content-Type") == "application/json"
+
     def test_request_extra_query(self, client: Browserbase) -> None:
         request = client._build_request(
             FinalRequestOptions(
