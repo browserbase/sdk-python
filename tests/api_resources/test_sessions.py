@@ -219,14 +219,22 @@ class TestSessions:
     @parametrize
     def test_method_debug(self, client: Browserbase) -> None:
         session = client.sessions.debug(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
+
+    @parametrize
+    def test_method_debug_with_all_params(self, client: Browserbase) -> None:
+        session = client.sessions.debug(
+            id="id",
+            expires_in=60,
         )
         assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     def test_raw_response_debug(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.debug(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -237,7 +245,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_debug(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.debug(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -251,7 +259,7 @@ class TestSessions:
     def test_path_params_debug(self, client: Browserbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sessions.with_raw_response.debug(
-                "",
+                id="",
             )
 
 
@@ -456,14 +464,22 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_debug(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.debug(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SessionLiveURLs, session, path=["response"])
+
+    @parametrize
+    async def test_method_debug_with_all_params(self, async_client: AsyncBrowserbase) -> None:
+        session = await async_client.sessions.debug(
+            id="id",
+            expires_in=60,
         )
         assert_matches_type(SessionLiveURLs, session, path=["response"])
 
     @parametrize
     async def test_raw_response_debug(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.debug(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -474,7 +490,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_debug(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.debug(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -488,5 +504,5 @@ class TestAsyncSessions:
     async def test_path_params_debug(self, async_client: AsyncBrowserbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.with_raw_response.debug(
-                "",
+                id="",
             )

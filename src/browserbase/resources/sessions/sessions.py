@@ -15,7 +15,7 @@ from .logs import (
     LogsResourceWithStreamingResponse,
     AsyncLogsResourceWithStreamingResponse,
 )
-from ...types import session_list_params, session_create_params, session_update_params
+from ...types import session_list_params, session_debug_params, session_create_params, session_update_params
 from .replays import (
     ReplaysResource,
     AsyncReplaysResource,
@@ -319,6 +319,7 @@ class SessionsResource(SyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -330,6 +331,9 @@ class SessionsResource(SyncAPIResource):
         Session Live URLs
 
         Args:
+          expires_in: Time-to-live of the generated live view URLs, in seconds. If omitted, the URLs
+              expire with the session, up to a maximum of 21600 seconds (6 hours).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -343,7 +347,11 @@ class SessionsResource(SyncAPIResource):
         return self._get(
             path_template("/v1/sessions/{id}/debug", id=id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"expires_in": expires_in}, session_debug_params.SessionDebugParams),
             ),
             cast_to=SessionLiveURLs,
         )
@@ -600,6 +608,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -611,6 +620,9 @@ class AsyncSessionsResource(AsyncAPIResource):
         Session Live URLs
 
         Args:
+          expires_in: Time-to-live of the generated live view URLs, in seconds. If omitted, the URLs
+              expire with the session, up to a maximum of 21600 seconds (6 hours).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -624,7 +636,11 @@ class AsyncSessionsResource(AsyncAPIResource):
         return await self._get(
             path_template("/v1/sessions/{id}/debug", id=id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"expires_in": expires_in}, session_debug_params.SessionDebugParams),
             ),
             cast_to=SessionLiveURLs,
         )
