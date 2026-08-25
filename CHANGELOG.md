@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.18.0](https://github.com/browserbase/sdk-python/compare/v1.17.0...v1.18.0) (2026-08-25)
+
+
+### Features
+
+* **sessions:** support expiresIn for debug URLs ([349a658](https://github.com/browserbase/sdk-python/commit/349a6589a9ddfedb33009c4c29a300c52fc89740))
+
+
+### Bug Fixes
+
+* **client:** omit Content-Type on bodyless DELETE requests ([#4](https://github.com/browserbase/sdk-python/issues/4)) ([24602da](https://github.com/browserbase/sdk-python/commit/24602da3e68397df53a5748f3431b6d9e75c9039))
+
+
+### Chores
+
+* add CODEOWNERS — core-browser owns this repo ([#174](https://github.com/browserbase/sdk-python/issues/174)) ([530eb39](https://github.com/browserbase/sdk-python/commit/530eb3932af843bd84482dceba0c6979da9ffeb4))
+* add CODEOWNERS — core-browser owns this repo ([#3](https://github.com/browserbase/sdk-python/issues/3)) ([857be9b](https://github.com/browserbase/sdk-python/commit/857be9bbed5d3ffea5dc80cc8a2f1d7e45f0b9b4))
+* reconcile trunk fork from independently-added CODEOWNERS ([0cb3b5d](https://github.com/browserbase/sdk-python/commit/0cb3b5d8b21d04920dedbf5dee4e449fe2269e3b))
+
 ## [1.17.0](https://github.com/browserbase/sdk-python/compare/v1.16.0...v1.17.0) (2026-08-14)
 
 
