@@ -1,0 +1,48 @@
+name: Close stale release PRs
+
+# A release PR whose head commit is older than 48h predates newer promotes or
+# was simply forgotten; merging one shipped the empty v2.18.1 (2026-08-24
+# incident). Close it — release-please opens a fresh, correctly-versioned PR
+# on the next push to production main (i.e. the next promote). Staleness is
+# judged by the HEAD COMMIT date, not the PR creation date: release-please
+# force-updates the same PR after each promote, which resets the clock.
+#
+# Lives in the staging repo (sealed as custom code) and rides the promote to
+# production, where the schedule actually does the work.
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  close-stale:
+    # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    # Only meaningful on production; the staging copy of this file is inert.
+    if: github.repository == 'browserbase/sdk-python'
+    env:
+      GH_TOKEN: ${{ github.token }}
+      MAX_AGE_HOURS: '48'
+    steps:
+      - name: Close release PRs whose head commit is stale
+        run: |
+          set -euo pipefail
+          cutoff=$(date -u -d "-${MAX_AGE_HOURS} hours" +%Y-%m-%dT%H:%M:%SZ)
+          prs=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open \
+            --json number,headRefName,headRefOid \
+            --jq '.[] | select(.headRefName | startswith("release-please--")) | "\(.number) \(.headRefOid)"')
+          if [ -z "$prs" ]; then echo "No open release PRs."; exit 0; fi
+          while read -r num oid; do
+            committed=$(gh api "repos/$GITHUB_REPOSITORY/commits/$oid" --jq '.commit.committer.date')
+            if [[ "$committed" < "$cutoff" ]]; then
+              gh pr comment "$num" --repo "$GITHUB_REPOSITORY" --body "Closing automatically: this release PR's head commit is from ${committed} (older than ${MAX_AGE_HOURS}h), so it may predate newer staging promotes. release-please opens a fresh, correctly-versioned PR on the next promote. (stale-release-prs.yml)"
+              gh pr close "$num" --repo "$GITHUB_REPOSITORY"
+              echo "Closed stale release PR #$num (head committed $committed)"
+            else
+              echo "PR #$num head committed $committed — fresh, keeping"
+            fi
+          done <<< "$prs"
