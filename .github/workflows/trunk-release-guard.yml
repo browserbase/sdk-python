@@ -1,0 +1,60 @@
+name: Trunk release guard
+
+# Blocks merging any PR on the production repo (in practice: release-please's
+# release PRs) while the staging trunk has commits production lacks — i.e. the
+# promote hasn't run. Merging in that state ships a stale release and, via the
+# squash commit, forks the trunks (the 2026-08-24 v2.18.1 incident).
+#
+# pull_request-triggered only, BY DESIGN: a scheduled run that re-stamps
+# results onto open PRs is what deadlocked the staging back-sync PR — do not
+# add a schedule here. After a promote, release-please force-updates the
+# release PR, which re-triggers this check and turns it green.
+#
+# Lives in the staging repo (sealed as custom code) and rides the promote to
+# production, where the `trunk-synced-release` job is a required check.
+# First-run: a check counts as "required" only after it reports once.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+env:
+  STAGING_REPO: browserbase/browserbase-python-staging
+
+jobs:
+  trunk-synced-release:
+    # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    # Only meaningful on production; the staging copy of this file is inert.
+    if: github.repository == 'browserbase/sdk-python'
+    steps:
+      # Short-lived installation token for browserbase-stlc-bot (CB-19) —
+      # needed to read the private staging repo.
+      - name: Mint bot token
+        id: bot-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.STLC_BOT_APP_ID }}
+          private-key: ${{ secrets.STLC_BOT_PRIVATE_KEY }}
+          owner: browserbase
+          repositories: sdk-python,browserbase-python-staging
+
+      - name: Require staging main to be contained in production main
+        env:
+          GH_TOKEN: ${{ steps.bot-token.outputs.token }}
+        run: |
+          set -euo pipefail
+          d=$(mktemp -d); git -C "$d" init -q
+          git -C "$d" fetch -q --no-tags \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main:refs/remotes/prod/main
+          git -C "$d" fetch -q --no-tags \
+            "https://x-access-token:${GH_TOKEN}@github.com/${STAGING_REPO}.git" main:refs/remotes/staging/main
+          if ! git -C "$d" merge-base --is-ancestor staging/main prod/main; then
+            echo "::error title=Promote before merging::${STAGING_REPO} main has commits ${GITHUB_REPOSITORY} main lacks. Run stlc-promote.yml on the staging repo; release-please will refresh this PR and re-run this check."
+            exit 1
+          fi
+          echo "Staging trunk is contained in production main — safe to merge."
