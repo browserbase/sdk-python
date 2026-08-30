@@ -26,10 +26,10 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
         with:
-          version: '0.10.2'
+          version: '0.12.3'
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: uv sync --all-extras --locked
 
       - name: Run lints
         run: ./scripts/lint
@@ -48,10 +48,10 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
         with:
-          version: '0.10.2'
+          version: '0.12.3'
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: uv sync --all-extras --locked
 
       - name: Run build
         run: uv build
@@ -67,7 +67,10 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
         with:
-          version: '0.10.2'
+          version: '0.12.3'
+
+      - name: Check lockfile
+        run: uv lock --check
 
       - name: Bootstrap
         run: ./scripts/bootstrap
