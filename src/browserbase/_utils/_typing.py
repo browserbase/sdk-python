@@ -51,7 +51,7 @@ def is_typevar(typ: type) -> bool:
     return type(typ) == TypeVar  # type: ignore
 
 
-_TYPE_ALIAS_TYPES: tuple[type[typing_extensions.TypeAliasType], ...] = (typing_extensions.TypeAliasType,)
+_TYPE_ALIAS_TYPES: tuple[type[object], ...] = (typing_extensions.TypeAliasType,)
 if sys.version_info >= (3, 12):
     _TYPE_ALIAS_TYPES = (*_TYPE_ALIAS_TYPES, typing.TypeAliasType)
 
