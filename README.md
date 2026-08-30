@@ -40,8 +40,6 @@ client = Browserbase(
 session = client.sessions.create(
     project_id=BROWSERBASE_PROJECT_ID,
 )
-```
-
 
 def run(playwright: Playwright) -> None:
     # Connect to the remote session
@@ -228,6 +226,8 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
+import httpx
+
 from browserbase import Browserbase
 
 # Configure the default for all requests:
