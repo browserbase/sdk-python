@@ -89,7 +89,7 @@ class BrowserSettingsViewport(TypedDict, total=False):
 
 class BrowserSettings(TypedDict, total=False):
     advanced_stealth: Annotated[bool, PropertyInfo(alias="advancedStealth")]
-    """Advanced Browser Stealth Mode"""
+    """Advanced Browser Stealth Mode. Deprecated: use `verified` instead."""
 
     allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
     """An optional list of allowed domains for the session.
