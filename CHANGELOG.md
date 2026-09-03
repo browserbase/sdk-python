@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.1](https://github.com/browserbase/sdk-python/compare/v1.18.0...v1.18.1) (2026-09-03)
+
+
+### Chores
+
+* **api:** spec sync from core ([73c0fd3](https://github.com/browserbase/sdk-python/commit/73c0fd34204f5096fde5f915ed150d151a0a02dc))
+
 ## [1.18.0](https://github.com/browserbase/sdk-python/compare/v1.17.0...v1.18.0) (2026-08-25)
 
 
