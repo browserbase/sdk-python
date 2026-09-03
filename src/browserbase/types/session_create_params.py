@@ -89,7 +89,7 @@ class BrowserSettingsViewport(TypedDict, total=False):
 
 class BrowserSettings(TypedDict, total=False):
     advanced_stealth: Annotated[bool, PropertyInfo(alias="advancedStealth")]
-    """Advanced Browser Stealth Mode"""
+    """Advanced Browser Stealth Mode. Deprecated: use `verified` instead."""
 
     allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
     """An optional list of allowed domains for the session.
@@ -129,7 +129,9 @@ class BrowserSettings(TypedDict, total=False):
     ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
     """Enable or disable ignoring of certificate errors in the browser.
 
-    Defaults to `true`.
+    Defaults to `false`, so TLS certificate validation is enforced; set to `true` to
+    ignore certificate errors (for example, to reach hosts with expired or
+    self-signed certificates).
     """
 
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
