@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing_extensions
+
 import httpx
 
 from ...._types import Body, Query, Headers, NotGiven, not_given
@@ -52,6 +54,7 @@ class RecordingResource(SyncAPIResource):
         """
         return RecordingResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def retrieve(
         self,
         id: str,
@@ -63,8 +66,10 @@ class RecordingResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RecordingRetrieveResponse:
-        """
-        Session Recording
+        """Deprecated.
+
+        Returns raw rrweb DOM replay events. Use the Session Replay API for
+        HLS video or the Recording Downloads API for MP4 files.
 
         Args:
           extra_headers: Send extra headers
@@ -110,6 +115,7 @@ class AsyncRecordingResource(AsyncAPIResource):
         """
         return AsyncRecordingResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def retrieve(
         self,
         id: str,
@@ -121,8 +127,10 @@ class AsyncRecordingResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RecordingRetrieveResponse:
-        """
-        Session Recording
+        """Deprecated.
+
+        Returns raw rrweb DOM replay events. Use the Session Replay API for
+        HLS video or the Recording Downloads API for MP4 files.
 
         Args:
           extra_headers: Send extra headers
@@ -148,8 +156,10 @@ class RecordingResourceWithRawResponse:
     def __init__(self, recording: RecordingResource) -> None:
         self._recording = recording
 
-        self.retrieve = to_raw_response_wrapper(
-            recording.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                recording.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -161,8 +171,10 @@ class AsyncRecordingResourceWithRawResponse:
     def __init__(self, recording: AsyncRecordingResource) -> None:
         self._recording = recording
 
-        self.retrieve = async_to_raw_response_wrapper(
-            recording.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                recording.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -174,8 +186,10 @@ class RecordingResourceWithStreamingResponse:
     def __init__(self, recording: RecordingResource) -> None:
         self._recording = recording
 
-        self.retrieve = to_streamed_response_wrapper(
-            recording.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                recording.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -187,8 +201,10 @@ class AsyncRecordingResourceWithStreamingResponse:
     def __init__(self, recording: AsyncRecordingResource) -> None:
         self._recording = recording
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            recording.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                recording.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
