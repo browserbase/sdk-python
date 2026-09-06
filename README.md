@@ -138,7 +138,7 @@ client = Browserbase()
 all_downloads = []
 # Automatically fetches more pages as needed.
 for download in client.downloads.list(
-    session_id="sessionId",
+    session_id="your_session_id",
 ):
     # Do something with download here
     all_downloads.append(download)
@@ -158,7 +158,7 @@ async def main() -> None:
     all_downloads = []
     # Iterate through items across all pages, issuing requests as needed.
     async for download in client.downloads.list(
-        session_id="sessionId",
+        session_id="your_session_id",
     ):
         all_downloads.append(download)
     print(all_downloads)
@@ -171,7 +171,7 @@ Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get
 
 ```python
 first_page = await client.downloads.list(
-    session_id="sessionId",
+    session_id="your_session_id",
 )
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
@@ -185,7 +185,7 @@ Or just work directly with the returned data:
 
 ```python
 first_page = await client.downloads.list(
-    session_id="sessionId",
+    session_id="your_session_id",
 )
 
 print(
