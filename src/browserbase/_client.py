@@ -35,10 +35,11 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agents, search, contexts, projects, sessions, fetch_api, extensions, certificates
+    from .resources import agents, search, contexts, projects, sessions, downloads, fetch_api, extensions, certificates
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.downloads import DownloadsResource, AsyncDownloadsResource
     from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.certificates import CertificatesResource, AsyncCertificatesResource
@@ -132,6 +133,12 @@ class Browserbase(SyncAPIClient):
         from .resources.contexts import ContextsResource
 
         return ContextsResource(self)
+
+    @cached_property
+    def downloads(self) -> DownloadsResource:
+        from .resources.downloads import DownloadsResource
+
+        return DownloadsResource(self)
 
     @cached_property
     def extensions(self) -> ExtensionsResource:
@@ -359,6 +366,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncContextsResource(self)
 
     @cached_property
+    def downloads(self) -> AsyncDownloadsResource:
+        from .resources.downloads import AsyncDownloadsResource
+
+        return AsyncDownloadsResource(self)
+
+    @cached_property
     def extensions(self) -> AsyncExtensionsResource:
         from .resources.extensions import AsyncExtensionsResource
 
@@ -526,6 +539,12 @@ class BrowserbaseWithRawResponse:
         return ContextsResourceWithRawResponse(self._client.contexts)
 
     @cached_property
+    def downloads(self) -> downloads.DownloadsResourceWithRawResponse:
+        from .resources.downloads import DownloadsResourceWithRawResponse
+
+        return DownloadsResourceWithRawResponse(self._client.downloads)
+
+    @cached_property
     def extensions(self) -> extensions.ExtensionsResourceWithRawResponse:
         from .resources.extensions import ExtensionsResourceWithRawResponse
 
@@ -579,6 +598,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.contexts import AsyncContextsResourceWithRawResponse
 
         return AsyncContextsResourceWithRawResponse(self._client.contexts)
+
+    @cached_property
+    def downloads(self) -> downloads.AsyncDownloadsResourceWithRawResponse:
+        from .resources.downloads import AsyncDownloadsResourceWithRawResponse
+
+        return AsyncDownloadsResourceWithRawResponse(self._client.downloads)
 
     @cached_property
     def extensions(self) -> extensions.AsyncExtensionsResourceWithRawResponse:
@@ -636,6 +661,12 @@ class BrowserbaseWithStreamedResponse:
         return ContextsResourceWithStreamingResponse(self._client.contexts)
 
     @cached_property
+    def downloads(self) -> downloads.DownloadsResourceWithStreamingResponse:
+        from .resources.downloads import DownloadsResourceWithStreamingResponse
+
+        return DownloadsResourceWithStreamingResponse(self._client.downloads)
+
+    @cached_property
     def extensions(self) -> extensions.ExtensionsResourceWithStreamingResponse:
         from .resources.extensions import ExtensionsResourceWithStreamingResponse
 
@@ -689,6 +720,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.contexts import AsyncContextsResourceWithStreamingResponse
 
         return AsyncContextsResourceWithStreamingResponse(self._client.contexts)
+
+    @cached_property
+    def downloads(self) -> downloads.AsyncDownloadsResourceWithStreamingResponse:
+        from .resources.downloads import AsyncDownloadsResourceWithStreamingResponse
+
+        return AsyncDownloadsResourceWithStreamingResponse(self._client.downloads)
 
     @cached_property
     def extensions(self) -> extensions.AsyncExtensionsResourceWithStreamingResponse:
