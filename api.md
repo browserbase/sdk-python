@@ -28,6 +28,21 @@ Methods:
 - <code title="put /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">update</a>(id) -> <a href="./src/browserbase/types/context_update_response.py">ContextUpdateResponse</a></code>
 - <code title="delete /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">delete</a>(id) -> None</code>
 
+# Downloads
+
+Types:
+
+```python
+from browserbase.types import Download
+```
+
+Methods:
+
+- <code title="get /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">retrieve</a>(id) -> <a href="./src/browserbase/types/download.py">Download</a></code>
+- <code title="get /v1/downloads">client.downloads.<a href="./src/browserbase/resources/downloads.py">list</a>(\*\*<a href="src/browserbase/types/download_list_params.py">params</a>) -> <a href="./src/browserbase/types/download.py">SyncOffsetPage[Download]</a></code>
+- <code title="delete /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">delete</a>(id) -> None</code>
+- <code title="get /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">download</a>(id) -> BinaryAPIResponse</code>
+
 # Extensions
 
 Types:
