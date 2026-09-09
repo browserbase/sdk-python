@@ -69,6 +69,8 @@ if __name__ == "__main__":
 
 See the [examples](examples) directory for more usage examples.
 
+Two of them cover downloads. [`playwright_downloads.py`](examples/playwright_downloads.py) uses `client.sessions.downloads.list(id)`, which returns a **zip archive** of every file the session downloaded. [`downloads_api.py`](examples/downloads_api.py) lists, filters and fetches individual files through the per-file `/v1/downloads` API, which the SDK does not generate a resource for yet.
+
 > [!NOTE]
 > Running the examples requires [uv](https://docs.astral.sh/uv/) to be installed.
 
