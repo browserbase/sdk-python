@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.19.0](https://github.com/browserbase/sdk-python/compare/v1.18.1...v1.19.0) (2026-09-09)
+
+
+### Features
+
+* **api:** declare the webhooks resource ([1630dc5](https://github.com/browserbase/sdk-python/commit/1630dc539d0746a33f0cf0198fd0c2ac38800727))
+
+
+### Chores
+
+* **api:** reset webhooks before release re-land ([4e84b8c](https://github.com/browserbase/sdk-python/commit/4e84b8c736f6dd33eaa09c3efa8ba34faadb838b))
+
 ## [1.18.1](https://github.com/browserbase/sdk-python/compare/v1.18.0...v1.18.1) (2026-09-03)
 
 
