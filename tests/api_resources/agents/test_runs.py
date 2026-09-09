@@ -45,9 +45,9 @@ class TestRuns:
                         "type": "browserbase",
                         "domain_pattern": "domainPattern",
                         "geolocation": {
-                            "country": "xx",
+                            "country": "se",
                             "city": "city",
-                            "state": "xx",
+                            "state": "se",
                         },
                     }
                 ],
@@ -238,9 +238,9 @@ class TestAsyncRuns:
                         "type": "browserbase",
                         "domain_pattern": "domainPattern",
                         "geolocation": {
-                            "country": "xx",
+                            "country": "se",
                             "city": "city",
-                            "state": "xx",
+                            "state": "se",
                         },
                     }
                 ],
