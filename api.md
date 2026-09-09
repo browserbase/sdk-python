@@ -214,3 +214,25 @@ Methods:
 - <code title="get /v1/agents/runs/{runId}">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">retrieve</a>(run_id) -> <a href="./src/browserbase/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
 - <code title="get /v1/agents/runs">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">list</a>(\*\*<a href="src/browserbase/types/agents/run_list_params.py">params</a>) -> <a href="./src/browserbase/types/agents/run_list_response.py">RunListResponse</a></code>
 - <code title="get /v1/agents/runs/{runId}/messages">client.agents.runs.<a href="./src/browserbase/resources/agents/runs.py">list_messages</a>(run_id, \*\*<a href="src/browserbase/types/agents/run_list_messages_params.py">params</a>) -> <a href="./src/browserbase/types/agents/run_list_messages_response.py">RunListMessagesResponse</a></code>
+
+# Webhooks
+
+Types:
+
+```python
+from browserbase.types import (
+    Webhook,
+    WebhookCreateResponse,
+    WebhookListResponse,
+    WebhookRotateSecretResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/webhooks">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">create</a>(\*\*<a href="src/browserbase/types/webhook_create_params.py">params</a>) -> <a href="./src/browserbase/types/webhook_create_response.py">WebhookCreateResponse</a></code>
+- <code title="get /v1/webhooks/{id}">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">retrieve</a>(id) -> <a href="./src/browserbase/types/webhook.py">Webhook</a></code>
+- <code title="patch /v1/webhooks/{id}">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">update</a>(id, \*\*<a href="src/browserbase/types/webhook_update_params.py">params</a>) -> <a href="./src/browserbase/types/webhook.py">Webhook</a></code>
+- <code title="get /v1/webhooks">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">list</a>(\*\*<a href="src/browserbase/types/webhook_list_params.py">params</a>) -> <a href="./src/browserbase/types/webhook_list_response.py">WebhookListResponse</a></code>
+- <code title="delete /v1/webhooks/{id}">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">delete</a>(id) -> None</code>
+- <code title="post /v1/webhooks/{id}/secret">client.webhooks.<a href="./src/browserbase/resources/webhooks.py">rotate_secret</a>(id, \*\*<a href="src/browserbase/types/webhook_rotate_secret_params.py">params</a>) -> <a href="./src/browserbase/types/webhook_rotate_secret_response.py">WebhookRotateSecretResponse</a></code>
