@@ -5,6 +5,7 @@ from __future__ import annotations
 from .context import Context as Context
 from .project import Project as Project
 from .session import Session as Session
+from .webhook import Webhook as Webhook
 from .extension import Extension as Extension
 from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
@@ -16,6 +17,7 @@ from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .search_web_response import SearchWebResponse as SearchWebResponse
 from .session_list_params import SessionListParams as SessionListParams
+from .webhook_list_params import WebhookListParams as WebhookListParams
 from .session_debug_params import SessionDebugParams as SessionDebugParams
 from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .agent_update_response import AgentUpdateResponse as AgentUpdateResponse
@@ -24,13 +26,19 @@ from .project_list_response import ProjectListResponse as ProjectListResponse
 from .session_create_params import SessionCreateParams as SessionCreateParams
 from .session_list_response import SessionListResponse as SessionListResponse
 from .session_update_params import SessionUpdateParams as SessionUpdateParams
+from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
+from .webhook_list_response import WebhookListResponse as WebhookListResponse
+from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
 from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
 from .context_create_response import ContextCreateResponse as ContextCreateResponse
 from .context_update_response import ContextUpdateResponse as ContextUpdateResponse
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
 from .fetch_api_create_params import FetchAPICreateParams as FetchAPICreateParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
+from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse
 from .certificate_create_params import CertificateCreateParams as CertificateCreateParams
 from .certificate_list_response import CertificateListResponse as CertificateListResponse
 from .fetch_api_create_response import FetchAPICreateResponse as FetchAPICreateResponse
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse
+from .webhook_rotate_secret_params import WebhookRotateSecretParams as WebhookRotateSecretParams
+from .webhook_rotate_secret_response import WebhookRotateSecretResponse as WebhookRotateSecretResponse
