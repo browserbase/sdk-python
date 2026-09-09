@@ -15,7 +15,17 @@ class WebhookUpdateParams(TypedDict, total=False):
     """HTTPS URL that event deliveries are POSTed to. Must be publicly reachable."""
 
     event_types: Annotated[
-        List[Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]],
+        List[
+            Literal[
+                "functions.builds.running",
+                "functions.builds.completed",
+                "functions.builds.failed",
+                "functions.invocations.pending",
+                "functions.invocations.running",
+                "functions.invocations.completed",
+                "functions.invocations.failed",
+            ]
+        ],
         PropertyInfo(alias="eventTypes"),
     ]
     """Event types this webhook subscribes to. Unknown types are rejected."""

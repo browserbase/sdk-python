@@ -16,7 +16,17 @@ class WebhookCreateParams(TypedDict, total=False):
 
     event_types: Required[
         Annotated[
-            List[Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]],
+            List[
+                Literal[
+                    "functions.builds.running",
+                    "functions.builds.completed",
+                    "functions.builds.failed",
+                    "functions.invocations.pending",
+                    "functions.invocations.running",
+                    "functions.invocations.completed",
+                    "functions.invocations.failed",
+                ]
+            ],
             PropertyInfo(alias="eventTypes"),
         ]
     ]

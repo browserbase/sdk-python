@@ -26,7 +26,7 @@ class TestWebhooks:
     def test_method_create(self, client: Browserbase) -> None:
         webhook = client.webhooks.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -34,7 +34,7 @@ class TestWebhooks:
     def test_raw_response_create(self, client: Browserbase) -> None:
         response = client.webhooks.with_raw_response.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
 
         assert response.is_closed is True
@@ -46,7 +46,7 @@ class TestWebhooks:
     def test_streaming_response_create(self, client: Browserbase) -> None:
         with client.webhooks.with_streaming_response.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,7 +106,7 @@ class TestWebhooks:
         webhook = client.webhooks.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 
@@ -268,7 +268,7 @@ class TestAsyncWebhooks:
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
         webhook = await async_client.webhooks.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -276,7 +276,7 @@ class TestAsyncWebhooks:
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.webhooks.with_raw_response.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
 
         assert response.is_closed is True
@@ -288,7 +288,7 @@ class TestAsyncWebhooks:
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.webhooks.with_streaming_response.create(
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -348,7 +348,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             endpoint="https://example.com",
-            event_types=["agents.runs.running"],
+            event_types=["functions.builds.running"],
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 

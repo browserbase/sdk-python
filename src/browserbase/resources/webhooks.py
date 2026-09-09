@@ -52,7 +52,15 @@ class WebhooksResource(SyncAPIResource):
         *,
         endpoint: str,
         event_types: List[
-            Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]
+            Literal[
+                "functions.builds.running",
+                "functions.builds.completed",
+                "functions.builds.failed",
+                "functions.invocations.pending",
+                "functions.invocations.running",
+                "functions.invocations.completed",
+                "functions.invocations.failed",
+            ]
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,7 +145,15 @@ class WebhooksResource(SyncAPIResource):
         *,
         endpoint: str | Omit = omit,
         event_types: List[
-            Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]
+            Literal[
+                "functions.builds.running",
+                "functions.builds.completed",
+                "functions.builds.failed",
+                "functions.invocations.pending",
+                "functions.invocations.running",
+                "functions.invocations.completed",
+                "functions.invocations.failed",
+            ]
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -340,7 +356,15 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         endpoint: str,
         event_types: List[
-            Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]
+            Literal[
+                "functions.builds.running",
+                "functions.builds.completed",
+                "functions.builds.failed",
+                "functions.invocations.pending",
+                "functions.invocations.running",
+                "functions.invocations.completed",
+                "functions.invocations.failed",
+            ]
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -425,7 +449,15 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         endpoint: str | Omit = omit,
         event_types: List[
-            Literal["agents.runs.running", "agents.runs.completed", "agents.runs.stopped", "agents.runs.failed"]
+            Literal[
+                "functions.builds.running",
+                "functions.builds.completed",
+                "functions.builds.failed",
+                "functions.invocations.pending",
+                "functions.invocations.running",
+                "functions.invocations.completed",
+                "functions.invocations.failed",
+            ]
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
