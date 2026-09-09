@@ -35,10 +35,22 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agents, search, contexts, projects, sessions, downloads, fetch_api, extensions, certificates
+    from .resources import (
+        agents,
+        search,
+        contexts,
+        projects,
+        sessions,
+        webhooks,
+        downloads,
+        fetch_api,
+        extensions,
+        certificates,
+    )
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.downloads import DownloadsResource, AsyncDownloadsResource
     from .resources.fetch_api import FetchAPIResource, AsyncFetchAPIResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
@@ -175,6 +187,12 @@ class Browserbase(SyncAPIClient):
         from .resources.agents import AgentsResource
 
         return AgentsResource(self)
+
+    @cached_property
+    def webhooks(self) -> WebhooksResource:
+        from .resources.webhooks import WebhooksResource
+
+        return WebhooksResource(self)
 
     @cached_property
     def with_raw_response(self) -> BrowserbaseWithRawResponse:
@@ -408,6 +426,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncAgentsResource(self)
 
     @cached_property
+    def webhooks(self) -> AsyncWebhooksResource:
+        from .resources.webhooks import AsyncWebhooksResource
+
+        return AsyncWebhooksResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBrowserbaseWithRawResponse:
         return AsyncBrowserbaseWithRawResponse(self)
 
@@ -580,6 +604,12 @@ class BrowserbaseWithRawResponse:
 
         return AgentsResourceWithRawResponse(self._client.agents)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+        from .resources.webhooks import WebhooksResourceWithRawResponse
+
+        return WebhooksResourceWithRawResponse(self._client.webhooks)
+
 
 class AsyncBrowserbaseWithRawResponse:
     _client: AsyncBrowserbase
@@ -640,6 +670,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.agents import AsyncAgentsResourceWithRawResponse
 
         return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+        from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
+
+        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
 
 class BrowserbaseWithStreamedResponse:
@@ -702,6 +738,12 @@ class BrowserbaseWithStreamedResponse:
 
         return AgentsResourceWithStreamingResponse(self._client.agents)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+        from .resources.webhooks import WebhooksResourceWithStreamingResponse
+
+        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
+
 
 class AsyncBrowserbaseWithStreamedResponse:
     _client: AsyncBrowserbase
@@ -762,6 +804,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.agents import AsyncAgentsResourceWithStreamingResponse
 
         return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+        from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
+
+        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
 
 
 Client = Browserbase
