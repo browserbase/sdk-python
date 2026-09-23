@@ -22,7 +22,7 @@ class AgentListParams(TypedDict, total=False):
     end_at: Annotated[Union[str, datetime], PropertyInfo(alias="endAt", format="iso8601")]
     """Only return agents created on or before this timestamp (inclusive).
 
-    ISO 8601 / RFC 3339, e.g. 2026-01-20T00:00:00Z.
+    RFC 3339, e.g. 2026-01-20T00:00:00Z.
     """
 
     limit: int
@@ -31,5 +31,5 @@ class AgentListParams(TypedDict, total=False):
     start_at: Annotated[Union[str, datetime], PropertyInfo(alias="startAt", format="iso8601")]
     """Only return agents created on or after this timestamp (inclusive).
 
-    ISO 8601 / RFC 3339, e.g. 2026-01-19T00:00:00Z.
+    RFC 3339, e.g. 2026-01-19T00:00:00Z.
     """

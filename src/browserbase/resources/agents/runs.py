@@ -176,13 +176,13 @@ class RunsResource(SyncAPIResource):
           cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
               next page. Omit to start from the first page.
 
-          end_at: Only return runs created on or before this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-20T00:00:00Z.
+          end_at: Only return runs created on or before this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-20T00:00:00Z.
 
           limit: Maximum number of results to return.
 
-          start_at: Only return runs created on or after this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-19T00:00:00Z.
+          start_at: Only return runs created on or after this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-19T00:00:00Z.
 
           status: Current status of the run.
 
@@ -432,13 +432,13 @@ class AsyncRunsResource(AsyncAPIResource):
           cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
               next page. Omit to start from the first page.
 
-          end_at: Only return runs created on or before this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-20T00:00:00Z.
+          end_at: Only return runs created on or before this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-20T00:00:00Z.
 
           limit: Maximum number of results to return.
 
-          start_at: Only return runs created on or after this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-19T00:00:00Z.
+          start_at: Only return runs created on or after this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-19T00:00:00Z.
 
           status: Current status of the run.
 

@@ -30,7 +30,7 @@ class Result(BaseModel):
     """Image URL if available"""
 
     published_date: Optional[datetime] = FieldInfo(alias="publishedDate", default=None)
-    """Publication date in ISO 8601 format"""
+    """Publication date in RFC 3339 format"""
 
 
 class SearchWebResponse(BaseModel):
