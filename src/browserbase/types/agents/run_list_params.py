@@ -25,7 +25,7 @@ class RunListParams(TypedDict, total=False):
     end_at: Annotated[Union[str, datetime], PropertyInfo(alias="endAt", format="iso8601")]
     """Only return runs created on or before this timestamp (inclusive).
 
-    ISO 8601 / RFC 3339, e.g. 2026-01-20T00:00:00Z.
+    RFC 3339, e.g. 2026-01-20T00:00:00Z.
     """
 
     limit: int
@@ -34,7 +34,7 @@ class RunListParams(TypedDict, total=False):
     start_at: Annotated[Union[str, datetime], PropertyInfo(alias="startAt", format="iso8601")]
     """Only return runs created on or after this timestamp (inclusive).
 
-    ISO 8601 / RFC 3339, e.g. 2026-01-19T00:00:00Z.
+    RFC 3339, e.g. 2026-01-19T00:00:00Z.
     """
 
     status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT"]
