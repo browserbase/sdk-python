@@ -53,6 +53,7 @@ class TestRuns:
                 ],
                 "verified": True,
             },
+            pause_when="x",
             result_schema={"foo": "bar"},
             variables={
                 "foo": {
@@ -246,6 +247,7 @@ class TestAsyncRuns:
                 ],
                 "verified": True,
             },
+            pause_when="x",
             result_schema={"foo": "bar"},
             variables={
                 "foo": {

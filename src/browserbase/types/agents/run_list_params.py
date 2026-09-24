@@ -37,7 +37,7 @@ class RunListParams(TypedDict, total=False):
     RFC 3339, e.g. 2026-01-19T00:00:00Z.
     """
 
-    status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT"]
+    status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT", "PAUSED"]
     """Current status of the run.
 
     - `PENDING` - agent will run soon
@@ -46,4 +46,6 @@ class RunListParams(TypedDict, total=False):
     - `FAILED` - agent has failed the run
     - `STOPPED` - run was stopped by the user
     - `TIMED_OUT` - run exceeded maximum time
+    - `PAUSED` - run is paused awaiting input from the caller; the agent's request
+      is the trailing `pause` tool call in the run's messages
     """
