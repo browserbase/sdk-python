@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.20.0](https://github.com/browserbase/sdk-python/compare/v1.19.0...v1.20.0) (2026-09-24)
+
+
+### Features
+
+* Add secrets SDK generation ([94ac1c2](https://github.com/browserbase/sdk-python/commit/94ac1c26af2c94c7670cf23287e9b13dd75a2de2))
+
 ## [1.19.0](https://github.com/browserbase/sdk-python/compare/v1.18.1...v1.19.0) (2026-09-09)
 
 
