@@ -35,8 +35,21 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agents, search, contexts, projects, sessions, webhooks, fetch_api, extensions, certificates
+    from .resources import (
+        agents,
+        search,
+        secrets,
+        contexts,
+        projects,
+        sessions,
+        webhooks,
+        fetch_api,
+        functions,
+        extensions,
+        certificates,
+    )
     from .resources.search import SearchResource, AsyncSearchResource
+    from .resources.secrets import SecretsResource, AsyncSecretsResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
@@ -45,6 +58,7 @@ if TYPE_CHECKING:
     from .resources.certificates import CertificatesResource, AsyncCertificatesResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
+    from .resources.functions.functions import FunctionsResource, AsyncFunctionsResource
 
 __all__ = [
     "Timeout",
@@ -147,6 +161,12 @@ class Browserbase(SyncAPIClient):
         return FetchAPIResource(self)
 
     @cached_property
+    def functions(self) -> FunctionsResource:
+        from .resources.functions import FunctionsResource
+
+        return FunctionsResource(self)
+
+    @cached_property
     def projects(self) -> ProjectsResource:
         from .resources.projects import ProjectsResource
 
@@ -157,6 +177,12 @@ class Browserbase(SyncAPIClient):
         from .resources.search import SearchResource
 
         return SearchResource(self)
+
+    @cached_property
+    def secrets(self) -> SecretsResource:
+        from .resources.secrets import SecretsResource
+
+        return SecretsResource(self)
 
     @cached_property
     def sessions(self) -> SessionsResource:
@@ -378,6 +404,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncFetchAPIResource(self)
 
     @cached_property
+    def functions(self) -> AsyncFunctionsResource:
+        from .resources.functions import AsyncFunctionsResource
+
+        return AsyncFunctionsResource(self)
+
+    @cached_property
     def projects(self) -> AsyncProjectsResource:
         from .resources.projects import AsyncProjectsResource
 
@@ -388,6 +420,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         from .resources.search import AsyncSearchResource
 
         return AsyncSearchResource(self)
+
+    @cached_property
+    def secrets(self) -> AsyncSecretsResource:
+        from .resources.secrets import AsyncSecretsResource
+
+        return AsyncSecretsResource(self)
 
     @cached_property
     def sessions(self) -> AsyncSessionsResource:
@@ -551,6 +589,12 @@ class BrowserbaseWithRawResponse:
         return FetchAPIResourceWithRawResponse(self._client.fetch_api)
 
     @cached_property
+    def functions(self) -> functions.FunctionsResourceWithRawResponse:
+        from .resources.functions import FunctionsResourceWithRawResponse
+
+        return FunctionsResourceWithRawResponse(self._client.functions)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithRawResponse:
         from .resources.projects import ProjectsResourceWithRawResponse
 
@@ -561,6 +605,12 @@ class BrowserbaseWithRawResponse:
         from .resources.search import SearchResourceWithRawResponse
 
         return SearchResourceWithRawResponse(self._client.search)
+
+    @cached_property
+    def secrets(self) -> secrets.SecretsResourceWithRawResponse:
+        from .resources.secrets import SecretsResourceWithRawResponse
+
+        return SecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
     def sessions(self) -> sessions.SessionsResourceWithRawResponse:
@@ -612,6 +662,12 @@ class AsyncBrowserbaseWithRawResponse:
         return AsyncFetchAPIResourceWithRawResponse(self._client.fetch_api)
 
     @cached_property
+    def functions(self) -> functions.AsyncFunctionsResourceWithRawResponse:
+        from .resources.functions import AsyncFunctionsResourceWithRawResponse
+
+        return AsyncFunctionsResourceWithRawResponse(self._client.functions)
+
+    @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
         from .resources.projects import AsyncProjectsResourceWithRawResponse
 
@@ -622,6 +678,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.search import AsyncSearchResourceWithRawResponse
 
         return AsyncSearchResourceWithRawResponse(self._client.search)
+
+    @cached_property
+    def secrets(self) -> secrets.AsyncSecretsResourceWithRawResponse:
+        from .resources.secrets import AsyncSecretsResourceWithRawResponse
+
+        return AsyncSecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
@@ -673,6 +735,12 @@ class BrowserbaseWithStreamedResponse:
         return FetchAPIResourceWithStreamingResponse(self._client.fetch_api)
 
     @cached_property
+    def functions(self) -> functions.FunctionsResourceWithStreamingResponse:
+        from .resources.functions import FunctionsResourceWithStreamingResponse
+
+        return FunctionsResourceWithStreamingResponse(self._client.functions)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
         from .resources.projects import ProjectsResourceWithStreamingResponse
 
@@ -683,6 +751,12 @@ class BrowserbaseWithStreamedResponse:
         from .resources.search import SearchResourceWithStreamingResponse
 
         return SearchResourceWithStreamingResponse(self._client.search)
+
+    @cached_property
+    def secrets(self) -> secrets.SecretsResourceWithStreamingResponse:
+        from .resources.secrets import SecretsResourceWithStreamingResponse
+
+        return SecretsResourceWithStreamingResponse(self._client.secrets)
 
     @cached_property
     def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
@@ -734,6 +808,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         return AsyncFetchAPIResourceWithStreamingResponse(self._client.fetch_api)
 
     @cached_property
+    def functions(self) -> functions.AsyncFunctionsResourceWithStreamingResponse:
+        from .resources.functions import AsyncFunctionsResourceWithStreamingResponse
+
+        return AsyncFunctionsResourceWithStreamingResponse(self._client.functions)
+
+    @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
         from .resources.projects import AsyncProjectsResourceWithStreamingResponse
 
@@ -744,6 +824,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.search import AsyncSearchResourceWithStreamingResponse
 
         return AsyncSearchResourceWithStreamingResponse(self._client.search)
+
+    @cached_property
+    def secrets(self) -> secrets.AsyncSecretsResourceWithStreamingResponse:
+        from .resources.secrets import AsyncSecretsResourceWithStreamingResponse
+
+        return AsyncSecretsResourceWithStreamingResponse(self._client.secrets)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:
