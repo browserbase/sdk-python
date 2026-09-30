@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .secret import Secret as Secret
 from .context import Context as Context
 from .project import Project as Project
 from .session import Session as Session
@@ -9,15 +10,20 @@ from .webhook import Webhook as Webhook
 from .extension import Extension as Extension
 from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
+from .secrets_keypair import SecretsKeypair as SecretsKeypair
 from .agent_list_params import AgentListParams as AgentListParams
 from .search_web_params import SearchWebParams as SearchWebParams
 from .session_live_urls import SessionLiveURLs as SessionLiveURLs
+from .secret_list_params import SecretListParams as SecretListParams
 from .agent_create_params import AgentCreateParams as AgentCreateParams
 from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .search_web_response import SearchWebResponse as SearchWebResponse
 from .session_list_params import SessionListParams as SessionListParams
 from .webhook_list_params import WebhookListParams as WebhookListParams
+from .secret_create_params import SecretCreateParams as SecretCreateParams
+from .secret_list_response import SecretListResponse as SecretListResponse
+from .secret_update_params import SecretUpdateParams as SecretUpdateParams
 from .session_debug_params import SessionDebugParams as SessionDebugParams
 from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .agent_update_response import AgentUpdateResponse as AgentUpdateResponse
