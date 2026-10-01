@@ -54,6 +54,7 @@ class RunsResource(SyncAPIResource):
         task: str,
         agent_id: str | Omit = omit,
         browser_settings: run_create_params.BrowserSettings | Omit = omit,
+        pause_when: str | Omit = omit,
         result_schema: Dict[str, object] | Omit = omit,
         variables: Dict[str, run_create_params.Variables] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -77,6 +78,12 @@ class RunsResource(SyncAPIResource):
 
           browser_settings: Browser configuration for the agent's session. When omitted, runner defaults
               apply.
+
+          pause_when: Optional description of when the agent should pause and wait for input from your
+              application (e.g. a verification code, an approval, or an answer from another
+              system). When set, the agent is given a `pause` tool; calling it transitions the
+              run to `PAUSED` (the agent's request is the trailing `pause` tool call in the
+              run's messages) until it is resumed via the resume endpoint.
 
           result_schema: An optional [JSON Schema](https://json-schema.org/specification) object. If
               provided, the agent will aim to return a `result` that conforms to this schema
@@ -103,6 +110,7 @@ class RunsResource(SyncAPIResource):
                     "task": task,
                     "agent_id": agent_id,
                     "browser_settings": browser_settings,
+                    "pause_when": pause_when,
                     "result_schema": result_schema,
                     "variables": variables,
                 },
@@ -157,7 +165,7 @@ class RunsResource(SyncAPIResource):
         end_at: Union[str, datetime] | Omit = omit,
         limit: int | Omit = omit,
         start_at: Union[str, datetime] | Omit = omit,
-        status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT"] | Omit = omit,
+        status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT", "PAUSED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,13 +184,13 @@ class RunsResource(SyncAPIResource):
           cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
               next page. Omit to start from the first page.
 
-          end_at: Only return runs created on or before this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-20T00:00:00Z.
+          end_at: Only return runs created on or before this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-20T00:00:00Z.
 
           limit: Maximum number of results to return.
 
-          start_at: Only return runs created on or after this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-19T00:00:00Z.
+          start_at: Only return runs created on or after this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-19T00:00:00Z.
 
           status: Current status of the run.
 
@@ -192,6 +200,8 @@ class RunsResource(SyncAPIResource):
               - `FAILED` - agent has failed the run
               - `STOPPED` - run was stopped by the user
               - `TIMED_OUT` - run exceeded maximum time
+              - `PAUSED` - run is paused awaiting input from the caller; the agent's request
+                is the trailing `pause` tool call in the run's messages
 
           extra_headers: Send extra headers
 
@@ -310,6 +320,7 @@ class AsyncRunsResource(AsyncAPIResource):
         task: str,
         agent_id: str | Omit = omit,
         browser_settings: run_create_params.BrowserSettings | Omit = omit,
+        pause_when: str | Omit = omit,
         result_schema: Dict[str, object] | Omit = omit,
         variables: Dict[str, run_create_params.Variables] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -333,6 +344,12 @@ class AsyncRunsResource(AsyncAPIResource):
 
           browser_settings: Browser configuration for the agent's session. When omitted, runner defaults
               apply.
+
+          pause_when: Optional description of when the agent should pause and wait for input from your
+              application (e.g. a verification code, an approval, or an answer from another
+              system). When set, the agent is given a `pause` tool; calling it transitions the
+              run to `PAUSED` (the agent's request is the trailing `pause` tool call in the
+              run's messages) until it is resumed via the resume endpoint.
 
           result_schema: An optional [JSON Schema](https://json-schema.org/specification) object. If
               provided, the agent will aim to return a `result` that conforms to this schema
@@ -359,6 +376,7 @@ class AsyncRunsResource(AsyncAPIResource):
                     "task": task,
                     "agent_id": agent_id,
                     "browser_settings": browser_settings,
+                    "pause_when": pause_when,
                     "result_schema": result_schema,
                     "variables": variables,
                 },
@@ -413,7 +431,7 @@ class AsyncRunsResource(AsyncAPIResource):
         end_at: Union[str, datetime] | Omit = omit,
         limit: int | Omit = omit,
         start_at: Union[str, datetime] | Omit = omit,
-        status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT"] | Omit = omit,
+        status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT", "PAUSED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -432,13 +450,13 @@ class AsyncRunsResource(AsyncAPIResource):
           cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
               next page. Omit to start from the first page.
 
-          end_at: Only return runs created on or before this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-20T00:00:00Z.
+          end_at: Only return runs created on or before this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-20T00:00:00Z.
 
           limit: Maximum number of results to return.
 
-          start_at: Only return runs created on or after this timestamp (inclusive). ISO 8601 / RFC
-              3339, e.g. 2026-01-19T00:00:00Z.
+          start_at: Only return runs created on or after this timestamp (inclusive). RFC 3339, e.g.
+              2026-01-19T00:00:00Z.
 
           status: Current status of the run.
 
@@ -448,6 +466,8 @@ class AsyncRunsResource(AsyncAPIResource):
               - `FAILED` - agent has failed the run
               - `STOPPED` - run was stopped by the user
               - `TIMED_OUT` - run exceeded maximum time
+              - `PAUSED` - run is paused awaiting input from the caller; the agent's request
+                is the trailing `pause` tool call in the run's messages
 
           extra_headers: Send extra headers
 
