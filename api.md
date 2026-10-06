@@ -54,6 +54,22 @@ Methods:
 
 - <code title="post /v1/fetch">client.fetch_api.<a href="./src/browserbase/resources/fetch_api.py">create</a>(\*\*<a href="src/browserbase/types/fetch_api_create_params.py">params</a>) -> <a href="./src/browserbase/types/fetch_api_create_response.py">FetchAPICreateResponse</a></code>
 
+# Functions
+
+## Secrets
+
+Types:
+
+```python
+from browserbase.types.functions import SecretListResponse
+```
+
+Methods:
+
+- <code title="get /v1/functions/{id}/secrets">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">list</a>(id, \*\*<a href="src/browserbase/types/functions/secret_list_params.py">params</a>) -> <a href="./src/browserbase/types/functions/secret_list_response.py">SecretListResponse</a></code>
+- <code title="post /v1/functions/{id}/secrets">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">attach</a>(id, \*\*<a href="src/browserbase/types/functions/secret_attach_params.py">params</a>) -> None</code>
+- <code title="delete /v1/functions/{id}/secrets/{secretId}">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">detach</a>(secret_id, \*, id) -> None</code>
+
 # Projects
 
 Types:
@@ -79,6 +95,23 @@ from browserbase.types import SearchWebResponse
 Methods:
 
 - <code title="post /v1/search">client.search.<a href="./src/browserbase/resources/search.py">web</a>(\*\*<a href="src/browserbase/types/search_web_params.py">params</a>) -> <a href="./src/browserbase/types/search_web_response.py">SearchWebResponse</a></code>
+
+# Secrets
+
+Types:
+
+```python
+from browserbase.types import Secret, SecretsKeypair, SecretListResponse
+```
+
+Methods:
+
+- <code title="post /v1/secrets">client.secrets.<a href="./src/browserbase/resources/secrets.py">create</a>(\*\*<a href="src/browserbase/types/secret_create_params.py">params</a>) -> <a href="./src/browserbase/types/secret.py">Secret</a></code>
+- <code title="get /v1/secrets/{id}">client.secrets.<a href="./src/browserbase/resources/secrets.py">retrieve</a>(id) -> <a href="./src/browserbase/types/secret.py">Secret</a></code>
+- <code title="patch /v1/secrets/{id}">client.secrets.<a href="./src/browserbase/resources/secrets.py">update</a>(id, \*\*<a href="src/browserbase/types/secret_update_params.py">params</a>) -> <a href="./src/browserbase/types/secret.py">Secret</a></code>
+- <code title="get /v1/secrets">client.secrets.<a href="./src/browserbase/resources/secrets.py">list</a>(\*\*<a href="src/browserbase/types/secret_list_params.py">params</a>) -> <a href="./src/browserbase/types/secret_list_response.py">SecretListResponse</a></code>
+- <code title="delete /v1/secrets/{id}">client.secrets.<a href="./src/browserbase/resources/secrets.py">delete</a>(id) -> None</code>
+- <code title="get /v1/secrets/keypair">client.secrets.<a href="./src/browserbase/resources/secrets.py">get_public_key</a>() -> <a href="./src/browserbase/types/secrets_keypair.py">SecretsKeypair</a></code>
 
 # Sessions
 
