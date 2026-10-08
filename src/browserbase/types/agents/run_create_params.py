@@ -37,6 +37,15 @@ class RunCreateParams(TypedDict, total=False):
     When omitted, runner defaults apply.
     """
 
+    pause_when: Annotated[str, PropertyInfo(alias="pauseWhen")]
+    """
+    Optional description of when the agent should pause and wait for input from your
+    application (e.g. a verification code, an approval, or an answer from another
+    system). When set, the agent is given a `pause` tool; calling it transitions the
+    run to `PAUSED` (the agent's request is the trailing `pause` tool call in the
+    run's messages) until it is resumed via the resume endpoint.
+    """
+
     result_schema: Annotated[Dict[str, object], PropertyInfo(alias="resultSchema")]
     """An optional [JSON Schema](https://json-schema.org/specification) object.
 
@@ -90,6 +99,12 @@ class BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfig(TypedDict, total=
 
     geolocation: BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfigGeolocation
     """Geographic location for the proxy. Optional."""
+
+    proxy_id: Annotated[str, PropertyInfo(alias="proxyId")]
+    """ID of a managed static proxy assigned to your organization.
+
+    Cannot be combined with geolocation.
+    """
 
 
 class BrowserSettingsProxiesUnionMember0ExternalProxyConfig(TypedDict, total=False):
