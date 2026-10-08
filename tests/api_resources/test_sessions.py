@@ -65,6 +65,7 @@ class TestSessions:
                         "city": "city",
                         "state": "se",
                     },
+                    "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
@@ -310,6 +311,7 @@ class TestAsyncSessions:
                         "city": "city",
                         "state": "se",
                     },
+                    "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
