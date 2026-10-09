@@ -184,12 +184,6 @@ class ProxiesUnionMember0BrowserbaseProxyConfig(TypedDict, total=False):
     geolocation: ProxiesUnionMember0BrowserbaseProxyConfigGeolocation
     """Geographic location for the proxy. Optional."""
 
-    proxy_id: Annotated[str, PropertyInfo(alias="proxyId")]
-    """ID of a managed static proxy assigned to your organization.
-
-    Cannot be combined with geolocation.
-    """
-
 
 class ProxiesUnionMember0ExternalProxyConfig(TypedDict, total=False):
     server: Required[str]
