@@ -30,7 +30,7 @@ class RunRetrieveResponse(BaseModel):
     run_id: str = FieldInfo(alias="runId")
     """Unique identifier for the run."""
 
-    status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT"]
+    status: Literal["PENDING", "RUNNING", "COMPLETED", "FAILED", "STOPPED", "TIMED_OUT", "PAUSED"]
     """Current status of the run.
 
     - `PENDING` - agent will run soon
@@ -39,6 +39,8 @@ class RunRetrieveResponse(BaseModel):
     - `FAILED` - agent has failed the run
     - `STOPPED` - run was stopped by the user
     - `TIMED_OUT` - run exceeded maximum time
+    - `PAUSED` - run is paused awaiting input from the caller; the agent's request
+      is the trailing `pause` tool call in the run's messages
     """
 
     task: str
