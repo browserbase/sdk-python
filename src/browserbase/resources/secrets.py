@@ -60,16 +60,16 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Secret:
         """
-        Create Secret
+        Create a Secret
 
         Args:
           keypair_id: The `id` returned by GET /v1/secrets/keypair, identifying the keypair whose
               public key encrypted the value. Recorded with the secret so decryption stays
               correct across keypair rotation.
 
-          sealed_secret_value: The secret value encrypted with HPKE. In order to seal the secret value before
-              sending, get the project's public key from GET /v1/secrets/keypair. Decode the
-              publicKey using base64 into the raw 32-byte public key. Then, use HPKE Base mode
+          sealed_secret_value: The secret value encrypted with HPKE. To seal the secret value before sending,
+              get the project's public key from GET /v1/secrets/keypair. Decode the publicKey
+              using base64 into the raw 32-byte public key. Then, use HPKE Base mode
               (RFC 9180) with the following algorithm suite: DHKEM(X25519, HKDF-SHA256),
               HKDF-SHA256, and AES-256-GCM. Set both info and additional authenticated data
               (AAD) to an empty byte string. Then, create a new sender context using the
@@ -116,7 +116,7 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Secret:
         """
-        Get Secret
+        Get a Secret
 
         Args:
           extra_headers: Send extra headers
@@ -160,16 +160,16 @@ class SecretsResource(SyncAPIResource):
               public key encrypted the value. Recorded with the secret so decryption stays
               correct across keypair rotation.
 
-          sealed_secret_value: The new secret value encrypted with HPKE. In order to seal the secret value
-              before sending, get the project's public key from GET /v1/secrets/keypair.
-              Decode the publicKey using base64 into the raw 32-byte public key. Then, use
-              HPKE Base mode (RFC 9180) with the following algorithm suite: DHKEM(X25519,
-              HKDF-SHA256), HKDF-SHA256, and AES-256-GCM. Set both info and additional
-              authenticated data (AAD) to an empty byte string. Then, create a new sender
-              context using the public key and these settings, and encrypt the secret value as
-              one message. Put the 32-byte encapsulated key before the ciphertext and keep the
-              authentication tag at the end of the ciphertext. Encode the combined bytes with
-              standard base64. Send the result as sealedSecretValue: base64(enc || ciphertext)
+          sealed_secret_value: The new secret value encrypted with HPKE. To seal the secret value before
+              sending, get the project's public key from GET /v1/secrets/keypair. Decode the
+              publicKey using base64 into the raw 32-byte public key. Then, use HPKE Base mode
+              (RFC 9180) with the following algorithm suite: DHKEM(X25519, HKDF-SHA256),
+              HKDF-SHA256, and AES-256-GCM. Set both info and additional authenticated data
+              (AAD) to an empty byte string. Then, create a new sender context using the
+              public key and these settings, and encrypt the secret value as one message. Put
+              the 32-byte encapsulated key before the ciphertext and keep the authentication
+              tag at the end of the ciphertext. Encode the combined bytes with standard
+              base64. Send the result as sealedSecretValue: base64(enc || ciphertext)
 
           extra_headers: Send extra headers
 
@@ -266,7 +266,7 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete Secret
+        Delete a Secret
 
         Args:
           extra_headers: Send extra headers
@@ -298,7 +298,7 @@ class SecretsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretsKeypair:
-        """Get Secrets Keypair"""
+        """Get a Keypair"""
         return self._get(
             "/v1/secrets/keypair",
             options=make_request_options(
@@ -342,16 +342,16 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Secret:
         """
-        Create Secret
+        Create a Secret
 
         Args:
           keypair_id: The `id` returned by GET /v1/secrets/keypair, identifying the keypair whose
               public key encrypted the value. Recorded with the secret so decryption stays
               correct across keypair rotation.
 
-          sealed_secret_value: The secret value encrypted with HPKE. In order to seal the secret value before
-              sending, get the project's public key from GET /v1/secrets/keypair. Decode the
-              publicKey using base64 into the raw 32-byte public key. Then, use HPKE Base mode
+          sealed_secret_value: The secret value encrypted with HPKE. To seal the secret value before sending,
+              get the project's public key from GET /v1/secrets/keypair. Decode the publicKey
+              using base64 into the raw 32-byte public key. Then, use HPKE Base mode
               (RFC 9180) with the following algorithm suite: DHKEM(X25519, HKDF-SHA256),
               HKDF-SHA256, and AES-256-GCM. Set both info and additional authenticated data
               (AAD) to an empty byte string. Then, create a new sender context using the
@@ -398,7 +398,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Secret:
         """
-        Get Secret
+        Get a Secret
 
         Args:
           extra_headers: Send extra headers
@@ -442,16 +442,16 @@ class AsyncSecretsResource(AsyncAPIResource):
               public key encrypted the value. Recorded with the secret so decryption stays
               correct across keypair rotation.
 
-          sealed_secret_value: The new secret value encrypted with HPKE. In order to seal the secret value
-              before sending, get the project's public key from GET /v1/secrets/keypair.
-              Decode the publicKey using base64 into the raw 32-byte public key. Then, use
-              HPKE Base mode (RFC 9180) with the following algorithm suite: DHKEM(X25519,
-              HKDF-SHA256), HKDF-SHA256, and AES-256-GCM. Set both info and additional
-              authenticated data (AAD) to an empty byte string. Then, create a new sender
-              context using the public key and these settings, and encrypt the secret value as
-              one message. Put the 32-byte encapsulated key before the ciphertext and keep the
-              authentication tag at the end of the ciphertext. Encode the combined bytes with
-              standard base64. Send the result as sealedSecretValue: base64(enc || ciphertext)
+          sealed_secret_value: The new secret value encrypted with HPKE. To seal the secret value before
+              sending, get the project's public key from GET /v1/secrets/keypair. Decode the
+              publicKey using base64 into the raw 32-byte public key. Then, use HPKE Base mode
+              (RFC 9180) with the following algorithm suite: DHKEM(X25519, HKDF-SHA256),
+              HKDF-SHA256, and AES-256-GCM. Set both info and additional authenticated data
+              (AAD) to an empty byte string. Then, create a new sender context using the
+              public key and these settings, and encrypt the secret value as one message. Put
+              the 32-byte encapsulated key before the ciphertext and keep the authentication
+              tag at the end of the ciphertext. Encode the combined bytes with standard
+              base64. Send the result as sealedSecretValue: base64(enc || ciphertext)
 
           extra_headers: Send extra headers
 
@@ -548,7 +548,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete Secret
+        Delete a Secret
 
         Args:
           extra_headers: Send extra headers
@@ -580,7 +580,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretsKeypair:
-        """Get Secrets Keypair"""
+        """Get a Keypair"""
         return await self._get(
             "/v1/secrets/keypair",
             options=make_request_options(

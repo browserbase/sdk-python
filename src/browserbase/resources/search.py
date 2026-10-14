@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal, overload
+
 import httpx
 
 from ..types import search_web_params
@@ -41,11 +43,14 @@ class SearchResource(SyncAPIResource):
         """
         return SearchResourceWithStreamingResponse(self)
 
+    @overload
     def web(
         self,
         *,
-        query: str,
+        provider: Literal["parallel"],
+        mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
+        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,9 +62,9 @@ class SearchResource(SyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          query: The search query string
-
           num_results: Number of results to return (1-25)
+
+          query: The search query string
 
           extra_headers: Send extra headers
 
@@ -69,12 +74,67 @@ class SearchResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def web(
+        self,
+        *,
+        mode: Literal["fast", "advanced"] | Omit = omit,
+        num_results: int | Omit = omit,
+        provider: Literal["exa"] | Omit = omit,
+        query: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchWebResponse:
+        """
+        Perform a web search and return structured results.
+
+        Args:
+          mode: The search mode used by the underlying provider.
+              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
+              available modes and defaults.
+
+          num_results: Number of results to return (1-25)
+
+          query: The search query string
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    def web(
+        self,
+        *,
+        provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
+        mode: Literal["fast", "advanced"] | Omit = omit,
+        num_results: int | Omit = omit,
+        query: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchWebResponse:
         return self._post(
             "/v1/search",
             body=maybe_transform(
                 {
-                    "query": query,
+                    "provider": provider,
+                    "mode": mode,
                     "num_results": num_results,
+                    "query": query,
                 },
                 search_web_params.SearchWebParams,
             ),
@@ -105,11 +165,14 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return AsyncSearchResourceWithStreamingResponse(self)
 
+    @overload
     async def web(
         self,
         *,
-        query: str,
+        provider: Literal["parallel"],
+        mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
+        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -121,9 +184,9 @@ class AsyncSearchResource(AsyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          query: The search query string
-
           num_results: Number of results to return (1-25)
+
+          query: The search query string
 
           extra_headers: Send extra headers
 
@@ -133,12 +196,67 @@ class AsyncSearchResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def web(
+        self,
+        *,
+        mode: Literal["fast", "advanced"] | Omit = omit,
+        num_results: int | Omit = omit,
+        provider: Literal["exa"] | Omit = omit,
+        query: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchWebResponse:
+        """
+        Perform a web search and return structured results.
+
+        Args:
+          mode: The search mode used by the underlying provider.
+              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
+              available modes and defaults.
+
+          num_results: Number of results to return (1-25)
+
+          query: The search query string
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    async def web(
+        self,
+        *,
+        provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
+        mode: Literal["fast", "advanced"] | Omit = omit,
+        num_results: int | Omit = omit,
+        query: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchWebResponse:
         return await self._post(
             "/v1/search",
             body=await async_maybe_transform(
                 {
-                    "query": query,
+                    "provider": provider,
+                    "mode": mode,
                     "num_results": num_results,
+                    "query": query,
                 },
                 search_web_params.SearchWebParams,
             ),
