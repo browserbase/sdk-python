@@ -629,12 +629,12 @@ class AsyncResponseContextManager(Generic[_AsyncAPIResponseT]):
     when the context manager exits
     """
 
-    def __init__(self, api_request: Awaitable[_AsyncAPIResponseT]) -> None:
+    def __init__(self, api_request: Callable[[], Awaitable[_AsyncAPIResponseT]]) -> None:
         self._api_request = api_request
         self.__response: _AsyncAPIResponseT | None = None
 
     async def __aenter__(self) -> _AsyncAPIResponseT:
-        self.__response = await self._api_request
+        self.__response = await self._api_request()
         return self.__response
 
     async def __aexit__(
@@ -680,9 +680,9 @@ def async_to_streamed_response_wrapper(
 
         kwargs["extra_headers"] = extra_headers
 
-        make_request = func(*args, **kwargs)
+        make_request = functools.partial(func, *args, **kwargs)
 
-        return AsyncResponseContextManager(cast(Awaitable[AsyncAPIResponse[R]], make_request))
+        return AsyncResponseContextManager(cast(Callable[[], Awaitable[AsyncAPIResponse[R]]], make_request))
 
     return wrapped
 
@@ -730,9 +730,9 @@ def async_to_custom_streamed_response_wrapper(
 
         kwargs["extra_headers"] = extra_headers
 
-        make_request = func(*args, **kwargs)
+        make_request = functools.partial(func, *args, **kwargs)
 
-        return AsyncResponseContextManager(cast(Awaitable[_AsyncAPIResponseT], make_request))
+        return AsyncResponseContextManager(cast(Callable[[], Awaitable[_AsyncAPIResponseT]], make_request))
 
     return wrapped
 
