@@ -18,24 +18,26 @@ class TestSearch:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_web(self, client: Browserbase) -> None:
+    def test_method_web_overload_1(self, client: Browserbase) -> None:
         search = client.search.web(
-            query="x",
+            provider="parallel",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    def test_method_web_with_all_params(self, client: Browserbase) -> None:
+    def test_method_web_with_all_params_overload_1(self, client: Browserbase) -> None:
         search = client.search.web(
-            query="x",
+            provider="parallel",
+            mode="fast",
             num_results=1,
+            query="x",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    def test_raw_response_web(self, client: Browserbase) -> None:
+    def test_raw_response_web_overload_1(self, client: Browserbase) -> None:
         response = client.search.with_raw_response.web(
-            query="x",
+            provider="parallel",
         )
 
         assert response.is_closed is True
@@ -44,10 +46,45 @@ class TestSearch:
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    def test_streaming_response_web(self, client: Browserbase) -> None:
+    def test_streaming_response_web_overload_1(self, client: Browserbase) -> None:
         with client.search.with_streaming_response.web(
-            query="x",
+            provider="parallel",
         ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            search = response.parse()
+            assert_matches_type(SearchWebResponse, search, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_web_overload_2(self, client: Browserbase) -> None:
+        search = client.search.web()
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    def test_method_web_with_all_params_overload_2(self, client: Browserbase) -> None:
+        search = client.search.web(
+            mode="fast",
+            num_results=1,
+            provider="exa",
+            query="x",
+        )
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    def test_raw_response_web_overload_2(self, client: Browserbase) -> None:
+        response = client.search.with_raw_response.web()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        search = response.parse()
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    def test_streaming_response_web_overload_2(self, client: Browserbase) -> None:
+        with client.search.with_streaming_response.web() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -63,24 +100,26 @@ class TestAsyncSearch:
     )
 
     @parametrize
-    async def test_method_web(self, async_client: AsyncBrowserbase) -> None:
+    async def test_method_web_overload_1(self, async_client: AsyncBrowserbase) -> None:
         search = await async_client.search.web(
-            query="x",
+            provider="parallel",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    async def test_method_web_with_all_params(self, async_client: AsyncBrowserbase) -> None:
+    async def test_method_web_with_all_params_overload_1(self, async_client: AsyncBrowserbase) -> None:
         search = await async_client.search.web(
-            query="x",
+            provider="parallel",
+            mode="fast",
             num_results=1,
+            query="x",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    async def test_raw_response_web(self, async_client: AsyncBrowserbase) -> None:
+    async def test_raw_response_web_overload_1(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.search.with_raw_response.web(
-            query="x",
+            provider="parallel",
         )
 
         assert response.is_closed is True
@@ -89,10 +128,45 @@ class TestAsyncSearch:
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
     @parametrize
-    async def test_streaming_response_web(self, async_client: AsyncBrowserbase) -> None:
+    async def test_streaming_response_web_overload_1(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.search.with_streaming_response.web(
-            query="x",
+            provider="parallel",
         ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            search = await response.parse()
+            assert_matches_type(SearchWebResponse, search, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_web_overload_2(self, async_client: AsyncBrowserbase) -> None:
+        search = await async_client.search.web()
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    async def test_method_web_with_all_params_overload_2(self, async_client: AsyncBrowserbase) -> None:
+        search = await async_client.search.web(
+            mode="fast",
+            num_results=1,
+            provider="exa",
+            query="x",
+        )
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    async def test_raw_response_web_overload_2(self, async_client: AsyncBrowserbase) -> None:
+        response = await async_client.search.with_raw_response.web()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        search = await response.parse()
+        assert_matches_type(SearchWebResponse, search, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_web_overload_2(self, async_client: AsyncBrowserbase) -> None:
+        async with async_client.search.with_streaming_response.web() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
