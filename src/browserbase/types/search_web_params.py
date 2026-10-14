@@ -12,17 +12,14 @@ __all__ = ["SearchWebParams", "Variant0", "Variant1"]
 
 class Variant0(TypedDict, total=False):
     provider: Required[Literal["parallel"]]
+    """Search provider to serve this request.
 
-    mode: Literal["fast", "advanced"]
+    Omit to use the default provider for your project.
+    """
 
-    num_results: Annotated[int, PropertyInfo(alias="numResults")]
-    """Number of results to return (1-25)"""
-
-    query: str
+    query: Required[str]
     """The search query string"""
 
-
-class Variant1(TypedDict, total=False):
     mode: Literal["fast", "advanced"]
     """The search mode used by the underlying provider.
 
@@ -33,10 +30,19 @@ class Variant1(TypedDict, total=False):
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
     """Number of results to return (1-25)"""
 
-    provider: Literal["exa"]
 
-    query: str
+class Variant1(TypedDict, total=False):
+    query: Required[str]
     """The search query string"""
+
+    num_results: Annotated[int, PropertyInfo(alias="numResults")]
+    """Number of results to return (1-25)"""
+
+    provider: Literal["exa"]
+    """Search provider to serve this request.
+
+    Omit to use the default provider for your project.
+    """
 
 
 SearchWebParams: TypeAlias = Union[Variant0, Variant1]
