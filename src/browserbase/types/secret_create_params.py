@@ -20,13 +20,13 @@ class SecretCreateParams(TypedDict, total=False):
     sealed_secret_value: Required[Annotated[str, PropertyInfo(alias="sealedSecretValue")]]
     """The secret value encrypted with HPKE.
 
-    In order to seal the secret value before sending, get the project's public key
-    from GET /v1/secrets/keypair. Decode the publicKey using base64 into the raw
-    32-byte public key. Then, use HPKE Base mode (RFC 9180) with the following
-    algorithm suite: DHKEM(X25519, HKDF-SHA256), HKDF-SHA256, and AES-256-GCM. Set
-    both info and additional authenticated data (AAD) to an empty byte string. Then,
-    create a new sender context using the public key and these settings, and encrypt
-    the secret value as one message. Put the 32-byte encapsulated key before the
+    To seal the secret value before sending, get the project's public key from GET
+    /v1/secrets/keypair. Decode the publicKey using base64 into the raw 32-byte
+    public key. Then, use HPKE Base mode (RFC 9180) with the following algorithm
+    suite: DHKEM(X25519, HKDF-SHA256), HKDF-SHA256, and AES-256-GCM. Set both info
+    and additional authenticated data (AAD) to an empty byte string. Then, create a
+    new sender context using the public key and these settings, and encrypt the
+    secret value as one message. Put the 32-byte encapsulated key before the
     ciphertext and keep the authentication tag at the end of the ciphertext. Encode
     the combined bytes with standard base64. Send the result as sealedSecretValue:
     base64(enc || ciphertext)
