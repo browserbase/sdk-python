@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.21.0](https://github.com/browserbase/sdk-python/compare/v1.20.0...v1.21.0) (2026-10-14)
+
+
+### Features
+
+* add search provider and mode options ([3c0aa20](https://github.com/browserbase/sdk-python/commit/3c0aa200b8c1344f0ad0fd7f91b8a7d5ed4377f6))
+
+
+### Bug Fixes
+
+* preserve required search parameters in SDKs ([e870c3f](https://github.com/browserbase/sdk-python/commit/e870c3feca0bba1751abe30957ad3a5ea48db233))
+
 ## [1.20.0](https://github.com/browserbase/sdk-python/compare/v1.19.0...v1.20.0) (2026-09-24)
 
 
