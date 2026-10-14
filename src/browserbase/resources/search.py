@@ -8,7 +8,7 @@ import httpx
 
 from ..types import search_web_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -48,9 +48,9 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         provider: Literal["parallel"],
+        query: str,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -62,9 +62,16 @@ class SearchResource(SyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          num_results: Number of results to return (1-25)
+          provider: Search provider to serve this request. Omit to use the default provider for your
+              project.
 
           query: The search query string
+
+          mode: The search mode used by the underlying provider.
+              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
+              available modes and defaults.
+
+          num_results: Number of results to return (1-25)
 
           extra_headers: Send extra headers
 
@@ -80,10 +87,9 @@ class SearchResource(SyncAPIResource):
     def web(
         self,
         *,
-        mode: Literal["fast", "advanced"] | Omit = omit,
+        query: str,
         num_results: int | Omit = omit,
         provider: Literal["exa"] | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -95,13 +101,12 @@ class SearchResource(SyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          mode: The search mode used by the underlying provider.
-              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+          query: The search query string
 
           num_results: Number of results to return (1-25)
 
-          query: The search query string
+          provider: Search provider to serve this request. Omit to use the default provider for your
+              project.
 
           extra_headers: Send extra headers
 
@@ -113,13 +118,14 @@ class SearchResource(SyncAPIResource):
         """
         ...
 
+    @required_args(["provider", "query"], ["query"])
     def web(
         self,
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
+        query: str,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,9 +138,9 @@ class SearchResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "provider": provider,
+                    "query": query,
                     "mode": mode,
                     "num_results": num_results,
-                    "query": query,
                 },
                 search_web_params.SearchWebParams,
             ),
@@ -170,9 +176,9 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         provider: Literal["parallel"],
+        query: str,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -184,9 +190,16 @@ class AsyncSearchResource(AsyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          num_results: Number of results to return (1-25)
+          provider: Search provider to serve this request. Omit to use the default provider for your
+              project.
 
           query: The search query string
+
+          mode: The search mode used by the underlying provider.
+              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
+              available modes and defaults.
+
+          num_results: Number of results to return (1-25)
 
           extra_headers: Send extra headers
 
@@ -202,10 +215,9 @@ class AsyncSearchResource(AsyncAPIResource):
     async def web(
         self,
         *,
-        mode: Literal["fast", "advanced"] | Omit = omit,
+        query: str,
         num_results: int | Omit = omit,
         provider: Literal["exa"] | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -217,13 +229,12 @@ class AsyncSearchResource(AsyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          mode: The search mode used by the underlying provider.
-              [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+          query: The search query string
 
           num_results: Number of results to return (1-25)
 
-          query: The search query string
+          provider: Search provider to serve this request. Omit to use the default provider for your
+              project.
 
           extra_headers: Send extra headers
 
@@ -235,13 +246,14 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         ...
 
+    @required_args(["provider", "query"], ["query"])
     async def web(
         self,
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
+        query: str,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
-        query: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -254,9 +266,9 @@ class AsyncSearchResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "provider": provider,
+                    "query": query,
                     "mode": mode,
                     "num_results": num_results,
-                    "query": query,
                 },
                 search_web_params.SearchWebParams,
             ),
