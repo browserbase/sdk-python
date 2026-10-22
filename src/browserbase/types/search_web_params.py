@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["SearchWebParams", "Variant0", "Variant1"]
+__all__ = ["SearchWebParams", "Variant0", "Variant1", "Variant2"]
 
 
 class Variant0(TypedDict, total=False):
@@ -20,7 +20,7 @@ class Variant0(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
-    mode: Literal["fast", "advanced"]
+    mode: Literal["fast", "advanced", "deep-lite", "deep"]
     """The search mode used by the underlying provider.
 
     [Search docs](https://docs.browserbase.com/platform/search/overview) for the
@@ -45,4 +45,25 @@ class Variant1(TypedDict, total=False):
     """
 
 
-SearchWebParams: TypeAlias = Union[Variant0, Variant1]
+class Variant2(TypedDict, total=False):
+    mode: Literal["fast", "advanced", "deep-lite", "deep"]
+    """The search mode used by the underlying provider.
+
+    [Search docs](https://docs.browserbase.com/platform/search/overview) for the
+    available modes and defaults.
+    """
+
+    num_results: Annotated[int, PropertyInfo(alias="numResults")]
+    """Number of results to return (1-25)"""
+
+    provider: Literal["parallel", "exa"]
+    """Search provider to serve this request.
+
+    Omit to use the default provider for your project.
+    """
+
+    query: str
+    """The search query string"""
+
+
+SearchWebParams: TypeAlias = Union[Variant0, Variant1, Variant2]
