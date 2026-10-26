@@ -50,6 +50,7 @@ class FetchAPIResource(SyncAPIResource):
         url: str,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
+        context_id: str | Omit = omit,
         format: Literal["raw", "json", "markdown"] | Omit = omit,
         proxies: bool | Omit = omit,
         schema: Dict[str, object] | Omit = omit,
@@ -69,6 +70,8 @@ class FetchAPIResource(SyncAPIResource):
           allow_insecure_ssl: Whether to bypass TLS certificate verification
 
           allow_redirects: Whether to follow HTTP redirects
+
+          context_id: ID of a context whose persisted cookies are sent with the request.
 
           format: Output format for the response content. `raw` (default) returns the response
               body unchanged; `json` returns structured data (requires `schema`); `markdown`
@@ -94,6 +97,7 @@ class FetchAPIResource(SyncAPIResource):
                     "url": url,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
+                    "context_id": context_id,
                     "format": format,
                     "proxies": proxies,
                     "schema": schema,
@@ -133,6 +137,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
         url: str,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
+        context_id: str | Omit = omit,
         format: Literal["raw", "json", "markdown"] | Omit = omit,
         proxies: bool | Omit = omit,
         schema: Dict[str, object] | Omit = omit,
@@ -152,6 +157,8 @@ class AsyncFetchAPIResource(AsyncAPIResource):
           allow_insecure_ssl: Whether to bypass TLS certificate verification
 
           allow_redirects: Whether to follow HTTP redirects
+
+          context_id: ID of a context whose persisted cookies are sent with the request.
 
           format: Output format for the response content. `raw` (default) returns the response
               body unchanged; `json` returns structured data (requires `schema`); `markdown`
@@ -177,6 +184,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
                     "url": url,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
+                    "context_id": context_id,
                     "format": format,
                     "proxies": proxies,
                     "schema": schema,

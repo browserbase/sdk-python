@@ -20,6 +20,9 @@ class FetchAPICreateParams(TypedDict, total=False):
     allow_redirects: Annotated[bool, PropertyInfo(alias="allowRedirects")]
     """Whether to follow HTTP redirects"""
 
+    context_id: Annotated[str, PropertyInfo(alias="contextId")]
+    """ID of a context whose persisted cookies are sent with the request."""
+
     format: Literal["raw", "json", "markdown"]
     """Output format for the response content.
 
