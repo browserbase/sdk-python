@@ -20,7 +20,7 @@ class Variant0(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
-    mode: Literal["fast", "advanced", "deep-lite", "deep"]
+    mode: Literal["fast", "advanced"]
     """The search mode used by the underlying provider.
 
     [Search docs](https://docs.browserbase.com/platform/search/overview) for the
@@ -32,21 +32,16 @@ class Variant0(TypedDict, total=False):
 
 
 class Variant1(TypedDict, total=False):
-    query: Required[str]
-    """The search query string"""
-
-    num_results: Annotated[int, PropertyInfo(alias="numResults")]
-    """Number of results to return (1-25)"""
-
-    provider: Literal["exa"]
+    provider: Required[Literal["exa"]]
     """Search provider to serve this request.
 
     Omit to use the default provider for your project.
     """
 
+    query: Required[str]
+    """The search query string"""
 
-class Variant2(TypedDict, total=False):
-    mode: Literal["fast", "advanced", "deep-lite", "deep"]
+    mode: Literal["fast", "deep-lite", "deep"]
     """The search mode used by the underlying provider.
 
     [Search docs](https://docs.browserbase.com/platform/search/overview) for the
@@ -56,14 +51,13 @@ class Variant2(TypedDict, total=False):
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
     """Number of results to return (1-25)"""
 
-    provider: Literal["parallel", "exa"]
-    """Search provider to serve this request.
 
-    Omit to use the default provider for your project.
-    """
-
-    query: str
+class Variant2(TypedDict, total=False):
+    query: Required[str]
     """The search query string"""
+
+    num_results: Annotated[int, PropertyInfo(alias="numResults")]
+    """Number of results to return (1-25)"""
 
 
 SearchWebParams: TypeAlias = Union[Variant0, Variant1, Variant2]
