@@ -46,6 +46,7 @@ class TestSessions:
                 "log_session": True,
                 "os": "windows",
                 "record_session": True,
+                "risk_policy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "solve_captchas": True,
                 "verified": True,
                 "viewport": {
@@ -291,6 +292,7 @@ class TestAsyncSessions:
                 "log_session": True,
                 "os": "windows",
                 "record_session": True,
+                "risk_policy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "solve_captchas": True,
                 "verified": True,
                 "viewport": {
