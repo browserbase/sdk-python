@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.23.0](https://github.com/browserbase/sdk-python/compare/v1.22.0...v1.23.0) (2026-10-29)
+
+
+### Features
+
+* add navigation policies ([bb47b3c](https://github.com/browserbase/sdk-python/commit/bb47b3cd859dd52f1f205d4f9a5d8f1b13d30af3))
+
+
+### Chores
+
+* **internal:** revert the navigation policy spec sync ([#61](https://github.com/browserbase/sdk-python/issues/61)) ([1c65867](https://github.com/browserbase/sdk-python/commit/1c658670927ceb939654949bd6d6534f3b37f621))
+
 ## [1.22.0](https://github.com/browserbase/sdk-python/compare/v1.21.0...v1.22.0) (2026-10-26)
 
 
