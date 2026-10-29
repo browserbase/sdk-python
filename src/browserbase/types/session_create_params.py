@@ -146,6 +146,15 @@ class BrowserSettings(TypedDict, total=False):
     record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
     """Enable or disable session recording. Defaults to `true`."""
 
+    risk_policy_id: Annotated[str, PropertyInfo(alias="riskPolicyId")]
+    """Navigation policy to enforce for the session.
+
+    Must belong to the session's project and be enabled. The session keeps the
+    policy as it was when the session started; later edits apply to sessions that
+    start afterwards. Browserbase enforces it only when navigation policy
+    enforcement is enabled for the project.
+    """
+
     solve_captchas: Annotated[bool, PropertyInfo(alias="solveCaptchas")]
     """Enable or disable captcha solving in the browser. Defaults to `true`."""
 
