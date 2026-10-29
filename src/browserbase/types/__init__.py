@@ -12,6 +12,7 @@ from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
 from .secrets_keypair import SecretsKeypair as SecretsKeypair
 from .agent_list_params import AgentListParams as AgentListParams
+from .navigation_policy import NavigationPolicy as NavigationPolicy
 from .search_web_params import SearchWebParams as SearchWebParams
 from .session_live_urls import SessionLiveURLs as SessionLiveURLs
 from .secret_list_params import SecretListParams as SecretListParams
@@ -48,3 +49,6 @@ from .fetch_api_create_response import FetchAPICreateResponse as FetchAPICreateR
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse
 from .webhook_rotate_secret_params import WebhookRotateSecretParams as WebhookRotateSecretParams
 from .webhook_rotate_secret_response import WebhookRotateSecretResponse as WebhookRotateSecretResponse
+from .navigation_policy_create_params import NavigationPolicyCreateParams as NavigationPolicyCreateParams
+from .navigation_policy_list_response import NavigationPolicyListResponse as NavigationPolicyListResponse
+from .navigation_policy_update_params import NavigationPolicyUpdateParams as NavigationPolicyUpdateParams
