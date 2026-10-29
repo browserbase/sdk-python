@@ -88,6 +88,14 @@ from .certificates import (
     CertificatesResourceWithStreamingResponse,
     AsyncCertificatesResourceWithStreamingResponse,
 )
+from .navigation_policies import (
+    NavigationPoliciesResource,
+    AsyncNavigationPoliciesResource,
+    NavigationPoliciesResourceWithRawResponse,
+    AsyncNavigationPoliciesResourceWithRawResponse,
+    NavigationPoliciesResourceWithStreamingResponse,
+    AsyncNavigationPoliciesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "CertificatesResource",
@@ -156,4 +164,10 @@ __all__ = [
     "AsyncWebhooksResourceWithRawResponse",
     "WebhooksResourceWithStreamingResponse",
     "AsyncWebhooksResourceWithStreamingResponse",
+    "NavigationPoliciesResource",
+    "AsyncNavigationPoliciesResource",
+    "NavigationPoliciesResourceWithRawResponse",
+    "AsyncNavigationPoliciesResourceWithRawResponse",
+    "NavigationPoliciesResourceWithStreamingResponse",
+    "AsyncNavigationPoliciesResourceWithStreamingResponse",
 ]
