@@ -47,7 +47,6 @@ if TYPE_CHECKING:
         functions,
         extensions,
         certificates,
-        navigation_policies,
     )
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.secrets import SecretsResource, AsyncSecretsResource
@@ -60,7 +59,6 @@ if TYPE_CHECKING:
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
     from .resources.functions.functions import FunctionsResource, AsyncFunctionsResource
-    from .resources.navigation_policies import NavigationPoliciesResource, AsyncNavigationPoliciesResource
 
 __all__ = [
     "Timeout",
@@ -203,12 +201,6 @@ class Browserbase(SyncAPIClient):
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
-
-    @cached_property
-    def navigation_policies(self) -> NavigationPoliciesResource:
-        from .resources.navigation_policies import NavigationPoliciesResource
-
-        return NavigationPoliciesResource(self)
 
     @cached_property
     def with_raw_response(self) -> BrowserbaseWithRawResponse:
@@ -454,12 +446,6 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncWebhooksResource(self)
 
     @cached_property
-    def navigation_policies(self) -> AsyncNavigationPoliciesResource:
-        from .resources.navigation_policies import AsyncNavigationPoliciesResource
-
-        return AsyncNavigationPoliciesResource(self)
-
-    @cached_property
     def with_raw_response(self) -> AsyncBrowserbaseWithRawResponse:
         return AsyncBrowserbaseWithRawResponse(self)
 
@@ -644,12 +630,6 @@ class BrowserbaseWithRawResponse:
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
 
-    @cached_property
-    def navigation_policies(self) -> navigation_policies.NavigationPoliciesResourceWithRawResponse:
-        from .resources.navigation_policies import NavigationPoliciesResourceWithRawResponse
-
-        return NavigationPoliciesResourceWithRawResponse(self._client.navigation_policies)
-
 
 class AsyncBrowserbaseWithRawResponse:
     _client: AsyncBrowserbase
@@ -722,12 +702,6 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
-
-    @cached_property
-    def navigation_policies(self) -> navigation_policies.AsyncNavigationPoliciesResourceWithRawResponse:
-        from .resources.navigation_policies import AsyncNavigationPoliciesResourceWithRawResponse
-
-        return AsyncNavigationPoliciesResourceWithRawResponse(self._client.navigation_policies)
 
 
 class BrowserbaseWithStreamedResponse:
@@ -802,12 +776,6 @@ class BrowserbaseWithStreamedResponse:
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
-    @cached_property
-    def navigation_policies(self) -> navigation_policies.NavigationPoliciesResourceWithStreamingResponse:
-        from .resources.navigation_policies import NavigationPoliciesResourceWithStreamingResponse
-
-        return NavigationPoliciesResourceWithStreamingResponse(self._client.navigation_policies)
-
 
 class AsyncBrowserbaseWithStreamedResponse:
     _client: AsyncBrowserbase
@@ -880,12 +848,6 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
-
-    @cached_property
-    def navigation_policies(self) -> navigation_policies.AsyncNavigationPoliciesResourceWithStreamingResponse:
-        from .resources.navigation_policies import AsyncNavigationPoliciesResourceWithStreamingResponse
-
-        return AsyncNavigationPoliciesResourceWithStreamingResponse(self._client.navigation_policies)
 
 
 Client = Browserbase
