@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.0](https://github.com/browserbase/sdk-python/compare/v1.21.0...v1.22.0) (2026-10-26)
+
+
+### Features
+
+* add contextId to fetch and Exa deep search modes ([9e6a791](https://github.com/browserbase/sdk-python/commit/9e6a791fe2d3ac95d2c73fb7f4ced0b53ccf1580))
+
 ## [1.21.0](https://github.com/browserbase/sdk-python/compare/v1.20.0...v1.21.0) (2026-10-14)
 
 
