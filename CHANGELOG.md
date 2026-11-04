@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.24.0](https://github.com/browserbase/sdk-python/compare/v1.23.0...v1.24.0) (2026-11-04)
+
+
+### Features
+
+* add created and updated timestamps to secrets ([717f258](https://github.com/browserbase/sdk-python/commit/717f258e6605282240507a4f75a224f9e0f42802))
+
+
+### Chores
+
+* **internal:** generate straight into the SDK repos ([32fa520](https://github.com/browserbase/sdk-python/commit/32fa520b6956db54d2652e06184ac3c49b3fa11c))
+
 ## [1.23.0](https://github.com/browserbase/sdk-python/compare/v1.22.0...v1.23.0) (2026-10-29)
 
 
