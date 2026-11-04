@@ -62,14 +62,15 @@ class SearchResource(SyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          provider: Search provider to serve this request. Omit to use the default provider for your
-              project.
+          provider: Search provider to serve this request. Defaults to `parallel`, which uses
+              `advanced` mode unless `mode` is set.
 
           query: The search query string
 
-          mode: The search mode used by the underlying provider.
+          mode: The search mode used by the underlying provider. Defaults to `advanced` for
+              `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+              available modes.
 
           num_results: Number of results to return (1-25)
 
@@ -102,14 +103,15 @@ class SearchResource(SyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          provider: Search provider to serve this request. Omit to use the default provider for your
-              project.
+          provider: Search provider to serve this request. Defaults to `parallel`, which uses
+              `advanced` mode unless `mode` is set.
 
           query: The search query string
 
-          mode: The search mode used by the underlying provider.
+          mode: The search mode used by the underlying provider. Defaults to `advanced` for
+              `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+              available modes.
 
           num_results: Number of results to return (1-25)
 
@@ -226,14 +228,15 @@ class AsyncSearchResource(AsyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          provider: Search provider to serve this request. Omit to use the default provider for your
-              project.
+          provider: Search provider to serve this request. Defaults to `parallel`, which uses
+              `advanced` mode unless `mode` is set.
 
           query: The search query string
 
-          mode: The search mode used by the underlying provider.
+          mode: The search mode used by the underlying provider. Defaults to `advanced` for
+              `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+              available modes.
 
           num_results: Number of results to return (1-25)
 
@@ -266,14 +269,15 @@ class AsyncSearchResource(AsyncAPIResource):
         Perform a web search and return structured results.
 
         Args:
-          provider: Search provider to serve this request. Omit to use the default provider for your
-              project.
+          provider: Search provider to serve this request. Defaults to `parallel`, which uses
+              `advanced` mode unless `mode` is set.
 
           query: The search query string
 
-          mode: The search mode used by the underlying provider.
+          mode: The search mode used by the underlying provider. Defaults to `advanced` for
+              `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-              available modes and defaults.
+              available modes.
 
           num_results: Number of results to return (1-25)
 
