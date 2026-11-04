@@ -7,6 +7,7 @@ from .context import Context as Context
 from .project import Project as Project
 from .session import Session as Session
 from .webhook import Webhook as Webhook
+from .download import Download as Download
 from .extension import Extension as Extension
 from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
@@ -22,6 +23,7 @@ from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .search_web_response import SearchWebResponse as SearchWebResponse
 from .session_list_params import SessionListParams as SessionListParams
 from .webhook_list_params import WebhookListParams as WebhookListParams
+from .download_list_params import DownloadListParams as DownloadListParams
 from .secret_create_params import SecretCreateParams as SecretCreateParams
 from .secret_list_response import SecretListResponse as SecretListResponse
 from .secret_update_params import SecretUpdateParams as SecretUpdateParams
