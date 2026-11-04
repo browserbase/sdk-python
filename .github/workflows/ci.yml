@@ -74,3 +74,26 @@ jobs:
 
       - name: Run tests
         run: ./scripts/test
+
+  windows-test:
+    timeout-minutes: 15
+    name: test (Windows)
+    runs-on: windows-latest
+    if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+        with:
+          version: '0.10.2'
+
+      - name: Install dependencies
+        run: uv sync --python 3.12 --all-extras
+
+      - name: Start mock server
+        run: ./scripts/mock --daemon
+        shell: bash
+
+      - name: Run tests
+        run: uv run --python 3.12 pytest
