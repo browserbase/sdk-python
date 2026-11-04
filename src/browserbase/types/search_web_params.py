@@ -14,7 +14,7 @@ class Variant0(TypedDict, total=False):
     provider: Required[Literal["parallel"]]
     """Search provider to serve this request.
 
-    Omit to use the default provider for your project.
+    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set.
     """
 
     query: Required[str]
@@ -23,8 +23,9 @@ class Variant0(TypedDict, total=False):
     mode: Literal["fast", "advanced"]
     """The search mode used by the underlying provider.
 
+    Defaults to `advanced` for `parallel` and `fast` for `exa`. See the
     [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-    available modes and defaults.
+    available modes.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
@@ -35,7 +36,7 @@ class Variant1(TypedDict, total=False):
     provider: Required[Literal["exa"]]
     """Search provider to serve this request.
 
-    Omit to use the default provider for your project.
+    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set.
     """
 
     query: Required[str]
@@ -44,8 +45,9 @@ class Variant1(TypedDict, total=False):
     mode: Literal["fast", "deep-lite", "deep"]
     """The search mode used by the underlying provider.
 
+    Defaults to `advanced` for `parallel` and `fast` for `exa`. See the
     [Search docs](https://docs.browserbase.com/platform/search/overview) for the
-    available modes and defaults.
+    available modes.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
