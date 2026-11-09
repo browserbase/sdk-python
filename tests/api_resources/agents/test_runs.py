@@ -40,6 +40,7 @@ class TestRuns:
                     "id": "id",
                     "persist": True,
                 },
+                "log_session": True,
                 "proxies": [
                     {
                         "type": "browserbase",
@@ -52,6 +53,7 @@ class TestRuns:
                         "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     }
                 ],
+                "record_session": True,
                 "verified": True,
             },
             pause_when="x",
@@ -235,6 +237,7 @@ class TestAsyncRuns:
                     "id": "id",
                     "persist": True,
                 },
+                "log_session": True,
                 "proxies": [
                     {
                         "type": "browserbase",
@@ -247,6 +250,7 @@ class TestAsyncRuns:
                         "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     }
                 ],
+                "record_session": True,
                 "verified": True,
             },
             pause_when="x",

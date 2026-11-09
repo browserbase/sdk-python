@@ -153,11 +153,17 @@ class BrowserSettings(TypedDict, total=False):
 
     context: BrowserSettingsContext
 
+    log_session: Annotated[bool, PropertyInfo(alias="logSession")]
+    """Enable or disable session logging. Defaults to `true`."""
+
     proxies: Union[Iterable[BrowserSettingsProxiesUnionMember0], bool]
     """Proxy configuration.
 
     Can be true for default proxy, or an array of proxy configurations.
     """
+
+    record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
+    """Enable or disable session recording. Defaults to `true`."""
 
     verified: bool
     """Set true to enable Browserbase Verified for the session."""
