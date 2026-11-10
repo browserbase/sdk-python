@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from .label import Label as Label
 from .secret import Secret as Secret
 from .context import Context as Context
 from .project import Project as Project
 from .session import Session as Session
 from .webhook import Webhook as Webhook
+from .download import Download as Download
 from .extension import Extension as Extension
 from .certificate import Certificate as Certificate
 from .project_usage import ProjectUsage as ProjectUsage
@@ -19,9 +21,12 @@ from .secret_list_params import SecretListParams as SecretListParams
 from .agent_create_params import AgentCreateParams as AgentCreateParams
 from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
+from .label_create_params import LabelCreateParams as LabelCreateParams
+from .label_update_params import LabelUpdateParams as LabelUpdateParams
 from .search_web_response import SearchWebResponse as SearchWebResponse
 from .session_list_params import SessionListParams as SessionListParams
 from .webhook_list_params import WebhookListParams as WebhookListParams
+from .download_list_params import DownloadListParams as DownloadListParams
 from .secret_create_params import SecretCreateParams as SecretCreateParams
 from .secret_list_response import SecretListResponse as SecretListResponse
 from .secret_update_params import SecretUpdateParams as SecretUpdateParams
@@ -48,6 +53,8 @@ from .certificate_create_params import CertificateCreateParams as CertificateCre
 from .certificate_list_response import CertificateListResponse as CertificateListResponse
 from .fetch_api_create_response import FetchAPICreateResponse as FetchAPICreateResponse
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse
+from .session_set_labels_params import SessionSetLabelsParams as SessionSetLabelsParams
+from .session_set_labels_response import SessionSetLabelsResponse as SessionSetLabelsResponse
 from .webhook_rotate_secret_params import WebhookRotateSecretParams as WebhookRotateSecretParams
 from .webhook_rotate_secret_response import WebhookRotateSecretResponse as WebhookRotateSecretResponse
 from .navigation_policy_create_params import NavigationPolicyCreateParams as NavigationPolicyCreateParams

@@ -21,6 +21,7 @@ from ...types import (
     session_create_params,
     session_update_params,
     session_retrieve_params,
+    session_set_labels_params,
 )
 from .replays import (
     ReplaysResource,
@@ -70,6 +71,7 @@ from ...types.session_live_urls import SessionLiveURLs
 from ...types.session_list_response import SessionListResponse
 from ...types.session_create_response import SessionCreateResponse
 from ...types.session_retrieve_response import SessionRetrieveResponse
+from ...types.session_set_labels_response import SessionSetLabelsResponse
 
 __all__ = ["SessionsResource", "AsyncSessionsResource"]
 
@@ -376,6 +378,46 @@ class SessionsResource(SyncAPIResource):
             cast_to=SessionLiveURLs,
         )
 
+    def set_labels(
+        self,
+        id: str,
+        *,
+        labels: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SessionSetLabelsResponse:
+        """Atomically replace a session's labels.
+
+        Returns the response after the assignment
+        commits.
+
+        Args:
+          labels: Complete replacement set of label names. Empty clears assignments; missing names
+              create labels.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._put(
+            path_template("/v1/sessions/{id}/labels", id=id),
+            body=maybe_transform({"labels": labels}, session_set_labels_params.SessionSetLabelsParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SessionSetLabelsResponse,
+        )
+
 
 class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
@@ -679,6 +721,46 @@ class AsyncSessionsResource(AsyncAPIResource):
             cast_to=SessionLiveURLs,
         )
 
+    async def set_labels(
+        self,
+        id: str,
+        *,
+        labels: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SessionSetLabelsResponse:
+        """Atomically replace a session's labels.
+
+        Returns the response after the assignment
+        commits.
+
+        Args:
+          labels: Complete replacement set of label names. Empty clears assignments; missing names
+              create labels.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._put(
+            path_template("/v1/sessions/{id}/labels", id=id),
+            body=await async_maybe_transform({"labels": labels}, session_set_labels_params.SessionSetLabelsParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SessionSetLabelsResponse,
+        )
+
 
 class SessionsResourceWithRawResponse:
     def __init__(self, sessions: SessionsResource) -> None:
@@ -698,6 +780,9 @@ class SessionsResourceWithRawResponse:
         )
         self.debug = to_raw_response_wrapper(
             sessions.debug,
+        )
+        self.set_labels = to_raw_response_wrapper(
+            sessions.set_labels,
         )
 
     @cached_property
@@ -740,6 +825,9 @@ class AsyncSessionsResourceWithRawResponse:
         self.debug = async_to_raw_response_wrapper(
             sessions.debug,
         )
+        self.set_labels = async_to_raw_response_wrapper(
+            sessions.set_labels,
+        )
 
     @cached_property
     def downloads(self) -> AsyncDownloadsResourceWithRawResponse:
@@ -781,6 +869,9 @@ class SessionsResourceWithStreamingResponse:
         self.debug = to_streamed_response_wrapper(
             sessions.debug,
         )
+        self.set_labels = to_streamed_response_wrapper(
+            sessions.set_labels,
+        )
 
     @cached_property
     def downloads(self) -> DownloadsResourceWithStreamingResponse:
@@ -821,6 +912,9 @@ class AsyncSessionsResourceWithStreamingResponse:
         )
         self.debug = async_to_streamed_response_wrapper(
             sessions.debug,
+        )
+        self.set_labels = async_to_streamed_response_wrapper(
+            sessions.set_labels,
         )
 
     @cached_property
