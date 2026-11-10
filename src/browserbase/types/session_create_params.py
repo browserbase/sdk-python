@@ -37,6 +37,13 @@ class SessionCreateParams(TypedDict, total=False):
     Available on the Hobby Plan and above.
     """
 
+    labels: SequenceNotStr[str]
+    """Label names to assign after creation.
+
+    Creates missing labels automatically. Assignment is best-effort and does not
+    delay or fail session creation.
+    """
+
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """The Project ID.
 

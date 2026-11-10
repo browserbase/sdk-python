@@ -15,7 +15,13 @@ from .logs import (
     LogsResourceWithStreamingResponse,
     AsyncLogsResourceWithStreamingResponse,
 )
-from ...types import session_list_params, session_debug_params, session_create_params, session_update_params
+from ...types import (
+    session_list_params,
+    session_debug_params,
+    session_create_params,
+    session_update_params,
+    session_retrieve_params,
+)
 from .replays import (
     ReplaysResource,
     AsyncReplaysResource,
@@ -32,7 +38,7 @@ from .uploads import (
     UploadsResourceWithStreamingResponse,
     AsyncUploadsResourceWithStreamingResponse,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .downloads import (
@@ -114,6 +120,7 @@ class SessionsResource(SyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | Omit = omit,
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
+        labels: SequenceNotStr[str] | Omit = omit,
         project_id: str | Omit = omit,
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
         proxy_settings: session_create_params.ProxySettings | Omit = omit,
@@ -137,6 +144,9 @@ class SessionsResource(SyncAPIResource):
 
           keep_alive: Set to true to keep the session alive even after disconnections. Available on
               the Hobby Plan and above.
+
+          labels: Label names to assign after creation. Creates missing labels automatically.
+              Assignment is best-effort and does not delay or fail session creation.
 
           project_id: The Project ID. Can be found in
               [Settings](https://www.browserbase.com/settings). Optional - if not provided,
@@ -171,6 +181,7 @@ class SessionsResource(SyncAPIResource):
                     "browser_settings": browser_settings,
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
+                    "labels": labels,
                     "project_id": project_id,
                     "proxies": proxies,
                     "proxy_settings": proxy_settings,
@@ -190,6 +201,7 @@ class SessionsResource(SyncAPIResource):
         self,
         id: str,
         *,
+        include_labels: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -201,6 +213,8 @@ class SessionsResource(SyncAPIResource):
         Get a Session
 
         Args:
+          include_labels: Include the session's label IDs and current names.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -214,7 +228,13 @@ class SessionsResource(SyncAPIResource):
         return self._get(
             path_template("/v1/sessions/{id}", id=id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"include_labels": include_labels}, session_retrieve_params.SessionRetrieveParams
+                ),
             ),
             cast_to=SessionRetrieveResponse,
         )
@@ -403,6 +423,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser_settings: session_create_params.BrowserSettings | Omit = omit,
         extension_id: str | Omit = omit,
         keep_alive: bool | Omit = omit,
+        labels: SequenceNotStr[str] | Omit = omit,
         project_id: str | Omit = omit,
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
         proxy_settings: session_create_params.ProxySettings | Omit = omit,
@@ -426,6 +447,9 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           keep_alive: Set to true to keep the session alive even after disconnections. Available on
               the Hobby Plan and above.
+
+          labels: Label names to assign after creation. Creates missing labels automatically.
+              Assignment is best-effort and does not delay or fail session creation.
 
           project_id: The Project ID. Can be found in
               [Settings](https://www.browserbase.com/settings). Optional - if not provided,
@@ -460,6 +484,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "browser_settings": browser_settings,
                     "extension_id": extension_id,
                     "keep_alive": keep_alive,
+                    "labels": labels,
                     "project_id": project_id,
                     "proxies": proxies,
                     "proxy_settings": proxy_settings,
@@ -479,6 +504,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        include_labels: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -490,6 +516,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         Get a Session
 
         Args:
+          include_labels: Include the session's label IDs and current names.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -503,7 +531,13 @@ class AsyncSessionsResource(AsyncAPIResource):
         return await self._get(
             path_template("/v1/sessions/{id}", id=id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"include_labels": include_labels}, session_retrieve_params.SessionRetrieveParams
+                ),
             ),
             cast_to=SessionRetrieveResponse,
         )
