@@ -56,6 +56,7 @@ class TestSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
+            labels=["string"],
             project_id="projectId",
             proxies=[
                 {
@@ -66,6 +67,7 @@ class TestSessions:
                         "city": "city",
                         "state": "se",
                     },
+                    "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
@@ -98,14 +100,22 @@ class TestSessions:
     @parametrize
     def test_method_retrieve(self, client: Browserbase) -> None:
         session = client.sessions.retrieve(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Browserbase) -> None:
+        session = client.sessions.retrieve(
+            id="id",
+            include_labels=True,
         )
         assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Browserbase) -> None:
         response = client.sessions.with_raw_response.retrieve(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -116,7 +126,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Browserbase) -> None:
         with client.sessions.with_streaming_response.retrieve(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -130,7 +140,7 @@ class TestSessions:
     def test_path_params_retrieve(self, client: Browserbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sessions.with_raw_response.retrieve(
-                "",
+                id="",
             )
 
     @parametrize
@@ -302,6 +312,7 @@ class TestAsyncSessions:
             },
             extension_id="extensionId",
             keep_alive=True,
+            labels=["string"],
             project_id="projectId",
             proxies=[
                 {
@@ -312,6 +323,7 @@ class TestAsyncSessions:
                         "city": "city",
                         "state": "se",
                     },
+                    "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
@@ -344,14 +356,22 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrowserbase) -> None:
         session = await async_client.sessions.retrieve(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncBrowserbase) -> None:
+        session = await async_client.sessions.retrieve(
+            id="id",
+            include_labels=True,
         )
         assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.sessions.with_raw_response.retrieve(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -362,7 +382,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.sessions.with_streaming_response.retrieve(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -376,7 +396,7 @@ class TestAsyncSessions:
     async def test_path_params_retrieve(self, async_client: AsyncBrowserbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.with_raw_response.retrieve(
-                "",
+                id="",
             )
 
     @parametrize
