@@ -42,6 +42,7 @@ from .context_update_response import ContextUpdateResponse as ContextUpdateRespo
 from .extension_create_params import ExtensionCreateParams as ExtensionCreateParams
 from .fetch_api_create_params import FetchAPICreateParams as FetchAPICreateParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
+from .session_retrieve_params import SessionRetrieveParams as SessionRetrieveParams
 from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse
 from .certificate_create_params import CertificateCreateParams as CertificateCreateParams
 from .certificate_list_response import CertificateListResponse as CertificateListResponse
