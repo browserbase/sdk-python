@@ -134,7 +134,7 @@ class SessionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
-        """Create a Session
+        """Create a new Session
 
         Args:
           extension_id: The uploaded Extension ID.
@@ -437,7 +437,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
-        """Create a Session
+        """Create a new Session
 
         Args:
           extension_id: The uploaded Extension ID.
