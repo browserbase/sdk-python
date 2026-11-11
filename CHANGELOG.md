@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.0](https://github.com/browserbase/sdk-python/compare/v1.24.0...v1.25.0) (2026-11-11)
+
+
+### Features
+
+* release managed static proxies, session labels, and agent recording controls ([#208](https://github.com/browserbase/sdk-python/issues/208)) ([e2d648d](https://github.com/browserbase/sdk-python/commit/e2d648d3aad94663e00a04ad2643e4201be27cec))
+
 ## [1.24.0](https://github.com/browserbase/sdk-python/compare/v1.23.0...v1.24.0) (2026-11-04)
 
 
