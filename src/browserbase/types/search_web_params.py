@@ -39,9 +39,8 @@ class Variant0(TypedDict, total=False):
     to 720.
 
     0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. This is a refresh threshold, not a
-    strict maximum age: a provider can return an older cached copy when a live fetch
-    fails.
+    only). Omit to use the provider default. A provider can return an older cached
+    copy when a live fetch fails.
     """
 
     mode: Literal["fast", "advanced"]
@@ -93,9 +92,8 @@ class Variant1(TypedDict, total=False):
     to 720.
 
     0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. This is a refresh threshold, not a
-    strict maximum age: a provider can return an older cached copy when a live fetch
-    fails.
+    only). Omit to use the provider default. A provider can return an older cached
+    copy when a live fetch fails.
     """
 
     mode: Literal["fast", "deep-lite", "deep"]
@@ -141,9 +139,8 @@ class Variant2(TypedDict, total=False):
     to 720.
 
     0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. This is a refresh threshold, not a
-    strict maximum age: a provider can return an older cached copy when a live fetch
-    fails.
+    only). Omit to use the provider default. A provider can return an older cached
+    copy when a live fetch fails.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]

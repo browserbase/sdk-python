@@ -75,9 +75,8 @@ class SearchResource(SyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
@@ -131,9 +130,8 @@ class SearchResource(SyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
@@ -182,9 +180,8 @@ class SearchResource(SyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           num_results: Number of results to return (1-25)
 
@@ -295,9 +292,8 @@ class AsyncSearchResource(AsyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
@@ -351,9 +347,8 @@ class AsyncSearchResource(AsyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
@@ -402,9 +397,8 @@ class AsyncSearchResource(AsyncAPIResource):
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
               to 720. 0 always fetches fresh content and -1 uses only cached content (exa
-              provider only). Omit to use the provider default. This is a refresh threshold,
-              not a strict maximum age: a provider can return an older cached copy when a live
-              fetch fails.
+              provider only). Omit to use the provider default. A provider can return an older
+              cached copy when a live fetch fails.
 
           num_results: Number of results to return (1-25)
 
