@@ -30,8 +30,11 @@ class TestSearch:
         search = client.search.web(
             provider="parallel",
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             mode="fast",
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -74,8 +77,11 @@ class TestSearch:
         search = client.search.web(
             provider="exa",
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             mode="fast",
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -116,7 +122,10 @@ class TestSearch:
     def test_method_web_with_all_params_overload_3(self, client: Browserbase) -> None:
         search = client.search.web(
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -163,8 +172,11 @@ class TestAsyncSearch:
         search = await async_client.search.web(
             provider="parallel",
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             mode="fast",
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -207,8 +219,11 @@ class TestAsyncSearch:
         search = await async_client.search.web(
             provider="exa",
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             mode="fast",
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -249,7 +264,10 @@ class TestAsyncSearch:
     async def test_method_web_with_all_params_overload_3(self, async_client: AsyncBrowserbase) -> None:
         search = await async_client.search.web(
             query="x",
+            excerpts={"max_characters": 1},
+            max_age_hours=-1,
             num_results=1,
+            objective="P",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
