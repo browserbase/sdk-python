@@ -15,6 +15,7 @@ from browserbase.types import (
     SessionListResponse,
     SessionCreateResponse,
     SessionRetrieveResponse,
+    SessionSetLabelsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -273,6 +274,48 @@ class TestSessions:
                 id="",
             )
 
+    @parametrize
+    def test_method_set_labels(self, client: Browserbase) -> None:
+        session = client.sessions.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        )
+        assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+    @parametrize
+    def test_raw_response_set_labels(self, client: Browserbase) -> None:
+        response = client.sessions.with_raw_response.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+    @parametrize
+    def test_streaming_response_set_labels(self, client: Browserbase) -> None:
+        with client.sessions.with_streaming_response.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_set_labels(self, client: Browserbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sessions.with_raw_response.set_labels(
+                id="",
+                labels=["string"],
+            )
+
 
 class TestAsyncSessions:
     parametrize = pytest.mark.parametrize(
@@ -527,4 +570,46 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sessions.with_raw_response.debug(
                 id="",
+            )
+
+    @parametrize
+    async def test_method_set_labels(self, async_client: AsyncBrowserbase) -> None:
+        session = await async_client.sessions.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        )
+        assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+    @parametrize
+    async def test_raw_response_set_labels(self, async_client: AsyncBrowserbase) -> None:
+        response = await async_client.sessions.with_raw_response.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_set_labels(self, async_client: AsyncBrowserbase) -> None:
+        async with async_client.sessions.with_streaming_response.set_labels(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            labels=["string"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(SessionSetLabelsResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_set_labels(self, async_client: AsyncBrowserbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.sessions.with_raw_response.set_labels(
+                id="",
+                labels=["string"],
             )
