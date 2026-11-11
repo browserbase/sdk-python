@@ -75,13 +75,14 @@ Methods:
 Types:
 
 ```python
-from browserbase.types import Label
+from browserbase.types import Label, LabelListResponse
 ```
 
 Methods:
 
 - <code title="post /v1/labels">client.labels.<a href="./src/browserbase/resources/labels.py">create</a>(\*\*<a href="src/browserbase/types/label_create_params.py">params</a>) -> <a href="./src/browserbase/types/label.py">Label</a></code>
 - <code title="patch /v1/labels/{labelId}">client.labels.<a href="./src/browserbase/resources/labels.py">update</a>(label_id, \*\*<a href="src/browserbase/types/label_update_params.py">params</a>) -> <a href="./src/browserbase/types/label.py">Label</a></code>
+- <code title="get /v1/labels">client.labels.<a href="./src/browserbase/resources/labels.py">list</a>(\*\*<a href="src/browserbase/types/label_list_params.py">params</a>) -> <a href="./src/browserbase/types/label_list_response.py">LabelListResponse</a></code>
 - <code title="delete /v1/labels/{labelId}">client.labels.<a href="./src/browserbase/resources/labels.py">delete</a>(label_id) -> None</code>
 
 # Projects
