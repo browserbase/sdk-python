@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import label_create_params, label_update_params
-from .._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from ..types import label_list_params, label_create_params, label_update_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -17,6 +17,7 @@ from .._response import (
 )
 from ..types.label import Label
 from .._base_client import make_request_options
+from ..types.label_list_response import LabelListResponse
 
 __all__ = ["LabelsResource", "AsyncLabelsResource"]
 
@@ -115,6 +116,55 @@ class LabelsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Label,
+        )
+
+    def list(
+        self,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LabelListResponse:
+        """List the project's labels, newest first.
+
+        Page by passing the previous response's
+        `nextCursor` as `cursor`; a null `nextCursor` means there are no further pages.
+
+        Args:
+          cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
+              next page. Omit to start from the first page.
+
+          limit: Maximum number of results to return.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/labels",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    label_list_params.LabelListParams,
+                ),
+            ),
+            cast_to=LabelListResponse,
         )
 
     def delete(
@@ -250,6 +300,55 @@ class AsyncLabelsResource(AsyncAPIResource):
             cast_to=Label,
         )
 
+    async def list(
+        self,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LabelListResponse:
+        """List the project's labels, newest first.
+
+        Page by passing the previous response's
+        `nextCursor` as `cursor`; a null `nextCursor` means there are no further pages.
+
+        Args:
+          cursor: Pagination cursor. Pass the nextCursor from the previous response to fetch the
+              next page. Omit to start from the first page.
+
+          limit: Maximum number of results to return.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/labels",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    label_list_params.LabelListParams,
+                ),
+            ),
+            cast_to=LabelListResponse,
+        )
+
     async def delete(
         self,
         label_id: str,
@@ -297,6 +396,9 @@ class LabelsResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             labels.update,
         )
+        self.list = to_raw_response_wrapper(
+            labels.list,
+        )
         self.delete = to_raw_response_wrapper(
             labels.delete,
         )
@@ -311,6 +413,9 @@ class AsyncLabelsResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             labels.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            labels.list,
         )
         self.delete = async_to_raw_response_wrapper(
             labels.delete,
@@ -327,6 +432,9 @@ class LabelsResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             labels.update,
         )
+        self.list = to_streamed_response_wrapper(
+            labels.list,
+        )
         self.delete = to_streamed_response_wrapper(
             labels.delete,
         )
@@ -341,6 +449,9 @@ class AsyncLabelsResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             labels.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            labels.list,
         )
         self.delete = async_to_streamed_response_wrapper(
             labels.delete,
