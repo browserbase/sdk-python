@@ -23,6 +23,12 @@ class Result(BaseModel):
     author: Optional[str] = None
     """Author of the content if available"""
 
+    excerpts: Optional[List[str]] = None
+    """Passages from the page most relevant to the query.
+
+    Only set when the request asks for excerpts.
+    """
+
     favicon: Optional[str] = None
     """Favicon URL"""
 
