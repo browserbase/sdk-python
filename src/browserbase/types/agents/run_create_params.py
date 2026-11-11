@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = [
@@ -16,6 +17,7 @@ __all__ = [
     "BrowserSettingsProxiesUnionMember0BrowserbaseProxyConfigGeolocation",
     "BrowserSettingsProxiesUnionMember0ExternalProxyConfig",
     "BrowserSettingsProxiesUnionMember0NoneProxyConfig",
+    "BrowserSettingsProxySettings",
     "Variables",
 ]
 
@@ -145,13 +147,33 @@ BrowserSettingsProxiesUnionMember0: TypeAlias = Union[
 ]
 
 
+class BrowserSettingsProxySettings(TypedDict, total=False):
+    """Proxy settings for the browser session. Optional."""
+
+    ca_certificates: Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]
+    """The TLS certificate IDs to trust. Optional."""
+
+
 class BrowserSettings(TypedDict, total=False):
     """Browser configuration for the agent's session.
 
     When omitted, runner defaults apply.
     """
 
+    allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
+    """Domains the browser session may navigate to, including their subdomains.
+
+    Restricts top-level navigations only. Omit or pass an empty list to allow every
+    domain.
+    """
+
     context: BrowserSettingsContext
+
+    ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
+    """Set `true` to ignore TLS certificate errors in the browser session.
+
+    When omitted, your project's default applies.
+    """
 
     log_session: Annotated[bool, PropertyInfo(alias="logSession")]
     """Enable or disable session logging. Defaults to `true`."""
@@ -161,6 +183,9 @@ class BrowserSettings(TypedDict, total=False):
 
     Can be true for default proxy, or an array of proxy configurations.
     """
+
+    proxy_settings: Annotated[BrowserSettingsProxySettings, PropertyInfo(alias="proxySettings")]
+    """Proxy settings for the browser session. Optional."""
 
     record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
     """Enable or disable session recording. Defaults to `true`."""
