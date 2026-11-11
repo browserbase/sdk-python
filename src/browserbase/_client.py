@@ -37,6 +37,7 @@ from ._base_client import (
 if TYPE_CHECKING:
     from .resources import (
         agents,
+        labels,
         search,
         secrets,
         contexts,
@@ -49,6 +50,7 @@ if TYPE_CHECKING:
         certificates,
         navigation_policies,
     )
+    from .resources.labels import LabelsResource, AsyncLabelsResource
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.secrets import SecretsResource, AsyncSecretsResource
     from .resources.contexts import ContextsResource, AsyncContextsResource
@@ -167,6 +169,12 @@ class Browserbase(SyncAPIClient):
         from .resources.functions import FunctionsResource
 
         return FunctionsResource(self)
+
+    @cached_property
+    def labels(self) -> LabelsResource:
+        from .resources.labels import LabelsResource
+
+        return LabelsResource(self)
 
     @cached_property
     def projects(self) -> ProjectsResource:
@@ -418,6 +426,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncFunctionsResource(self)
 
     @cached_property
+    def labels(self) -> AsyncLabelsResource:
+        from .resources.labels import AsyncLabelsResource
+
+        return AsyncLabelsResource(self)
+
+    @cached_property
     def projects(self) -> AsyncProjectsResource:
         from .resources.projects import AsyncProjectsResource
 
@@ -609,6 +623,12 @@ class BrowserbaseWithRawResponse:
         return FunctionsResourceWithRawResponse(self._client.functions)
 
     @cached_property
+    def labels(self) -> labels.LabelsResourceWithRawResponse:
+        from .resources.labels import LabelsResourceWithRawResponse
+
+        return LabelsResourceWithRawResponse(self._client.labels)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithRawResponse:
         from .resources.projects import ProjectsResourceWithRawResponse
 
@@ -686,6 +706,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.functions import AsyncFunctionsResourceWithRawResponse
 
         return AsyncFunctionsResourceWithRawResponse(self._client.functions)
+
+    @cached_property
+    def labels(self) -> labels.AsyncLabelsResourceWithRawResponse:
+        from .resources.labels import AsyncLabelsResourceWithRawResponse
+
+        return AsyncLabelsResourceWithRawResponse(self._client.labels)
 
     @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
@@ -767,6 +793,12 @@ class BrowserbaseWithStreamedResponse:
         return FunctionsResourceWithStreamingResponse(self._client.functions)
 
     @cached_property
+    def labels(self) -> labels.LabelsResourceWithStreamingResponse:
+        from .resources.labels import LabelsResourceWithStreamingResponse
+
+        return LabelsResourceWithStreamingResponse(self._client.labels)
+
+    @cached_property
     def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
         from .resources.projects import ProjectsResourceWithStreamingResponse
 
@@ -844,6 +876,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.functions import AsyncFunctionsResourceWithStreamingResponse
 
         return AsyncFunctionsResourceWithStreamingResponse(self._client.functions)
+
+    @cached_property
+    def labels(self) -> labels.AsyncLabelsResourceWithStreamingResponse:
+        from .resources.labels import AsyncLabelsResourceWithStreamingResponse
+
+        return AsyncLabelsResourceWithStreamingResponse(self._client.labels)
 
     @cached_property
     def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
