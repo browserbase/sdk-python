@@ -148,7 +148,7 @@ BrowserSettingsProxiesUnionMember0: TypeAlias = Union[
 
 
 class BrowserSettingsProxySettings(TypedDict, total=False):
-    """Proxy settings. Optional."""
+    """Proxy settings for the browser session. Optional."""
 
     ca_certificates: Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]
     """The TLS certificate IDs to trust. Optional."""
@@ -161,21 +161,16 @@ class BrowserSettings(TypedDict, total=False):
     """
 
     allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
-    """An optional list of allowed domains for the session.
+    """Domains the browser session may navigate to, including their subdomains.
 
-    If you pass one or more domains, Browserbase restricts top-level (main-frame)
-    page navigations to the listed domains and their subdomains. For example,
-    `example.com` also permits `www.example.com` and `a.b.example.com`, but not
-    `notexample.com`. Matching is domain-based, not full-URL. An empty list (the
-    default) disables the restriction entirely. Browserbase enforces only main-frame
-    navigations; it does not block iframe/subframe loads or other in-page resource
-    requests (images, scripts, XHR, etc.).
+    Restricts top-level navigations only. Omit or pass an empty list to allow every
+    domain.
     """
 
     context: BrowserSettingsContext
 
     ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
-    """Set `true` to ignore TLS certificate errors.
+    """Set `true` to ignore TLS certificate errors in the browser session.
 
     When omitted, your project's default applies.
     """
@@ -190,7 +185,7 @@ class BrowserSettings(TypedDict, total=False):
     """
 
     proxy_settings: Annotated[BrowserSettingsProxySettings, PropertyInfo(alias="proxySettings")]
-    """Proxy settings. Optional."""
+    """Proxy settings for the browser session. Optional."""
 
     record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
     """Enable or disable session recording. Defaults to `true`."""
