@@ -36,10 +36,12 @@ class TestRuns:
             task="x",
             agent_id="agentId",
             browser_settings={
+                "allowed_domains": ["string"],
                 "context": {
                     "id": "id",
                     "persist": True,
                 },
+                "ignore_certificate_errors": True,
                 "log_session": True,
                 "proxies": [
                     {
@@ -53,6 +55,7 @@ class TestRuns:
                         "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     }
                 ],
+                "proxy_settings": {"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
                 "record_session": True,
                 "verified": True,
             },
@@ -233,10 +236,12 @@ class TestAsyncRuns:
             task="x",
             agent_id="agentId",
             browser_settings={
+                "allowed_domains": ["string"],
                 "context": {
                     "id": "id",
                     "persist": True,
                 },
+                "ignore_certificate_errors": True,
                 "log_session": True,
                 "proxies": [
                     {
@@ -250,6 +255,7 @@ class TestAsyncRuns:
                         "proxy_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     }
                 ],
+                "proxy_settings": {"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
                 "record_session": True,
                 "verified": True,
             },
