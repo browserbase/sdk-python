@@ -28,6 +28,21 @@ Methods:
 - <code title="put /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">update</a>(id) -> <a href="./src/browserbase/types/context_update_response.py">ContextUpdateResponse</a></code>
 - <code title="delete /v1/contexts/{id}">client.contexts.<a href="./src/browserbase/resources/contexts.py">delete</a>(id) -> None</code>
 
+# Downloads
+
+Types:
+
+```python
+from browserbase.types import Download
+```
+
+Methods:
+
+- <code title="get /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">retrieve</a>(id) -> <a href="./src/browserbase/types/download.py">Download</a></code>
+- <code title="get /v1/downloads">client.downloads.<a href="./src/browserbase/resources/downloads.py">list</a>(\*\*<a href="src/browserbase/types/download_list_params.py">params</a>) -> <a href="./src/browserbase/types/download.py">SyncOffsetPage[Download]</a></code>
+- <code title="delete /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">delete</a>(id) -> None</code>
+- <code title="get /v1/downloads/{id}">client.downloads.<a href="./src/browserbase/resources/downloads.py">download</a>(id) -> BinaryAPIResponse</code>
+
 # Extensions
 
 Types:
@@ -69,6 +84,21 @@ Methods:
 - <code title="get /v1/functions/{id}/secrets">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">list</a>(id, \*\*<a href="src/browserbase/types/functions/secret_list_params.py">params</a>) -> <a href="./src/browserbase/types/functions/secret_list_response.py">SecretListResponse</a></code>
 - <code title="post /v1/functions/{id}/secrets">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">attach</a>(id, \*\*<a href="src/browserbase/types/functions/secret_attach_params.py">params</a>) -> None</code>
 - <code title="delete /v1/functions/{id}/secrets/{secretId}">client.functions.secrets.<a href="./src/browserbase/resources/functions/secrets.py">detach</a>(secret_id, \*, id) -> None</code>
+
+# Labels
+
+Types:
+
+```python
+from browserbase.types import Label, LabelListResponse
+```
+
+Methods:
+
+- <code title="post /v1/labels">client.labels.<a href="./src/browserbase/resources/labels.py">create</a>(\*\*<a href="src/browserbase/types/label_create_params.py">params</a>) -> <a href="./src/browserbase/types/label.py">Label</a></code>
+- <code title="patch /v1/labels/{labelId}">client.labels.<a href="./src/browserbase/resources/labels.py">update</a>(label_id, \*\*<a href="src/browserbase/types/label_update_params.py">params</a>) -> <a href="./src/browserbase/types/label.py">Label</a></code>
+- <code title="get /v1/labels">client.labels.<a href="./src/browserbase/resources/labels.py">list</a>(\*\*<a href="src/browserbase/types/label_list_params.py">params</a>) -> <a href="./src/browserbase/types/label_list_response.py">LabelListResponse</a></code>
+- <code title="delete /v1/labels/{labelId}">client.labels.<a href="./src/browserbase/resources/labels.py">delete</a>(label_id) -> None</code>
 
 # Projects
 
@@ -124,6 +154,7 @@ from browserbase.types import (
     SessionCreateResponse,
     SessionRetrieveResponse,
     SessionListResponse,
+    SessionSetLabelsResponse,
 )
 ```
 
@@ -134,6 +165,7 @@ Methods:
 - <code title="post /v1/sessions/{id}">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">update</a>(id, \*\*<a href="src/browserbase/types/session_update_params.py">params</a>) -> <a href="./src/browserbase/types/session.py">Session</a></code>
 - <code title="get /v1/sessions">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">list</a>(\*\*<a href="src/browserbase/types/session_list_params.py">params</a>) -> <a href="./src/browserbase/types/session_list_response.py">SessionListResponse</a></code>
 - <code title="get /v1/sessions/{id}/debug">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">debug</a>(id, \*\*<a href="src/browserbase/types/session_debug_params.py">params</a>) -> <a href="./src/browserbase/types/session_live_urls.py">SessionLiveURLs</a></code>
+- <code title="put /v1/sessions/{id}/labels">client.sessions.<a href="./src/browserbase/resources/sessions/sessions.py">set_labels</a>(id, \*\*<a href="src/browserbase/types/session_set_labels_params.py">params</a>) -> <a href="./src/browserbase/types/session_set_labels_response.py">SessionSetLabelsResponse</a></code>
 
 ## Downloads
 

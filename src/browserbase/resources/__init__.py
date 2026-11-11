@@ -8,6 +8,14 @@ from .agents import (
     AgentsResourceWithStreamingResponse,
     AsyncAgentsResourceWithStreamingResponse,
 )
+from .labels import (
+    LabelsResource,
+    AsyncLabelsResource,
+    LabelsResourceWithRawResponse,
+    AsyncLabelsResourceWithRawResponse,
+    LabelsResourceWithStreamingResponse,
+    AsyncLabelsResourceWithStreamingResponse,
+)
 from .search import (
     SearchResource,
     AsyncSearchResource,
@@ -55,6 +63,14 @@ from .webhooks import (
     AsyncWebhooksResourceWithRawResponse,
     WebhooksResourceWithStreamingResponse,
     AsyncWebhooksResourceWithStreamingResponse,
+)
+from .downloads import (
+    DownloadsResource,
+    AsyncDownloadsResource,
+    DownloadsResourceWithRawResponse,
+    AsyncDownloadsResourceWithRawResponse,
+    DownloadsResourceWithStreamingResponse,
+    AsyncDownloadsResourceWithStreamingResponse,
 )
 from .fetch_api import (
     FetchAPIResource,
@@ -110,6 +126,12 @@ __all__ = [
     "AsyncContextsResourceWithRawResponse",
     "ContextsResourceWithStreamingResponse",
     "AsyncContextsResourceWithStreamingResponse",
+    "DownloadsResource",
+    "AsyncDownloadsResource",
+    "DownloadsResourceWithRawResponse",
+    "AsyncDownloadsResourceWithRawResponse",
+    "DownloadsResourceWithStreamingResponse",
+    "AsyncDownloadsResourceWithStreamingResponse",
     "ExtensionsResource",
     "AsyncExtensionsResource",
     "ExtensionsResourceWithRawResponse",
@@ -128,6 +150,12 @@ __all__ = [
     "AsyncFunctionsResourceWithRawResponse",
     "FunctionsResourceWithStreamingResponse",
     "AsyncFunctionsResourceWithStreamingResponse",
+    "LabelsResource",
+    "AsyncLabelsResource",
+    "LabelsResourceWithRawResponse",
+    "AsyncLabelsResourceWithRawResponse",
+    "LabelsResourceWithStreamingResponse",
+    "AsyncLabelsResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",
