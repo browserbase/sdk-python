@@ -49,8 +49,11 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["parallel"],
         query: str,
+        excerpts: search_web_params.Variant0Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,12 +70,24 @@ class SearchResource(SyncAPIResource):
 
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -90,8 +105,11 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["exa"],
         query: str,
+        excerpts: search_web_params.Variant1Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "deep-lite", "deep"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,12 +126,24 @@ class SearchResource(SyncAPIResource):
 
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -130,7 +160,10 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         query: str,
+        excerpts: search_web_params.Variant2Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -144,7 +177,19 @@ class SearchResource(SyncAPIResource):
         Args:
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -162,8 +207,14 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
         query: str,
+        excerpts: search_web_params.Variant0Excerpts
+        | search_web_params.Variant1Excerpts
+        | search_web_params.Variant2Excerpts
+        | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Literal["fast", "deep-lite", "deep"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -177,8 +228,11 @@ class SearchResource(SyncAPIResource):
                 {
                     "provider": provider,
                     "query": query,
+                    "excerpts": excerpts,
+                    "max_age_hours": max_age_hours,
                     "mode": mode,
                     "num_results": num_results,
+                    "objective": objective,
                 },
                 search_web_params.SearchWebParams,
             ),
@@ -215,8 +269,11 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["parallel"],
         query: str,
+        excerpts: search_web_params.Variant0Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -233,12 +290,24 @@ class AsyncSearchResource(AsyncAPIResource):
 
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -256,8 +325,11 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["exa"],
         query: str,
+        excerpts: search_web_params.Variant1Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "deep-lite", "deep"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -274,12 +346,24 @@ class AsyncSearchResource(AsyncAPIResource):
 
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           mode: The search mode used by the underlying provider. Defaults to `advanced` for
               `parallel` and `fast` for `exa`. See the
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -296,7 +380,10 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        excerpts: search_web_params.Variant2Excerpts | Omit = omit,
+        max_age_hours: int | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -310,7 +397,19 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           query: The search query string
 
+          excerpts: Return the passages of each page most relevant to the query. Omit to return no
+              excerpts.
+
+          max_age_hours: Refetch a page when the cached copy is older than this many hours, from 1
+              to 720. 0 always fetches fresh content and -1 uses only cached content (exa
+              provider only). Omit to use the provider default. This is a refresh threshold,
+              not a strict maximum age: a provider can return an older cached copy when a live
+              fetch fails.
+
           num_results: Number of results to return (1-25)
+
+          objective: The task intent and soft preferences for the search, in natural language. Adds
+              context to query without replacing it.
 
           extra_headers: Send extra headers
 
@@ -328,8 +427,14 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
         query: str,
+        excerpts: search_web_params.Variant0Excerpts
+        | search_web_params.Variant1Excerpts
+        | search_web_params.Variant2Excerpts
+        | Omit = omit,
+        max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Literal["fast", "deep-lite", "deep"] | Omit = omit,
         num_results: int | Omit = omit,
+        objective: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,8 +448,11 @@ class AsyncSearchResource(AsyncAPIResource):
                 {
                     "provider": provider,
                     "query": query,
+                    "excerpts": excerpts,
+                    "max_age_hours": max_age_hours,
                     "mode": mode,
                     "num_results": num_results,
+                    "objective": objective,
                 },
                 search_web_params.SearchWebParams,
             ),
