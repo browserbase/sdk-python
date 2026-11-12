@@ -20,14 +20,14 @@ class TestFetchAPI:
     @parametrize
     def test_method_create(self, client: Browserbase) -> None:
         fetch_api = client.fetch_api.create(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(FetchAPICreateResponse, fetch_api, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         fetch_api = client.fetch_api.create(
-            url="https://example.com",
+            url="url",
             allow_insecure_ssl=True,
             allow_redirects=True,
             context_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -40,7 +40,7 @@ class TestFetchAPI:
     @parametrize
     def test_raw_response_create(self, client: Browserbase) -> None:
         response = client.fetch_api.with_raw_response.create(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -51,7 +51,7 @@ class TestFetchAPI:
     @parametrize
     def test_streaming_response_create(self, client: Browserbase) -> None:
         with client.fetch_api.with_streaming_response.create(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -70,14 +70,14 @@ class TestAsyncFetchAPI:
     @parametrize
     async def test_method_create(self, async_client: AsyncBrowserbase) -> None:
         fetch_api = await async_client.fetch_api.create(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(FetchAPICreateResponse, fetch_api, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         fetch_api = await async_client.fetch_api.create(
-            url="https://example.com",
+            url="url",
             allow_insecure_ssl=True,
             allow_redirects=True,
             context_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -90,7 +90,7 @@ class TestAsyncFetchAPI:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrowserbase) -> None:
         response = await async_client.fetch_api.with_raw_response.create(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -101,7 +101,7 @@ class TestAsyncFetchAPI:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrowserbase) -> None:
         async with async_client.fetch_api.with_streaming_response.create(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
