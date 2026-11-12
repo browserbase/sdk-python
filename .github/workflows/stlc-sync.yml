@@ -176,12 +176,12 @@ jobs:
           fi
 
   seal-dispatch:
-    # When out-of-band custom code lands on staging main, tell the config repo to
+    # When out-of-band custom code lands on main, tell browserbase/core to
     # re-seal now instead of waiting for its scheduled sync. The loop guards skip
     # stlc's own pushes, so the bot's commits can't trigger a re-seal loop.
     runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
     if: >-
-      github.repository == 'browserbase/browserbase-python-staging' &&
+      github.repository == 'browserbase/sdk-python' &&
       github.event_name == 'push'
     permissions:
       contents: read
@@ -189,7 +189,7 @@ jobs:
       group: seal-dispatch-${{ github.ref }}
       cancel-in-progress: false
     env:
-      CONFIG_REPO: browserbase/browserbase-stlc-config
+      CONFIG_REPO: browserbase/core
     steps:
       # App token in place of the CONFIG_DISPATCH_TOKEN PAT (CB-19).
       - name: Mint bot token
@@ -199,7 +199,7 @@ jobs:
           app-id: ${{ secrets.STLC_BOT_APP_ID }}
           private-key: ${{ secrets.STLC_BOT_PRIVATE_KEY }}
           owner: browserbase
-          repositories: browserbase-stlc-config
+          repositories: core
 
       - name: Loop-guard and send re-seal dispatch
         env:
