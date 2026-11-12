@@ -15,6 +15,7 @@ jobs:
     # identical); only production may publish. A stray GitHub Release on the
     # staging repo must never reach PyPI.
     if: github.repository == 'browserbase/sdk-python'
+    environment: release
     runs-on: ubuntu-latest
 
     steps:
