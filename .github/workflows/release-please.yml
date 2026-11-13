@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .release-please-manifest.json
   workflow_dispatch:
 
 permissions:
@@ -13,10 +15,7 @@ jobs:
   release-please:
     # Release PRs open only when someone runs this workflow. A push runs it only
     # when a release PR merges (it bumps the manifest), to tag the release.
-    if: >-
-      github.repository == 'browserbase/sdk-python' &&
-      (github.event_name == 'workflow_dispatch' ||
-      contains(toJSON(github.event.commits.*.modified), '.release-please-manifest.json'))
+    if: github.repository == 'browserbase/sdk-python'
     runs-on: ubuntu-latest
 
     steps:
