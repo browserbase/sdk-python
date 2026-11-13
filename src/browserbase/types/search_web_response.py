@@ -41,13 +41,6 @@ class Result(BaseModel):
 
 
 class SearchWebResponse(BaseModel):
-    provider: Literal["parallel", "exa"]
-    """The search provider that served the request.
-
-    Can differ from the documented default when the project or the filters select
-    another provider.
-    """
-
     query: str
     """The search query that was executed"""
 
@@ -59,3 +52,10 @@ class SearchWebResponse(BaseModel):
 
     mode: Optional[Literal["fast", "advanced", "deep-lite", "deep"]] = None
     """The search mode that served the request."""
+
+    provider: Optional[Literal["parallel", "exa"]] = None
+    """The search provider that served the request.
+
+    Can differ from the documented default when the project or the filters select
+    another provider.
+    """
