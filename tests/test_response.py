@@ -1,4 +1,8 @@
+from __future__ import annotations
+
+import gc
 import json
+import warnings
 from typing import Any, List, Union, cast
 from typing_extensions import Annotated
 
@@ -14,6 +18,7 @@ from browserbase._response import (
     BinaryAPIResponse,
     AsyncBinaryAPIResponse,
     extract_response_type,
+    async_to_streamed_response_wrapper,
 )
 from browserbase._streaming import Stream
 from browserbase._base_client import FinalRequestOptions
@@ -26,6 +31,53 @@ class ConcreteAPIResponse(APIResponse[List[str]]): ...
 
 
 class ConcreteAsyncAPIResponse(APIResponse[httpx.Response]): ...
+
+
+@pytest.mark.asyncio
+async def test_async_streaming_response_request_is_lazy(async_client: AsyncBrowserbase) -> None:
+    calls = 0
+
+    async def request(*, extra_headers: dict[str, str] | None = None) -> AsyncAPIResponse[str]:
+        nonlocal calls
+        calls += 1
+        assert extra_headers == {"X-Stainless-Raw-Response": "stream"}
+        return AsyncAPIResponse(
+            raw=httpx.Response(200, content=b"response"),
+            client=async_client,
+            stream=False,
+            stream_cls=None,
+            cast_to=str,
+            options=FinalRequestOptions.construct(method="get", url="/foo"),
+        )
+
+    wrapped = async_to_streamed_response_wrapper(request)
+    context_manager = wrapped()
+
+    assert calls == 0
+    async with context_manager as response:
+        assert calls == 1
+        assert await response.text() == "response"
+
+    assert response.is_closed
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("custom_response", [False, True])
+async def test_discarding_async_streaming_response_does_not_warn(
+    async_client: AsyncBrowserbase, custom_response: bool
+) -> None:
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        if custom_response:
+            context_manager = async_client.sessions.replays.with_streaming_response.retrieve_page(
+                id="session-id", page_id="page-id"
+            )
+        else:
+            context_manager = async_client.sessions.with_streaming_response.create()
+        del context_manager
+        gc.collect()
+
+    assert not caught
 
 
 def test_extract_response_type_direct_classes() -> None:
