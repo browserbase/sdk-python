@@ -5,6 +5,7 @@ import pytest
 from dirty_equals import IsDict, IsList, IsBytes, IsTuple
 
 from browserbase._files import to_httpx_files, deepcopy_with_paths, async_to_httpx_files
+from browserbase._types import FileTypes
 from browserbase._utils import extract_files
 
 readme_path = Path(__file__).parent.parent.joinpath("README.md")
@@ -20,6 +21,21 @@ def test_tuple_input() -> None:
     result = to_httpx_files([("file", readme_path)])
     print(result)
     assert result == IsList(IsTuple("file", IsTuple("README.md", IsBytes())))
+
+
+@pytest.mark.parametrize(
+    "file",
+    [
+        ("custom.md", readme_path),
+        ("custom.md", readme_path, "text/markdown"),
+        ("custom.md", readme_path, "text/markdown", {"X-Test": "true"}),
+    ],
+)
+def test_pathlib_inside_file_tuple(file: FileTypes) -> None:
+    result = to_httpx_files({"file": file})
+
+    assert isinstance(file, tuple)
+    assert result == {"file": (file[0], readme_path.read_bytes(), *file[2:])}
 
 
 @pytest.mark.asyncio
@@ -41,6 +57,22 @@ async def test_async_tuple_input() -> None:
     result = await async_to_httpx_files([("file", readme_path)])
     print(result)
     assert result == IsList(IsTuple("file", IsTuple("README.md", IsBytes())))
+
+
+@pytest.mark.parametrize(
+    "file",
+    [
+        ("custom.md", readme_path),
+        ("custom.md", readme_path, "text/markdown"),
+        ("custom.md", readme_path, "text/markdown", {"X-Test": "true"}),
+    ],
+)
+@pytest.mark.asyncio
+async def test_async_pathlib_inside_file_tuple(file: FileTypes) -> None:
+    result = await async_to_httpx_files({"file": file})
+
+    assert isinstance(file, tuple)
+    assert result == {"file": (file[0], readme_path.read_bytes(), *file[2:])}
 
 
 def test_string_not_allowed() -> None:
