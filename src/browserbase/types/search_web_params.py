@@ -7,15 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = [
-    "SearchWebParams",
-    "Variant0",
-    "Variant0Excerpts",
-    "Variant1",
-    "Variant1Excerpts",
-    "Variant2",
-    "Variant2Excerpts",
-]
+__all__ = ["SearchWebParams", "Variant0", "Variant1", "Variant2"]
 
 
 class Variant0(TypedDict, total=False):
@@ -28,19 +20,14 @@ class Variant0(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
-    excerpts: Variant0Excerpts
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
+    excerpts: bool
+    """Return the passages of each page most relevant to the query. Defaults to false."""
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
-    """Refetch a page when the cached copy is older than this many hours, from 1
-    to 720.
+    """Refetch a page when the cached copy is older than this many hours.
 
-    0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. A provider can return an older cached
-    copy when a live fetch fails.
+    Omit to use the provider default. A provider can return an older cached copy
+    when a live fetch fails.
     """
 
     mode: Literal["fast", "advanced"]
@@ -52,23 +39,13 @@ class Variant0(TypedDict, total=False):
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
-    """Number of results to return (1-25)"""
+    """Number of results to return"""
 
     objective: str
     """The task intent and soft preferences for the search, in natural language.
 
     Adds context to query without replacing it.
     """
-
-
-class Variant0Excerpts(TypedDict, total=False):
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
-
-    max_characters: Annotated[int, PropertyInfo(alias="maxCharacters")]
-    """Maximum excerpt characters per result. Omit to use the provider default."""
 
 
 class Variant1(TypedDict, total=False):
@@ -81,19 +58,14 @@ class Variant1(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
-    excerpts: Variant1Excerpts
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
+    excerpts: bool
+    """Return the passages of each page most relevant to the query. Defaults to false."""
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
-    """Refetch a page when the cached copy is older than this many hours, from 1
-    to 720.
+    """Refetch a page when the cached copy is older than this many hours.
 
-    0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. A provider can return an older cached
-    copy when a live fetch fails.
+    Omit to use the provider default. A provider can return an older cached copy
+    when a live fetch fails.
     """
 
     mode: Literal["fast", "deep-lite", "deep"]
@@ -105,62 +77,37 @@ class Variant1(TypedDict, total=False):
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
-    """Number of results to return (1-25)"""
+    """Number of results to return"""
 
     objective: str
     """The task intent and soft preferences for the search, in natural language.
 
     Adds context to query without replacing it.
     """
-
-
-class Variant1Excerpts(TypedDict, total=False):
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
-
-    max_characters: Annotated[int, PropertyInfo(alias="maxCharacters")]
-    """Maximum excerpt characters per result. Omit to use the provider default."""
 
 
 class Variant2(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
-    excerpts: Variant2Excerpts
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
+    excerpts: bool
+    """Return the passages of each page most relevant to the query. Defaults to false."""
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
-    """Refetch a page when the cached copy is older than this many hours, from 1
-    to 720.
+    """Refetch a page when the cached copy is older than this many hours.
 
-    0 always fetches fresh content and -1 uses only cached content (exa provider
-    only). Omit to use the provider default. A provider can return an older cached
-    copy when a live fetch fails.
+    Omit to use the provider default. A provider can return an older cached copy
+    when a live fetch fails.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
-    """Number of results to return (1-25)"""
+    """Number of results to return"""
 
     objective: str
     """The task intent and soft preferences for the search, in natural language.
 
     Adds context to query without replacing it.
     """
-
-
-class Variant2Excerpts(TypedDict, total=False):
-    """Return the passages of each page most relevant to the query.
-
-    Omit to return no excerpts.
-    """
-
-    max_characters: Annotated[int, PropertyInfo(alias="maxCharacters")]
-    """Maximum excerpt characters per result. Omit to use the provider default."""
 
 
 SearchWebParams: TypeAlias = Union[Variant0, Variant1, Variant2]

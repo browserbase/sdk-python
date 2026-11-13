@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -40,6 +41,13 @@ class Result(BaseModel):
 
 
 class SearchWebResponse(BaseModel):
+    provider: Literal["parallel", "exa"]
+    """The search provider that served the request.
+
+    Can differ from the documented default when the project or the filters select
+    another provider.
+    """
+
     query: str
     """The search query that was executed"""
 
@@ -48,3 +56,6 @@ class SearchWebResponse(BaseModel):
 
     results: List[Result]
     """List of search results"""
+
+    mode: Optional[Literal["fast", "advanced", "deep-lite", "deep"]] = None
+    """The search mode that served the request."""
