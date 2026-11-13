@@ -56,8 +56,11 @@ class CertificatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Certificate:
-        """
-        Upload a Certificate
+        """Upload a PEM file with one or more CA certificates (up to 100 MB).
+
+        Pass the
+        returned ID in `proxySettings.caCertificates` when creating a session so the
+        browser trusts these certificates.
 
         Args:
           extra_headers: Send extra headers
@@ -96,7 +99,8 @@ class CertificatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Certificate:
         """
-        Get a Certificate
+        Retrieve metadata for an uploaded certificate by its ID, including its project
+        ID and timestamps. The PEM content is not returned.
 
         Args:
           extra_headers: Send extra headers
@@ -127,7 +131,7 @@ class CertificatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CertificateListResponse:
-        """List Certificates"""
+        """List the certificates uploaded to your project."""
         return self._get(
             "/v1/certificates",
             options=make_request_options(
@@ -147,8 +151,11 @@ class CertificatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Certificate
+        """Delete an uploaded certificate from your project by its ID.
+
+        Session creation
+        requests that still reference this ID in `proxySettings.caCertificates` fail
+        with HTTP 400.
 
         Args:
           extra_headers: Send extra headers
@@ -202,8 +209,11 @@ class AsyncCertificatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Certificate:
-        """
-        Upload a Certificate
+        """Upload a PEM file with one or more CA certificates (up to 100 MB).
+
+        Pass the
+        returned ID in `proxySettings.caCertificates` when creating a session so the
+        browser trusts these certificates.
 
         Args:
           extra_headers: Send extra headers
@@ -242,7 +252,8 @@ class AsyncCertificatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Certificate:
         """
-        Get a Certificate
+        Retrieve metadata for an uploaded certificate by its ID, including its project
+        ID and timestamps. The PEM content is not returned.
 
         Args:
           extra_headers: Send extra headers
@@ -273,7 +284,7 @@ class AsyncCertificatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CertificateListResponse:
-        """List Certificates"""
+        """List the certificates uploaded to your project."""
         return await self._get(
             "/v1/certificates",
             options=make_request_options(
@@ -293,8 +304,11 @@ class AsyncCertificatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Certificate
+        """Delete an uploaded certificate from your project by its ID.
+
+        Session creation
+        requests that still reference this ID in `proxySettings.caCertificates` fail
+        with HTTP 400.
 
         Args:
           extra_headers: Send extra headers
