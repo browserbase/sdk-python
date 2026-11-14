@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.26.0](https://github.com/browserbase/sdk-python/compare/v1.25.0...v1.26.0) (2026-11-13)
+
+
+### Features
+
+* add paginated downloads and file streaming ([e61ce54](https://github.com/browserbase/sdk-python/commit/e61ce540fca6477fbe823245d527a97a284a7c19))
+* **api:** add labels and session set_labels methods ([a9a58aa](https://github.com/browserbase/sdk-python/commit/a9a58aa64b19e4573a7d470970d888da81147628))
+* **api:** Support additional browser settings for `/v1/agents/runs` ([06dc904](https://github.com/browserbase/sdk-python/commit/06dc9049395887de53b27d9cc7e75a766b790ea9))
+
+
+### Chores
+
+* **internal:** generate SDK main from core, retire the spec sync ([7f7526f](https://github.com/browserbase/sdk-python/commit/7f7526f8ed83962264c1fb8f9acad2c3f47e90ec))
+
+
+### Documentation
+
+* **api:** add certificate endpoint descriptions ([d33cf49](https://github.com/browserbase/sdk-python/commit/d33cf491142406826184311197b8f3125dd39f1b))
+
 ## [1.25.0](https://github.com/browserbase/sdk-python/compare/v1.24.0...v1.25.0) (2026-11-11)
 
 
