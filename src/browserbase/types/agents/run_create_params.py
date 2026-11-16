@@ -190,6 +190,12 @@ class BrowserSettings(TypedDict, total=False):
     record_session: Annotated[bool, PropertyInfo(alias="recordSession")]
     """Enable or disable session recording. Defaults to `true`."""
 
+    region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
+    """The requested region for the browser session.
+
+    Defaults to us-west-2. Project routing may override this value.
+    """
+
     verified: bool
     """Set true to enable Browserbase Verified for the session."""
 
