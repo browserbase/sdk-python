@@ -1,3 +1,4 @@
+from typing import Any
 from pathlib import Path
 
 import anyio
@@ -20,6 +21,23 @@ def test_tuple_input() -> None:
     result = to_httpx_files([("file", readme_path)])
     print(result)
     assert result == IsList(IsTuple("file", IsTuple("README.md", IsBytes())))
+
+
+tuple_extras = pytest.mark.parametrize("extras", [(), ("text/markdown",), ("text/markdown", {"X-Test": "1"})])
+
+
+@tuple_extras
+def test_pathlike_in_file_tuple(extras: Any) -> None:
+    file: Any = ("custom.md", readme_path, *extras)
+    assert extract_files({"file": file}, paths=[["file"]]) == [("file", file)]
+    assert to_httpx_files({"file": file}) == {"file": ("custom.md", readme_path.read_bytes(), *extras)}
+
+
+@tuple_extras
+@pytest.mark.asyncio
+async def test_async_pathlike_in_file_tuple(extras: Any) -> None:
+    file: Any = ("custom.md", readme_path, *extras)
+    assert await async_to_httpx_files({"file": file}) == {"file": ("custom.md", readme_path.read_bytes(), *extras)}
 
 
 @pytest.mark.asyncio
