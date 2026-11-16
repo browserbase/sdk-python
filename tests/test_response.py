@@ -1,4 +1,6 @@
+import gc
 import json
+import warnings
 from typing import Any, List, Union, cast
 from typing_extensions import Annotated
 
@@ -275,3 +277,12 @@ async def test_async_response_parse_expect_model_union_non_json_content(async_cl
     obj = await response.parse(to=cast(Any, Union[CustomModel, OtherModel]))
     assert isinstance(obj, str)
     assert obj == "foo"
+
+
+async def test_async_streamed_response_not_entered(async_client: AsyncBrowserbase) -> None:
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        async_client.sessions.with_streaming_response.create()
+        gc.collect()
+
+    assert [str(w.message) for w in caught] == []
