@@ -104,6 +104,14 @@ from .certificates import (
     CertificatesResourceWithStreamingResponse,
     AsyncCertificatesResourceWithStreamingResponse,
 )
+from .static_proxies import (
+    StaticProxiesResource,
+    AsyncStaticProxiesResource,
+    StaticProxiesResourceWithRawResponse,
+    AsyncStaticProxiesResourceWithRawResponse,
+    StaticProxiesResourceWithStreamingResponse,
+    AsyncStaticProxiesResourceWithStreamingResponse,
+)
 from .navigation_policies import (
     NavigationPoliciesResource,
     AsyncNavigationPoliciesResource,
@@ -174,6 +182,12 @@ __all__ = [
     "AsyncSecretsResourceWithRawResponse",
     "SecretsResourceWithStreamingResponse",
     "AsyncSecretsResourceWithStreamingResponse",
+    "StaticProxiesResource",
+    "AsyncStaticProxiesResource",
+    "StaticProxiesResourceWithRawResponse",
+    "AsyncStaticProxiesResourceWithRawResponse",
+    "StaticProxiesResourceWithStreamingResponse",
+    "AsyncStaticProxiesResourceWithStreamingResponse",
     "SessionsResource",
     "AsyncSessionsResource",
     "SessionsResourceWithRawResponse",

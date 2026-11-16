@@ -49,6 +49,7 @@ if TYPE_CHECKING:
         functions,
         extensions,
         certificates,
+        static_proxies,
         navigation_policies,
     )
     from .resources.labels import LabelsResource, AsyncLabelsResource
@@ -62,6 +63,7 @@ if TYPE_CHECKING:
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.certificates import CertificatesResource, AsyncCertificatesResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
+    from .resources.static_proxies import StaticProxiesResource, AsyncStaticProxiesResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
     from .resources.functions.functions import FunctionsResource, AsyncFunctionsResource
     from .resources.navigation_policies import NavigationPoliciesResource, AsyncNavigationPoliciesResource
@@ -201,6 +203,12 @@ class Browserbase(SyncAPIClient):
         from .resources.secrets import SecretsResource
 
         return SecretsResource(self)
+
+    @cached_property
+    def static_proxies(self) -> StaticProxiesResource:
+        from .resources.static_proxies import StaticProxiesResource
+
+        return StaticProxiesResource(self)
 
     @cached_property
     def sessions(self) -> SessionsResource:
@@ -464,6 +472,12 @@ class AsyncBrowserbase(AsyncAPIClient):
         return AsyncSecretsResource(self)
 
     @cached_property
+    def static_proxies(self) -> AsyncStaticProxiesResource:
+        from .resources.static_proxies import AsyncStaticProxiesResource
+
+        return AsyncStaticProxiesResource(self)
+
+    @cached_property
     def sessions(self) -> AsyncSessionsResource:
         from .resources.sessions import AsyncSessionsResource
 
@@ -667,6 +681,12 @@ class BrowserbaseWithRawResponse:
         return SecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
+    def static_proxies(self) -> static_proxies.StaticProxiesResourceWithRawResponse:
+        from .resources.static_proxies import StaticProxiesResourceWithRawResponse
+
+        return StaticProxiesResourceWithRawResponse(self._client.static_proxies)
+
+    @cached_property
     def sessions(self) -> sessions.SessionsResourceWithRawResponse:
         from .resources.sessions import SessionsResourceWithRawResponse
 
@@ -756,6 +776,12 @@ class AsyncBrowserbaseWithRawResponse:
         from .resources.secrets import AsyncSecretsResourceWithRawResponse
 
         return AsyncSecretsResourceWithRawResponse(self._client.secrets)
+
+    @cached_property
+    def static_proxies(self) -> static_proxies.AsyncStaticProxiesResourceWithRawResponse:
+        from .resources.static_proxies import AsyncStaticProxiesResourceWithRawResponse
+
+        return AsyncStaticProxiesResourceWithRawResponse(self._client.static_proxies)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
@@ -849,6 +875,12 @@ class BrowserbaseWithStreamedResponse:
         return SecretsResourceWithStreamingResponse(self._client.secrets)
 
     @cached_property
+    def static_proxies(self) -> static_proxies.StaticProxiesResourceWithStreamingResponse:
+        from .resources.static_proxies import StaticProxiesResourceWithStreamingResponse
+
+        return StaticProxiesResourceWithStreamingResponse(self._client.static_proxies)
+
+    @cached_property
     def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
         from .resources.sessions import SessionsResourceWithStreamingResponse
 
@@ -938,6 +970,12 @@ class AsyncBrowserbaseWithStreamedResponse:
         from .resources.secrets import AsyncSecretsResourceWithStreamingResponse
 
         return AsyncSecretsResourceWithStreamingResponse(self._client.secrets)
+
+    @cached_property
+    def static_proxies(self) -> static_proxies.AsyncStaticProxiesResourceWithStreamingResponse:
+        from .resources.static_proxies import AsyncStaticProxiesResourceWithStreamingResponse
+
+        return AsyncStaticProxiesResourceWithStreamingResponse(self._client.static_proxies)
 
     @cached_property
     def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:

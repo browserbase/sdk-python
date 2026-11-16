@@ -143,6 +143,18 @@ Methods:
 - <code title="delete /v1/secrets/{id}">client.secrets.<a href="./src/browserbase/resources/secrets.py">delete</a>(id) -> None</code>
 - <code title="get /v1/secrets/keypair">client.secrets.<a href="./src/browserbase/resources/secrets.py">get_public_key</a>() -> <a href="./src/browserbase/types/secrets_keypair.py">SecretsKeypair</a></code>
 
+# StaticProxies
+
+Types:
+
+```python
+from browserbase.types import StaticProxyListResponse
+```
+
+Methods:
+
+- <code title="get /v1/static-proxies">client.static_proxies.<a href="./src/browserbase/resources/static_proxies.py">list</a>(\*\*<a href="src/browserbase/types/static_proxy_list_params.py">params</a>) -> <a href="./src/browserbase/types/static_proxy_list_response.py">StaticProxyListResponse</a></code>
+
 # Sessions
 
 Types:
