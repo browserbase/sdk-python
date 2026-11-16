@@ -61,6 +61,11 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/browserbase/_version.py"
+    "src/browserbase/_version.py",
+    {
+      "type": "toml",
+      "path": "uv.lock",
+      "jsonpath": "$.package[?(@.name.value=='browserbase')].version"
+    }
   ]
 }
