@@ -41,6 +41,9 @@ class Session(BaseModel):
 
     ended_at: Optional[datetime] = FieldInfo(alias="endedAt", default=None)
 
+    size: Optional[Literal["regular", "large", "xlarge"]] = None
+    """Size of the browser used for the session."""
+
     user_metadata: Optional[Dict[str, object]] = FieldInfo(alias="userMetadata", default=None)
     """Arbitrary user metadata to attach to the session.
 
