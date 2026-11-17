@@ -134,7 +134,7 @@ class BrowserSettings(TypedDict, total=False):
     """
 
     ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
-    """Set `true` to ignore TLS certificate errors in the browser.
+    """Set `true` to ignore TLS certificate errors in the browser session.
 
     When omitted, your project's default applies.
     """
