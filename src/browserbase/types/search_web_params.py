@@ -9,17 +9,16 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
-__all__ = ["SearchWebParams", "Variant0", "Variant1", "Variant2"]
+__all__ = ["SearchWebParams", "ProviderParallel", "ProviderExa", "DefaultProvider"]
 
 
-class Variant0(TypedDict, total=False):
+class ProviderParallel(TypedDict, total=False):
     provider: Required[Literal["parallel"]]
     """Search provider to serve this request.
 
     Defaults to `parallel`, which uses `advanced` mode unless `mode` is set. If you
-    omit it and set a filter that `parallel` doesn't support, `exa` serves the
-    request at `exa` pricing. The response `provider` field shows which one served
-    it.
+    omit it and `parallel` can't apply one of your filters, `exa` serves the request
+    at `exa` pricing. The response `provider` field shows which one served it.
     """
 
     query: Required[str]
@@ -75,7 +74,7 @@ class Variant0(TypedDict, total=False):
     moderation: bool
     """Filter unsafe content from the results.
 
-    Defaults to false. Only the `exa` provider supports `true`.
+    Defaults to `false`. Only the `exa` provider supports `true`.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
@@ -103,14 +102,13 @@ class Variant0(TypedDict, total=False):
     """
 
 
-class Variant1(TypedDict, total=False):
+class ProviderExa(TypedDict, total=False):
     provider: Required[Literal["exa"]]
     """Search provider to serve this request.
 
     Defaults to `parallel`, which uses `advanced` mode unless `mode` is set. If you
-    omit it and set a filter that `parallel` doesn't support, `exa` serves the
-    request at `exa` pricing. The response `provider` field shows which one served
-    it.
+    omit it and `parallel` can't apply one of your filters, `exa` serves the request
+    at `exa` pricing. The response `provider` field shows which one served it.
     """
 
     query: Required[str]
@@ -166,7 +164,7 @@ class Variant1(TypedDict, total=False):
     moderation: bool
     """Filter unsafe content from the results.
 
-    Defaults to false. Only the `exa` provider supports `true`.
+    Defaults to `false`. Only the `exa` provider supports `true`.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
@@ -194,7 +192,7 @@ class Variant1(TypedDict, total=False):
     """
 
 
-class Variant2(TypedDict, total=False):
+class DefaultProvider(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
@@ -240,7 +238,7 @@ class Variant2(TypedDict, total=False):
     moderation: bool
     """Filter unsafe content from the results.
 
-    Defaults to false. Only the `exa` provider supports `true`.
+    Defaults to `false`. Only the `exa` provider supports `true`.
     """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
@@ -268,4 +266,4 @@ class Variant2(TypedDict, total=False):
     """
 
 
-SearchWebParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+SearchWebParams: TypeAlias = Union[ProviderParallel, ProviderExa, DefaultProvider]

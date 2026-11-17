@@ -76,9 +76,9 @@ class SearchResource(SyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set. If you omit it and set a filter that
-              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
-              response `provider` field shows which one served it.
+              `advanced` mode unless `mode` is set. If you omit it and `parallel` can't apply
+              one of your filters, `exa` serves the request at `exa` pricing. The response
+              `provider` field shows which one served it.
 
           query: The search query string
 
@@ -108,7 +108,7 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
@@ -166,9 +166,9 @@ class SearchResource(SyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set. If you omit it and set a filter that
-              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
-              response `provider` field shows which one served it.
+              `advanced` mode unless `mode` is set. If you omit it and `parallel` can't apply
+              one of your filters, `exa` serves the request at `exa` pricing. The response
+              `provider` field shows which one served it.
 
           query: The search query string
 
@@ -198,7 +198,7 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
@@ -276,7 +276,7 @@ class SearchResource(SyncAPIResource):
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
@@ -408,9 +408,9 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set. If you omit it and set a filter that
-              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
-              response `provider` field shows which one served it.
+              `advanced` mode unless `mode` is set. If you omit it and `parallel` can't apply
+              one of your filters, `exa` serves the request at `exa` pricing. The response
+              `provider` field shows which one served it.
 
           query: The search query string
 
@@ -440,7 +440,7 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
@@ -498,9 +498,9 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set. If you omit it and set a filter that
-              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
-              response `provider` field shows which one served it.
+              `advanced` mode unless `mode` is set. If you omit it and `parallel` can't apply
+              one of your filters, `exa` serves the request at `exa` pricing. The response
+              `provider` field shows which one served it.
 
           query: The search query string
 
@@ -530,7 +530,7 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
@@ -608,7 +608,7 @@ class AsyncSearchResource(AsyncAPIResource):
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
-          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+          moderation: Filter unsafe content from the results. Defaults to `false`. Only the `exa`
               provider supports `true`.
 
           num_results: Number of results to return
