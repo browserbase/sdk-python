@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Dict, List, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -132,6 +132,9 @@ class BrowserSettings(TypedDict, total=False):
 
     See [Upload Extension](/reference/api/upload-an-extension).
     """
+
+    extensions: List[Literal["onepassword", "browser-events"]]
+    """Built-in Browserbase extensions to load in the session."""
 
     ignore_certificate_errors: Annotated[bool, PropertyInfo(alias="ignoreCertificateErrors")]
     """
