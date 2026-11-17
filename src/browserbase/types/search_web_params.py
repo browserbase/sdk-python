@@ -16,19 +16,26 @@ class Variant0(TypedDict, total=False):
     provider: Required[Literal["parallel"]]
     """Search provider to serve this request.
 
-    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set.
+    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set. If you
+    omit it and set a filter that `parallel` doesn't support, `exa` serves the
+    request at `exa` pricing. The response `provider` field shows which one served
+    it.
     """
 
     query: Required[str]
     """The search query string"""
 
     category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
-    """Focus the search on a category of content"""
+    """Focus the search on a category of content.
+
+    Only the `exa` provider supports this filter.
+    """
 
     end_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="endPublishedDate", format="iso8601")]
-    """Only return results published before this date (ISO 8601).
-
-    Not supported with the company or people categories.
+    """
+    Only return results published before this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+    supported with the company or people categories.
     """
 
     excerpts: bool
@@ -45,7 +52,9 @@ class Variant0(TypedDict, total=False):
     """Only return results from these domains.
 
     Entries can be a hostname (example.com), a hostname with a path prefix
-    (example.com/docs), or a wildcard subdomain (\\**.example.com).
+    (example.com/docs), or a wildcard subdomain (\\**.example.com). The `parallel`
+    provider allows one list, not both, with at most 200 domains and no scheme,
+    port, query string, or fragment.
     """
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
@@ -64,7 +73,10 @@ class Variant0(TypedDict, total=False):
     """
 
     moderation: bool
-    """Filter unsafe content from the results. Defaults to false."""
+    """Filter unsafe content from the results.
+
+    Defaults to false. Only the `exa` provider supports `true`.
+    """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
     """Number of results to return"""
@@ -76,16 +88,18 @@ class Variant0(TypedDict, total=False):
     """
 
     start_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="startPublishedDate", format="iso8601")]
-    """Only return results published after this date (ISO 8601).
-
+    """
+    Only return results published after this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
     Not supported with the company or people categories.
     """
 
     user_location: Annotated[str, PropertyInfo(alias="userLocation")]
-    """Two-letter ISO 3166-1 country code of the end user, used to localize results.
+    """Two-letter ISO 3166-1 country code of the end user.
 
-    This localizes ranking and does not restrict results to sources from that
-    country.
+    Localizes ranking without restricting results to sources from that country. The
+    `parallel` provider supports only
+    [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
     """
 
 
@@ -93,19 +107,26 @@ class Variant1(TypedDict, total=False):
     provider: Required[Literal["exa"]]
     """Search provider to serve this request.
 
-    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set.
+    Defaults to `parallel`, which uses `advanced` mode unless `mode` is set. If you
+    omit it and set a filter that `parallel` doesn't support, `exa` serves the
+    request at `exa` pricing. The response `provider` field shows which one served
+    it.
     """
 
     query: Required[str]
     """The search query string"""
 
     category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
-    """Focus the search on a category of content"""
+    """Focus the search on a category of content.
+
+    Only the `exa` provider supports this filter.
+    """
 
     end_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="endPublishedDate", format="iso8601")]
-    """Only return results published before this date (ISO 8601).
-
-    Not supported with the company or people categories.
+    """
+    Only return results published before this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+    supported with the company or people categories.
     """
 
     excerpts: bool
@@ -122,7 +143,9 @@ class Variant1(TypedDict, total=False):
     """Only return results from these domains.
 
     Entries can be a hostname (example.com), a hostname with a path prefix
-    (example.com/docs), or a wildcard subdomain (\\**.example.com).
+    (example.com/docs), or a wildcard subdomain (\\**.example.com). The `parallel`
+    provider allows one list, not both, with at most 200 domains and no scheme,
+    port, query string, or fragment.
     """
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
@@ -141,7 +164,10 @@ class Variant1(TypedDict, total=False):
     """
 
     moderation: bool
-    """Filter unsafe content from the results. Defaults to false."""
+    """Filter unsafe content from the results.
+
+    Defaults to false. Only the `exa` provider supports `true`.
+    """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
     """Number of results to return"""
@@ -153,16 +179,18 @@ class Variant1(TypedDict, total=False):
     """
 
     start_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="startPublishedDate", format="iso8601")]
-    """Only return results published after this date (ISO 8601).
-
+    """
+    Only return results published after this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
     Not supported with the company or people categories.
     """
 
     user_location: Annotated[str, PropertyInfo(alias="userLocation")]
-    """Two-letter ISO 3166-1 country code of the end user, used to localize results.
+    """Two-letter ISO 3166-1 country code of the end user.
 
-    This localizes ranking and does not restrict results to sources from that
-    country.
+    Localizes ranking without restricting results to sources from that country. The
+    `parallel` provider supports only
+    [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
     """
 
 
@@ -171,12 +199,16 @@ class Variant2(TypedDict, total=False):
     """The search query string"""
 
     category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
-    """Focus the search on a category of content"""
+    """Focus the search on a category of content.
+
+    Only the `exa` provider supports this filter.
+    """
 
     end_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="endPublishedDate", format="iso8601")]
-    """Only return results published before this date (ISO 8601).
-
-    Not supported with the company or people categories.
+    """
+    Only return results published before this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+    supported with the company or people categories.
     """
 
     excerpts: bool
@@ -193,7 +225,9 @@ class Variant2(TypedDict, total=False):
     """Only return results from these domains.
 
     Entries can be a hostname (example.com), a hostname with a path prefix
-    (example.com/docs), or a wildcard subdomain (\\**.example.com).
+    (example.com/docs), or a wildcard subdomain (\\**.example.com). The `parallel`
+    provider allows one list, not both, with at most 200 domains and no scheme,
+    port, query string, or fragment.
     """
 
     max_age_hours: Annotated[int, PropertyInfo(alias="maxAgeHours")]
@@ -204,7 +238,10 @@ class Variant2(TypedDict, total=False):
     """
 
     moderation: bool
-    """Filter unsafe content from the results. Defaults to false."""
+    """Filter unsafe content from the results.
+
+    Defaults to false. Only the `exa` provider supports `true`.
+    """
 
     num_results: Annotated[int, PropertyInfo(alias="numResults")]
     """Number of results to return"""
@@ -216,16 +253,18 @@ class Variant2(TypedDict, total=False):
     """
 
     start_published_date: Annotated[Union[str, datetime], PropertyInfo(alias="startPublishedDate", format="iso8601")]
-    """Only return results published after this date (ISO 8601).
-
+    """
+    Only return results published after this date-time (RFC 3339, for example
+    2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
     Not supported with the company or people categories.
     """
 
     user_location: Annotated[str, PropertyInfo(alias="userLocation")]
-    """Two-letter ISO 3166-1 country code of the end user, used to localize results.
+    """Two-letter ISO 3166-1 country code of the end user.
 
-    This localizes ranking and does not restrict results to sources from that
-    country.
+    Localizes ranking without restricting results to sources from that country. The
+    `parallel` provider supports only
+    [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
     """
 
 

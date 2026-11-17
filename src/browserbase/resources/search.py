@@ -76,14 +76,18 @@ class SearchResource(SyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set.
+              `advanced` mode unless `mode` is set. If you omit it and set a filter that
+              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
+              response `provider` field shows which one served it.
 
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -92,7 +96,8 @@ class SearchResource(SyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -103,19 +108,22 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
@@ -158,14 +166,18 @@ class SearchResource(SyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set.
+              `advanced` mode unless `mode` is set. If you omit it and set a filter that
+              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
+              response `provider` field shows which one served it.
 
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -174,7 +186,8 @@ class SearchResource(SyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -185,19 +198,22 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
@@ -239,10 +255,12 @@ class SearchResource(SyncAPIResource):
         Args:
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -251,25 +269,29 @@ class SearchResource(SyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
@@ -386,14 +408,18 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set.
+              `advanced` mode unless `mode` is set. If you omit it and set a filter that
+              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
+              response `provider` field shows which one served it.
 
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -402,7 +428,8 @@ class AsyncSearchResource(AsyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -413,19 +440,22 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
@@ -468,14 +498,18 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           provider: Search provider to serve this request. Defaults to `parallel`, which uses
-              `advanced` mode unless `mode` is set.
+              `advanced` mode unless `mode` is set. If you omit it and set a filter that
+              `parallel` doesn't support, `exa` serves the request at `exa` pricing. The
+              response `provider` field shows which one served it.
 
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -484,7 +518,8 @@ class AsyncSearchResource(AsyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -495,19 +530,22 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
@@ -549,10 +587,12 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           query: The search query string
 
-          category: Focus the search on a category of content
+          category: Focus the search on a category of content. Only the `exa` provider supports this
+              filter.
 
-          end_published_date: Only return results published before this date (ISO 8601). Not supported with
-              the company or people categories.
+          end_published_date: Only return results published before this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). Only the `exa` provider supports this filter. Not
+              supported with the company or people categories.
 
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
 
@@ -561,25 +601,29 @@ class AsyncSearchResource(AsyncAPIResource):
 
           include_domains: Only return results from these domains. Entries can be a hostname (example.com),
               a hostname with a path prefix (example.com/docs), or a wildcard subdomain
-              (\\**.example.com).
+              (\\**.example.com). The `parallel` provider allows one list, not both, with at
+              most 200 domains and no scheme, port, query string, or fragment.
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
-          moderation: Filter unsafe content from the results. Defaults to false.
+          moderation: Filter unsafe content from the results. Defaults to false. Only the `exa`
+              provider supports `true`.
 
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
 
-          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
-              company or people categories.
+          start_published_date: Only return results published after this date-time (RFC 3339, for example
+              2026-01-01T00:00:00Z). The `parallel` provider rounds it up to a whole UTC day.
+              Not supported with the company or people categories.
 
-          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
-              This localizes ranking and does not restrict results to sources from that
-              country.
+          user_location: Two-letter ISO 3166-1 country code of the end user. Localizes ranking without
+              restricting results to sources from that country. The `parallel` provider
+              supports only
+              [some countries](https://docs.browserbase.com/platform/search/overview#appendix-supported-countries).
 
           extra_headers: Send extra headers
 
