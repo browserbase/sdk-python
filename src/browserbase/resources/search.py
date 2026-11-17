@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import datetime
 from typing_extensions import Literal, overload
 
 import httpx
 
 from ..types import search_web_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,11 +51,19 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["parallel"],
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,7 +80,19 @@ class SearchResource(SyncAPIResource):
 
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -81,10 +103,19 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -102,11 +133,19 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["exa"],
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "deep-lite", "deep"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,7 +162,19 @@ class SearchResource(SyncAPIResource):
 
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -134,10 +185,19 @@ class SearchResource(SyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -154,10 +214,18 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,16 +239,37 @@ class SearchResource(SyncAPIResource):
         Args:
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -198,11 +287,19 @@ class SearchResource(SyncAPIResource):
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Literal["fast", "deep-lite", "deep"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,11 +313,18 @@ class SearchResource(SyncAPIResource):
                 {
                     "provider": provider,
                     "query": query,
+                    "category": category,
+                    "end_published_date": end_published_date,
                     "excerpts": excerpts,
+                    "exclude_domains": exclude_domains,
+                    "include_domains": include_domains,
                     "max_age_hours": max_age_hours,
                     "mode": mode,
+                    "moderation": moderation,
                     "num_results": num_results,
                     "objective": objective,
+                    "start_published_date": start_published_date,
+                    "user_location": user_location,
                 },
                 search_web_params.SearchWebParams,
             ),
@@ -257,11 +361,19 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["parallel"],
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -278,7 +390,19 @@ class AsyncSearchResource(AsyncAPIResource):
 
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -289,10 +413,19 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -310,11 +443,19 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["exa"],
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "deep-lite", "deep"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -331,7 +472,19 @@ class AsyncSearchResource(AsyncAPIResource):
 
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
@@ -342,10 +495,19 @@ class AsyncSearchResource(AsyncAPIResource):
               [Search docs](https://docs.browserbase.com/platform/search/overview) for the
               available modes.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -362,10 +524,18 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -379,16 +549,37 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           query: The search query string
 
+          category: Focus the search on a category of content
+
+          end_published_date: Only return results published before this date (ISO 8601). Not supported with
+              the company or people categories.
+
           excerpts: Return the passages of each page most relevant to the query. Defaults to false.
+
+          exclude_domains: Never return results from these domains. Accepts the same entry formats as
+              includeDomains. Not supported with the people category.
+
+          include_domains: Only return results from these domains. Entries can be a hostname (example.com),
+              a hostname with a path prefix (example.com/docs), or a wildcard subdomain
+              (\\**.example.com).
 
           max_age_hours: Refetch a page when the cached copy is older than this many hours. Omit to use
               the provider default. A provider can return an older cached copy when a live
               fetch fails.
 
+          moderation: Filter unsafe content from the results. Defaults to false.
+
           num_results: Number of results to return
 
           objective: The task intent and soft preferences for the search, in natural language. Adds
               context to query without replacing it.
+
+          start_published_date: Only return results published after this date (ISO 8601). Not supported with the
+              company or people categories.
+
+          user_location: Two-letter ISO 3166-1 country code of the end user, used to localize results.
+              This localizes ranking and does not restrict results to sources from that
+              country.
 
           extra_headers: Send extra headers
 
@@ -406,11 +597,19 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         provider: Literal["parallel"] | Literal["exa"] | Omit = omit,
         query: str,
+        category: Literal["company", "publication", "news", "personal site", "financial report", "people"]
+        | Omit = omit,
+        end_published_date: Union[str, datetime] | Omit = omit,
         excerpts: bool | Omit = omit,
+        exclude_domains: SequenceNotStr[str] | Omit = omit,
+        include_domains: SequenceNotStr[str] | Omit = omit,
         max_age_hours: int | Omit = omit,
         mode: Literal["fast", "advanced"] | Literal["fast", "deep-lite", "deep"] | Omit = omit,
+        moderation: bool | Omit = omit,
         num_results: int | Omit = omit,
         objective: str | Omit = omit,
+        start_published_date: Union[str, datetime] | Omit = omit,
+        user_location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -424,11 +623,18 @@ class AsyncSearchResource(AsyncAPIResource):
                 {
                     "provider": provider,
                     "query": query,
+                    "category": category,
+                    "end_published_date": end_published_date,
                     "excerpts": excerpts,
+                    "exclude_domains": exclude_domains,
+                    "include_domains": include_domains,
                     "max_age_hours": max_age_hours,
                     "mode": mode,
+                    "moderation": moderation,
                     "num_results": num_results,
                     "objective": objective,
+                    "start_published_date": start_published_date,
+                    "user_location": user_location,
                 },
                 search_web_params.SearchWebParams,
             ),
