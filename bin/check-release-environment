@@ -8,10 +8,6 @@ if [ -z "${STLC_BOT_APP_ID}" ] || [ -z "${STLC_BOT_PRIVATE_KEY}" ]; then
   errors+=("The STLC_BOT_APP_ID / STLC_BOT_PRIVATE_KEY secrets are not set. Releases mint tokens from the browserbase-stlc-bot GitHub App; check the org secrets' repository access.")
 fi
 
-if [ -z "${PYPI_TOKEN}" ]; then
-  errors+=("The PYPI_TOKEN secret has not been set. Please set it in either this repository's secrets or your organization secrets.")
-fi
-
 lenErrors=${#errors[@]}
 
 if [[ lenErrors -gt 0 ]]; then

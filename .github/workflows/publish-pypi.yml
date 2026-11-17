@@ -17,6 +17,9 @@ jobs:
     if: github.repository == 'browserbase/sdk-python'
     environment: release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -26,8 +29,8 @@ jobs:
         with:
           version: '0.9.13'
 
-      - name: Publish to PyPI
-        run: |
-          bash ./bin/publish-pypi
-        env:
-          PYPI_TOKEN: ${{ secrets.BROWSERBASE_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+      - name: Build
+        run: uv build
+
+      # Trusted publishing (OIDC) with attestations; no stored PyPI token.
+      - uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
