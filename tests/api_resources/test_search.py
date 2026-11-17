@@ -10,6 +10,7 @@ import pytest
 from browserbase import Browserbase, AsyncBrowserbase
 from tests.utils import assert_matches_type
 from browserbase.types import SearchWebResponse
+from browserbase._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -30,11 +31,18 @@ class TestSearch:
         search = client.search.web(
             provider="parallel",
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
             mode="fast",
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -77,11 +85,18 @@ class TestSearch:
         search = client.search.web(
             provider="exa",
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
             mode="fast",
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -122,10 +137,17 @@ class TestSearch:
     def test_method_web_with_all_params_overload_3(self, client: Browserbase) -> None:
         search = client.search.web(
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -172,11 +194,18 @@ class TestAsyncSearch:
         search = await async_client.search.web(
             provider="parallel",
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
             mode="fast",
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -219,11 +248,18 @@ class TestAsyncSearch:
         search = await async_client.search.web(
             provider="exa",
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
             mode="fast",
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
@@ -264,10 +300,17 @@ class TestAsyncSearch:
     async def test_method_web_with_all_params_overload_3(self, async_client: AsyncBrowserbase) -> None:
         search = await async_client.search.web(
             query="x",
+            category="company",
+            end_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             excerpts=True,
+            exclude_domains=["x"],
+            include_domains=["x"],
             max_age_hours=1,
+            moderation=True,
             num_results=1,
             objective="P",
+            start_published_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            user_location="se",
         )
         assert_matches_type(SearchWebResponse, search, path=["response"])
 
