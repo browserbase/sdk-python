@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["SearchWebParams", "Variant0", "Variant1", "Variant2"]
+__all__ = ["SearchWebParams", "ProviderParallel", "ProviderExa", "DefaultProvider"]
 
 
-class Variant0(TypedDict, total=False):
+class ProviderParallel(TypedDict, total=False):
     provider: Required[Literal["parallel"]]
     """Search provider to serve this request.
 
@@ -48,7 +48,7 @@ class Variant0(TypedDict, total=False):
     """
 
 
-class Variant1(TypedDict, total=False):
+class ProviderExa(TypedDict, total=False):
     provider: Required[Literal["exa"]]
     """Search provider to serve this request.
 
@@ -86,7 +86,7 @@ class Variant1(TypedDict, total=False):
     """
 
 
-class Variant2(TypedDict, total=False):
+class DefaultProvider(TypedDict, total=False):
     query: Required[str]
     """The search query string"""
 
@@ -110,4 +110,4 @@ class Variant2(TypedDict, total=False):
     """
 
 
-SearchWebParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+SearchWebParams: TypeAlias = Union[ProviderParallel, ProviderExa, DefaultProvider]
