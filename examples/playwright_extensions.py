@@ -2,6 +2,7 @@ import os
 import time
 import zipfile
 from io import BytesIO
+from typing import Callable
 from pathlib import Path
 
 from playwright.sync_api import Page, Playwright, sync_playwright
@@ -10,9 +11,24 @@ from examples import (
     BROWSERBASE_PROJECT_ID,
     bb,
 )
+from browserbase import APIStatusError
 from browserbase.types import Extension, SessionCreateResponse
 
 PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
+
+
+def expect_api_status_error(
+    operation: Callable[[], object],
+    *,
+    failure_message: str,
+    success_message: str,
+) -> None:
+    try:
+        operation()
+    except APIStatusError as error:
+        print(f"{success_message}: {error}")
+    else:
+        raise AssertionError(failure_message)
 
 
 def zip_extension(path: Path = PATH_TO_EXTENSION, save_local: bool = False) -> BytesIO:
@@ -122,20 +138,20 @@ def run(playwright: Playwright) -> None:
     print(f"Deleted extension with ID: {extension_id}")
 
     # Verify deleted extension is unusable
-    try:
-        get_extension(extension_id)
-        raise AssertionError("Expected to fail when retrieving deleted extension")
-    except Exception as e:
-        print(f"Failed to get deleted extension as expected: {str(e)}")
+    expect_api_status_error(
+        lambda: get_extension(extension_id),
+        failure_message="Expected to fail when retrieving deleted extension",
+        success_message="Failed to get deleted extension as expected",
+    )
 
-    try:
-        bb.sessions.create(
+    expect_api_status_error(
+        lambda: bb.sessions.create(
             project_id=BROWSERBASE_PROJECT_ID,
             extension_id=extension_id,
-        )
-        raise AssertionError("Expected to fail when creating session with deleted extension")
-    except Exception as e:
-        print(f"Failed to create session with deleted extension as expected: {str(e)}")
+        ),
+        failure_message="Expected to fail when creating session with deleted extension",
+        success_message="Failed to create session with deleted extension as expected",
+    )
 
 
 if __name__ == "__main__":
