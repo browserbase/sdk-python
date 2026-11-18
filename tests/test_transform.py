@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import base64
 import pathlib
 from typing import Any, Dict, List, Union, TypeVar, Iterable, Optional, cast
 from datetime import date, datetime
@@ -422,7 +423,7 @@ async def test_base64_file_input(use_async: bool) -> None:
 
     # pathlib.Path is automatically converted to base64
     assert await transform({"foo": SAMPLE_FILE_PATH}, TypedDictBase64Input, use_async) == {
-        "foo": "SGVsbG8sIHdvcmxkIQo="
+        "foo": base64.b64encode(SAMPLE_FILE_PATH.read_bytes()).decode("ascii")
     }  # type: ignore[comparison-overlap]
 
     # io instances are automatically converted to base64
