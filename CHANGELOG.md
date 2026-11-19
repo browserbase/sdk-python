@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.28.0](https://github.com/browserbase/sdk-python/compare/v1.27.0...v1.28.0) (2026-11-19)
+
+
+### Features
+
+* **api:** Unhide VSB in docs/SDK ([7d46201](https://github.com/browserbase/sdk-python/commit/7d462012629647f80678cbf8367f747bb248aad6))
+* require Python 3.11+ ([#231](https://github.com/browserbase/sdk-python/issues/231)) ([c9f5afa](https://github.com/browserbase/sdk-python/commit/c9f5afa8eb158af9efe145cc1297df57ab53ee3a))
+
+
+### Build System
+
+* **deps:** bump certifi from 2026.1.4 to 2026.10.18 ([#228](https://github.com/browserbase/sdk-python/issues/228)) ([92619ea](https://github.com/browserbase/sdk-python/commit/92619ea477b5d06022d8244d79200c4c673124e7))
+
 ## [1.27.0](https://github.com/browserbase/sdk-python/compare/v1.26.0...v1.27.0) (2026-11-17)
 
 
