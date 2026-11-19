@@ -1,6 +1,6 @@
 [project]
 name = "browserbase"
-version = "1.26.0"
+version = "1.27.0"
 description = "The official Python library for the Browserbase API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -17,12 +17,10 @@ dependencies = [
   "sniffio",
 ]
 
-requires-python = ">= 3.9"
+requires-python = ">= 3.11"
 classifiers = [
   "Typing :: Typed",
   "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -133,7 +131,7 @@ filterwarnings = [
 # there are a couple of flags that are still disabled by
 # default in strict mode as they are experimental and niche.
 typeCheckingMode = "strict"
-pythonVersion = "3.9"
+pythonVersion = "3.11"
 
 exclude = [
     "_dev",

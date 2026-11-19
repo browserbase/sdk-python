@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.27.0](https://github.com/browserbase/sdk-python/compare/v1.26.0...v1.27.0) (2026-11-17)
+
+
+### Features
+
+* **api:** api-types: stop rejecting valid URLs on /v1/fetch ([5d74fb4](https://github.com/browserbase/sdk-python/commit/5d74fb4611a1c6f568da4b3c2a18aa3201cdf3bd))
+* **api:** Publish search filter params in SDK and docs specs ([c7c99c7](https://github.com/browserbase/sdk-python/commit/c7c99c7849eb4f648621dd1c9ac9087574bbcbe0))
+
+
+### Documentation
+
+* Add copy and link for new search api params ([dfaddfe](https://github.com/browserbase/sdk-python/commit/dfaddfed27ba7502948c66e0d23df74c3514cc67))
+
 ## [1.26.0](https://github.com/browserbase/sdk-python/compare/v1.25.0...v1.26.0) (2026-11-13)
 
 
