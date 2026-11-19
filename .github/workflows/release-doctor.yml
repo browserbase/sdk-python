@@ -20,4 +20,3 @@ jobs:
         env:
           STLC_BOT_APP_ID: ${{ secrets.STLC_BOT_APP_ID }}
           STLC_BOT_PRIVATE_KEY: ${{ secrets.STLC_BOT_PRIVATE_KEY }}
-          PYPI_TOKEN: ${{ secrets.BROWSERBASE_PYPI_TOKEN || secrets.PYPI_TOKEN }}
