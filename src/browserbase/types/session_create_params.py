@@ -161,6 +161,13 @@ class BrowserSettings(TypedDict, total=False):
     enforcement is enabled for the project.
     """
 
+    size: Literal["regular", "large", "xlarge"]
+    """Size of the browser.
+
+    Larger sizes provide more resources to improve performance for intensive tasks.
+    Defaults to `regular`.
+    """
+
     solve_captchas: Annotated[bool, PropertyInfo(alias="solveCaptchas")]
     """Enable or disable captcha solving in the browser. Defaults to `true`."""
 
