@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["FetchAPICreateParams"]
@@ -13,6 +14,15 @@ __all__ = ["FetchAPICreateParams"]
 class FetchAPICreateParams(TypedDict, total=False):
     url: Required[str]
     """The URL to fetch"""
+
+    allowed_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedDomains")]
+    """Domains the fetch may reach, up to 1000.
+
+    A listed domain also permits its subdomains: `example.com` permits
+    `www.example.com`. A URL on any other host is rejected with a 400 before it is
+    fetched, and so is a redirect to one when `allowRedirects` is set, before it is
+    followed. An empty list (the default) allows any host.
+    """
 
     allow_insecure_ssl: Annotated[bool, PropertyInfo(alias="allowInsecureSsl")]
     """Whether to bypass TLS certificate verification"""
