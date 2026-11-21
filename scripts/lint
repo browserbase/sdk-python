@@ -14,9 +14,11 @@ fi
 
 echo "==> Running pyright"
 uv run pyright -p .
+uv run pyright -p . --pythonversion 3.12
 
 echo "==> Running mypy"
 uv run mypy .
+uv run mypy . --python-version 3.12
 
 echo "==> Making sure it imports"
 uv run python -c 'import browserbase'
