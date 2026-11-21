@@ -10,6 +10,7 @@ from examples import (
     BROWSERBASE_PROJECT_ID,
     bb,
 )
+from browserbase import NotFoundError, BadRequestError
 from browserbase.types import Extension, SessionCreateResponse
 
 PATH_TO_EXTENSION = Path.cwd() / "examples" / "packages" / "extensions" / "browserbase-test"
@@ -125,7 +126,7 @@ def run(playwright: Playwright) -> None:
     try:
         get_extension(extension_id)
         raise AssertionError("Expected to fail when retrieving deleted extension")
-    except Exception as e:
+    except NotFoundError as e:
         print(f"Failed to get deleted extension as expected: {str(e)}")
 
     try:
@@ -134,7 +135,7 @@ def run(playwright: Playwright) -> None:
             extension_id=extension_id,
         )
         raise AssertionError("Expected to fail when creating session with deleted extension")
-    except Exception as e:
+    except BadRequestError as e:
         print(f"Failed to create session with deleted extension as expected: {str(e)}")
 
 
