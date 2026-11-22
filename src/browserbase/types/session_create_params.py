@@ -20,7 +20,8 @@ __all__ = [
     "ProxiesUnionMember0NoneProxyConfig",
     "ProxySettings",
     "Stagehand",
-    "StagehandClientInfo",
+    "StagehandUnionMember0",
+    "StagehandUnionMember0ClientInfo",
 ]
 
 
@@ -66,7 +67,11 @@ class SessionCreateParams(TypedDict, total=False):
     """The region where the Session should run."""
 
     stagehand: Stagehand
-    """Stagehand settings for the session. Unknown keys are rejected."""
+    """
+    Set to true to load the browser extension the Stagehand SDK uses, provided by
+    Browserbase, into the session. A Stagehand client can pass an object with its
+    details instead, which also loads it.
+    """
 
     api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
     """Duration in seconds after which the session will automatically end.
@@ -263,7 +268,7 @@ class ProxySettings(TypedDict, total=False):
     """The TLS certificate IDs to trust. Optional."""
 
 
-class StagehandClientInfo(TypedDict, total=False):
+class StagehandUnionMember0ClientInfo(TypedDict, total=False):
     """The Stagehand client that created the session."""
 
     name: Required[str]
@@ -273,16 +278,10 @@ class StagehandClientInfo(TypedDict, total=False):
     """Version of the Stagehand client."""
 
 
-class Stagehand(TypedDict, total=False):
-    """Stagehand settings for the session. Unknown keys are rejected."""
+class StagehandUnionMember0(TypedDict, total=False):
+    """Details a Stagehand client sends about itself. Unknown keys are rejected."""
 
-    enabled: Required[bool]
-    """
-    Set to true to load the browser extension the Stagehand SDK uses, provided by
-    Browserbase, into the session.
-    """
-
-    client_info: Annotated[StagehandClientInfo, PropertyInfo(alias="clientInfo")]
+    client_info: Annotated[StagehandUnionMember0ClientInfo, PropertyInfo(alias="clientInfo")]
     """The Stagehand client that created the session."""
 
     extension_fingerprint: Annotated[str, PropertyInfo(alias="extensionFingerprint")]
@@ -293,3 +292,6 @@ class Stagehand(TypedDict, total=False):
 
     protocol_version: Annotated[str, PropertyInfo(alias="protocolVersion")]
     """The Stagehand protocol version the client speaks, as a SemVer 2.0.0 string."""
+
+
+Stagehand: TypeAlias = Union[StagehandUnionMember0, bool]

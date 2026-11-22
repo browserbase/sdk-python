@@ -162,7 +162,9 @@ class SessionsResource(SyncAPIResource):
 
           region: The region where the Session should run.
 
-          stagehand: Stagehand settings for the session. Unknown keys are rejected.
+          stagehand: Set to true to load the browser extension the Stagehand SDK uses, provided by
+              Browserbase, into the session. A Stagehand client can pass an object with its
+              details instead, which also loads it.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
@@ -509,7 +511,9 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           region: The region where the Session should run.
 
-          stagehand: Stagehand settings for the session. Unknown keys are rejected.
+          stagehand: Set to true to load the browser extension the Stagehand SDK uses, provided by
+              Browserbase, into the session. A Stagehand client can pass an object with its
+              details instead, which also loads it.
 
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
