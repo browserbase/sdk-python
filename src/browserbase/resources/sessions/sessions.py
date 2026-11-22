@@ -127,6 +127,7 @@ class SessionsResource(SyncAPIResource):
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
         proxy_settings: session_create_params.ProxySettings | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
+        stagehand: session_create_params.Stagehand | Omit = omit,
         api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -161,6 +162,8 @@ class SessionsResource(SyncAPIResource):
 
           region: The region where the Session should run.
 
+          stagehand: Stagehand settings for the session. Unknown keys are rejected.
+
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
               hours).
@@ -188,6 +191,7 @@ class SessionsResource(SyncAPIResource):
                     "proxies": proxies,
                     "proxy_settings": proxy_settings,
                     "region": region,
+                    "stagehand": stagehand,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
                 },
@@ -470,6 +474,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         proxies: Union[Iterable[session_create_params.ProxiesUnionMember0], bool] | Omit = omit,
         proxy_settings: session_create_params.ProxySettings | Omit = omit,
         region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"] | Omit = omit,
+        stagehand: session_create_params.Stagehand | Omit = omit,
         api_timeout: int | Omit = omit,
         user_metadata: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -504,6 +509,8 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           region: The region where the Session should run.
 
+          stagehand: Stagehand settings for the session. Unknown keys are rejected.
+
           api_timeout: Duration in seconds after which the session will automatically end. Defaults to
               the Project's `defaultTimeout`. Minimum 60 seconds, maximum 21600 seconds (6
               hours).
@@ -531,6 +538,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "proxies": proxies,
                     "proxy_settings": proxy_settings,
                     "region": region,
+                    "stagehand": stagehand,
                     "api_timeout": api_timeout,
                     "user_metadata": user_metadata,
                 },
