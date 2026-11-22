@@ -20,8 +20,8 @@ __all__ = [
     "ProxiesUnionMember0NoneProxyConfig",
     "ProxySettings",
     "Stagehand",
-    "StagehandUnionMember0",
-    "StagehandUnionMember0ClientInfo",
+    "StagehandStagehandSettings",
+    "StagehandStagehandSettingsClientInfo",
 ]
 
 
@@ -268,7 +268,7 @@ class ProxySettings(TypedDict, total=False):
     """The TLS certificate IDs to trust. Optional."""
 
 
-class StagehandUnionMember0ClientInfo(TypedDict, total=False):
+class StagehandStagehandSettingsClientInfo(TypedDict, total=False):
     """The Stagehand client that created the session."""
 
     name: Required[str]
@@ -278,10 +278,10 @@ class StagehandUnionMember0ClientInfo(TypedDict, total=False):
     """Version of the Stagehand client."""
 
 
-class StagehandUnionMember0(TypedDict, total=False):
+class StagehandStagehandSettings(TypedDict, total=False):
     """Details a Stagehand client sends about itself. Unknown keys are rejected."""
 
-    client_info: Annotated[StagehandUnionMember0ClientInfo, PropertyInfo(alias="clientInfo")]
+    client_info: Annotated[StagehandStagehandSettingsClientInfo, PropertyInfo(alias="clientInfo")]
     """The Stagehand client that created the session."""
 
     extension_fingerprint: Annotated[str, PropertyInfo(alias="extensionFingerprint")]
@@ -294,4 +294,4 @@ class StagehandUnionMember0(TypedDict, total=False):
     """The Stagehand protocol version the client speaks, as a SemVer 2.0.0 string."""
 
 
-Stagehand: TypeAlias = Union[StagehandUnionMember0, bool]
+Stagehand: TypeAlias = Union[StagehandStagehandSettings, bool]
