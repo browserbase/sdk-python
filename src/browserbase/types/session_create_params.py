@@ -19,6 +19,8 @@ __all__ = [
     "ProxiesUnionMember0ExternalProxyConfig",
     "ProxiesUnionMember0NoneProxyConfig",
     "ProxySettings",
+    "Stagehand",
+    "StagehandClientInfo",
 ]
 
 
@@ -62,6 +64,9 @@ class SessionCreateParams(TypedDict, total=False):
 
     region: Literal["us-west-2", "us-east-1", "eu-central-1", "ap-southeast-1"]
     """The region where the Session should run."""
+
+    stagehand: Stagehand
+    """Stagehand settings for the session. Unknown keys are rejected."""
 
     api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
     """Duration in seconds after which the session will automatically end.
@@ -256,3 +261,35 @@ class ProxySettings(TypedDict, total=False):
 
     ca_certificates: Annotated[SequenceNotStr[str], PropertyInfo(alias="caCertificates")]
     """The TLS certificate IDs to trust. Optional."""
+
+
+class StagehandClientInfo(TypedDict, total=False):
+    """The Stagehand client that created the session."""
+
+    name: Required[str]
+    """Name of the Stagehand client."""
+
+    version: Required[str]
+    """Version of the Stagehand client."""
+
+
+class Stagehand(TypedDict, total=False):
+    """Stagehand settings for the session. Unknown keys are rejected."""
+
+    enabled: Required[bool]
+    """
+    Set to true to load the browser extension the Stagehand SDK uses, provided by
+    Browserbase, into the session.
+    """
+
+    client_info: Annotated[StagehandClientInfo, PropertyInfo(alias="clientInfo")]
+    """The Stagehand client that created the session."""
+
+    extension_fingerprint: Annotated[str, PropertyInfo(alias="extensionFingerprint")]
+    """
+    SHA-256 fingerprint of the Stagehand extension build the client ships with, as
+    64 lowercase hex characters. The API does not verify it.
+    """
+
+    protocol_version: Annotated[str, PropertyInfo(alias="protocolVersion")]
+    """The Stagehand protocol version the client speaks, as a SemVer 2.0.0 string."""

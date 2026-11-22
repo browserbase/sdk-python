@@ -74,6 +74,15 @@ class TestSessions:
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             region="us-west-2",
+            stagehand={
+                "enabled": True,
+                "client_info": {
+                    "name": "x",
+                    "version": "x",
+                },
+                "extension_fingerprint": "ecc2efdd09bd231a9ad9bd2aada37aa7ccc3d38a03cc25beb6c28aa0aaa316be",
+                "protocol_version": "869.6101.6934",
+            },
             api_timeout=60,
             user_metadata={"foo": "bar"},
         )
@@ -373,6 +382,15 @@ class TestAsyncSessions:
             ],
             proxy_settings={"ca_certificates": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             region="us-west-2",
+            stagehand={
+                "enabled": True,
+                "client_info": {
+                    "name": "x",
+                    "version": "x",
+                },
+                "extension_fingerprint": "ecc2efdd09bd231a9ad9bd2aada37aa7ccc3d38a03cc25beb6c28aa0aaa316be",
+                "protocol_version": "869.6101.6934",
+            },
             api_timeout=60,
             user_metadata={"foo": "bar"},
         )
