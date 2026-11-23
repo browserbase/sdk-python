@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import fetch_api_create_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -48,6 +48,7 @@ class FetchAPIResource(SyncAPIResource):
         self,
         *,
         url: str,
+        allowed_domains: SequenceNotStr[str] | Omit = omit,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
         context_id: str | Omit = omit,
@@ -66,6 +67,12 @@ class FetchAPIResource(SyncAPIResource):
 
         Args:
           url: The URL to fetch
+
+          allowed_domains: Domains the fetch may reach, up to 1000. A listed domain also permits its
+              subdomains: `example.com` permits `www.example.com`. A URL on any other host is
+              rejected with a 400 before it is fetched, and so is a redirect to one when
+              `allowRedirects` is set, before it is followed. An empty list (the default)
+              allows any host.
 
           allow_insecure_ssl: Whether to bypass TLS certificate verification
 
@@ -95,6 +102,7 @@ class FetchAPIResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "allowed_domains": allowed_domains,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
                     "context_id": context_id,
@@ -135,6 +143,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        allowed_domains: SequenceNotStr[str] | Omit = omit,
         allow_insecure_ssl: bool | Omit = omit,
         allow_redirects: bool | Omit = omit,
         context_id: str | Omit = omit,
@@ -153,6 +162,12 @@ class AsyncFetchAPIResource(AsyncAPIResource):
 
         Args:
           url: The URL to fetch
+
+          allowed_domains: Domains the fetch may reach, up to 1000. A listed domain also permits its
+              subdomains: `example.com` permits `www.example.com`. A URL on any other host is
+              rejected with a 400 before it is fetched, and so is a redirect to one when
+              `allowRedirects` is set, before it is followed. An empty list (the default)
+              allows any host.
 
           allow_insecure_ssl: Whether to bypass TLS certificate verification
 
@@ -182,6 +197,7 @@ class AsyncFetchAPIResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "allowed_domains": allowed_domains,
                     "allow_insecure_ssl": allow_insecure_ssl,
                     "allow_redirects": allow_redirects,
                     "context_id": context_id,
