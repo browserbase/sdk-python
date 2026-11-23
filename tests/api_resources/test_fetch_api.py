@@ -28,6 +28,7 @@ class TestFetchAPI:
     def test_method_create_with_all_params(self, client: Browserbase) -> None:
         fetch_api = client.fetch_api.create(
             url="url",
+            allowed_domains=["x"],
             allow_insecure_ssl=True,
             allow_redirects=True,
             context_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -78,6 +79,7 @@ class TestAsyncFetchAPI:
     async def test_method_create_with_all_params(self, async_client: AsyncBrowserbase) -> None:
         fetch_api = await async_client.fetch_api.create(
             url="url",
+            allowed_domains=["x"],
             allow_insecure_ssl=True,
             allow_redirects=True,
             context_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
