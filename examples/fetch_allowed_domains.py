@@ -1,6 +1,5 @@
-from browserbase import BadRequestError
-
 from examples import bb
+from browserbase import BadRequestError
 
 
 def run() -> None:
