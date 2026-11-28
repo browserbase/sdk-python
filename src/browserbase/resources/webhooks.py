@@ -60,7 +60,6 @@ class WebhooksResource(SyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
-                "sessions.navigations.allowed",
                 "sessions.navigations.blocked",
             ]
         ],
@@ -155,7 +154,6 @@ class WebhooksResource(SyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
-                "sessions.navigations.allowed",
                 "sessions.navigations.blocked",
             ]
         ]
@@ -368,7 +366,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
-                "sessions.navigations.allowed",
                 "sessions.navigations.blocked",
             ]
         ],
@@ -463,7 +460,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
-                "sessions.navigations.allowed",
                 "sessions.navigations.blocked",
             ]
         ]

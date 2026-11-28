@@ -25,7 +25,6 @@ class WebhookCreateParams(TypedDict, total=False):
                     "functions.invocations.running",
                     "functions.invocations.completed",
                     "functions.invocations.failed",
-                    "sessions.navigations.allowed",
                     "sessions.navigations.blocked",
                 ]
             ],
