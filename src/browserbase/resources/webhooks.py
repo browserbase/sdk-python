@@ -60,6 +60,7 @@ class WebhooksResource(SyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
+                "sessions.navigations.blocked",
             ]
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -153,6 +154,7 @@ class WebhooksResource(SyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
+                "sessions.navigations.blocked",
             ]
         ]
         | Omit = omit,
@@ -364,6 +366,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
+                "sessions.navigations.blocked",
             ]
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -457,6 +460,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "functions.invocations.running",
                 "functions.invocations.completed",
                 "functions.invocations.failed",
+                "sessions.navigations.blocked",
             ]
         ]
         | Omit = omit,

@@ -34,6 +34,7 @@ class Webhook(BaseModel):
             "functions.invocations.running",
             "functions.invocations.completed",
             "functions.invocations.failed",
+            "sessions.navigations.blocked",
         ]
     ] = FieldInfo(alias="eventTypes")
     """Event types this webhook subscribes to. Unknown types are rejected."""
